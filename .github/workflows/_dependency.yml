@@ -1,49 +1,41 @@
 # Reusable workflow for dependency management and security review
 #
-# This workflow performs dependency review and automated updates using GitHub's
-# dependency-review-action and Renovate bot.
+# This workflow performs comprehensive dependency analysis and automated updates using:
+# - GitHub's Dependency Review Action for security vulnerability scanning
+# - Renovate Bot for automated dependency updates
 #
-# Workflow Inputs:
-#   renovate-version:
-#     description: Version of Renovate CLI to use
-#     type: string
-#     required: false
-#     default: "42.64.1"
+# Features:
+# - Scans dependencies for security vulnerabilities in pull requests
+# - Automatically discovers and updates outdated dependencies
+# - Supports organization-wide repository discovery (when token has appropriate permissions)
+# - Provides PR comments with dependency review summaries
 #
-# Workflow Secrets:
-#   token:
-#     description: GitHub repository token with the following permissions:
-#       - contents: read/write
-#       - pull-requests: read/write
-#       - issues: read/write
-#       - security-events: read
-#     required: true
+# Inputs:
+#   renovate-version: (optional) Renovate CLI version to use (default: 42.64.1)
 #
-# Jobs:
-#   setup:
-#     - Initializes environment and timezone configuration
-#     - Outputs configuration for downstream jobs
-#
-#   dependencies:
-#     - Checks out repository code
-#     - Sets up Node.js environment
-#     - Installs project dependencies
-#     - Runs dependency review action to analyze dependency changes
-#     - Executes Renovate bot for automated dependency updates
-#     - Supports multi-repo discovery when token has organization-wide access
+# Required Secrets:
+#   token: GitHub token with the following permissions:
+#     - contents: write (for committing updates)
+#     - pull-requests: write (for creating/updating PRs)
+#     - issues: write (for creating issues)
+#     - security-events: read (for scanning vulnerabilities)
 #
 # Environment Variables:
-#   environment: Set to "base" by default
-#   timezone: Retrieved from repository variables
+#   TIMEZONE: (optional) Timezone configuration from repository variables
+#   NODE_VERSION: Node.js version from repository variables
 #
-# Usage:
+# Concurrency:
+#   - Uses 'moj-actions-dependencies' group to prevent parallel runs
+#   - Does not cancel in-progress jobs
+#
+# Usage Example:
 #   jobs:
 #     dependency-review:
 #       uses: ministryofjustice/devsecops-actions/.github/workflows/_dependency.yml@main
-#       with:
-#         renovate-version: "42.64.1"
 #       secrets:
 #         token: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+#         renovate-version: "42.64.1"
 #
 
 name: Dependency review ⚡️
@@ -97,6 +89,10 @@ jobs:
     environment:
       name: ${{ needs.setup.outputs.environment }}
     runs-on: ubuntu-latest
+
+    concurrency:
+      group: moj-actions-dependencies
+      cancel-in-progress: false
 
     steps:
       - name: Repository

@@ -1,29 +1,26 @@
 # Dependencies Review Workflow
 #
-# This workflow performs automated dependency reviews and security scanning for the repository.
-# It runs on multiple triggers to ensure dependencies are regularly checked and reviewed.
+# This reusable workflow orchestrates dependency scanning and review processes
+# for the repository. It runs on a scheduled basis, on pull requests to main,
+# and can be manually triggered.
 #
 # Triggers:
-#   - schedule: Runs daily at midnight (00:00 UTC) via cron job
-#   - pull_request: Runs when PRs are opened/updated against the main branch
-#   - workflow_dispatch: Allows manual triggering from the Actions tab
+#   - schedule: Runs daily at midnight (00:00 UTC)
+#   - pull_request: Executes when PRs are opened/updated against main branch
+#   - workflow_dispatch: Allows manual execution from GitHub Actions UI
 #
 # Permissions:
-#   The workflow requires minimal permissions at the top level (empty set),
-#   but the dependencies job specifically needs:
-#     - contents: write - To update dependency files if needed
-#     - pull-requests: write - To create/update PRs with dependency updates
-#     - issues: write - To create/update issues for dependency vulnerabilities
-#     - security-events: read - To access security scanning results
+#   - contents: write - Required to update repository files
+#   - pull-requests: write - Required to comment on and manage PRs
+#   - issues: write - Required to create/update issues for vulnerabilities
+#   - security-events: read - Required to access security scanning results
 #
-# Jobs:
-#   dependencies:
-#     Uses a reusable workflow from the same repository to perform dependency
-#     review tasks. The workflow is referenced from the feat/dependency-workflow
-#     branch and requires a GitHub token for authentication.
+# Configuration:
+#   - policy-mode: enforce - Strict mode that enforces dependency policies
+#   - token: GitHub token for authentication with repository operations
 #
-# Secrets:
-#   - GITHUB_TOKEN: Automatically provided by GitHub Actions for authentication
+# Dependencies:
+#   - Calls the reusable _dependency.yml workflow from the feat/dependency-workflow branch
 #
 
 name: Dependencies review ⚡️
@@ -48,6 +45,9 @@ jobs:
       issues: write
       security-events: read
 
+    name: Dependencies⚡️
     uses: ministryofjustice/devsecops-actions/.github/workflows/_dependency.yml@feat/dependency-workflow
+    with:
+      policy-mode: enforce
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
