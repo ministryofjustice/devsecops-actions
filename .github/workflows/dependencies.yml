@@ -45,7 +45,6 @@ jobs:
       issues: write
       security-events: read
 
-    name: Dependencies⚡️
     uses: ministryofjustice/devsecops-actions/.github/workflows/_dependency.yml@feat/dependency-workflow
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
