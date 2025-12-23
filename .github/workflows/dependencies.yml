@@ -20,7 +20,7 @@
 #   - token: GitHub token for authentication with repository operations
 #
 # Dependencies:
-#   - Calls the reusable _dependency.yml workflow from the feat/dependency-workflow branch
+#   - Calls the reusable _dependency.yml workflow from the commit 7aa180ff5608f4f786912bb47ac098a096eacd05 SHA
 #
 
 name: Dependencies review ⚡️
@@ -45,6 +45,6 @@ jobs:
       issues: write
       security-events: read
 
-    uses: ministryofjustice/devsecops-actions/.github/workflows/_dependency.yml@feat/dependency-workflow
+    uses: ministryofjustice/devsecops-actions/.github/workflows/_dependency.yml@7aa180ff5608f4f786912bb47ac098a096eacd05
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
