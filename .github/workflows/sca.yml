@@ -1,26 +1,26 @@
 # Software Composition Analysis (SCA) Workflow
-# 
-# This workflow performs automated security scanning of project dependencies to identify
-# vulnerabilities and license compliance issues.
+#
+# This workflow performs automated dependency scanning and security analysis for the repository.
 #
 # Triggers:
 #   - schedule: Runs daily at midnight (00:00 UTC)
-#   - pull_request: Runs when PRs are opened/updated targeting the main branch
+#   - pull_request: Runs on pull requests targeting the main branch
 #   - workflow_dispatch: Can be manually triggered from the Actions tab
 #
 # Permissions:
-#   - contents: write - Required to read repository files and potentially update dependency files
-#   - pull-requests: write - Required to create/update PRs with dependency updates
-#   - issues: write - Required to create issues for security vulnerabilities
-#   - security-events: read - Required to access security scanning results
+#   The workflow requires the following permissions:
+#   - contents: write - To update repository contents
+#   - pull-requests: write - To create and update pull requests
+#   - issues: write - To create and manage issues for findings
+#   - security-events: read - To read security event data
 #
-# Usage:
-#   This workflow calls a reusable workflow from the devsecops-actions repository
-#   to perform the actual SCA scanning. It passes the GITHUB_TOKEN for authentication.
+# Configuration:
+#   - Uses a reusable workflow from ministryofjustice/devsecops-actions
+#   - Dependency review configuration is loaded from .github/dependency-review-config.yml
+#   - Authenticates using the GITHUB_TOKEN secret
 #
 # Dependencies:
-#   - Reusable workflow: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml
-#   - Version pinned to: aa7cf0d14dfb02b91d760613aeab5c82507d15f7
+#   - Reusable workflow: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@aa7cf0d14dfb02b91d760613aeab5c82507d15f7
 #
 
 name: SCA ⚡️
@@ -46,5 +46,7 @@ jobs:
       security-events: read
 
     uses: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@aa7cf0d14dfb02b91d760613aeab5c82507d15f7
+    with:
+      dependency-review-config-file: "./.github/dependency-review-config.yml"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}

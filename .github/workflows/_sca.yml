@@ -1,3 +1,67 @@
+# GitHub Actions reusable workflow for Software Composition Analysis (SCA)
+#
+# This workflow performs automated dependency governance using Renovate and GitHub's
+# dependency review action. It helps maintain secure and up-to-date dependencies
+# across repositories.
+#
+# Features:
+# - Automated dependency scanning and review
+# - Renovate bot integration for dependency updates
+# - Support for custom dependency review configurations
+# - Multi-repository discovery capabilities
+# - Concurrency control to prevent conflicting updates
+#
+# Usage:
+#   jobs:
+#     sca:
+#       uses: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@main
+#       with:
+#         renovate-version: "42.64.1"
+#         dependency-review-config-file: ".github/dependency-review-config.yml"
+#       secrets:
+#         token: ${{ secrets.GITHUB_TOKEN }}
+#
+# Inputs:
+#   renovate-version:
+#     description: Version of Renovate CLI to use
+#     required: false
+#     default: "42.64.1"
+#     type: string
+#
+#   dependency-review-config-file:
+#     description: Path to dependency review configuration file relative to repository root
+#     required: false
+#     default: ""
+#     type: string
+#
+# Secrets:
+#   token:
+#     description: GitHub token with permissions for contents (write), pull-requests (write), issues (write), and security-events (read)
+#     required: true
+#
+# Environment Variables:
+#   TIMEZONE: Timezone configuration (from repository variables)
+#   NODE_VERSION: Node.js version to use (from repository variables)
+#
+# Jobs:
+#   setup: Initializes workflow environment and timezone settings
+#   dependencies: Performs dependency review and runs Renovate bot
+#
+# Permissions:
+#   The workflow requires minimal permissions at the workflow level (none),
+#   but the dependencies job requires:
+#   - contents: write
+#   - pull-requests: write
+#   - issues: write
+#   - security-events: read
+#
+# Notes:
+# - All action versions are frozen using commit SHAs for security
+# - RENOVATE_AUTODISCOVER is enabled for organization-wide repository discovery
+# - Concurrency group 'moj-actions-dependencies' ensures only one run at a time
+# - NPM dependencies are installed with --ignore-scripts for security
+#
+
 name: SCA ⚡️
 run-name: SCA-enabled dependency governance workflow
 
