@@ -1,0 +1,121 @@
+# Reusable workflow for dependency management and security review
+#
+# This workflow performs comprehensive dependency analysis and automated updates using:
+# - GitHub's Dependency Review Action for security vulnerability scanning
+# - Renovate Bot for automated dependency updates
+#
+# Features:
+# - Scans dependencies for security vulnerabilities in pull requests
+# - Automatically discovers and updates outdated dependencies
+# - Supports organization-wide repository discovery (when token has appropriate permissions)
+# - Provides PR comments with dependency review summaries
+#
+# Inputs:
+#   renovate-version: (optional) Renovate CLI version to use (default: 42.64.1)
+#
+# Required Secrets:
+#   token: GitHub token with the following permissions:
+#     - contents: write (for committing updates)
+#     - pull-requests: write (for creating/updating PRs)
+#     - issues: write (for creating issues)
+#     - security-events: read (for scanning vulnerabilities)
+#
+# Environment Variables:
+#   TIMEZONE: (optional) Timezone configuration from repository variables
+#   NODE_VERSION: Node.js version from repository variables
+#
+# Concurrency:
+#   - Uses 'moj-actions-dependencies' group to prevent parallel runs
+#   - Does not cancel in-progress jobs
+#
+# Usage Example:
+#   jobs:
+#     dependency-review:
+#       uses: ministryofjustice/devsecops-actions/.github/workflows/_dependency.yml@main
+#       secrets:
+#         token: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+#         renovate-version: "42.64.1"
+#
+
+name: Dependency review ⚡️
+run-name: Dependency review ⚡️
+
+on:
+  workflow_call:
+    inputs:
+      renovate-version:
+        type: string
+        required: false
+        description: "Renovate CLI version, an optional argument which defaults to v42.64.1."
+        default: "42.64.1"
+
+    secrets:
+      token:
+        required: true
+        description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+permissions: {}
+
+env:
+  environment: base
+  timezone: ${{ vars.TIMEZONE }}
+
+jobs:
+  # 1. Setup
+  setup:
+    name: Setup 🔧
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ env.environment }}
+      timezone: ${{ env.timezone }}
+    steps:
+      - name: Environment 🧪
+        run: echo "Environment set to ${{ env.environment }}"
+
+      - name: Timezone 🌐
+        run: echo "Timezone set to ${{ env.timezone }}"
+
+  # 2. Review
+  dependencies:
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      security-events: read
+
+    name: Dependencies ⚡️
+    needs: setup
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: moj-actions-dependencies
+      cancel-in-progress: false
+
+    steps:
+      - name: Repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # frozen: v6.0.1
+
+      - name: Node
+        uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # frozen: v6.1.0
+        with:
+          node-version: ${{ vars.NODE_VERSION }}
+
+      - name: Install
+        run: npm ci --ignore-scripts
+
+      - name: Dependencies
+        uses: actions/dependency-review-action@774d14bf50b7a2e2460f9f49e25c52503ecab125 # frozen: v4.8.3
+        with:
+          comment-summary-in-pr: always
+
+      - name: Renovate
+        uses: renovatebot/github-action@822441559e94f98b67b82d97ab89fe3003b0a247 # frozen: v44.2.0
+        with:
+          token: ${{ secrets.token }}
+          renovate-version: ${{ inputs.renovate-version }}
+        env:
+          # Enables multi-repo discovery when the token has organisation wide access
+          RENOVATE_AUTODISCOVER: true

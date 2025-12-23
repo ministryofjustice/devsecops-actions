@@ -1,10 +1,10 @@
 {
   "name": "moj-actions",
   "version": "1.0.0",
-  "description": "",
+  "description": "A collection of reusable GitHub Actions that standardise DevSecOps security scanning i.e. SCA, SAST, DAST, secrets, IaC, and container security.",
   "keywords": [
-    "devsecops",
     "moj",
+    "devsecops",
     "actions"
   ],
   "homepage": "https://github.com/ministryofjustice/devsecops-actions#readme",

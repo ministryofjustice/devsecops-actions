@@ -1,44 +1,26 @@
 # Dependencies Review Workflow
 #
-# Purpose:
-#   Automates dependency management and security review for the repository using Renovate.
-#   Runs on a schedule, manually via workflow dispatch, or on pull requests.
+# This reusable workflow orchestrates dependency scanning and review processes
+# for the repository. It runs on a scheduled basis, on pull requests to main,
+# and can be manually triggered.
 #
 # Triggers:
-#   - schedule: Daily at midnight (UTC)
-#   - workflow_dispatch: Manual trigger
+#   - schedule: Runs daily at midnight (00:00 UTC)
+#   - pull_request: Executes when PRs are opened/updated against main branch
+#   - workflow_dispatch: Allows manual execution from GitHub Actions UI
 #
-# Environment Variables:
-#   - environment: Set to 'base' - defines the deployment environment
-#   - timezone: Retrieved from repository variable TIMEZONE
+# Permissions:
+#   - contents: write - Required to update repository files
+#   - pull-requests: write - Required to comment on and manage PRs
+#   - issues: write - Required to create/update issues for vulnerabilities
+#   - security-events: read - Required to access security scanning results
 #
-# Jobs:
-#   1. setup:
-#      - Configures infrastructure settings
-#      - Outputs environment and timezone for downstream jobs
-#      - Runs on: ubuntu-latest
-#
-#   2. dependencies:
-#      - Performs dependency review and updates using Renovate
-#      - Requires: setup job completion
-#      - Permissions: contents (write), pull-requests (write), issues (write), security-events (read)
-#      - Steps:
-#        * Checks out repository code
-#        * Sets up Node.js environment with configured version
-#        * Installs npm dependencies (excluding scripts)
-#        * Runs Renovate bot for automated dependency updates
-#      - Runs on: ubuntu-latest
-#
-# Security:
-#   - Uses pinned action versions with commit SHAs for supply chain security
-#   - Minimal permissions granted at workflow level (none by default)
-#   - Job-specific permissions explicitly defined where needed
+# Configuration:
+#   - policy-mode: enforce - Strict mode that enforces dependency policies
+#   - token: GitHub token for authentication with repository operations
 #
 # Dependencies:
-#   - actions/checkout@v6.0.1
-#   - actions/setup-node@v6.1.0
-#   - renovatebot/github-action@v44.2.0
-#   - Renovate version: 42.64.1
+#   - Calls the reusable _dependency.yml workflow from the feat/dependency-workflow branch
 #
 
 name: Dependencies review ⚡️
@@ -47,33 +29,15 @@ run-name: Dependencies review ⚡️
 on:
   schedule:
     - cron: "0 0 * * *"
-  workflow_dispatch:
 
   pull_request:
     branches: ["main"]
 
+  workflow_dispatch:
+
 permissions: {}
 
-env:
-  environment: base
-  timezone: ${{ vars.TIMEZONE }}
-
 jobs:
-  # 1. Setup test infrastructure
-  setup:
-    name: Infrastructure 🔧
-    runs-on: ubuntu-latest
-    outputs:
-      environment: ${{ env.environment }}
-      timezone: ${{ env.timezone }}
-    steps:
-      - name: Environment 🧪
-        run: echo "Environment set to ${{ env.environment }}"
-
-      - name: Timezone 🌐
-        run: echo "Timezone set to ${{ env.timezone }}"
-
-  # 2. Dependencies review
   dependencies:
     permissions:
       contents: write
@@ -81,29 +45,6 @@ jobs:
       issues: write
       security-events: read
 
-    name: Dependencies ⚡️
-    needs: setup
-    environment:
-      name: ${{ needs.setup.outputs.environment }}
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # frozen: v6.0.1
-
-      - name: Node
-        uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # frozen: v6.1.0
-        with:
-          node-version: ${{ vars.NODE_VERSION }}
-
-      - name: Install
-        run: npm ci --ignore-scripts
-
-      - name: Renovate
-        uses: renovatebot/github-action@822441559e94f98b67b82d97ab89fe3003b0a247 # frozen: v44.2.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          renovate-version: 42.64.1
-        env:
-          RENOVATE_AUTODISCOVER: true
-
+    uses: ministryofjustice/devsecops-actions/.github/workflows/_dependency.yml@feat/dependency-workflow
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
