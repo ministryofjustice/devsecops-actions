@@ -1,7 +1,9 @@
 {
   "ignorePaths": [
     "**/node_modules/**",
-    "prek/**"
+    "prek/**",
+    "**/*.drawio",
+    "**/*.svg"
   ],
   "language": "en",
   "noConfigSearch": true,
@@ -9,6 +11,7 @@
   "words": [
     "Abhi",
     "Markan",
+    "prek"
   ],
   "dictionaries": [
     "en-gb",

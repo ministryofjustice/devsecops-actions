@@ -1,0 +1,52 @@
+# Software Composition Analysis (SCA) Workflow
+#
+# This workflow performs automated dependency scanning and security analysis for the repository.
+#
+# Triggers:
+#   - schedule: Runs daily at midnight (00:00 UTC)
+#   - pull_request: Runs on pull requests targeting the main branch
+#   - workflow_dispatch: Can be manually triggered from the Actions tab
+#
+# Permissions:
+#   The workflow requires the following permissions:
+#   - contents: write - To update repository contents
+#   - pull-requests: write - To create and update pull requests
+#   - issues: write - To create and manage issues for findings
+#   - security-events: read - To read security event data
+#
+# Configuration:
+#   - Uses a reusable workflow from ministryofjustice/devsecops-actions
+#   - Dependency review configuration is loaded from .github/dependency-review-config.yml
+#   - Authenticates using the GITHUB_TOKEN secret
+#
+# Dependencies:
+#   - Reusable workflow: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@feat/dependency-workflow
+#
+
+name: SCA ⚡️
+run-name: Software Composition Analysis ⚡️
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+  pull_request:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  dependencies:
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      security-events: read
+
+    uses: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@feat/dependency-workflow
+    with:
+      dependency-review-config-file: "./.github/dependency-review-config.yml"
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
