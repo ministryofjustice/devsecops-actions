@@ -1,5 +1,5 @@
 # Software Composition Analysis (SCA) GitHub Action
-# 
+#
 # This composite action performs comprehensive software composition analysis including:
 # - Dependency review to identify vulnerabilities in project dependencies
 # - Automated dependency updates via Renovate bot
@@ -84,3 +84,4 @@ runs:
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
+        repositories: ${{ github.repository }}
