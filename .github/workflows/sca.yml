@@ -20,7 +20,7 @@
 #   - Authenticates using the GITHUB_TOKEN secret
 #
 # Dependencies:
-#   - Reusable workflow: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@feat/dependency-workflow
+#   - Reusable workflow: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml
 #
 
 name: SCA ⚡️
@@ -45,7 +45,7 @@ jobs:
       issues: write
       security-events: read
 
-    uses: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@feat/dependency-workflow
+    uses: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@2fa001f2e51f7ecf30ca05819a51a460a25e1510 # frozen: v1.0.0
     with:
       dependency-review-config-file: "./.github/dependency-review-config.yml"
     secrets:
