@@ -75,7 +75,7 @@ runs:
 
     - name: Renovate
       if: inputs.renovate == 'true'
-      uses: renovatebot/github-action@f7fad228a053c69a98e24f8e4f6cf40db8f61e08 # frozen: v44.2.1
+      uses: renovatebot/github-action@9d99aa6c5d71d3a20cddbce90e2d8147e589f83e # frozen: v44.2.1
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
