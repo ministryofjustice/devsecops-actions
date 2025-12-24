@@ -84,4 +84,6 @@ runs:
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
-        repositories: ${{ github.repository }}
+      env:
+        RENOVATE_AUTODISCOVER: "false"
+        RENOVATE_REPOSITORIES: ${{ github.repository }}
