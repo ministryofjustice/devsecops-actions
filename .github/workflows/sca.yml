@@ -5,7 +5,6 @@
 # Triggers:
 #   - schedule: Runs daily at midnight (00:00 UTC)
 #   - pull_request: Runs on pull requests targeting the main branch
-#   - workflow_dispatch: Can be manually triggered from the Actions tab
 #
 # Permissions:
 #   The workflow requires the following permissions:
@@ -32,8 +31,6 @@ on:
 
   pull_request:
     branches: ["main"]
-
-  workflow_dispatch:
 
 permissions: {}
 

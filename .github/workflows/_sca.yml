@@ -120,7 +120,7 @@ jobs:
     runs-on: ubuntu-latest
 
     concurrency:
-      group: moj-actions-dependencies-${{ github.workflow }}-${{ github.workflow_ref }}-${{ matrix.services }}
+      group: moj-actions-dependencies-${{ github.repository }}-${{ github.workflow }}-${{ github.workflow_ref }}
       cancel-in-progress: true
 
     steps:

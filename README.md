@@ -106,8 +106,6 @@ on:
   pull_request:
     branches: ["main"]
 
-  workflow_dispatch: # Allow manual trigger
-
 permissions: {}
 
 jobs:
@@ -135,8 +133,6 @@ on:
 
   pull_request:
     branches: ["main", "develop"]
-
-  workflow_dispatch:
 
 permissions: {}
 
