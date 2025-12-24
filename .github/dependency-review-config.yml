@@ -8,4 +8,4 @@
 #     - on-failure: Only post when vulnerabilities or issues are detected
 #     - never: Don't post summary comments
 
-comment-summary-in-pr: never
+comment-summary-in-pr: always

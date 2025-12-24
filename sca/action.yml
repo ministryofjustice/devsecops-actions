@@ -1,3 +1,48 @@
+# Software Composition Analysis (SCA) GitHub Action
+# 
+# This composite action performs comprehensive software composition analysis including:
+# - Dependency review to identify vulnerabilities in project dependencies
+# - Automated dependency updates via Renovate bot
+# - Security scanning of dependencies
+#
+# Usage:
+#   - uses: ministryofjustice/devsecops-actions/sca@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       renovate: 'true'
+#       renovate-version: '42.64.1'
+#       dependency-review-config-file: '.github/dependency-review-config.yml'
+#
+# Inputs:
+#   renovate:
+#     description: Enable or disable Renovate bot execution
+#     required: false
+#     default: 'true'
+#
+#   renovate-version:
+#     description: Specific version of Renovate CLI to use
+#     required: false
+#     default: '42.64.1'
+#
+#   dependency-review-config-file:
+#     description: Path to custom dependency review configuration file
+#     required: false
+#     default: ''
+#
+#   token:
+#     description: GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read)
+#     required: true
+#
+# Steps:
+#   1. Checks out the repository code
+#   2. Runs dependency review action to scan for vulnerabilities
+#   3. Executes Renovate bot (if enabled) to create automated dependency update PRs
+#
+# Requirements:
+#   - GitHub token with appropriate permissions
+#   - Repository must have dependency manifest files (package.json, requirements.txt, etc.)
+#
+
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action focuses on dependencies, secret scanning and vulnerabilities management
 author: Ministry of Justice UK

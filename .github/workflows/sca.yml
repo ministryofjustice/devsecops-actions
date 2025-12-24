@@ -1,3 +1,33 @@
+# Software Composition Analysis (SCA) Workflow
+#
+# This workflow performs automated software composition analysis to identify
+# security vulnerabilities and license compliance issues in project dependencies.
+#
+# Triggers:
+#   - Scheduled daily at midnight (00:00 UTC)
+#   - Pull requests targeting the main branch
+#
+# Workflow Structure:
+#   1. setup job: Initializes environment configuration
+#      - Sets up the base environment
+#      - Outputs environment name for downstream jobs
+#
+#   2. sca job: Executes the software composition analysis
+#      - Requires setup job completion
+#      - Uses the MoJ devsecops-actions/sca action
+#      - Requires GitHub token for API access
+#      - Uses dependency review configuration from .github/dependency-review-config.yml
+#
+# Required Secrets:
+#   - GITHUB_TOKEN: Automatically provided by GitHub Actions
+#
+# Permissions:
+#   - contents: write - Required to update repository content
+#   - pull-requests: write - Required to comment on pull requests
+#   - issues: write - Required to create/update security issues
+#   - security-events: read - Required to access security event data
+#
+
 name: SCA ⚡️
 run-name: Software Composition Analysis ⚡️
 
@@ -40,7 +70,7 @@ jobs:
 
     steps:
       - name: SCA
-        uses: ministryofjustice/devsecops-actions/sca@feat/10-sca
+        uses: ministryofjustice/devsecops-actions/sca@8969573dae1df43e6f86b3966c71362604f6863a
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           dependency-review-config-file: "./.github/dependency-review-config.yml"
