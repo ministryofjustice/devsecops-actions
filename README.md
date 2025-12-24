@@ -21,8 +21,8 @@ and container security.
 ## 📋 Table of Contents
 
 - [Architecture](#️-architecture)
-- [Available Workflows](#-available-workflows)
-  - [SCA Workflow](#-sca-workflow-_scayml)
+- [Available Actions](#-available-actions)
+  - [SCA Action](#-sca-action)
 - [Usage Examples](#-usage-examples)
 - [Development](#️-development)
 - [Contributing](#-contributing)
@@ -35,26 +35,26 @@ and container security.
 
 ### Key Architecture Concepts
 
-1. **Reusable Workflow Pattern**: Workflows prefixed with `_` (e.g., `_sca.yml`) are designed to be called by other workflows
-2. **Explicit Permissions**: Caller workflows must explicitly declare all required permissions
+1. **Composite Actions**: Reusable composite actions in dedicated directories (e.g., `sca/`) provide modular functionality
+2. **Explicit Permissions**: Workflows must explicitly declare all required permissions
 3. **Version Pinning**: Use `@vx.x.x` for latest updates or `@<commit-sha>` for stability
 4. **Centralised Maintenance**: Developed and managed by PandA team, with future updates triggered automatically.
 
 ---
 
-## 🚀 Available Workflows
+## 🚀 Available Actions
 
-### 🔍 SCA Workflow (`_sca.yml`)
+### 🔍 SCA Action
 
-**Reusable workflow** for comprehensive dependency management and security review.
+**Composite action** for comprehensive software composition analysis including dependency management and security review.
 
 #### Features
 
 - 🛡️ Scans dependencies for security vulnerabilities in pull requests
 - 🔄 Automatically discovers and updates outdated dependencies using Renovate Bot
-- 🌐 Supports organisation-wide repository discovery (with appropriate token permissions)
-- 💬 Provides PR comments with detailed SCA summaries
-- 📊 Uses GitHub's SCA Action for vulnerability scanning
+- 💬 Provides detailed dependency review analysis
+- 📊 Uses GitHub's Dependency Review Action for vulnerability scanning
+- 🤖 Optional Renovate bot integration for automated dependency updates
 
 #### 🧩 Workflow
 
@@ -62,36 +62,29 @@ and container security.
 
 #### Inputs
 
-| Input                           | Type   | Required | Default   | Description                                                                   |
-| ------------------------------- | ------ | -------- | --------- | ----------------------------------------------------------------------------- |
-| `renovate-version`              | string | No       | `42.64.1` | Renovate CLI version to use                                                   |
-| `dependency-review-config-file` | string | No       | `""`      | Path to dependency review configuration file relative to your repository root |
+| Input                           | Type   | Required | Default   | Description                                                                                                                         |
+| ------------------------------- | ------ | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `token`                         | string | Yes      | N/A       | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read) |
+| `renovate`                      | string | No       | `true`    | Enable or disable Renovate bot execution                                                                                            |
+| `renovate-version`              | string | No       | `42.64.1` | Renovate CLI version to use                                                                                                         |
+| `dependency-review-config-file` | string | No       | `""`      | Path to dependency review configuration file relative to your repository root                                                       |
 
-#### Required Secrets
+#### Required Permissions
 
-| Secret  | Description                                                                                                                                                                                                                                                 |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `token` | GitHub token with the following permissions:<br>• `contents: write` (for committing updates)<br>• `pull-requests: write` (for creating/updating PRs)<br>• `issues: write` (for creating issues)<br>• `security-events: read` (for scanning vulnerabilities) |
-
-#### Environment Variables
-
-| Variable       | Required | Description                                      |
-| -------------- | -------- | ------------------------------------------------ |
-| `TIMEZONE`     | No       | Timezone configuration from repository variables |
-| `NODE_VERSION` | Yes      | Node.js version from repository variables        |
-
-#### Concurrency
-
-- Uses `moj-actions-dependencies` group to prevent parallel runs
-- Does not cancel in-progress jobs
+| Permission        | Level | Purpose                      |
+| ----------------- | ----- | ---------------------------- |
+| `contents`        | write | For committing updates       |
+| `pull-requests`   | write | For creating/updating PRs    |
+| `issues`          | write | For creating issues          |
+| `security-events` | read  | For scanning vulnerabilities |
 
 ---
 
 ## 📖 Usage Examples
 
-### Dependency Workflow
+### SCA Action
 
-To use the reusable `_sca.yml` workflow in your repository:
+To use the SCA composite action in your repository workflow:
 
 #### Basic Usage
 
@@ -109,16 +102,21 @@ on:
 permissions: {}
 
 jobs:
-  dependencies:
+  sca:
+    name: Software Composition Analysis
+    runs-on: ubuntu-latest
+
     permissions:
       contents: write
       pull-requests: write
       issues: write
       security-events: read
 
-    uses: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@v1.0.0
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Run SCA
+        uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 #### Advanced Usage with Custom Configuration
@@ -137,19 +135,35 @@ on:
 permissions: {}
 
 jobs:
-  dependencies:
+  sca:
+    name: Software Composition Analysis
+    runs-on: ubuntu-latest
+
     permissions:
       contents: write
       pull-requests: write
       issues: write
       security-events: read
 
-    uses: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@v1.0.0
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Run SCA
+        uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          renovate: "true" # Enable Renovate bot
+          renovate-version: "42.64.1" # Specify custom Renovate version
+          dependency-review-config-file: ".github/dependency-review-config.yml" # Custom dependency review config
+```
+
+#### Disable Renovate Bot
+
+```yaml
+steps:
+  - name: Run SCA without Renovate
+    uses: ministryofjustice/devsecops-actions/sca@v1.0.0
     with:
-      renovate-version: "42.64.1" # Specify custom Renovate version
-      dependency-review-config-file: ".github/dependency-review-config.yml" # Custom dependency review config
+      token: ${{ secrets.GITHUB_TOKEN }}
+      renovate: "false" # Disable Renovate bot
 ```
 
 ---

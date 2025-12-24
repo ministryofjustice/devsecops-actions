@@ -1,25 +1,31 @@
 # Software Composition Analysis (SCA) Workflow
 #
-# This workflow performs automated dependency scanning and security analysis for the repository.
+# This workflow performs automated software composition analysis to identify
+# security vulnerabilities and license compliance issues in project dependencies.
 #
 # Triggers:
-#   - schedule: Runs daily at midnight (00:00 UTC)
-#   - pull_request: Runs on pull requests targeting the main branch
+#   - Scheduled daily at midnight (00:00 UTC)
+#   - Pull requests targeting the main branch
+#
+# Workflow Structure:
+#   1. setup job: Initializes environment configuration
+#      - Sets up the base environment
+#      - Outputs environment name for downstream jobs
+#
+#   2. sca job: Executes the software composition analysis
+#      - Requires setup job completion
+#      - Uses the MoJ devsecops-actions/sca action
+#      - Requires GitHub token for API access
+#      - Uses dependency review configuration from .github/dependency-review-config.yml
+#
+# Required Secrets:
+#   - GITHUB_TOKEN: Automatically provided by GitHub Actions
 #
 # Permissions:
-#   The workflow requires the following permissions:
-#   - contents: write - To update repository contents
-#   - pull-requests: write - To create and update pull requests
-#   - issues: write - To create and manage issues for findings
-#   - security-events: read - To read security event data
-#
-# Configuration:
-#   - Uses a reusable workflow from ministryofjustice/devsecops-actions
-#   - Dependency review configuration is loaded from .github/dependency-review-config.yml
-#   - Authenticates using the GITHUB_TOKEN secret
-#
-# Dependencies:
-#   - Reusable workflow: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml
+#   - contents: write - Required to update repository content
+#   - pull-requests: write - Required to comment on pull requests
+#   - issues: write - Required to create/update security issues
+#   - security-events: read - Required to access security event data
 #
 
 name: SCA ⚡️
@@ -34,16 +40,37 @@ on:
 
 permissions: {}
 
+env:
+  environment: base
+
 jobs:
-  dependencies:
+  # 1. Pre-requisite
+  setup:
+    name: Setup 🔧
+    runs-on: ["ubuntu-latest"]
+    outputs:
+      environment: ${{ env.environment }}
+    steps:
+      - name: Environment 🧪
+        run: echo "Environment set to ${{ env.environment }}"
+
+  # 2. MoJ - SCA
+  sca:
     permissions:
       contents: write
       pull-requests: write
       issues: write
       security-events: read
 
-    uses: ministryofjustice/devsecops-actions/.github/workflows/_sca.yml@2fa001f2e51f7ecf30ca05819a51a460a25e1510 # frozen: v1.0.0
-    with:
-      dependency-review-config-file: "./.github/dependency-review-config.yml"
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
+    name: Execute ⚙️
+    runs-on: ["ubuntu-latest"]
+    needs: setup
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: SCA
+        uses: ministryofjustice/devsecops-actions/sca@8969573dae1df43e6f86b3966c71362604f6863a
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dependency-review-config-file: "./.github/dependency-review-config.yml"
