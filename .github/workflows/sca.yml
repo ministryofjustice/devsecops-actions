@@ -70,7 +70,7 @@ jobs:
 
     steps:
       - name: SCA
-        uses: ministryofjustice/devsecops-actions/sca@a2c9fe513afa45f3d9259347a0172e1177d231c6
+        uses: ministryofjustice/devsecops-actions/sca@56ee885dd74f7661dc1a4534cfaf1c6a09f51c8d
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           dependency-review-config-file: "./.github/dependency-review-config.yml"
