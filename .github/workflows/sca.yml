@@ -1,32 +1,37 @@
-# Software Composition Analysis (SCA) Workflow
+# GitHub Actions Workflow: Software Composition Analysis (SCA)
 #
 # This workflow performs automated software composition analysis to identify
 # security vulnerabilities and license compliance issues in project dependencies.
 #
 # Triggers:
-#   - Scheduled daily at midnight (00:00 UTC)
-#   - Pull requests targeting the main branch
+#   - schedule: Runs daily at midnight (00:00 UTC)
+#   - pull_request: Runs on pull requests targeting the main branch
+#   - workflow_dispatch: Allows manual triggering from the GitHub UI
 #
-# Workflow Structure:
-#   1. setup job: Initializes environment configuration
-#      - Sets up the base environment
-#      - Outputs environment name for downstream jobs
+# Jobs:
+#   1. setup: Initializes the workflow environment
+#      - Outputs the environment name for downstream jobs
+#      - Runs on ubuntu-latest
 #
-#   2. sca job: Executes the software composition analysis
-#      - Requires setup job completion
+#   2. sca: Executes the software composition analysis
+#      - Requires setup job to complete first
 #      - Uses the MoJ devsecops-actions/sca action
-#      - Requires GitHub token for API access
-#      - Uses dependency review configuration from .github/dependency-review-config.yml
+#      - Permissions granted:
+#        * contents: write - For repository content access
+#        * pull-requests: write - For commenting on PRs
+#        * issues: write - For creating security issues
+#        * security-events: read - For accessing security alerts
+#      - Configuration:
+#        * Uses GITHUB_TOKEN for authentication
+#        * Dependency review config file location: ./.github/dependency-review-config.yml
 #
-# Required Secrets:
-#   - GITHUB_TOKEN: Automatically provided by GitHub Actions
+# Environment:
+#   - Default environment: base
+#   - Can be referenced by downstream jobs via outputs
 #
-# Permissions:
-#   - contents: write - Required to update repository content
-#   - pull-requests: write - Required to comment on pull requests
-#   - issues: write - Required to create/update security issues
-#   - security-events: read - Required to access security event data
-#
+# Security:
+#   - Top-level permissions set to empty (none) by default
+#   - Job-specific permissions explicitly defined where needed
 
 name: SCA ⚡️
 run-name: Software Composition Analysis ⚡️
@@ -37,6 +42,8 @@ on:
 
   pull_request:
     branches: ["main"]
+
+  workflow_dispatch:
 
 permissions: {}
 
