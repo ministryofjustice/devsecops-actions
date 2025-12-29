@@ -87,8 +87,4 @@ runs:
 
     - name: 🔑 Secrets
       shell: bash
-      run: |
-        docker run --rm \
-          -w /src \
-          -v ${{ github.workspace }}:/src \
-          ghcr.io/ministryofjustice/devsecops-hooks:v1.0.2
+      run: docker run --rm -w /src -v $(pwd):/src ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0
