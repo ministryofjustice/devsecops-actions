@@ -72,6 +72,7 @@ runs:
       uses: actions/dependency-review-action@774d14bf50b7a2e2460f9f49e25c52503ecab125 # frozen: v4.8.3
       with:
         config-file: ${{ inputs.dependency-review-config-file }}
+        head-ref: ${{ github.head_ref || github.sha }}
         base-ref: ${{ github.base_ref || github.event.repository.default_branch }}
 
     - name: Renovate
