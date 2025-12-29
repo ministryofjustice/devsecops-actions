@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.1.0...v1.2.0) (2025-12-29)
+
+
+### Features
+
+* **10-sca:** added moj central secret scanning ([#22](https://github.com/ministryofjustice/devsecops-actions/issues/22)) ([0b3f4ac](https://github.com/ministryofjustice/devsecops-actions/commit/0b3f4ac24b5d9c672abd29529ecc990c3adf5a24))
+
+
+### Bug Fixes
+
+* **sca:** update to v1.1.0 ([#20](https://github.com/ministryofjustice/devsecops-actions/issues/20)) ([1ead3ca](https://github.com/ministryofjustice/devsecops-actions/commit/1ead3ca5ee18d10570b98c123a7d45ba881b2f79))
+
 ## [1.1.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.0.0...v1.1.0) (2025-12-29)
 
 
