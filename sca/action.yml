@@ -88,6 +88,6 @@ runs:
     - name: 🔑 Secrets
       shell: bash
       run: docker run --rm
-        \ -e GIT_MODE=false
-        \ -v $(pwd):/src
-        \ ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0 # https://github.com/ministryofjustice/devsecops-hooks
+        \-e GIT_MODE=false
+        \-v $(pwd):/src
+        \ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0 # https://github.com/ministryofjustice/devsecops-hooks
