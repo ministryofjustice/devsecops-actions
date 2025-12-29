@@ -1,42 +1,42 @@
-# Software Composition Analysis (SCA) Action
+# Ministry of Justice UK - Software Composition Analysis (SCA) Action
 #
-# This GitHub Action performs comprehensive software composition analysis including:
+# This composite GitHub Action performs comprehensive software composition analysis including:
 # - Dependency review and vulnerability scanning
 # - Automated dependency updates via Renovate
-# - Secret scanning and security event monitoring
+# - Secret scanning using MoJ DevSecOps hooks
 #
-# Inputs:
-#   renovate: (optional, default: "true")
-#     Controls whether Renovate dependency updates should be executed
-#
-#   renovate-version: (optional, default: "42.64.1")
-#     Specifies the version of Renovate CLI to use for dependency updates
-#
-#   dependency-review-config-file: (optional, default: "")
-#     Path to a custom dependency review configuration file relative to repository root
-#     If not provided, uses default dependency review settings
-#
-#   token: (required)
-#     GitHub token with the following permissions:
-#     - Read/Write: contents, pull requests, issues
-#     - Read-only: security events
-#
-# Usage Example:
+# Usage:
 #   - uses: ministryofjustice/devsecops-actions/sca@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
-#       renovate: "true"
-#       renovate-version: "42.64.1"
+#       renovate: 'true'
+#       renovate-version: '42.64.1'
+#       dependency-review-config-file: '.github/dependency-review-config.yml'
+#
+# Inputs:
+#   renovate: (optional) Enable/disable Renovate execution. Default: 'true'
+#   renovate-version: (optional) Specific Renovate CLI version to use. Default: '42.64.1'
+#   dependency-review-config-file: (optional) Path to custom dependency review config. Default: ''
+#   token: (required) GitHub token with permissions:
+#     - contents: read/write
+#     - pull_requests: read/write
+#     - issues: read/write
+#     - security_events: read
 #
 # Steps:
-#   1. Repository checkout - Clones the repository for analysis
-#   2. Dependencies - Runs dependency review to identify vulnerabilities
-#   3. Renovate - Automatically creates PRs for dependency updates (if enabled)
+#   1. Checkout repository code
+#   2. Run dependency review action to analyze dependencies for vulnerabilities
+#   3. Execute Renovate bot for automated dependency updates (if enabled)
+#   4. Scan for secrets using MoJ DevSecOps hooks container
 #
-# Environment Variables (Renovate):
-#   RENOVATE_AUTODISCOVER: Disabled to prevent automatic repository discovery
-#   RENOVATE_REPOSITORIES: Set to current repository only
+# Requirements:
+#   - Runner must support Docker for secret scanning step
+#   - Token must have appropriate repository permissions
 #
+# Example with minimal configuration:
+#   - uses: ministryofjustice/devsecops-actions/sca@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
 
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action focuses on dependencies, secret scanning and vulnerabilities management
