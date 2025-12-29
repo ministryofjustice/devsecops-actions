@@ -65,17 +65,17 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Repository
+    - name: 📦 Repository
       uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # frozen: v6.0.1
 
-    - name: Dependencies
+    - name: 📊 Dependencies
       uses: actions/dependency-review-action@774d14bf50b7a2e2460f9f49e25c52503ecab125 # frozen: v4.8.3
       with:
         config-file: ${{ inputs.dependency-review-config-file }}
         head-ref: ${{ github.head_ref || github.sha }}
         base-ref: ${{ github.base_ref || github.event.repository.default_branch }}
 
-    - name: Renovate
+    - name: 🔁 Renovate
       if: inputs.renovate == 'true'
       uses: renovatebot/github-action@8b7941943a108b2cc2150730963164aa8baeab8c # frozen: v44.2.2
       with:
@@ -84,3 +84,11 @@ runs:
       env:
         RENOVATE_AUTODISCOVER: "false"
         RENOVATE_REPOSITORIES: ${{ github.repository }}
+
+    - name: 🔑 Secrets
+      shell: bash
+      run: |
+        docker run --rm \
+          -w /src \
+          -v ${{ github.workspace }}:/src \
+          ghcr.io/ministryofjustice/devsecops-hooks:v1.0.2
