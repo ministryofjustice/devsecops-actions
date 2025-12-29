@@ -1,37 +1,38 @@
-# GitHub Actions Workflow: Software Composition Analysis (SCA)
+# Software Composition Analysis (SCA) Workflow
 #
-# This workflow performs automated software composition analysis to identify
-# security vulnerabilities and license compliance issues in project dependencies.
+# This workflow performs automated security scanning of project dependencies to identify
+# vulnerabilities, license issues, and outdated packages.
 #
 # Triggers:
 #   - schedule: Runs daily at midnight (00:00 UTC)
-#   - pull_request: Runs on pull requests targeting the main branch
-#   - workflow_dispatch: Allows manual triggering from the GitHub UI
+#   - pull_request: Executes when PRs are opened against the main branch
+#   - workflow_dispatch: Allows manual workflow execution
 #
 # Jobs:
-#   1. setup: Initializes the workflow environment
-#      - Outputs the environment name for downstream jobs
-#      - Runs on ubuntu-latest
+#   1. setup: Initializes workflow environment configuration
+#      - Sets the environment variable to 'base'
+#      - Outputs environment name for downstream jobs
 #
-#   2. sca: Executes the software composition analysis
-#      - Requires setup job to complete first
-#      - Uses the MoJ devsecops-actions/sca action
-#      - Permissions granted:
-#        * contents: write - For repository content access
-#        * pull-requests: write - For commenting on PRs
+#   2. sca: Executes the Software Composition Analysis
+#      - Permissions:
+#        * contents: write - For creating/updating files
+#        * pull-requests: write - For PR comments and updates
 #        * issues: write - For creating security issues
-#        * security-events: read - For accessing security alerts
+#        * security-events: read - For accessing security scan results
+#      - Uses MoJ's devsecops-actions/sca action (v1.1.0)
 #      - Configuration:
-#        * Uses GITHUB_TOKEN for authentication
-#        * Dependency review config file location: ./.github/dependency-review-config.yml
+#        * Authenticates using GitHub token
+#        * Uses custom dependency review config from .github/dependency-review-config.yml
+#      - Depends on successful completion of setup job
+#      - Runs in the environment specified by setup job output
 #
 # Environment:
 #   - Default environment: base
-#   - Can be referenced by downstream jobs via outputs
 #
 # Security:
-#   - Top-level permissions set to empty (none) by default
-#   - Job-specific permissions explicitly defined where needed
+#   - Workflow has minimal default permissions (none)
+#   - Individual jobs specify required granular permissions
+#   - Uses pinned action version with SHA for supply chain security
 
 name: SCA ⚡️
 run-name: Software Composition Analysis ⚡️
@@ -77,7 +78,7 @@ jobs:
 
     steps:
       - name: SCA
-        uses: ministryofjustice/devsecops-actions/sca@fix/non-pull-request-actions
+        uses: ministryofjustice/devsecops-actions/sca@79780d6219adfb74f1602fd71ee8e84f1dc254e3 # frozen: v1.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           dependency-review-config-file: "./.github/dependency-review-config.yml"
