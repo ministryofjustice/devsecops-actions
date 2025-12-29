@@ -40,3 +40,6 @@ coverage
 .vscode/launch.json
 .vscode/extensions.json
 *.code-workspace
+
+# GitLeaks
+gitleaks-report.json
