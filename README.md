@@ -55,6 +55,7 @@ and container security.
 - 💬 Provides detailed dependency review analysis
 - 📊 Uses GitHub's Dependency Review Action for vulnerability scanning
 - 🤖 Optional Renovate bot integration for automated dependency updates
+- 🔑 Secret scanning using MoJ DevSecOps hooks to detect exposed credentials
 
 #### 🧩 Workflow
 
