@@ -1,9 +1,10 @@
-# Ministry of Justice UK - Software Composition Analysis (SCA) Action
+# Ministry of Justice UK - Software Composition Analysis (SCA) GitHub Action
 #
-# This composite GitHub Action performs comprehensive software composition analysis including:
+# This composite action performs comprehensive software composition analysis including:
 # - Dependency review and vulnerability scanning
 # - Automated dependency updates via Renovate
-# - Secret scanning using MoJ DevSecOps hooks
+# - Secret scanning using DevSecOps hooks
+# - CodeQL security analysis for multiple languages
 #
 # Usage:
 #   - uses: ministryofjustice/devsecops-actions/sca@main
@@ -12,31 +13,31 @@
 #       renovate: 'true'
 #       renovate-version: '42.64.1'
 #       dependency-review-config-file: '.github/dependency-review-config.yml'
+#       codeql-config-file: '.github/codeql-config.yml'
+#       codeql-upload-findings: 'always'
 #
 # Inputs:
 #   renovate: (optional) Enable/disable Renovate execution. Default: 'true'
-#   renovate-version: (optional) Specific Renovate CLI version to use. Default: '42.64.1'
-#   dependency-review-config-file: (optional) Path to custom dependency review config. Default: ''
-#   token: (required) GitHub token with permissions:
-#     - contents: read/write
-#     - pull_requests: read/write
-#     - issues: read/write
-#     - security_events: read
+#   renovate-version: (optional) Renovate CLI version. Default: '42.64.1'
+#   dependency-review-config-file: (optional) Path to dependency review config
+#   codeql-config-file: (optional) Path to CodeQL configuration file
+#   codeql-upload-findings: (optional) Upload CodeQL SARIF results. Default: 'always'
+#   token: (required) GitHub token with permissions for contents, PR, issues (read/write) and security events (read)
 #
-# Steps:
-#   1. Checkout repository code
-#   2. Run dependency review action to analyze dependencies for vulnerabilities
-#   3. Execute Renovate bot for automated dependency updates (if enabled)
-#   4. Scan for secrets using MoJ DevSecOps hooks container
+# Workflow Steps:
+#   1. Repository Checkout - Clones the repository for analysis
+#   2. Dependencies - Reviews dependencies for vulnerabilities and license compliance
+#   3. Renovate - Automates dependency updates (if enabled)
+#   4. Secrets - Scans for exposed secrets and credentials
+#   5. CodeQL - Initializes, builds, and analyzes code for security vulnerabilities
 #
-# Requirements:
-#   - Runner must support Docker for secret scanning step
-#   - Token must have appropriate repository permissions
+# Required Permissions:
+#   contents: read/write
+#   pull-requests: read/write
+#   issues: read/write
+#   security-events: read
 #
-# Example with minimal configuration:
-#   - uses: ministryofjustice/devsecops-actions/sca@main
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
+# Note: Set codeql-upload-findings to 'never' if CodeQL default setup is already enabled
 
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action focuses on dependencies, secret scanning and vulnerabilities management

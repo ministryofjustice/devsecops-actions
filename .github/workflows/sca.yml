@@ -83,4 +83,3 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           dependency-review-config-file: "./.github/dependency-review-config.yml"
-          codeql-upload-findings: never
