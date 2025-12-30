@@ -55,7 +55,12 @@ inputs:
 
   dependency-review-config-file:
     required: false
-    description: "GitHub Actions dependency review configuration file path relative to your repository."
+    description: "GitHub Actions dependency review configuration file path."
+    default: ""
+
+  codeql-config-file:
+    required: false
+    description: "CodeQL configuration file path."
     default: ""
 
   token:
@@ -91,3 +96,18 @@ runs:
         \-e GIT_MODE=false
         \-v $(pwd):/src
         \ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0 # https://github.com/ministryofjustice/devsecops-hooks
+
+      # Sets up CodeQL for analysis
+    - name: ⚙️ CodeQL
+      uses: github/codeql-action/init@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
+      with:
+        config-file: ${{ inputs.codeql-config-file }}
+
+      # Auto-build for compiled languages
+    - name: ⚙️ CodeQL
+      uses: github/codeql-action/autobuild@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
+      continue-on-error: true
+
+    # Finalizes the CodeQL database, runs the analysis, and uploads the results to Code Scanning
+    - name: ⚙️ CodeQL
+      uses: github/codeql-action/analyze@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
