@@ -119,7 +119,7 @@ runs:
         \--no-update
         \--branch ${{ github.head_ref }}
         \--fail-on-scan-errors
-        \--config ${{ inputs.trufflehog-config-file }}
+        \--config=${{ inputs.trufflehog-config-file }}
         \--json > trufflehog.json
 
     # Upload findings
