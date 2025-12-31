@@ -117,7 +117,7 @@ runs:
         \--concurrency=14
         \--no-verification
         \--no-update
-        \--branch ${{ github.ref_name }}
+        \--branch ${{ github.head_ref }}
         \--fail-on-scan-errors
         \--json > trufflehog.json
 
@@ -126,7 +126,7 @@ runs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: trufflehog-${{ github.ref_name }}
+        name: trufflehog
         path: trufflehog.json
         retention-days: 90
 
