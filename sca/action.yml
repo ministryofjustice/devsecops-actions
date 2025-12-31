@@ -112,23 +112,23 @@ runs:
     - name: 🐷 Trufflehog
       shell: bash
       run: docker run --rm
-        \-v $(pwd):/src
+        \-v $(pwd):/src trufflesecurity/trufflehog:3.92.4@sha256:c28ab4a11e01d6fcc10776f65cce015bdf9795f2393cffa2ec0a7c8464ee58b6
         \git https://github.com/${{ github.repository }}
-        \--no-update
+        \--concurrency=14
         \--no-verification
-        \--fail-on-scan-error
-        \--concurency=14
+        \--no-update
         \--branch ${{ github.ref_name }}
-        \--format sarif
-        \--rules ${{ inputs.trufflehog-config-file }}
-        \trufflesecurity/trufflehog:3.92.4@sha256:c28ab4a11e01d6fcc10776f65cce015bdf9795f2393cffa2ec0a7c8464ee58b6 > trufflehog.sarif
+        \--fail-on-scan-errors
+        \--json > trufflehog.json
 
     # Upload findings
     - name: 🐷 Trufflehog
       if: always()
-      uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
+      uses: actions/upload-artifact@v4
       with:
-        sarif_file: trufflehog.sarif
+        name: trufflehog-${{ github.ref_name }}
+        path: trufflehog.json
+        retention-days: 90
 
       # Sets up CodeQL for analysis
     - name: ⚙️ CodeQL
