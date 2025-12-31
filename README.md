@@ -55,7 +55,8 @@ and container security.
 - 💬 Provides detailed dependency review analysis
 - 📊 Uses GitHub's Dependency Review Action for vulnerability scanning
 - 🤖 Optional Renovate bot integration for automated dependency updates
-- 🔑 Secret scanning using MoJ DevSecOps hooks to detect exposed credentials
+- 🔑 Secret scanning using MoJ DevSecOps hooks and Trufflehog to detect exposed credentials
+- 🔍 Code security analysis using CodeQL for vulnerability detection
 
 #### 🧩 Workflow
 
@@ -69,6 +70,9 @@ and container security.
 | `renovate`                      | string | No       | `true`    | Enable or disable Renovate bot execution                                                                                            |
 | `renovate-version`              | string | No       | `42.64.1` | Renovate CLI version to use                                                                                                         |
 | `dependency-review-config-file` | string | No       | `""`      | Path to dependency review configuration file relative to your repository root                                                       |
+| `trufflehog-config-file`        | string | No       | `""`      | Path to Trufflehog configuration file for secret scanning                                                                           |
+| `codeql-config-file`            | string | No       | `""`      | Path to CodeQL configuration file for code analysis                                                                                 |
+| `codeql-upload-findings`        | string | No       | `always`  | Upload CodeQL findings as SARIF to Code Scanning. Set to "never" if default setup is enabled                                        |
 
 #### Required Permissions
 
@@ -154,6 +158,9 @@ jobs:
           renovate: "true" # Enable Renovate bot
           renovate-version: "42.64.1" # Specify custom Renovate version
           dependency-review-config-file: ".github/dependency-review-config.yml" # Custom dependency review config
+          trufflehog-config-file: ".github/trufflehog-config.yml" # Custom Trufflehog config
+          codeql-config-file: ".github/codeql-config.yml" # Custom CodeQL config
+          codeql-upload-findings: "always" # Upload CodeQL findings
 ```
 
 #### Disable Renovate Bot
