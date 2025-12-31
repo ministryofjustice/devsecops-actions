@@ -111,7 +111,14 @@ runs:
     # Initiate scan
     - name: 🐷 Trufflehog
       shell: bash
-      run: docker run --rm
+      run: |
+        CONFIG=""
+
+        if [ -n "${{ inputs.trufflehog-config-file }}" ]; then
+          CONFIG="--config=${{ inputs.trufflehog-config-file }}"
+        fi
+
+        docker run --rm
         \-v $(pwd):/src trufflesecurity/trufflehog:3.92.4@sha256:c28ab4a11e01d6fcc10776f65cce015bdf9795f2393cffa2ec0a7c8464ee58b6
         \git https://github.com/ministryofjustice/cla_backend
         \--concurrency=14
@@ -119,7 +126,7 @@ runs:
         \--no-update
         \--branch ${{ github.head_ref }}
         \--fail-on-scan-errors
-        \--config=${{ inputs.trufflehog-config-file }}
+        \$CONFIG
         \--json > trufflehog.json
 
     # Upload findings
