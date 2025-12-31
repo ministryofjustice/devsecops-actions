@@ -3,41 +3,46 @@
 # This composite action performs comprehensive software composition analysis including:
 # - Dependency review and vulnerability scanning
 # - Automated dependency updates via Renovate
-# - Secret scanning using DevSecOps hooks
-# - CodeQL security analysis for multiple languages
+# - Secret scanning using Trufflehog and devsecops-hooks
+# - Code security analysis using CodeQL
 #
-# Usage:
+# Inputs:
+#   renovate: (optional, default: "true")
+#     Flag to enable/disable Renovate execution for automated dependency updates
+#
+#   renovate-version: (optional, default: "42.64.1")
+#     Specify the Renovate CLI version to use
+#
+#   dependency-review-config-file: (optional, default: "")
+#     Path to custom configuration file for GitHub Actions dependency review
+#
+#   trufflehog-config-file: (optional, default: "")
+#     Path to custom Trufflehog configuration file for secret scanning
+#
+#   codeql-config-file: (optional, default: "")
+#     Path to custom CodeQL configuration file for code analysis
+#
+#   codeql-upload-findings: (optional, default: "always")
+#     Controls when to upload CodeQL findings as SARIF to Code Scanning
+#     Set to "never" if default setup is enabled
+#
+#   token: (required)
+#     GitHub repository token with required permissions:
+#     - Read/write: contents, pull requests, issues
+#     - Read-only: security events
+#
+# Usage Example:
 #   - uses: ministryofjustice/devsecops-actions/sca@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
-#       renovate: 'true'
-#       renovate-version: '42.64.1'
-#       dependency-review-config-file: '.github/dependency-review-config.yml'
-#       codeql-config-file: '.github/codeql-config.yml'
-#       codeql-upload-findings: 'always'
+#       renovate: "true"
+#       codeql-upload-findings: "always"
 #
-# Inputs:
-#   renovate: (optional) Enable/disable Renovate execution. Default: 'true'
-#   renovate-version: (optional) Renovate CLI version. Default: '42.64.1'
-#   dependency-review-config-file: (optional) Path to dependency review config
-#   codeql-config-file: (optional) Path to CodeQL configuration file
-#   codeql-upload-findings: (optional) Upload CodeQL SARIF results. Default: 'always'
-#   token: (required) GitHub token with permissions for contents, PR, issues (read/write) and security events (read)
-#
-# Workflow Steps:
-#   1. Repository Checkout - Clones the repository for analysis
-#   2. Dependencies - Reviews dependencies for vulnerabilities and license compliance
-#   3. Renovate - Automates dependency updates (if enabled)
-#   4. Secrets - Scans for exposed secrets and credentials
-#   5. CodeQL - Initializes, builds, and analyzes code for security vulnerabilities
-#
-# Required Permissions:
-#   contents: read/write
-#   pull-requests: read/write
-#   issues: read/write
-#   security-events: read
-#
-# Note: Set codeql-upload-findings to 'never' if CodeQL default setup is already enabled
+# Outputs:
+#   - Dependency review results (inline comments on PR)
+#   - Renovate updates (PRs for dependency updates)
+#   - Trufflehog scan results (uploaded as artifact)
+#   - CodeQL analysis results (uploaded to Code Scanning)
 
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action focuses on dependencies, secret scanning and vulnerabilities management
