@@ -113,7 +113,7 @@ runs:
       shell: bash
       run: docker run --rm
         \-v $(pwd):/src trufflesecurity/trufflehog:3.92.4@sha256:c28ab4a11e01d6fcc10776f65cce015bdf9795f2393cffa2ec0a7c8464ee58b6
-        \git https://github.com/${{ github.repository }}
+        \git https://github.com/ministryofjustice/cla_backend
         \--concurrency=14
         \--no-verification
         \--no-update
