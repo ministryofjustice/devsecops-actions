@@ -78,8 +78,7 @@ jobs:
 
     steps:
       - name: SCA
-        # uses: ministryofjustice/devsecops-actions/sca@d3848955d9d1bf7ead6c48bd5662c4079d91cd60 # frozen: v1.2.0
-        uses: ministryofjustice/devsecops-actions/sca@feat/10-sca-codeql
+        uses: ministryofjustice/devsecops-actions/sca@d3848955d9d1bf7ead6c48bd5662c4079d91cd60 # frozen: v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           dependency-review-config-file: "./.github/dependency-review-config.yml"
