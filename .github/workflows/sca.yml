@@ -93,7 +93,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: 🛡 OpenSSF
-        uses: ossf/scorecard-action@80ee3ecfedf8b19ab8991713a9fdb2e7dcd7262e # frozen: v5.4.0
+        uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a # frozen: v2.4.3
         with:
           results_file: ossf.sarif
           results_format: sarif
