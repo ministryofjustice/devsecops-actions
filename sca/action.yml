@@ -45,7 +45,7 @@
 #   - CodeQL analysis results (uploaded to Code Scanning)
 
 name: Ministry of Justice UK - SCA ⚡️
-description: Software composition analysis GitHub action focuses on dependencies, secret scanning and vulnerabilities management
+description: Software composition analysis GitHub action for dependency management, secret scanning, and security vulnerability detection
 author: Ministry of Justice UK
 
 inputs:
@@ -95,6 +95,25 @@ runs:
         config-file: ${{ inputs.dependency-review-config-file }}
         head-ref: ${{ github.head_ref || github.sha }}
         base-ref: ${{ github.base_ref || github.event.repository.default_branch }}
+
+    - name: 🔎 OWASP
+      uses: dependency-check/Dependency-Check_Action@1e54355a8b4c8abaa8cc7d0b70aa655a3bb15a6c # frozen: v1.1.0
+      with:
+        project: ${{ github.repository }}
+        path: "."
+        format: JSON,SARIF
+        args: >
+          --failOnCVSS 7
+          --prettyPrint
+          --format json
+
+    - name: 🔎 OWASP
+      if: always()
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # frozen: v6.0.0
+      with:
+        name: OWASP SCA
+        path: ${{github.workspace}}/reports
+        retention-days: 30
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
