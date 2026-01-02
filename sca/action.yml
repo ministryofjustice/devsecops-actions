@@ -101,11 +101,12 @@ runs:
       with:
         project: ${{ github.repository }}
         path: "."
-        format: JSON, SARIF
+        format: JSON
         args: >
           --failOnCVSS 7
           --prettyPrint
-          --format json
+          --format JSON
+          --format SARIF
 
     - name: 🔎 OWASP
       if: always()
