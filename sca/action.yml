@@ -101,7 +101,7 @@ runs:
       with:
         project: ${{ github.repository }}
         path: "."
-        format: JSON,SARIF
+        format: JSON, SARIF
         args: >
           --failOnCVSS 7
           --prettyPrint
