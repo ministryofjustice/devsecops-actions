@@ -1,42 +1,48 @@
-# Ministry of Justice UK - Software Composition Analysis (SCA) Action
+# Ministry of Justice UK - Software Composition Analysis (SCA) GitHub Action
 #
-# This composite GitHub Action performs comprehensive software composition analysis including:
+# This composite action performs comprehensive software composition analysis including:
 # - Dependency review and vulnerability scanning
 # - Automated dependency updates via Renovate
-# - Secret scanning using MoJ DevSecOps hooks
-#
-# Usage:
-#   - uses: ministryofjustice/devsecops-actions/sca@main
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
-#       renovate: 'true'
-#       renovate-version: '42.64.1'
-#       dependency-review-config-file: '.github/dependency-review-config.yml'
+# - Secret scanning using Trufflehog and devsecops-hooks
+# - Code security analysis using CodeQL
 #
 # Inputs:
-#   renovate: (optional) Enable/disable Renovate execution. Default: 'true'
-#   renovate-version: (optional) Specific Renovate CLI version to use. Default: '42.64.1'
-#   dependency-review-config-file: (optional) Path to custom dependency review config. Default: ''
-#   token: (required) GitHub token with permissions:
-#     - contents: read/write
-#     - pull_requests: read/write
-#     - issues: read/write
-#     - security_events: read
+#   renovate: (optional, default: "true")
+#     Flag to enable/disable Renovate execution for automated dependency updates
 #
-# Steps:
-#   1. Checkout repository code
-#   2. Run dependency review action to analyze dependencies for vulnerabilities
-#   3. Execute Renovate bot for automated dependency updates (if enabled)
-#   4. Scan for secrets using MoJ DevSecOps hooks container
+#   renovate-version: (optional, default: "42.64.1")
+#     Specify the Renovate CLI version to use
 #
-# Requirements:
-#   - Runner must support Docker for secret scanning step
-#   - Token must have appropriate repository permissions
+#   dependency-review-config-file: (optional, default: "")
+#     Path to custom configuration file for GitHub Actions dependency review
 #
-# Example with minimal configuration:
+#   trufflehog-config-file: (optional, default: "")
+#     Path to custom Trufflehog configuration file for secret scanning
+#
+#   codeql-config-file: (optional, default: "")
+#     Path to custom CodeQL configuration file for code analysis
+#
+#   codeql-upload-findings: (optional, default: "always")
+#     Controls when to upload CodeQL findings as SARIF to Code Scanning
+#     Set to "never" if default setup is enabled
+#
+#   token: (required)
+#     GitHub repository token with required permissions:
+#     - Read/write: contents, pull requests, issues
+#     - Read-only: security events
+#
+# Usage Example:
 #   - uses: ministryofjustice/devsecops-actions/sca@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
+#       renovate: "true"
+#       codeql-upload-findings: "always"
+#
+# Outputs:
+#   - Dependency review results (inline comments on PR)
+#   - Renovate updates (PRs for dependency updates)
+#   - Trufflehog scan results (uploaded as artifact)
+#   - CodeQL analysis results (uploaded to Code Scanning)
 
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action focuses on dependencies, secret scanning and vulnerabilities management
@@ -55,8 +61,23 @@ inputs:
 
   dependency-review-config-file:
     required: false
-    description: "GitHub Actions dependency review configuration file path relative to your repository."
+    description: "GitHub Actions dependency review configuration file path."
     default: ""
+
+  trufflehog-config-file:
+    required: false
+    description: "Trufflehog configuration file path."
+    default: ""
+
+  codeql-config-file:
+    required: false
+    description: "CodeQL configuration file path."
+    default: ""
+
+  codeql-upload-findings:
+    required: false
+    description: "Upload the findings from CodeQL as SARIF file to Code Scanning, set to never if default setup is enabled."
+    default: "always"
 
   token:
     required: true
@@ -89,5 +110,52 @@ runs:
       shell: bash
       run: docker run --rm
         \-e GIT_MODE=false
-        \-v $(pwd):/src
+        \-v "$(pwd)":/src
         \ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0 # https://github.com/ministryofjustice/devsecops-hooks
+
+    # Initiate scan
+    - name: 🐷 Trufflehog
+      shell: bash
+      run: |
+        CONFIG=""
+
+        if [ -n "${{ inputs.trufflehog-config-file }}" ]; then
+          CONFIG="--config ${{ inputs.trufflehog-config-file }}"
+        fi
+
+        docker run --rm \
+        -v "$(pwd)":/src trufflesecurity/trufflehog:3.92.4@sha256:c28ab4a11e01d6fcc10776f65cce015bdf9795f2393cffa2ec0a7c8464ee58b6 \
+        git https://github.com/${{ github.repository }} \
+        $CONFIG \
+        --concurrency=14 \
+        --no-verification \
+        --no-update \
+        --branch ${{ github.head_ref }} \
+        --fail-on-scan-errors \
+        --json > trufflehog.json
+
+    # Upload findings
+    - name: 🐷 Trufflehog
+      if: always()
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # frozen: v6.0.0
+      with:
+        name: trufflehog
+        path: trufflehog.json
+        retention-days: 30
+
+      # Sets up CodeQL for analysis
+    - name: ⚙️ CodeQL
+      uses: github/codeql-action/init@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
+      with:
+        config-file: ${{ inputs.codeql-config-file }}
+
+      # Auto-build for compiled languages
+    - name: ⚙️ CodeQL
+      uses: github/codeql-action/autobuild@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
+      continue-on-error: true
+
+    # Finalizes the CodeQL database, runs the analysis, and uploads the results to Code Scanning
+    - name: ⚙️ CodeQL
+      uses: github/codeql-action/analyze@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
+      with:
+        upload: ${{ inputs.codeql-upload-findings }}
