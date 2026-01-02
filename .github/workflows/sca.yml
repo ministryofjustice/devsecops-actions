@@ -1,38 +1,36 @@
 # Software Composition Analysis (SCA) Workflow
 #
-# This workflow performs automated security scanning of project dependencies to identify
-# vulnerabilities, license issues, and outdated packages.
+# This workflow performs security analysis of project dependencies to identify
+# vulnerabilities and license compliance issues.
 #
 # Triggers:
 #   - schedule: Runs daily at midnight (00:00 UTC)
-#   - pull_request: Executes when PRs are opened against the main branch
-#   - workflow_dispatch: Allows manual workflow execution
+#   - pull_request: On PRs targeting the main branch
+#   - push: On commits to the main branch
+#   - workflow_dispatch: Manual trigger
 #
 # Jobs:
-#   1. setup: Initializes workflow environment configuration
-#      - Sets the environment variable to 'base'
-#      - Outputs environment name for downstream jobs
+#   setup:
+#     - Configures the workflow environment
+#     - Sets environment output for downstream jobs
 #
-#   2. sca: Executes the Software Composition Analysis
-#      - Permissions:
-#        * contents: write - For creating/updating files
-#        * pull-requests: write - For PR comments and updates
-#        * issues: write - For creating security issues
-#        * security-events: read - For accessing security scan results
-#      - Uses MoJ's devsecops-actions/sca action (v1.1.0)
-#      - Configuration:
-#        * Authenticates using GitHub token
-#        * Uses custom dependency review config from .github/dependency-review-config.yml
-#      - Depends on successful completion of setup job
-#      - Runs in the environment specified by setup job output
+#   sca:
+#     - Checks out the repository
+#     - Sets up Node.js environment using configured version
+#     - Installs npm dependencies (without running scripts)
+#     - Executes MoJ DevSecOps SCA action for dependency analysis
 #
-# Environment:
-#   - Default environment: base
+# Permissions:
+#   - contents: write - Required for repository access and updates
+#   - pull-requests: write - Required for PR comments and annotations
+#   - issues: write - Required for creating/updating security issues
+#   - security-events: write - Required for uploading SARIF results
+#   - id-token: write - Required for OIDC authentication
 #
-# Security:
-#   - Workflow has minimal default permissions (none)
-#   - Individual jobs specify required granular permissions
-#   - Uses pinned action version with SHA for supply chain security
+# Configuration:
+#   - Uses dependency-review-config.yml for customizing analysis rules
+#   - References MoJ DevSecOps SCA action on feature branch
+#   - Runs on ubuntu-latest runners
 
 name: SCA ⚡️
 run-name: Software Composition Analysis ⚡️
@@ -93,8 +91,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: ⚡️ SCA
-        # uses: ministryofjustice/devsecops-actions/sca@d3848955d9d1bf7ead6c48bd5662c4079d91cd60 # frozen: v1.2.0
-        uses: ministryofjustice/devsecops-actions/sca@feat/10-sca-owasp
+        uses: ministryofjustice/devsecops-actions/sca@d3848955d9d1bf7ead6c48bd5662c4079d91cd60 # frozen: v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
