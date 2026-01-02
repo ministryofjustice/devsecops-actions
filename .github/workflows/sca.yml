@@ -93,7 +93,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: 🛡 OpenSSF
-        uses: ossf/scorecard-action@eaacf0543bb3f2c246792bd56e8cdeffafb205a # frozen: v2.4.3
+        uses: ossf/scorecard-action@80ee3ecfedf8b19ab8991713a9fdb2e7dcd7262e # frozen: v5.4.0
         with:
           results_file: ossf.sarif
           results_format: sarif
@@ -101,12 +101,9 @@ jobs:
           publish_results: true
 
       - name: 🛡 OpenSSF
-        uses: ossf/scorecard-action@eaacf0543bb3f2c246792bd56e8cdeffafb205a # frozen: v2.4.3
+        uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
         with:
-          results_file: ossf.sarif
-          results_format: sarif
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_results: true
+          sarif_file: ossf.sarif
 
       - name: ⚡️ SCA
         # uses: ministryofjustice/devsecops-actions/sca@d3848955d9d1bf7ead6c48bd5662c4079d91cd60 # frozen: v1.2.0
