@@ -77,6 +77,17 @@ jobs:
       name: ${{ needs.setup.outputs.environment }}
 
     steps:
+      - name: Repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # frozen: v6.0.1
+
+      - name: Node
+        uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # frozen: v6.1.0
+        with:
+          node-version: ${{ vars.NODE_VERSION }}
+
+      - name: Install
+        run: npm ci --ignore-scripts
+
       - name: SCA
         # uses: ministryofjustice/devsecops-actions/sca@d3848955d9d1bf7ead6c48bd5662c4079d91cd60 # frozen: v1.2.0
         uses: ministryofjustice/devsecops-actions/sca@feat/10-sca-owasp
