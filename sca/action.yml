@@ -1,54 +1,76 @@
-# Ministry of Justice UK - Software Composition Analysis (SCA) GitHub Action
+# Software Composition Analysis (SCA) GitHub Action
 #
-# This composite action performs comprehensive software composition analysis including:
-# - Dependency review and vulnerability scanning
-# - Automated dependency updates via Renovate
-# - Secret scanning using Trufflehog and devsecops-hooks
-# - Code security analysis using CodeQL
+# This composite action performs comprehensive security scanning and dependency management for repositories.
+#
+# Features:
+# - Dependency review and vulnerability detection
+# - OWASP Dependency Check for known CVEs
+# - Renovate bot for automated dependency updates
+# - Secret scanning with Trufflehog
+# - CodeQL static analysis
+# - OpenSSF Scorecard security posture assessment
 #
 # Inputs:
+#   score: (optional, default: "true")
+#     Enable/disable OpenSSF Scorecard checks
+#
 #   renovate: (optional, default: "true")
-#     Flag to enable/disable Renovate execution for automated dependency updates
+#     Enable/disable Renovate bot execution for dependency updates
 #
 #   renovate-version: (optional, default: "42.64.1")
-#     Specify the Renovate CLI version to use
+#     Specific version of Renovate CLI to use
 #
 #   dependency-review-config-file: (optional, default: "")
-#     Path to custom configuration file for GitHub Actions dependency review
+#     Path to custom configuration file for GitHub dependency review
 #
 #   trufflehog-config-file: (optional, default: "")
-#     Path to custom Trufflehog configuration file for secret scanning
+#     Path to custom Trufflehog configuration file
 #
 #   codeql-config-file: (optional, default: "")
-#     Path to custom CodeQL configuration file for code analysis
+#     Path to custom CodeQL configuration file
 #
 #   codeql-upload-findings: (optional, default: "always")
-#     Controls when to upload CodeQL findings as SARIF to Code Scanning
-#     Set to "never" if default setup is enabled
+#     Controls SARIF upload behavior; set to "never" if default CodeQL setup is enabled
 #
 #   token: (required)
-#     GitHub repository token with required permissions:
-#     - Read/write: contents, pull requests, issues
-#     - Read-only: security events
+#     GitHub token with permissions:
+#       - contents: read/write
+#       - pull_requests: read/write
+#       - issues: read/write
+#       - security_events: read
 #
-# Usage Example:
+# Usage:
 #   - uses: ministryofjustice/devsecops-actions/sca@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
+#       score: "true"
 #       renovate: "true"
-#       codeql-upload-findings: "always"
 #
 # Outputs:
-#   - Dependency review results (inline comments on PR)
-#   - Renovate updates (PRs for dependency updates)
-#   - Trufflehog scan results (uploaded as artifact)
-#   - CodeQL analysis results (uploaded to Code Scanning)
+#   - OWASP Dependency Check SARIF report uploaded to Code Scanning
+#   - Trufflehog findings artifact (30-day retention)
+#   - CodeQL analysis results uploaded to Code Scanning
+#   - OpenSSF Scorecard results uploaded to Code Scanning
+#
+# Security Thresholds:
+#   - OWASP Dependency Check fails on CVSS score >= 7
+#   - Trufflehog fails on scan errors
+#
+# Notes:
+#   - All container images and actions are pinned to specific SHAs for security
+#   - Renovate autodiscovery is disabled; only scans specified repository
+#   - CodeQL autobuild continues on error to handle diverse project structures
 
 name: Ministry of Justice UK - SCA ⚡️
-description: Software composition analysis GitHub action focuses on dependencies, secret scanning and vulnerabilities management
+description: Software composition analysis GitHub action for dependency management, secret scanning, and security vulnerability detection
 author: Ministry of Justice UK
 
 inputs:
+  score:
+    required: false
+    description: "Flag to execute OSSF checks"
+    default: "true"
+
   renovate:
     required: false
     description: "Flag to evaluation Renovate execution"
@@ -96,6 +118,24 @@ runs:
         head-ref: ${{ github.head_ref || github.sha }}
         base-ref: ${{ github.base_ref || github.event.repository.default_branch }}
 
+    - name: 🔎 OWASP
+      uses: dependency-check/Dependency-Check_Action@1e54355a8b4c8abaa8cc7d0b70aa655a3bb15a6c # frozen: v1.1.0
+      with:
+        project: ${{ github.repository }}
+        path: "."
+        format: JSON
+        args: >
+          --failOnCVSS 7
+          --prettyPrint
+          --format SARIF
+          --out ./reports
+
+    - name: 🔎 OWASP
+      if: always()
+      uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
+      with:
+        sarif_file: ./reports/dependency-check-report.sarif
+
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
       uses: renovatebot/github-action@79c82e73b230664d999879c5fd8c7143fb19a561 # frozen: v44.2.2
@@ -139,7 +179,7 @@ runs:
       if: always()
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # frozen: v6.0.0
       with:
-        name: trufflehog
+        name: 🐷 TruffleHog
         path: trufflehog.json
         retention-days: 30
 
@@ -159,3 +199,18 @@ runs:
       uses: github/codeql-action/analyze@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
       with:
         upload: ${{ inputs.codeql-upload-findings }}
+
+    - name: 🛡 OpenSSF
+      if: inputs.score == 'true'
+      uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a # frozen: v2.4.3
+      with:
+        results_file: ossf.sarif
+        results_format: sarif
+        repo_token: ${{ inputs.token }}
+        publish_results: true
+
+    - name: 🛡 OpenSSF
+      if: inputs.score == 'true'
+      uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
+      with:
+        sarif_file: ossf.sarif
