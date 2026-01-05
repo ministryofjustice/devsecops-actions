@@ -103,7 +103,7 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: steps/Repository
+      uses: ./sca/steps/Repository
 
     - name: 📊 Dependencies
       uses: ./sca/steps/Dependencies
