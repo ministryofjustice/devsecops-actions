@@ -53,7 +53,7 @@
 # Requirements:
 #   - GitHub repository with appropriate permissions
 #   - Valid GitHub token with required scopes
-#   - Composite actions must be available in ./steps/ directory
+#   - Composite actions must be available in ./sca/steps/ directory
 
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action for dependency management, secret scanning, and security vulnerability detection
@@ -103,39 +103,39 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ./steps/Repository
+      uses: steps/Repository
 
     - name: 📊 Dependencies
-      uses: ./steps/Dependencies
+      uses: ./sca/steps/Dependencies
       with:
         config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ./steps/OWASP
+      uses: ./sca/steps/OWASP
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
-      uses: ./steps/Renovate
+      uses: ./sca/steps/Renovate
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ./steps/Secrets
+      uses: ./sca/steps/Secrets
 
     - name: 🐷 Trufflehog
-      uses: ./steps/Trufflehog
+      uses: ./sca/steps/Trufflehog
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
 
     - name: ⚙️ CodeQL
-      uses: ./steps/CodeQL
+      uses: ./sca/steps/CodeQL
       with:
         config-file: ${{ inputs.codeql-config-file }}
         upload: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
       if: inputs.score == 'true'
-      uses: ./steps/OpenSSF
+      uses: ./sca/steps/OpenSSF
       with:
         token: ${{ inputs.token }}
