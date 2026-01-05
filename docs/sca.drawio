@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="SCA Composite Action" id="github-flow">
-        <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="800" background="#0d1117" math="0" shadow="0">
+        <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="2000" background="#0d1117" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -47,7 +47,7 @@
                 <mxCell id="step2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#341a00;strokeColor=#9e6a03;strokeWidth=2;shadow=1;" vertex="1" parent="1">
                     <mxGeometry x="200" y="370" width="600" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="step2-icon" value="🔍" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+                <mxCell id="step2-icon" value="📊" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
                     <mxGeometry x="220" y="385" width="60" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="step2-title" value="Dependency Review" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
@@ -57,33 +57,52 @@
                     <mxGeometry x="300" y="415" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
-                <!-- Arrow 3 with conditional -->
-                <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step2" target="decision">
+                <!-- Arrow 3 -->
+                <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step2" target="step3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Step 3: OWASP Dependency Check -->
+                <mxCell id="step3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c1810;strokeColor=#d73a49;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="510" width="600" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="step3-icon" value="🔎" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="525" width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="step3-title" value="OWASP Dependency Check" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="525" width="480" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="step3-desc" value="dependency-check/Dependency-Check_Action@v1.1.0&lt;br&gt;Scans dependencies for known CVEs with CVSS threshold enforcement" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="555" width="480" height="45" as="geometry"/>
+                </mxCell>
+                
+                <!-- Arrow 4 with conditional -->
+                <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step3" target="decision">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 
                 <!-- Decision Diamond -->
                 <mxCell id="decision" value="renovate == 'true' ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#21262d;strokeColor=#30363d;strokeWidth=2;fontColor=#c9d1d9;fontSize=13;fontStyle=1;fontFamily=Segoe UI;shadow=1;" vertex="1" parent="1">
-                    <mxGeometry x="400" y="510" width="200" height="100" as="geometry"/>
+                    <mxGeometry x="400" y="650" width="200" height="100" as="geometry"/>
                 </mxCell>
                 
                 <!-- Arrow Yes -->
-                <mxCell id="arrowYes" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3fb950;strokeWidth=2;endArrow=block;endFill=1;fontColor=#3fb950;fontSize=12;fontStyle=1;fontFamily=Segoe UI;" edge="1" parent="1" source="decision" target="step3">
+                <mxCell id="arrowYes" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3fb950;strokeWidth=2;endArrow=block;endFill=1;fontColor=#3fb950;fontSize=12;fontStyle=1;fontFamily=Segoe UI;" edge="1" parent="1" source="decision" target="step4">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 
-                <!-- Step 3: Renovate Bot -->
-                <mxCell id="step3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d1e1a;strokeColor=#2ea043;strokeWidth=2;shadow=1;" vertex="1" parent="1">
-                    <mxGeometry x="200" y="650" width="300" height="100" as="geometry"/>
+                <!-- Step 4: Renovate Bot -->
+                <mxCell id="step4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d1e1a;strokeColor=#2ea043;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="790" width="300" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="step3-icon" value="🤖" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
-                    <mxGeometry x="220" y="665" width="60" height="60" as="geometry"/>
+                <mxCell id="step4-icon" value="🔁" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="805" width="60" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="step3-title" value="Renovate Bot" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="300" y="665" width="180" height="25" as="geometry"/>
+                <mxCell id="step4-title" value="Renovate Bot" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="805" width="180" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step3-desc" value="renovatebot/github-action@v44.2.1&lt;br&gt;Automated dependency updates" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="300" y="695" width="180" height="45" as="geometry"/>
+                <mxCell id="step4-desc" value="renovatebot/github-action@v44.2.1&lt;br&gt;Automated dependency updates" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="835" width="180" height="45" as="geometry"/>
                 </mxCell>
                 
                 <!-- Arrow No -->
@@ -93,102 +112,169 @@
                 
                 <!-- Skip Step -->
                 <mxCell id="skip" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c0b0e;strokeColor=#da3633;strokeWidth=2;shadow=1;dashed=1;" vertex="1" parent="1">
-                    <mxGeometry x="550" y="650" width="250" height="100" as="geometry"/>
+                    <mxGeometry x="550" y="790" width="250" height="100" as="geometry"/>
                 </mxCell>
                 <mxCell id="skip-icon" value="⏭️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
-                    <mxGeometry x="570" y="665" width="60" height="60" as="geometry"/>
+                    <mxGeometry x="570" y="805" width="60" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="skip-title" value="Skip Renovate" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="640" y="665" width="150" height="25" as="geometry"/>
+                    <mxGeometry x="640" y="805" width="150" height="25" as="geometry"/>
                 </mxCell>
                 <mxCell id="skip-desc" value="Renovate disabled&lt;br&gt;No automated updates" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="640" y="695" width="150" height="45" as="geometry"/>
+                    <mxGeometry x="640" y="835" width="150" height="45" as="geometry"/>
                 </mxCell>
                 
                 <!-- Merge paths -->
-                <mxCell id="merge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="step3" target="merge-point">
+                <mxCell id="merge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="step4" target="merge-point">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="350" y="780" as="sourcePoint"/>
-                        <mxPoint x="500" y="780" as="targetPoint"/>
+                        <mxPoint x="350" y="920" as="sourcePoint"/>
+                        <mxPoint x="500" y="920" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 
                 <mxCell id="merge2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="skip" target="merge-point">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="675" y="780" as="sourcePoint"/>
-                        <mxPoint x="500" y="780" as="targetPoint"/>
+                        <mxPoint x="675" y="920" as="sourcePoint"/>
+                        <mxPoint x="500" y="920" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 
                 <mxCell id="merge-point" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#8b949e;strokeColor=#8b949e;" vertex="1" parent="1">
-                    <mxGeometry x="490" y="775" width="20" height="20" as="geometry"/>
+                    <mxGeometry x="490" y="915" width="20" height="20" as="geometry"/>
                 </mxCell>
                 
                 <!-- Arrow to secrets step -->
-                <mxCell id="arrow-secrets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="merge-point" target="step4">
+                <mxCell id="arrow-secrets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="merge-point" target="step5">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 
-                <!-- Step 4: Secret Scanning -->
-                <mxCell id="step4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3d1100;strokeColor=#d29922;strokeWidth=2;shadow=1;" vertex="1" parent="1">
-                    <mxGeometry x="200" y="830" width="600" height="100" as="geometry"/>
-                </mxCell>
-                <mxCell id="step4-icon" value="🔑" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
-                    <mxGeometry x="220" y="845" width="60" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="step4-title" value="Secret Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="300" y="845" width="480" height="25" as="geometry"/>
-                </mxCell>
-                <mxCell id="step4-desc" value="ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0&lt;br&gt;Scans codebase for exposed secrets and credentials using Docker container" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="300" y="875" width="480" height="45" as="geometry"/>
-                </mxCell>
-                
-                <!-- Arrow to trufflehog -->
-                <mxCell id="arrow-trufflehog" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step4" target="step5">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                
-                <!-- Step 5: Trufflehog Scan -->
-                <mxCell id="step5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#321a41;strokeColor=#a371f7;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+                <!-- Step 5: Secret Scanning -->
+                <mxCell id="step5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3d1100;strokeColor=#d29922;strokeWidth=2;shadow=1;" vertex="1" parent="1">
                     <mxGeometry x="200" y="970" width="600" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="step5-icon" value="🐷" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+                <mxCell id="step5-icon" value="🔑" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
                     <mxGeometry x="220" y="985" width="60" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="step5-title" value="Trufflehog Secret Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step5-title" value="Secret Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="985" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step5-desc" value="trufflesecurity/trufflehog:3.92.4&lt;br&gt;Advanced secret detection and scanning, uploads findings as artifact" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step5-desc" value="ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0&lt;br&gt;Scans codebase for exposed secrets and credentials using Docker container" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1015" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
-                <!-- Arrow to codeql -->
-                <mxCell id="arrow-codeql" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step5" target="step6">
+                <!-- Arrow to trufflehog -->
+                <mxCell id="arrow-trufflehog" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step5" target="step6">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 
-                <!-- Step 6: CodeQL Analysis -->
-                <mxCell id="step6" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a2b1c;strokeColor=#3fb950;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+                <!-- Step 6: Trufflehog Scan -->
+                <mxCell id="step6" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#321a41;strokeColor=#a371f7;strokeWidth=2;shadow=1;" vertex="1" parent="1">
                     <mxGeometry x="200" y="1110" width="600" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="step6-icon" value="⚙️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+                <mxCell id="step6-icon" value="🐷" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
                     <mxGeometry x="220" y="1125" width="60" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="step6-title" value="CodeQL Security Analysis" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step6-title" value="Trufflehog Secret Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1125" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step6-desc" value="github/codeql-action@v4.31.9&lt;br&gt;Code scanning for security vulnerabilities, uploads results to Code Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step6-desc" value="trufflesecurity/trufflehog:3.92.4&lt;br&gt;Advanced secret detection and scanning, uploads findings as artifact" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1155" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
+                <!-- Arrow to codeql -->
+                <mxCell id="arrow-codeql" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step6" target="step7">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Step 7: CodeQL Analysis -->
+                <mxCell id="step7" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a2b1c;strokeColor=#3fb950;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="1250" width="600" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="step7-icon" value="⚙️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="1265" width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="step7-title" value="CodeQL Security Analysis" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="1265" width="480" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="step7-desc" value="github/codeql-action@v4.31.9&lt;br&gt;Code scanning for security vulnerabilities, uploads results to Code Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="1295" width="480" height="45" as="geometry"/>
+                </mxCell>
+                
+                <!-- Arrow to decision2 -->
+                <mxCell id="arrow-decision2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step7" target="decision2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Decision Diamond 2 -->
+                <mxCell id="decision2" value="score == 'true' ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#21262d;strokeColor=#30363d;strokeWidth=2;fontColor=#c9d1d9;fontSize=13;fontStyle=1;fontFamily=Segoe UI;shadow=1;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="1390" width="200" height="100" as="geometry"/>
+                </mxCell>
+                
+                <!-- Arrow Yes 2 -->
+                <mxCell id="arrowYes2" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3fb950;strokeWidth=2;endArrow=block;endFill=1;fontColor=#3fb950;fontSize=12;fontStyle=1;fontFamily=Segoe UI;" edge="1" parent="1" source="decision2" target="step8">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Step 8: OpenSSF Scorecard -->
+                <mxCell id="step8" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a2536;strokeColor=#388bfd;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="1530" width="300" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="step8-icon" value="🛡" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="1545" width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="step8-title" value="OpenSSF Scorecard" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="1545" width="180" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="step8-desc" value="ossf/scorecard-action@v2.4.3&lt;br&gt;Security health scoring" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="1575" width="180" height="45" as="geometry"/>
+                </mxCell>
+                
+                <!-- Arrow No 2 -->
+                <mxCell id="arrowNo2" value="NO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#f85149;strokeWidth=2;endArrow=block;endFill=1;fontColor=#f85149;fontSize=12;fontStyle=1;fontFamily=Segoe UI;" edge="1" parent="1" source="decision2" target="skip2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Skip Step 2 -->
+                <mxCell id="skip2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c0b0e;strokeColor=#da3633;strokeWidth=2;shadow=1;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="550" y="1530" width="250" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="skip2-icon" value="⏭️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="1545" width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="skip2-title" value="Skip OpenSSF" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="640" y="1545" width="150" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="skip2-desc" value="OpenSSF disabled&lt;br&gt;No security scoring" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="640" y="1575" width="150" height="45" as="geometry"/>
+                </mxCell>
+                
+                <!-- Merge paths 2 -->
+                <mxCell id="merge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="step8" target="merge-point2">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="1660" as="sourcePoint"/>
+                        <mxPoint x="500" y="1660" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                
+                <mxCell id="merge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="skip2" target="merge-point2">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="675" y="1660" as="sourcePoint"/>
+                        <mxPoint x="500" y="1660" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                
+                <mxCell id="merge-point2" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#8b949e;strokeColor=#8b949e;" vertex="1" parent="1">
+                    <mxGeometry x="490" y="1655" width="20" height="20" as="geometry"/>
+                </mxCell>
+                
                 <!-- Arrow to end -->
-                <mxCell id="arrow-end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step6" target="end">
+                <mxCell id="arrow-end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="merge-point2" target="end">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 
                 <!-- End Circle -->
                 <mxCell id="end" value="END" style="ellipse;whiteSpace=wrap;html=1;fillColor=#484f58;strokeColor=#6e7681;fontColor=#ffffff;fontSize=12;fontStyle=1;fontFamily=Segoe UI;shadow=1;" vertex="1" parent="1">
-                    <mxGeometry x="450" y="1250" width="100" height="60" as="geometry"/>
+                    <mxGeometry x="450" y="1710" width="100" height="60" as="geometry"/>
                 </mxCell>
                 
                 <!-- Legend Box -->
