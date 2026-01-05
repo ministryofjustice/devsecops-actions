@@ -61,9 +61,9 @@ and container security.
 - ⚙️ Code security analysis using CodeQL for vulnerability detection
 - 🛡️ OpenSSF Scorecard security scoring for project health assessment
 
-#### 🧩 Workflow
+#### 🧩 Flowchart
 
-![Dependency Workflow Architecture](docs/sca.drawio)
+![SCA flowchat](docs/sca.drawio)
 
 #### Inputs
 
