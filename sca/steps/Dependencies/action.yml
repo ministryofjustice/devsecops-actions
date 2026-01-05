@@ -1,0 +1,61 @@
+# Dependencies Scan Action
+#
+# This composite action performs a dependency review scan using GitHub's dependency-review-action.
+# It checks for vulnerabilities and license compliance issues in project dependencies by comparing
+# the dependency changes between the head and base branches.
+#
+# Inputs:
+#   dependency-review-config-file:
+#     description: Optional path to a configuration file for customizing dependency review settings.
+#                  If not provided, the action will use default settings.
+#     required: false
+#     type: string
+#     default: ""
+#
+#   token:
+#     description: GitHub repository token with the following permissions:
+#                  - read/write: contents, pull_request, issues
+#                  - read-only: security_events
+#     required: true
+#     type: string
+#
+# Usage:
+#   - name: Run Dependencies Scan
+#     uses: ministryofjustice/devsecops-actions/sca/steps/Dependencies@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       dependency-review-config-file: '.github/dependency-review-config.yml'
+#
+# Features:
+#   - Automatically compares dependencies between head and base branches
+#   - Uses frozen version (v4.8.3) of dependency-review-action for stability
+#   - Supports custom configuration via config file
+#   - Works with both pull requests and direct commits
+#
+# Notes:
+#   - For pull requests, uses github.head_ref and github.base_ref
+#   - For direct commits, uses github.sha and the repository's default branch
+
+name: 📊 Dependencies
+description: Dependencies scan
+author: Ministry of Justice UK
+
+inputs:
+  dependency-review-config-file:
+    required: false
+    description: "GitHub Actions dependency review configuration file path."
+    default: ""
+
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Scan
+      uses: actions/dependency-review-action@774d14bf50b7a2e2460f9f49e25c52503ecab125 # frozen: v4.8.3
+      with:
+        config-file: ${{ inputs.dependency-review-config-file }}
+        head-ref: ${{ github.head_ref || github.sha }}
+        base-ref: ${{ github.base_ref || github.event.repository.default_branch }}

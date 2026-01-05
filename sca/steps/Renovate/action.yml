@@ -1,0 +1,63 @@
+# Renovate Composite Action
+#
+# This action runs Renovate bot to automatically detect and update dependencies
+# in the repository. Renovate scans for outdated dependencies and can create
+# pull requests to update them.
+#
+# Usage:
+#   - name: Run Renovate
+#     uses: ministryofjustice/devsecops-actions/sca/steps/Renovate@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       renovate-version: "42.64.1"  # optional
+#
+# Inputs:
+#   renovate-version:
+#     Optional version of Renovate CLI to use. Defaults to v42.64.1.
+#
+#   token:
+#     Required GitHub token with the following permissions:
+#     - contents: read/write
+#     - pull_request: read/write
+#     - issues: read/write
+#     - security_events: read
+#
+# Environment Variables:
+#   RENOVATE_AUTODISCOVER: Set to "false" to disable automatic repository discovery
+#   RENOVATE_REPOSITORIES: Set to current repository to limit scanning scope
+#
+# Example:
+#   jobs:
+#     renovate:
+#       runs-on: ubuntu-latest
+#       steps:
+#         - uses: ministryofjustice/devsecops-actions/sca/steps/Renovate@main
+#           with:
+#             token: ${{ secrets.RENOVATE_TOKEN }}
+
+
+name: 🔁 Renovate
+description: Renovate scan
+author: Ministry of Justice UK
+
+inputs:
+  renovate-version:
+    required: false
+    description: "Renovate CLI version, an optional argument which defaults to v42.64.1."
+    default: "42.64.1"
+
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Scan
+      uses: renovatebot/github-action@8b7941943a108b2cc2150730963164aa8baeab8c # frozen: v44.2.2
+      with:
+        token: ${{ inputs.token }}
+        renovate-version: ${{ inputs.renovate-version }}
+      env:
+        RENOVATE_AUTODISCOVER: "false"
+        RENOVATE_REPOSITORIES: ${{ github.repository }}

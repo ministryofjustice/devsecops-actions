@@ -1,0 +1,65 @@
+# OWASP Dependency Check Action
+#
+# This composite action performs OWASP dependency vulnerability scanning on a project
+# and uploads the results to GitHub Security tab.
+#
+# Features:
+# - Scans all dependencies in the repository for known vulnerabilities
+# - Fails builds if vulnerabilities with CVSS score >= 7 are detected
+# - Generates SARIF format reports for GitHub Security integration
+# - Uploads scan results even if the scan fails (if: always())
+#
+# Usage:
+#   steps:
+#     - uses: ministryofjustice/devsecops-actions/sca/steps/OWASP@main
+#       with:
+#         token: ${{ secrets.GITHUB_TOKEN }}
+#
+# Inputs:
+#   token: (required)
+#     GitHub repository token with the following permissions:
+#     - contents: read/write
+#     - pull-requests: read/write
+#     - issues: read/write
+#     - security-events: read
+#
+# Outputs:
+#   None. Results are uploaded to GitHub Security tab via SARIF format.
+#
+# Reports:
+#   Generates reports in ./reports/dependency-check-report.sarif
+#
+# Notes:
+#   - Uses pinned versions of actions for security (frozen commits)
+#   - CVSS threshold set to 7 (High severity)
+#   - Scans entire repository root (path: ".")
+
+name: 🔎 OWASP
+description: OWASP dependency scan
+author: Ministry of Justice UK
+
+inputs:
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Scan
+      uses: dependency-check/Dependency-Check_Action@1e54355a8b4c8abaa8cc7d0b70aa655a3bb15a6c # frozen: v1.1.0
+      with:
+        project: ${{ github.repository }}
+        path: "."
+        format: JSON
+        args: >
+          --failOnCVSS 7
+          --prettyPrint
+          --format SARIF
+          --out ./reports
+
+    - name: Upload
+      if: always()
+      uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
+      with:
+        sarif_file: ./reports/dependency-check-report.sarif

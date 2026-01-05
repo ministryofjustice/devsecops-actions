@@ -1,0 +1,46 @@
+# This composite action performs a basic Git checkout operation for repository analysis.
+# It serves as a reusable step in the DevSecOps pipeline for Software Composition Analysis (SCA).
+#
+# Purpose:
+#   - Provides a standardized way to checkout repository code
+#   - Ensures consistent checkout behavior across different workflows
+#   - Abstracts the checkout process into a reusable component
+#
+# Inputs:
+#   token (required):
+#     - GitHub Personal Access Token (PAT) or GITHUB_TOKEN
+#     - Required permissions:
+#       * contents: read/write
+#       * pull_requests: read/write
+#       * issues: read/write
+#       * security_events: read
+#     - Used for authenticating Git operations and accessing repository resources
+#
+# Usage Example:
+#   - uses: ministryofjustice/devsecops-actions/sca/steps/Repository@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#
+# Dependencies:
+#   - actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 (v6.0.1)
+#     Note: SHA is pinned for security and reproducibility
+#
+# Notes:
+#   - This is a composite action that can be composed with other steps
+#   - Part of the Ministry of Justice UK DevSecOps tooling
+#   - Designed for use in SCA (Software Composition Analysis) workflows
+
+name: 📦 Repository
+description: Git checkout
+author: Ministry of Justice UK
+
+inputs:
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # frozen: v6.0.1

@@ -1,0 +1,90 @@
+# Trufflehog Secret Scanning Action
+#
+# This composite action performs secret scanning using Trufflehog to detect hardcoded
+# credentials, API keys, and other sensitive information in Git repositories.
+#
+# Features:
+# - Scans Git repository history for secrets and credentials
+# - Supports custom Trufflehog configuration files
+# - Runs in Docker container for isolation
+# - Exports scan results in JSON format
+# - Uploads findings as GitHub Actions artifacts
+#
+# Usage:
+#   - name: Run Trufflehog Scan
+#     uses: ministryofjustice/devsecops-actions/sca/steps/Trufflehog@main
+#     with:
+#       trufflehog-config-file: .trufflehog.yaml  # Optional
+#       token: ${{ secrets.GITHUB_TOKEN }}         # Required
+#
+# Inputs:
+#   trufflehog-config-file:
+#     Optional path to Trufflehog configuration file for custom scan settings.
+#     If not provided, default Trufflehog settings will be used.
+#
+#   token:
+#     Required GitHub token with the following permissions:
+#     - contents: read and write
+#     - pull-requests: read and write
+#     - issues: read and write
+#     - security-events: read only
+#
+# Outputs:
+#   Artifact named "🐷 TruffleHog" containing:
+#   - trufflehog.json: Detailed scan results in JSON format
+#   - Retention: 30 days
+#
+# Notes:
+# - Uses Trufflehog version 3.92.4 with pinned SHA256 digest for security
+# - Scans only the pull request branch (github.head_ref)
+# - Runs with 14 concurrent workers for performance
+# - Disables verification and auto-updates for consistent behavior
+# - Fails on scan errors to ensure pipeline integrity
+# - Results are uploaded even if the scan fails (if: always())
+
+name: 🐷 Trufflehog
+description: Trufflehog scan
+author: Ministry of Justice UK
+
+inputs:
+  trufflehog-config-file:
+    required: false
+    description: "Trufflehog configuration file path."
+    default: ""
+
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    # Initiate scan
+    - name: Scan
+      shell: bash
+      run: |
+        CONFIG=""
+
+        if [ -n "${{ inputs.trufflehog-config-file }}" ]; then
+          CONFIG="--config ${{ inputs.trufflehog-config-file }}"
+        fi
+
+        docker run --rm \
+        -v "$(pwd)":/src trufflesecurity/trufflehog:3.92.4@sha256:c28ab4a11e01d6fcc10776f65cce015bdf9795f2393cffa2ec0a7c8464ee58b6 \
+        git https://github.com/${{ github.repository }} \
+        $CONFIG \
+        --concurrency=14 \
+        --no-verification \
+        --no-update \
+        --branch ${{ github.head_ref }} \
+        --fail-on-scan-errors \
+        --json > trufflehog.json
+
+    # Upload findings
+    - name: Upload
+      if: always()
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # frozen: v6.0.0
+      with:
+        name: 🐷 TruffleHog
+        path: trufflehog.json
+        retention-days: 30

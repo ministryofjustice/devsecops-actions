@@ -1,4 +1,31 @@
-name: Ministry of Justice UK - SCA - 🛡 OpenSSF
+# OpenSSF Scorecard Action
+#
+# This composite action runs OpenSSF Scorecard security analysis on a repository
+# and uploads the results to GitHub Security tab.
+#
+# The action performs two main steps:
+# 1. Executes OpenSSF Scorecard scan and generates a SARIF report
+# 2. Uploads the SARIF report to GitHub Code Scanning
+#
+# Inputs:
+#   token: (required)
+#     A GitHub token with the following permissions:
+#     - contents: read and write
+#     - pull-requests: read and write
+#     - issues: read and write
+#     - security-events: read
+#
+# Usage:
+#   - uses: ministryofjustice/devsecops-actions/sca/steps/OpenSSF@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#
+# Notes:
+#   - The action uses frozen versions of dependencies for security
+#   - Results are published to the OpenSSF Scorecard API
+#   - SARIF results are uploaded to GitHub Security tab for review
+
+name: 🛡 OpenSSF
 description: OpenSSF scan
 author: Ministry of Justice UK
 
@@ -10,7 +37,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: 🛡 OpenSSF
+    - name: Scan
       uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a # frozen: v2.4.3
       with:
         results_file: ossf.sarif
@@ -18,7 +45,7 @@ runs:
         repo_token: ${{ inputs.token }}
         publish_results: true
 
-    - name: 🛡 OpenSSF
+    - name: Upload
       uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
       with:
         sarif_file: ossf.sarif
