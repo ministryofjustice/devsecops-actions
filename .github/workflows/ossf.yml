@@ -11,7 +11,7 @@ on:
   push:
     branches: ["main"]
 
-  workflow_dispatch:
+  branch_protection_rule:
 
 permissions: {}
 
@@ -32,6 +32,8 @@ jobs:
   # 2. OSSF
   sca:
     permissions:
+      contents: read
+      security-events: write
       id-token: write
 
     name: Execute ⚙️

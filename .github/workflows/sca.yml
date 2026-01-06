@@ -46,6 +46,7 @@ on:
     branches: ["main"]
 
   workflow_dispatch:
+  branch_protection_rule:
 
 permissions: {}
 

@@ -40,7 +40,8 @@ runs:
     - name: Install
       shell: bash
       run: |
-        curl -L https://github.com/ossf/scorecard/releases/download/v5.4.0/scorecard_5.4.0_linux_amd64.tar.gz -o /usr/local/bin/scorecard
+        curl -L https://github.com/ossf/scorecard/releases/download/v5.4.0/scorecard_5.4.0_linux_amd64.tar.gz | tar -xz
+        mv scorecard /usr/local/bin/scorecard
         chmod +x /usr/local/bin/scorecard
 
     - name: Scan
