@@ -200,81 +200,33 @@
                     <mxGeometry x="300" y="1295" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
-                <!-- Arrow to decision2 -->
-                <mxCell id="arrow-decision2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step7" target="decision2">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                
-                <!-- Decision Diamond 2 -->
-                <mxCell id="decision2" value="score == 'true' ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#21262d;strokeColor=#30363d;strokeWidth=2;fontColor=#c9d1d9;fontSize=13;fontStyle=1;fontFamily=Segoe UI;shadow=1;" vertex="1" parent="1">
-                    <mxGeometry x="400" y="1390" width="200" height="100" as="geometry"/>
-                </mxCell>
-                
-                <!-- Arrow Yes 2 -->
-                <mxCell id="arrowYes2" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3fb950;strokeWidth=2;endArrow=block;endFill=1;fontColor=#3fb950;fontSize=12;fontStyle=1;fontFamily=Segoe UI;" edge="1" parent="1" source="decision2" target="step8">
+                <!-- Arrow to step8 -->
+                <mxCell id="arrow-openssf" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step7" target="step8">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 
                 <!-- Step 8: OpenSSF Scorecard -->
                 <mxCell id="step8" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a2536;strokeColor=#388bfd;strokeWidth=2;shadow=1;" vertex="1" parent="1">
-                    <mxGeometry x="200" y="1530" width="300" height="100" as="geometry"/>
+                    <mxGeometry x="200" y="1390" width="600" height="100" as="geometry"/>
                 </mxCell>
                 <mxCell id="step8-icon" value="🛡" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
-                    <mxGeometry x="220" y="1545" width="60" height="60" as="geometry"/>
+                    <mxGeometry x="220" y="1405" width="60" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="step8-title" value="OpenSSF Scorecard" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="300" y="1545" width="180" height="25" as="geometry"/>
+                    <mxGeometry x="300" y="1405" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step8-desc" value="ossf/scorecard-action@v2.4.3&lt;br&gt;Security health scoring" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="300" y="1575" width="180" height="45" as="geometry"/>
-                </mxCell>
-                
-                <!-- Arrow No 2 -->
-                <mxCell id="arrowNo2" value="NO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#f85149;strokeWidth=2;endArrow=block;endFill=1;fontColor=#f85149;fontSize=12;fontStyle=1;fontFamily=Segoe UI;" edge="1" parent="1" source="decision2" target="skip2">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                
-                <!-- Skip Step 2 -->
-                <mxCell id="skip2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c0b0e;strokeColor=#da3633;strokeWidth=2;shadow=1;dashed=1;" vertex="1" parent="1">
-                    <mxGeometry x="550" y="1530" width="250" height="100" as="geometry"/>
-                </mxCell>
-                <mxCell id="skip2-icon" value="⏭️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
-                    <mxGeometry x="570" y="1545" width="60" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="skip2-title" value="Skip OpenSSF" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="640" y="1545" width="150" height="25" as="geometry"/>
-                </mxCell>
-                <mxCell id="skip2-desc" value="OpenSSF disabled&lt;br&gt;No security scoring" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
-                    <mxGeometry x="640" y="1575" width="150" height="45" as="geometry"/>
-                </mxCell>
-                
-                <!-- Merge paths 2 -->
-                <mxCell id="merge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="step8" target="merge-point2">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="350" y="1660" as="sourcePoint"/>
-                        <mxPoint x="500" y="1660" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                
-                <mxCell id="merge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="skip2" target="merge-point2">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="675" y="1660" as="sourcePoint"/>
-                        <mxPoint x="500" y="1660" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                
-                <mxCell id="merge-point2" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#8b949e;strokeColor=#8b949e;" vertex="1" parent="1">
-                    <mxGeometry x="490" y="1655" width="20" height="20" as="geometry"/>
+                <mxCell id="step8-desc" value="ossf/scorecard-action@v2.4.3&lt;br&gt;Security health scoring and best practices assessment" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="1435" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
                 <!-- Arrow to end -->
-                <mxCell id="arrow-end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="merge-point2" target="end">
+                <mxCell id="arrow-end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step8" target="end">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 
                 <!-- End Circle -->
                 <mxCell id="end" value="END" style="ellipse;whiteSpace=wrap;html=1;fillColor=#484f58;strokeColor=#6e7681;fontColor=#ffffff;fontSize=12;fontStyle=1;fontFamily=Segoe UI;shadow=1;" vertex="1" parent="1">
-                    <mxGeometry x="450" y="1710" width="100" height="60" as="geometry"/>
+                    <mxGeometry x="450" y="1530" width="100" height="60" as="geometry"/>
                 </mxCell>
                 
                 <!-- Legend Box -->

@@ -70,7 +70,6 @@ and container security.
 | Input                           | Type   | Required | Default   | Description                                                                                                                         |
 | ------------------------------- | ------ | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `token`                         | string | Yes      | N/A       | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read) |
-| `score`                         | string | No       | `true`    | Enable or disable OpenSSF Scorecard security checks                                                                                 |
 | `renovate`                      | string | No       | `true`    | Enable or disable Renovate bot execution                                                                                            |
 | `renovate-version`              | string | No       | `42.64.1` | Renovate CLI version to use                                                                                                         |
 | `dependency-review-config-file` | string | No       | `""`      | Path to dependency review configuration file relative to your repository root                                                       |
@@ -159,7 +158,6 @@ jobs:
         uses: ministryofjustice/devsecops-actions/sca@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          score: "true" # Enable OpenSSF Scorecard
           renovate: "true" # Enable Renovate bot
           renovate-version: "42.64.1" # Specify custom Renovate version
           dependency-review-config-file: ".github/dependency-review-config.yml" # Custom dependency review config
@@ -177,17 +175,6 @@ steps:
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
       renovate: "false" # Disable Renovate bot
-```
-
-#### Disable OpenSSF Scorecard
-
-```yaml
-steps:
-  - name: Run SCA without OpenSSF Scorecard
-    uses: ministryofjustice/devsecops-actions/sca@v1.0.0
-    with:
-      token: ${{ secrets.GITHUB_TOKEN }}
-      score: "false" # Disable OpenSSF Scorecard
 ```
 
 ---

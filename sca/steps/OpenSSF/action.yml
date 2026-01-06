@@ -1,32 +1,39 @@
-# OpenSSF Scorecard Action
+# OpenSSF Scorecard Security Scanner Action
 #
-# This composite action runs OpenSSF Scorecard security analysis on a repository
-# and uploads the results to GitHub Security tab.
+# This composite action runs the OpenSSF Scorecard security health metrics check
+# on a repository to assess its security posture.
 #
-# The action performs two main steps:
-# 1. Executes OpenSSF Scorecard scan and generates a SARIF report
-# 2. Uploads the SARIF report to GitHub Code Scanning
+# Overview:
+#   - Downloads and installs the OpenSSF Scorecard CLI tool (v5.4.0)
+#   - Executes a local scan of the repository
+#   - Generates a detailed JSON report with security metrics
+#   - Displays results in the GitHub Actions step summary
 #
 # Inputs:
 #   token: (required)
-#     A GitHub token with the following permissions:
-#     - contents: read and write
-#     - pull-requests: read and write
-#     - issues: read and write
-#     - security-events: read
+#     GitHub repository token with the following permissions:
+#     - contents: read/write
+#     - pull_request: read/write
+#     - issues: read/write
+#     - security_events: read-only
 #
-# Usage:
+# Outputs:
+#   - Creates a scorecard.json file with detailed scan results
+#   - Publishes a formatted summary to GitHub Actions step summary including:
+#     * Overall security score (0-10)
+#     * Individual check scores in a table format
+#
+# Usage Example:
 #   - uses: ministryofjustice/devsecops-actions/sca/steps/OpenSSF@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
-# Notes:
-#   - The action uses frozen versions of dependencies for security
-#   - Results are published to the OpenSSF Scorecard API
-#   - SARIF results are uploaded to GitHub Security tab for review
+# Note:
+#   This action requires sudo/root privileges to install the scorecard binary
+#   to /usr/local/bin/. Ensure the workflow has appropriate permissions.
 
-name: 🛡 OpenSSF
-description: OpenSSF scan
+name: 🛡 OSSF
+description: OSSF scan
 author: Ministry of Justice UK
 
 inputs:
@@ -51,7 +58,7 @@ runs:
     - name: Display
       shell: bash
       run: |
-        echo "## 🛡 OpenSSF " >> $GITHUB_STEP_SUMMARY
+        echo "## 🛡 OSSF " >> $GITHUB_STEP_SUMMARY
         echo "### Score" >> $GITHUB_STEP_SUMMARY
         echo "**$(jq '.score' scorecard.json)** / 10" >> $GITHUB_STEP_SUMMARY
         echo "### Overview" >> $GITHUB_STEP_SUMMARY
