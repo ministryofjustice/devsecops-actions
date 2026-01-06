@@ -1,12 +1,44 @@
+# OpenSSF Scorecard Security Scanning Workflow
+#
+# This workflow performs automated security scanning using the OpenSSF Scorecard tool
+# to assess the security posture of the repository against best practices.
+#
+# Triggers:
+#   - Daily at midnight (UTC) via cron schedule
+#   - On push to main branch
+#   - On branch protection rule changes
+#
+# Workflow Structure:
+#   1. Setup Job:
+#      - Configures the base environment
+#      - Outputs environment configuration for downstream jobs
+#
+#   2. SCA (Software Composition Analysis) Job:
+#      - Checks out the repository with full history
+#      - Runs OSSF Scorecard security assessment
+#      - Generates SARIF format results
+#      - Uploads findings to GitHub Security tab
+#
+# Permissions:
+#   - contents: read - Access repository code
+#   - security-events: write - Upload security findings
+#   - id-token: write - Required for OSSF result publishing
+#
+# Concurrency:
+#   - Groups by workflow reference to prevent duplicate runs
+#   - Cancels in-progress runs when new ones are triggered
+#
+# Security Notes:
+#   - All actions are pinned to specific commit SHAs for supply chain security
+#   - Results are published to OpenSSF for community visibility
+#   - SARIF results integrate with GitHub Advanced Security
+
 name: 🛡 OpenSSF
 run-name: Open source security foundation scan
 
 on:
   schedule:
     - cron: "0 0 * * *"
-
-  pull_request:
-    branches: ["main"]
 
   push:
     branches: ["main"]
@@ -17,6 +49,10 @@ permissions: {}
 
 env:
   environment: base
+
+concurrency:
+  group: ossf-${{ github.workflow }}-${{ github.workflow_ref }}
+  cancel-in-progress: true
 
 jobs:
   # 1. Pre-requisite
@@ -45,13 +81,14 @@ jobs:
     steps:
       - name: Repository
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # frozen: v6.0.1
+        with:
+          fetch-depth: 0
 
       - name: Scan
         uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a # frozen: v2.4.3
         with:
           results_file: ossf.sarif
           results_format: sarif
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
           publish_results: true
 
       - name: Upload
