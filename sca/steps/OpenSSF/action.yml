@@ -46,7 +46,7 @@ runs:
 
     - name: Scan
       shell: bash
-      run: scorecard --format json --output=scorecard.json
+      run: scorecard --local=./ --show-details --show-annotations --format json --output=scorecard.json
 
     - name: Display
       shell: bash
