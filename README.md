@@ -63,7 +63,7 @@ and container security.
 
 #### 🧩 Flowchart
 
-![SCA flowchat](docs/sca.drawio)
+![SCA flowchat](docs/sca.svg)
 
 #### Inputs
 

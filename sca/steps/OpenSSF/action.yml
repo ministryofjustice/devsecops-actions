@@ -37,15 +37,20 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Scan
-      uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a # frozen: v2.4.3
-      with:
-        results_file: ossf.sarif
-        results_format: sarif
-        repo_token: ${{ inputs.token }}
-        publish_results: true
+    - name: Install
+      shell: bash
+      run: |
+        curl -L https://github.com/ossf/scorecard/releases/80ee3ecfedf8b19ab8991713a9fdb2e7dcd7262e/download/scorecard-linux-amd64 -o /usr/local/bin/scorecard
+        chmod +x /usr/local/bin/scorecard
 
-    - name: Upload
-      uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
-      with:
-        sarif_file: ossf.sarif
+    - name: Scan
+      shell: bash
+      run: scorecard --format json --output=scorecard.json
+
+    - name: Display
+      shell: bash
+      run: |
+        echo "## 🛡 OpenSSF score " >> $GITHUB_STEP_SUMMARY
+        echo "**Score: ** $(jq '.score' scorecard.json) / 10" >> $GITHUB_STEP_SUMMARY
+        echo "\n\r\n\r"
+        jq -r '.checks[] | "- **\(.name)**: \(.score) / 10"' scorecard.json >> $GITHUB_STEP_SUMMARY

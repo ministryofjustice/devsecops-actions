@@ -1,70 +1,54 @@
 # Software Composition Analysis (SCA) GitHub Action
 #
-# This composite action performs comprehensive security and dependency analysis for repositories,
-# including dependency scanning, secret detection, vulnerability assessment, and security scoring.
+# This composite action performs comprehensive security analysis on repositories including:
+# - Dependency management and review
+# - OWASP security scanning
+# - Automated dependency updates via Renovate
+# - Secret scanning with multiple tools
+# - Code security analysis with CodeQL
+# - OpenSSF Scorecard evaluation
 #
 # Usage:
 #   - uses: ministryofjustice/devsecops-actions/sca@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
-#       score: 'true'
 #       renovate: 'true'
+#       renovate-version: '42.64.1'
+#       dependency-review-config-file: '.github/dependency-review-config.yml'
+#       trufflehog-config-file: '.github/trufflehog-config.yml'
+#       codeql-config-file: '.github/codeql-config.yml'
+#       codeql-upload-findings: 'always'
 #
 # Inputs:
-#   score: (optional, default: 'true')
-#     Enable/disable OpenSSF Scorecard security checks
+#   renovate: Enable/disable Renovate execution (default: 'true')
+#   renovate-version: Renovate CLI version to use (default: '42.64.1')
+#   dependency-review-config-file: Path to dependency review configuration
+#   trufflehog-config-file: Path to Trufflehog configuration
+#   codeql-config-file: Path to CodeQL configuration
+#   codeql-upload-findings: When to upload SARIF results (default: 'always', use 'never' if default setup enabled)
+#   token: GitHub token with required permissions (required)
 #
-#   renovate: (optional, default: 'true')
-#     Enable/disable Renovate dependency update evaluation
-#
-#   renovate-version: (optional, default: '42.64.1')
-#     Specify the Renovate CLI version to use
-#
-#   dependency-review-config-file: (optional, default: '')
-#     Path to custom dependency review configuration file
-#
-#   trufflehog-config-file: (optional, default: '')
-#     Path to custom Trufflehog configuration file for secret scanning
-#
-#   codeql-config-file: (optional, default: '')
-#     Path to custom CodeQL configuration file
-#
-#   codeql-upload-findings: (optional, default: 'always')
-#     Control SARIF upload to Code Scanning ('always', 'never', or conditions)
-#     Set to 'never' if CodeQL default setup is already enabled
-#
-#   token: (required)
-#     GitHub token with the following permissions:
-#       - contents: read/write
-#       - pull_requests: read/write
-#       - issues: read/write
-#       - security_events: read
+# Required Token Permissions:
+#   - contents: read/write
+#   - pull-requests: read/write
+#   - issues: read/write
+#   - security-events: read
 #
 # Steps Executed:
-#   1. Repository checkout and setup
-#   2. Dependency review and vulnerability scanning
-#   3. OWASP dependency checking
-#   4. Renovate dependency update analysis (conditional)
+#   1. Repository checkout
+#   2. Dependency review and analysis
+#   3. OWASP dependency check
+#   4. Renovate automated updates (conditional)
 #   5. GitHub secret scanning
 #   6. Trufflehog secret detection
-#   7. CodeQL code analysis
-#   8. OpenSSF Scorecard security scoring (conditional)
-#
-# Requirements:
-#   - GitHub repository with appropriate permissions
-#   - Valid GitHub token with required scopes
-#   - Composite actions must be available in ./sca/steps/ directory
+#   7. CodeQL security analysis
+#   8. OpenSSF Scorecard evaluation
 
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action for dependency management, secret scanning, and security vulnerability detection
 author: Ministry of Justice UK
 
 inputs:
-  score:
-    required: false
-    description: "Flag to execute OSSF checks"
-    default: "true"
-
   renovate:
     required: false
     description: "Flag to evaluation Renovate execution"
@@ -108,7 +92,7 @@ runs:
     - name: 📊 Dependencies
       uses: ./sca/steps/Dependencies
       with:
-        config-file: ${{ inputs.dependency-review-config-file }}
+        dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
       uses: ./sca/steps/OWASP
@@ -131,11 +115,10 @@ runs:
     - name: ⚙️ CodeQL
       uses: ./sca/steps/CodeQL
       with:
-        config-file: ${{ inputs.codeql-config-file }}
-        upload: ${{ inputs.codeql-upload-findings }}
+        codeql-config-file: ${{ inputs.codeql-config-file }}
+        codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      if: inputs.score == 'true'
       uses: ./sca/steps/OpenSSF
       with:
         token: ${{ inputs.token }}
