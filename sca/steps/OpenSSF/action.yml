@@ -55,7 +55,7 @@ runs:
         echo "### Score" >> $GITHUB_STEP_SUMMARY
         echo "**$(jq '.score' scorecard.json)** / 10" >> $GITHUB_STEP_SUMMARY
         echo "### Overview" >> $GITHUB_STEP_SUMMARY
-        echo "|Scan|Result (/10)|" >> $GITHUB_STEP_SUMMARY
-        echo "|-----|-----------|" >> $GITHUB_STEP_SUMMARY
-        echo "|$(jq -r '.checks[] | "\(.name)"')|$(jq -r '.checks[] | "\(.score)"')|" >> $GITHUB_STEP_SUMMARY
+        echo "|Scan|Score (/10)|" >> $GITHUB_STEP_SUMMARY
+        echo "|-----------|-----------|" >> $GITHUB_STEP_SUMMARY
+        jq -r '.checks[] | "| \(.name) | \(.score) |"' scorecard.json >> $GITHUB_STEP_SUMMARY
         echo "---" >> $GITHUB_STEP_SUMMARY
