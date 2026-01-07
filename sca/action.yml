@@ -84,43 +84,43 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: sca/steps/Repository
+      uses: ministryofjustice/devsecops-actions/sca/steps/Repository
 
     - name: 📊 Dependencies
-      uses: sca/steps/Dependencies
+      uses: ministryofjustice/devsecops-actions/sca/steps/Dependencies
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: sca/steps/OWASP
+      uses: ministryofjustice/devsecops-actions/sca/steps/OWASP
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
-      uses: sca/steps/Renovate
+      uses: ministryofjustice/devsecops-actions/sca/steps/Renovate
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: sca/steps/Secrets
+      uses: ministryofjustice/devsecops-actions/sca/steps/Secrets
 
     - name: 🐷 Trufflehog
-      uses: sca/steps/Trufflehog
+      uses: ministryofjustice/devsecops-actions/sca/steps/Trufflehog
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
 
     - name: ⚙️ CodeQL
-      uses: sca/steps/CodeQL
+      uses: ministryofjustice/devsecops-actions/sca/steps/CodeQL
       with:
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: sca/steps/OpenSSF
+      uses: ministryofjustice/devsecops-actions/sca/steps/OpenSSF
       with:
         token: ${{ inputs.token }}
 
     - name: 📋 SBOM
-      uses: sca/steps/SBOM
+      uses: ministryofjustice/devsecops-actions/sca/steps/SBOM
       with:
         token: ${{ inputs.token }}
