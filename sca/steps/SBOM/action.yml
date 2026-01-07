@@ -48,7 +48,7 @@ runs:
 
     - name: Generate
       shell: bash
-      run: syft scan ./ --base-path ${{ github.workspace }} --config ${{ github.action_path }}config.yml --output cyclonedx-json=sbom.cdx.json --source-name "${{ github.repository }}" --source-version "${{ github.sha }}"
+      run: syft scan ./ --base-path ${{ github.workspace }} --config ${{ github.action_path }}/config.yml --output cyclonedx-json=sbom.cdx.json --source-name "${{ github.repository }}" --source-version "${{ github.sha }}"
 
     - name: Upload
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # frozen: v6.0.0
