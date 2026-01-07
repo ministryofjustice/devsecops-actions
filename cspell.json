@@ -10,12 +10,16 @@
   "allowCompoundWords": true,
   "words": [
     "Abhi",
+    "Anchore",
     "cyclonedx",
     "Markan",
     "ossf",
     "prek",
     "SARIF",
-    "syft"
+    "syft",
+    "unindexed",
+    "venv",
+    "pycache"
   ],
   "dictionaries": [
     "en-gb",
