@@ -59,7 +59,6 @@ inputs:
 runs:
   using: composite
   steps:
-    # Initiate scan
     - name: Scan
       shell: bash
       run: |
@@ -80,7 +79,6 @@ runs:
         --fail-on-scan-errors \
         --json > trufflehog.json
 
-    # Upload findings
     - name: Upload
       if: always()
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # frozen: v6.0.0

@@ -1,0 +1,57 @@
+# SBOM Generation Action
+#
+# This composite action generates a Software Bill of Materials (SBOM) for the repository
+# using Syft tool from Anchore. The SBOM is generated in CycloneDX JSON format and
+# uploaded as a build artifact.
+#
+# Features:
+#   - Installs Syft SBOM generation tool
+#   - Scans the repository to generate SBOM in CycloneDX JSON format
+#   - Uploads the generated SBOM as a GitHub Actions artifact
+#
+# Usage:
+#   steps:
+#     - uses: ministryofjustice/devsecops-actions/sca/steps/SBOM@main
+#       with:
+#         token: ${{ secrets.GITHUB_TOKEN }}
+#
+# Inputs:
+#   token:
+#     description: GitHub repository token with read/write privileges to contents,
+#                  pull requests, issues and read-only permission to security events
+#     required: true
+#
+# Outputs:
+#   Uploads an artifact named "📋 SBOM" containing the sbom.cdx.json file
+#
+# Requirements:
+#   - Linux or macOS runner
+#   - curl must be available
+#   - sudo access for tool installation
+#   - Config file must exist at sca/steps/SBOM/config.yml
+
+name: ⛓️‍💥 SBOM
+description: Software bill of material generation
+author: Ministry of Justice UK
+
+inputs:
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Install
+      shell: bash
+      run: curl -sSfL https://get.anchore.io/syft | sudo sh -s -- -b /usr/local/bin
+
+    - name: Generate
+      shell: bash
+      run: syft scan ./ --base-path ${{ github.workspace }} --config $GITHUB_ACTION_PATH/sca/steps/SBOM/config.yml --output cyclonedx-json=sbom.cdx.json --source-name "${{ github.repository }}" --source-version "${{ github.sha }}"
+
+    - name: Upload
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # frozen: v6.0.0
+      with:
+        name: 📋 SBOM
+        path: sbom.cdx.json

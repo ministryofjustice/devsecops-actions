@@ -10,10 +10,12 @@
   "allowCompoundWords": true,
   "words": [
     "Abhi",
+    "cyclonedx",
     "Markan",
     "ossf",
     "prek",
-    "SARIF"
+    "SARIF",
+    "syft"
   ],
   "dictionaries": [
     "en-gb",

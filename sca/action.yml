@@ -1,12 +1,18 @@
-# Software Composition Analysis (SCA) GitHub Action
+# Ministry of Justice UK - Software Composition Analysis (SCA) Action
 #
-# This composite action performs comprehensive security analysis on repositories including:
-# - Dependency management and review
-# - OWASP security scanning
-# - Automated dependency updates via Renovate
-# - Secret scanning with multiple tools
-# - Code security analysis with CodeQL
-# - OpenSSF Scorecard evaluation
+# A comprehensive GitHub composite action that performs software composition analysis
+# including dependency management, secret scanning, and security vulnerability detection.
+#
+# Features:
+# - 📦 Repository checkout and setup
+# - 📊 Dependency review and analysis
+# - 🔎 OWASP dependency vulnerability scanning
+# - 🔁 Renovate automated dependency updates (optional)
+# - 🔑 Secret scanning
+# - 🐷 Trufflehog secret detection
+# - ⚙️ CodeQL security analysis
+# - 🛡 OpenSSF Scorecard security assessment
+# - 📋 SBOM (Software Bill of Materials) generation
 #
 # Usage:
 #   - uses: ministryofjustice/devsecops-actions/sca@main
@@ -19,30 +25,21 @@
 #       codeql-config-file: '.github/codeql-config.yml'
 #       codeql-upload-findings: 'always'
 #
-# Inputs:
-#   renovate: Enable/disable Renovate execution (default: 'true')
-#   renovate-version: Renovate CLI version to use (default: '42.64.1')
-#   dependency-review-config-file: Path to dependency review configuration
-#   trufflehog-config-file: Path to Trufflehog configuration
-#   codeql-config-file: Path to CodeQL configuration
-#   codeql-upload-findings: When to upload SARIF results (default: 'always', use 'never' if default setup enabled)
-#   token: GitHub token with required permissions (required)
-#
-# Required Token Permissions:
+# Required Permissions:
+#   The provided token must have:
 #   - contents: read/write
 #   - pull-requests: read/write
 #   - issues: read/write
 #   - security-events: read
 #
-# Steps Executed:
-#   1. Repository checkout
-#   2. Dependency review and analysis
-#   3. OWASP dependency check
-#   4. Renovate automated updates (conditional)
-#   5. GitHub secret scanning
-#   6. Trufflehog secret detection
-#   7. CodeQL security analysis
-#   8. OpenSSF Scorecard evaluation
+# Inputs:
+#   renovate: Enable/disable Renovate execution (default: 'true')
+#   renovate-version: Renovate CLI version (default: '42.64.1')
+#   dependency-review-config-file: Path to dependency review config (optional)
+#   trufflehog-config-file: Path to Trufflehog config (optional)
+#   codeql-config-file: Path to CodeQL config (optional)
+#   codeql-upload-findings: Upload CodeQL SARIF findings (default: 'always', use 'never' if default setup enabled)
+#   token: GitHub token with required permissions (required)
 
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action for dependency management, secret scanning, and security vulnerability detection
@@ -120,5 +117,10 @@ runs:
 
     - name: 🛡 OpenSSF
       uses: ./sca/steps/OpenSSF
+      with:
+        token: ${{ inputs.token }}
+
+    - name: 📋 SBOM
+      uses: ./sca/steps/SBOM
       with:
         token: ${{ inputs.token }}

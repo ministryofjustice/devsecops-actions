@@ -1,38 +1,33 @@
-# OpenSSF Scorecard GitHub Action Workflow
-# 
+# OpenSSF Scorecard Security Workflow
+#
 # Purpose:
-#   Runs OpenSSF Scorecard security health metrics checks on the repository
-#   to assess security best practices and upload results to GitHub Security tab.
+#   Runs OpenSSF Scorecard to assess the security posture of the repository
+#   against best practices for open source security.
 #
 # Triggers:
-#   - schedule: Runs daily at midnight (00:00 UTC)
-#   - push: Runs on pushes to the main branch
-#   - branch_protection_rule: Runs when branch protection rules are modified
+#   - schedule: Daily at midnight (00:00 UTC)
+#   - push: When code is pushed to the main branch
+#   - branch_protection_rule: When branch protection rules are modified
 #
 # Permissions:
-#   Workflow level: None (empty permissions object for least privilege)
-#   Job level:
-#     - contents: read - Required to checkout repository code
-#     - security-events: write - Required to upload SARIF results to Security tab
-#     - id-token: write - Required for publishing scorecard results
+#   - contents: read - Access repository contents for scanning
+#   - security-events: write - Upload security scan results to GitHub Security
+#   - id-token: write - Required for publishing scorecard results
 #
 # Concurrency:
-#   Groups concurrent runs by workflow and ref to prevent multiple simultaneous executions.
-#   Cancels in-progress runs when a new run is triggered.
+#   Ensures only one OSSF scan runs at a time per workflow reference.
+#   Cancels in-progress runs when a new one is triggered.
 #
-# Steps:
-#   1. Repository: Checks out the repository with full history (fetch-depth: 0)
-#   2. Scan: Executes OSSF Scorecard analysis and generates SARIF output
-#   3. Upload: Uploads SARIF results to GitHub Code Scanning for visualization
+# Jobs:
+#   ossf:
+#     - Checks out the repository with full history
+#     - Runs OpenSSF Scorecard security assessment
+#     - Generates results in SARIF format
+#     - Uploads results to GitHub Code Scanning for visibility
 #
 # Output:
-#   - SARIF file (ossf.sarif) containing security health metrics
-#   - Results published to repository's Security tab
-#
-# Dependencies:
-#   - actions/checkout@v6.0.1 (frozen)
-#   - ossf/scorecard-action@v2.4.3 (frozen)
-#   - github/codeql-action/upload-sarif@v4.31.9 (frozen)
+#   Security findings are available in the repository's Security tab
+#   under Code Scanning alerts.
 
 name: 🛡 OpenSSF
 run-name: Open source security foundation scan
@@ -59,7 +54,7 @@ jobs:
       security-events: write
       id-token: write
 
-    name: Execute ⚙️
+    name: Score ⚙️
     runs-on: ["ubuntu-latest"]
 
     steps:
@@ -74,7 +69,6 @@ jobs:
           results_file: ossf.sarif
           results_format: sarif
           publish_results: true
-          api: 123buaysd890naosdhg8012nasdasd
 
       - name: Upload
         uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # frozen: v4.31.9
