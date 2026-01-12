@@ -12,7 +12,7 @@ import { resolve } from "node:path";
  * ```typescript
  * const command = getCommand("--images", "nginx:latest");
  * // Returns: syft scan nginx:latest --source-name nginx:latest --config .../SBOM/config.yml
- * //          --source-name "nginx" --source-version "latest" --output cyclonedx-json=sbom-[random].cdx.json
+ * //          --source-name "nginx" --source-version "latest" --output cyclonedx-json=sca-sbom-[random].cdx.json
  * ```
  */
 
@@ -27,7 +27,7 @@ export const getCommand = (type: string, value: string): string => {
         image[0]
       }" --source-version "${
         image[1]
-      }" --output cyclonedx-json=sbom-${Math.random()}.cdx.json`;
+      }" --output cyclonedx-json=sca-sbom-${Math.random()}.cdx.json`;
     default:
       return "";
   }

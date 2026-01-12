@@ -42,13 +42,7 @@ coverage
 *.code-workspace
 
 # GitLeaks
-**/*.json
-!tsconfig.json
-!source.json
-!renovate.json
-!cspell.json
-!package*.json
-!release-please*.json
+**/sca-*.json
 
 # SARIF
 **/*.sarif

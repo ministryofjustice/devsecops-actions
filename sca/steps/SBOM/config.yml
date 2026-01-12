@@ -13,8 +13,8 @@ log:
 # Output (SBOMs)
 # -------------------------
 output:
-  - "cyclonedx-json=sbom.cdx.json"
-  - "spdx-json=sbom.spdx.json"
+  - "cyclonedx-json=sca-sbom.cdx.json"
+  - "spdx-json=sca-sbom.spdx.json"
 
 format:
   cyclonedx-json:

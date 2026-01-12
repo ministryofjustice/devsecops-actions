@@ -1,0 +1,8 @@
+{
+    "images": [
+        "ghcr.io/ministryofjustice/devsecops-hooks:latest",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0"
+    ]
+}
