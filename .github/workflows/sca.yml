@@ -114,4 +114,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
-          docker-images-file: ${{ github.workspace }}/sources.json # Optional
+          docker-images-file: ./sources.json # Optional
