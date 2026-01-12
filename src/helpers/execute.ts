@@ -47,7 +47,7 @@ export const execute = async (type: string, values: Array<string>) => {
 
   if (failed.length) {
     console.log(
-      "\n\r❌ %i images did not scan successfully: \n\r",
+      "\n\r\n\r❌ %i images did not scan successfully: \n\r",
       failed.length
     );
     failed.forEach(({ image }, index) => {
@@ -57,7 +57,7 @@ export const execute = async (type: string, values: Array<string>) => {
     process.exit(1);
   } else {
     console.log(
-      "\n\r✅ All %i images have been successfully scanned.",
+      "\n\r\n\r✅ All %i images have been successfully scanned.",
       values.length
     );
   }
