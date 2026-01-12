@@ -1,4 +1,5 @@
 import * as file from "node:fs";
+import { exec } from "node:child_process"
 
 /**
  * Validates and extracts data from a JSON file based on a specified property type.
@@ -26,8 +27,18 @@ export const isValidJson = (args: Array<string>): Array<string> => {
   const type = args[0].replace("--", "");
   const source = args[1];
 
-  console.log('===========1', __dirname);
-  console.log('===========2', source);
+  
+exec("ls -alh", (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error: ${error.message}`);
+    return;
+  }
+  if (stderr) {
+    console.error(`stderr: ${stderr}`);
+    return;
+  }
+  console.log(stdout);
+});
 
   const raw = file.readFileSync(source, { encoding: "utf8" });
   const json = JSON.parse(raw);
