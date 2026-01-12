@@ -52,6 +52,10 @@ on:
 
 permissions: {}
 
+env:
+  environment: base
+  timezone: ${{ vars.TIMEZONE }}
+
 jobs:
   sca:
     permissions:
@@ -64,6 +68,8 @@ jobs:
 
     name: Execute ⚙️
     runs-on: ["ubuntu-latest"]
+    environment:
+      name: ${{ env.environment }}
 
     steps:
       - name: Repository
