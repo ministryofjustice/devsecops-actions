@@ -79,7 +79,7 @@ runs:
 
     - name: Images
       shell: bash
-      run: node scan.js --images "${{ github.docker-images-file }}"
+      run: npm run scan -- --images "${{ github.docker-images-file }}"
 
     - name: Upload
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # frozen: v6.0.0
