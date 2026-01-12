@@ -1,45 +1,43 @@
-# Ministry of Justice UK - Software Composition Analysis (SCA) Action
+# This GitHub composite action performs comprehensive Software Composition Analysis (SCA)
+# for repositories, including dependency management, security scanning, and SBOM generation.
 #
-# A comprehensive GitHub composite action that performs software composition analysis
-# including dependency management, secret scanning, and security vulnerability detection.
-#
-# Features:
-# - 📦 Repository checkout and setup
-# - 📊 Dependency review and analysis
-# - 🔎 OWASP dependency vulnerability scanning
-# - 🔁 Renovate automated dependency updates (optional)
-# - 🔑 Secret scanning
-# - 🐷 Trufflehog secret detection
-# - ⚙️ CodeQL security analysis
-# - 🛡 OpenSSF Scorecard security assessment
-# - 📋 SBOM (Software Bill of Materials) generation
+# The action orchestrates multiple security and compliance checks in sequence:
+# - Repository checkout and setup
+# - Dependency review using GitHub's native dependency review
+# - OWASP dependency checking for known vulnerabilities
+# - Automated dependency updates via Renovate (optional)
+# - Secret scanning using GitHub's native capabilities
+# - Trufflehog for additional secret detection
+# - CodeQL for semantic code analysis
+# - OpenSSF Scorecard for security best practices assessment
+# - Software Bill of Materials (SBOM) generation
 #
 # Usage:
 #   - uses: ministryofjustice/devsecops-actions/sca@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate: 'true'
-#       renovate-version: '42.64.1'
-#       dependency-review-config-file: '.github/dependency-review-config.yml'
-#       trufflehog-config-file: '.github/trufflehog-config.yml'
-#       codeql-config-file: '.github/codeql-config.yml'
-#       codeql-upload-findings: 'always'
+#       docker-images-file: 'path/to/images.json'
 #
-# Required Permissions:
-#   The provided token must have:
+# Inputs:
+#   renovate: Enable/disable Renovate dependency updates (default: true)
+#   node_version: Node.js runtime version for SBOM generation (default: 24.11.1)
+#   renovate-version: Renovate CLI version (default: 42.64.1)
+#   dependency-review-config-file: Path to custom dependency review config
+#   trufflehog-config-file: Path to custom Trufflehog config
+#   codeql-config-file: Path to custom CodeQL config
+#   codeql-upload-findings: Control SARIF upload to Code Scanning (default: always)
+#   docker-images-file: JSON file with docker image URIs for SBOM generation
+#   token: GitHub token with appropriate permissions (required)
+#
+# Required Token Permissions:
 #   - contents: read/write
 #   - pull-requests: read/write
 #   - issues: read/write
 #   - security-events: read
 #
-# Inputs:
-#   renovate: Enable/disable Renovate execution (default: 'true')
-#   renovate-version: Renovate CLI version (default: '42.64.1')
-#   dependency-review-config-file: Path to dependency review config (optional)
-#   trufflehog-config-file: Path to Trufflehog config (optional)
-#   codeql-config-file: Path to CodeQL config (optional)
-#   codeql-upload-findings: Upload CodeQL SARIF findings (default: 'always', use 'never' if default setup enabled)
-#   token: GitHub token with required permissions (required)
+# Note: This action is designed to run as part of a CI/CD pipeline and requires
+# appropriate GitHub Advanced Security features to be enabled for full functionality.
 
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action for dependency management, secret scanning, and security vulnerability detection
@@ -50,6 +48,11 @@ inputs:
     required: false
     description: "Flag to evaluation Renovate execution"
     default: "true"
+
+  node_version:
+    required: false
+    description: "Node.js version to use"
+    default: "24.11.1"
 
   renovate-version:
     required: false
@@ -129,4 +132,5 @@ runs:
       uses: ./sca/steps/SBOM
       with:
         token: ${{ inputs.token }}
+        node_version: ${{ inputs.node_version }}
         docker-images-file: ${{ inputs.docker-images-file }}
