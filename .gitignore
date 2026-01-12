@@ -43,6 +43,7 @@ coverage
 
 # GitLeaks
 **/*.json
+!tsconfig.json
 
 # SARIF
 **/*.sarif

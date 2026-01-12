@@ -1,4 +1,9 @@
-import { getArguments, validateArguments, isValidJson, execute } from "./helpers/index";
+import {
+  getArguments,
+  validateArguments,
+  isValidJson,
+  execute,
+} from "./helpers";
 
 try {
   const args = getArguments();
