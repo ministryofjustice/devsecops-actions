@@ -1,38 +1,49 @@
 # Software Composition Analysis (SCA) Workflow
 #
-# This workflow performs automated security scanning of software dependencies and components
-# to identify vulnerabilities, license compliance issues, and outdated packages.
+# This workflow performs automated security scanning and dependency analysis for the repository.
+# It runs on a scheduled basis, during pull requests, pushes to main, and can be triggered manually.
 #
 # Triggers:
-#   - schedule: Runs daily at midnight (00:00 UTC)
-#   - pull_request: Executes on pull requests targeting the main branch
-#   - push: Runs on direct pushes to the main branch
-#   - workflow_dispatch: Allows manual triggering from GitHub UI
-#   - branch_protection_rule: Triggered by branch protection rule events
+#   - schedule: Daily at midnight (cron: "0 0 * * *")
+#   - pull_request: On pull requests targeting the main branch
+#   - push: On pushes to the main branch
+#   - workflow_dispatch: Manual trigger
+#   - branch_protection_rule: When branch protection rules are modified
+#
+# Environment Variables:
+#   - environment: Deployment environment (default: base)
+#   - timezone: Timezone configuration from repository variables
+#
+# Jobs:
+#   1. setup:
+#      - Configures infrastructure settings
+#      - Sets environment and timezone
+#      - Outputs configuration for downstream jobs
+#      - Runs on: ubuntu-latest
+#
+#   2. sca:
+#      - Executes Software Composition Analysis
+#      - Permissions: Full access for contents, PRs, issues, security events, OIDC, and actions
+#      - Dependencies: Requires setup job completion
+#      - Steps:
+#        * Checks out repository code
+#        * Sets up Node.js environment using configured version
+#        * Installs npm dependencies (ignoring scripts for security)
+#        * Runs SCA action with:
+#          - GitHub token for authentication
+#          - Custom dependency review configuration
+#          - Docker images sources file for container scanning
+#      - Runs on: ubuntu-latest
+#      - Environment: Uses output from setup job
 #
 # Permissions:
-#   The workflow requires minimal permissions at the workflow level (empty set),
-#   but the job has specific permissions for:
-#   - contents: write - To access and modify repository contents
-#   - pull-requests: write - To comment on and update pull requests
-#   - issues: write - To create and update security-related issues
-#   - security-events: write - To upload security scanning results
-#   - id-token: write - For OIDC token generation
+#   - Default: None (empty permissions at workflow level)
+#   - SCA job: Elevated permissions for writing results and creating issues
 #
-# Steps:
-#   1. Repository checkout: Clones the repository code
-#   2. Node.js setup: Configures Node.js environment using version from repository variables
-#   3. Install dependencies: Runs npm ci to install project dependencies without running scripts
-#   4. Execute SCA: Runs the custom SCA action with:
-#      - GitHub token for API access
-#      - Optional dependency review configuration file
-#      - Optional Docker images file for container scanning
-#
-# Configuration:
-#   - Uses pinned versions of actions (frozen with commit SHA) for security
-#   - Node version is configurable via repository variable NODE_VERSION
-#   - Dependency review config can be customized via .github/dependency-review-config.yml
-#   - Docker images for scanning can be specified via images.json
+# Notes:
+#   - Currently using feature branch (feat/10-sca-sbom) for SCA action
+#   - Docker images source file location: ./sources.json
+#   - Dependency review config location: ./.github/dependency-review-config.yml
 
 name: SCA ⚡️
 run-name: Software Composition Analysis ⚡️
@@ -94,6 +105,7 @@ jobs:
           node-version: ${{ vars.NODE_VERSION }}
 
       - name: Install
+        shell: bash
         run: npm ci --ignore-scripts
 
       - name: ⚡️ SCA
