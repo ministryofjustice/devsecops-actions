@@ -103,7 +103,7 @@ runs:
       uses: ./sca/steps/OWASP
 
     - name: 🔁 Renovate
-      if: inputs.renovate == 'true'
+      if: ${{ inputs.renovate == 'true' }}
       uses: ./sca/steps/Renovate
       with:
         token: ${{ inputs.token }}
