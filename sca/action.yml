@@ -76,6 +76,11 @@ inputs:
     description: "Upload the findings from CodeQL as SARIF file to Code Scanning, set to never if default setup is enabled."
     default: "always"
 
+  docker-images-file:
+    required: false
+    description: "A JSON file an 'images' property as an array containing URIs to docker image, for example 'ghcr.io/ministryofjustice/devsecops-hooks:latest'"
+    default: ""
+
   token:
     required: true
     description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
@@ -124,3 +129,4 @@ runs:
       uses: ./sca/steps/SBOM
       with:
         token: ${{ inputs.token }}
+        docker-images-file: ${{ inputs.docker-images-file }}
