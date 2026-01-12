@@ -1,43 +1,79 @@
-# This GitHub composite action performs comprehensive Software Composition Analysis (SCA)
-# for repositories, including dependency management, security scanning, and SBOM generation.
+# Software Composition Analysis (SCA) GitHub Action
 #
-# The action orchestrates multiple security and compliance checks in sequence:
-# - Repository checkout and setup
-# - Dependency review using GitHub's native dependency review
-# - OWASP dependency checking for known vulnerabilities
-# - Automated dependency updates via Renovate (optional)
-# - Secret scanning using GitHub's native capabilities
-# - Trufflehog for additional secret detection
-# - CodeQL for semantic code analysis
-# - OpenSSF Scorecard for security best practices assessment
+# This composite action performs comprehensive security analysis for software dependencies,
+# secrets, and vulnerabilities. It orchestrates multiple security scanning tools to ensure
+# code quality and security compliance.
+#
+# Features:
+# - Dependency review and management via Renovate
+# - OWASP dependency checking
+# - Secret scanning with Trufflehog
+# - CodeQL static analysis
+# - OpenSSF Scorecard security assessment
 # - Software Bill of Materials (SBOM) generation
 #
 # Usage:
-#   - uses: ministryofjustice/devsecops-actions/sca@main
+#   - name: Run SCA
+#     uses: ministryofjustice/devsecops-actions/sca@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate: 'true'
-#       docker-images-file: 'path/to/images.json'
+#       codeql-upload-findings: 'always'
 #
-# Inputs:
-#   renovate: Enable/disable Renovate dependency updates (default: true)
-#   node_version: Node.js runtime version for SBOM generation (default: 24.11.1)
-#   renovate-version: Renovate CLI version (default: 42.64.1)
-#   dependency-review-config-file: Path to custom dependency review config
-#   trufflehog-config-file: Path to custom Trufflehog config
-#   codeql-config-file: Path to custom CodeQL config
-#   codeql-upload-findings: Control SARIF upload to Code Scanning (default: always)
-#   docker-images-file: JSON file with docker image URIs for SBOM generation
-#   token: GitHub token with appropriate permissions (required)
-#
-# Required Token Permissions:
+# Required Permissions:
 #   - contents: read/write
 #   - pull-requests: read/write
 #   - issues: read/write
 #   - security-events: read
 #
-# Note: This action is designed to run as part of a CI/CD pipeline and requires
-# appropriate GitHub Advanced Security features to be enabled for full functionality.
+# Inputs:
+#   renovate:
+#     Flag to enable/disable Renovate dependency updates
+#     Default: 'true'
+#
+#   node_version:
+#     Node.js runtime version for SBOM generation
+#     Default: '24.11.1'
+#
+#   renovate-version:
+#     Renovate CLI version to use
+#     Default: '42.64.1'
+#
+#   dependency-review-config-file:
+#     Path to custom dependency review configuration
+#     Optional
+#
+#   trufflehog-config-file:
+#     Path to custom Trufflehog configuration
+#     Optional
+#
+#   codeql-config-file:
+#     Path to custom CodeQL configuration
+#     Optional
+#
+#   codeql-upload-findings:
+#     Controls SARIF upload to Code Scanning ('always' or 'never')
+#     Default: 'always'
+#
+#   docker-images-file:
+#     Path to JSON file containing Docker image URIs for SBOM generation
+#     Format: {"images": ["ghcr.io/org/image:tag"]}
+#     Optional
+#
+#   token:
+#     GitHub token with appropriate permissions
+#     Required
+#
+# Steps:
+#   1. Repository checkout and setup
+#   2. Dependency review against security advisories
+#   3. OWASP dependency vulnerability scanning
+#   4. Renovate automated dependency updates (conditional)
+#   5. Secret detection in repository
+#   6. Trufflehog secret scanning
+#   7. CodeQL static code analysis
+#   8. OpenSSF Scorecard security assessment
+#   9. SBOM generation for dependencies and Docker images
 
 name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action for dependency management, secret scanning, and security vulnerability detection

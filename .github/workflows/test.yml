@@ -1,0 +1,92 @@
+# Test Workflow Documentation
+#
+# Purpose:
+#   Runs automated tests for the devsecops-actions repository on pull requests to main branch.
+#
+# Triggers:
+#   - Pull requests targeting the 'main' branch
+#
+# Permissions:
+#   - Root level: None (empty permissions object)
+#   - Lint job: contents:read (for repository checkout)
+#
+# Environment Variables:
+#   - environment: Set to 'base' for test execution context
+#   - timezone: Retrieved from repository variable TIMEZONE
+#
+# Jobs:
+#   1. setup:
+#      - Purpose: Configure test infrastructure and environment settings
+#      - Runs on: ubuntu-latest
+#      - Outputs: environment and timezone values for downstream jobs
+#      - Steps: Echoes environment and timezone configuration
+#
+#   2. lint:
+#      - Purpose: Execute unit tests with coverage
+#      - Runs on: ubuntu-latest
+#      - Dependencies: Requires 'setup' job to complete
+#      - Environment: Uses environment from setup job outputs
+#      - Steps:
+#        a. Checks out repository code (actions/checkout@v6.0.1)
+#        b. Sets up Node.js using version from repository variable
+#        c. Installs npm dependencies with --ignore-scripts flag
+#        d. Runs unit tests with coverage reporting via npm script
+#
+# Notes:
+#   - Uses pinned action versions with SHA hashes for security
+#   - Node version is configurable via repository variable NODE_VERSION
+#   - Job name 'lint' appears misnamed as it runs unit tests, not linting
+
+name: Tests 🧪
+run-name: Tests 🧪
+
+on:
+  pull_request:
+    branches: ["main"]
+
+permissions: {}
+
+env:
+  environment: base
+  timezone: ${{ vars.TIMEZONE }}
+
+jobs:
+  # 1. Setup test infrastructure
+  setup:
+    name: Infrastructure 🔧
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ env.environment }}
+      timezone: ${{ env.timezone }}
+    steps:
+      - name: Environment 🧪
+        run: echo "Environment set to ${{ env.environment }}"
+
+      - name: Timezone 🌐
+        run: echo "Timezone set to ${{ env.timezone }}"
+
+  # 2. Various lint checks
+  lint:
+    permissions:
+      contents: read
+
+    name: Unit
+    needs: setup
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # frozen: v6.0.1
+
+      - name: Node
+        uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # frozen: v6.1.0
+        with:
+          node-version: ${{ vars.NODE_VERSION }}
+
+      - name: Install
+        run: npm ci --ignore-scripts
+
+      - name: Execute
+        run: npm run unit:test:coverage

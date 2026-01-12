@@ -37,7 +37,7 @@ export const isValidJson = (args: Array<string>): Array<string> => {
 
   if (!Array.isArray(data)) {
     throw new TypeError(
-      `${type} property is not an Array of values in the JSON file as expected`
+      `${type} property is not an Array of values in the JSON file as expected.`
     );
   }
 
