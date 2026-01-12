@@ -26,6 +26,8 @@ export const isValidJson = (args: Array<string>): Array<string> => {
   const type = args[0].replace("--", "");
   const source = args[1];
 
+  console.log('===========:', __dirname);
+
   const raw = file.readFileSync(source, { encoding: "utf8" });
   const json = JSON.parse(raw);
 
