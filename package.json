@@ -19,7 +19,7 @@
   "author": "Abhi Markan",
   "scripts": {
     "housekeeping": "npm update --save && npm install && npm audit && npm run validate:all && npx sort-package-json",
-    "scan": "ts-node src/scan.ts",
+    "scan": "ts-node src/index.ts",
     "spellcheck": "cspell lint --gitignore --no-must-find-files --unique --no-progress --show-suggestions --color **/*",
     "test:unit": "jest --verbose --config=unit.jest.config.js",
     "test:unit:coverage": "jest --coverage --verbose --config=unit.jest.config.js",

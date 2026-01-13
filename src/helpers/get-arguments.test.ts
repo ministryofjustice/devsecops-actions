@@ -36,7 +36,7 @@ describe("getArguments", () => {
     process.argv = ["node", "path"];
 
     // Assert
-    expect(() => getArguments()).toThrow("Invalid arguments supplied.");
+    expect(() => getArguments()).toThrow("Invalid arguments provided.");
   });
 
   it("should throw an error when one arguments are supplied, expecting minimum two.", () => {
@@ -44,6 +44,6 @@ describe("getArguments", () => {
     process.argv = ["node", "path", "--images"];
 
     // Act + Assert
-    expect(() => getArguments()).toThrow("Invalid arguments supplied.");
+    expect(() => getArguments()).toThrow("Invalid arguments provided.");
   });
 });

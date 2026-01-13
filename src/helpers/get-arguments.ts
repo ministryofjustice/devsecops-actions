@@ -26,7 +26,7 @@ export const getArguments = (): Array<string> => {
   const args = process.argv.slice(ignoreArguments);
 
   if (args.length < minimumArguments) {
-    throw new Error("Invalid arguments supplied.");
+    throw new TypeError("Invalid arguments provided.");
   }
 
   return args;

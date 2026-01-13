@@ -41,7 +41,7 @@ export const validateArguments = (args: Array<string>): boolean => {
 
     return true;
   } catch (error) {
-    console.error("An error has occurred while reading file %o", error);
+    console.error("❌ An error has occurred while reading file %o", error);
     return false;
   }
 };
