@@ -1,7 +1,7 @@
 import { execute } from "./execute";
 
 console.log = jest.fn();
-console.error = jest.fn();
+// console.error = jest.fn();
 
 describe("execute", () => {
   afterEach(() => {
@@ -9,7 +9,7 @@ describe("execute", () => {
     jest.clearAllMocks();
   });
 
-  it("should successfully scan a docker image", async () => {
+  it.only("should successfully scan a docker image", async () => {
     // Arrange
     const mockType = "--images";
     const mockValues = ["ghcr.io/ministryofjustice/devsecops-hooks:latest"];

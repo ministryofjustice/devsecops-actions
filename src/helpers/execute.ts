@@ -34,8 +34,8 @@ export const execute = async (
 
   const promises = values.map(async (value) => {
     try {
-      console.info('=======================>', type, value);
       const command = getCommand(type, value);
+      console.info('===>', type, value, command);
 
       await execAsync(command);
 
