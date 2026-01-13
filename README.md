@@ -89,6 +89,53 @@ and container security.
 | `issues`          | write | For creating issues          |
 | `security-events` | read  | For scanning vulnerabilities |
 
+#### Docker Images Configuration
+
+To enable Docker image scanning for SBOM generation, create a JSON file containing the images you wish to scan.
+
+**File Structure:**
+
+Create a file (e.g., `sources.json`, `docker-images.json`) in your repository root with the following structure:
+
+```json
+{
+  "images": [
+    "ghcr.io/ministryofjustice/devsecops-hooks:latest",
+    "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
+    "ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0",
+    "ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0"
+  ]
+}
+```
+
+**Key Points:**
+
+- The file must contain an `images` property as an array
+- Each array element should be a fully qualified Docker image URI
+- Supports any valid image reference format (with tags please)
+- Multiple images can be specified for batch scanning
+- The SBOM action will generate separate SBOM files for each image
+
+**Usage in Workflow:**
+
+Reference the file using the `docker-images-file` input parameter:
+
+```yaml
+- uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    docker-images-file: ${{ github.workspace }}/sources.json
+```
+
+**Generated Artefacts:**
+
+The action will generate:
+
+- `sca-sbom-repository.cdx.json` - Repository dependencies SBOM
+- `sca-sbom-<image-name>.cdx.json` - Individual SBOM for each Docker image
+
+All SBOM files are in CycloneDX JSON format and uploaded as workflow artefacts.
+
 ---
 
 ## 📖 Usage Examples
