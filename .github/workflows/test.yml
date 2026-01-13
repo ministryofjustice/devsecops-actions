@@ -70,7 +70,7 @@ jobs:
     permissions:
       contents: read
 
-    name: Unit
+    name: Unit 🧪
     needs: setup
     environment:
       name: ${{ needs.setup.outputs.environment }}
