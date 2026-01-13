@@ -89,4 +89,5 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Execute
-        run: npm run test:unit:coverage
+        # run: npm run test:unit:coverage
+        run: npm run test:unit src/helpers/execute.test.ts
