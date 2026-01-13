@@ -1,5 +1,7 @@
 import { validateArguments } from "./valid-argument";
 
+console.error = jest.fn();
+
 describe("validateArguments", () => {
   const assertions = [
     {
