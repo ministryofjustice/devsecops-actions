@@ -36,7 +36,7 @@ describe("execute", () => {
     const mockType = "--invalid";
     const mockValues = [
       "ghcr.io/ministryofjustice/devsecops-hooks:latest",
-      "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
+      "ghcr.io/ministryofjustice/devsecops-hooks:v1.1.0",
       "ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0",
     ];
     const mockError = new TypeError("Image scanning failed");
