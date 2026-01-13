@@ -1,7 +1,7 @@
 import { execute } from "./execute";
 
 console.log = jest.fn();
-// console.error = jest.fn();
+console.error = jest.fn();
 
 describe("execute", () => {
   afterEach(() => {
@@ -9,20 +9,32 @@ describe("execute", () => {
     jest.clearAllMocks();
   });
 
-  it.only("should successfully scan a docker image", async () => {
+  it("should successfully scan three docker images", async () => {
     // Arrange
     const mockType = "--images";
-    const mockValues = ["ghcr.io/ministryofjustice/devsecops-hooks:latest"];
+    const mockValues = [
+      "ghcr.io/ministryofjustice/devsecops-hooks:latest",
+      "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
+      "ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0",
+    ];
 
     // Act
     await execute(mockType, mockValues);
 
     // Assert
-    expect(console.log).toHaveBeenCalledTimes(2);
+    expect(console.log).toHaveBeenCalledTimes(4);
 
     expect(console.log).toHaveBeenCalledWith(
       "✅ Successfully scanned %s",
       mockValues[0]
+    );
+    expect(console.log).toHaveBeenCalledWith(
+      "✅ Successfully scanned %s",
+      mockValues[1]
+    );
+    expect(console.log).toHaveBeenCalledWith(
+      "✅ Successfully scanned %s",
+      mockValues[2]
     );
 
     expect(console.log).toHaveBeenCalledWith(
@@ -36,7 +48,7 @@ describe("execute", () => {
     const mockType = "--invalid";
     const mockValues = [
       "ghcr.io/ministryofjustice/devsecops-hooks:latest",
-      "ghcr.io/ministryofjustice/devsecops-hooks:v1.1.0",
+      "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
       "ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0",
     ];
     const mockError = new TypeError("Image scanning failed");

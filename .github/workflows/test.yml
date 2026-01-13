@@ -86,8 +86,11 @@ jobs:
           node-version: ${{ vars.NODE_VERSION }}
 
       - name: Install
-        run: npm ci --ignore-scripts
+        shell: bash
+        run: |
+          npm ci --ignore-scripts
+          curl -sSfL https://get.anchore.io/syft | sudo sh -s -- -b /usr/local/bin
 
       - name: Execute
-        # run: npm run test:unit:coverage
-        run: npm run test:unit src/helpers/execute.test.ts
+        shell: bash
+        run: npm run test:unit:coverage
