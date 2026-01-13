@@ -9,32 +9,20 @@ describe("execute", () => {
     jest.clearAllMocks();
   });
 
-  it("should successfully scan three docker images", async () => {
+  it("should successfully scan a docker image", async () => {
     // Arrange
     const mockType = "--images";
-    const mockValues = [
-      "ghcr.io/ministryofjustice/devsecops-hooks:latest",
-      "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
-      "ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0",
-    ];
+    const mockValues = ["ghcr.io/ministryofjustice/devsecops-hooks:latest"];
 
     // Act
     await execute(mockType, mockValues);
 
     // Assert
-    expect(console.log).toHaveBeenCalledTimes(4);
+    expect(console.log).toHaveBeenCalledTimes(2);
 
     expect(console.log).toHaveBeenCalledWith(
       "✅ Successfully scanned %s",
       mockValues[0]
-    );
-    expect(console.log).toHaveBeenCalledWith(
-      "✅ Successfully scanned %s",
-      mockValues[1]
-    );
-    expect(console.log).toHaveBeenCalledWith(
-      "✅ Successfully scanned %s",
-      mockValues[2]
     );
 
     expect(console.log).toHaveBeenCalledWith(

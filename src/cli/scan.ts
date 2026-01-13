@@ -48,6 +48,6 @@ export const scan = async (): Promise<void | TypeError> => {
     await execute(type, values);
   } catch (error) {
     console.error("❌ An error has occurred during execution %s", error);
-    throw new TypeError("Scanning failed");
+    throw new TypeError(`Scanning failed: ${error}`);
   }
 };
