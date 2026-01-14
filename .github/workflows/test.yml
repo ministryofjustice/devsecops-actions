@@ -74,10 +74,6 @@ jobs:
           npm ci --ignore-scripts
           npm run install:syft
 
-      - name: Test
-        shell: bash
-        run: syft --version
-
       - name: Execute
         shell: bash
         run: npm run test:unit:coverage
