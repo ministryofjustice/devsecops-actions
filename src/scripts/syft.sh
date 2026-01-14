@@ -74,5 +74,5 @@ command -v syft >/dev/null 2>&1 || { echo "❌ Missing syft executable."; exit 1
 rm -f "$FILE"
 rm -rf tmp
 
-echo "✅ Syft ${syft --version} has been installed."
+echo "✅ $(syft --version) has been installed."
 exit 0;
