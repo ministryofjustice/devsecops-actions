@@ -1,36 +1,35 @@
-#!/bin/bash
-# syft.sh - Syft SBOM Generator Installation Script
+# Script: syft.sh
+# Description: Downloads, verifies, and installs Syft - a CLI tool for generating
+#              Software Bill of Materials (SBOM) from container images and filesystems.
 #
-# DESCRIPTION:
-#   Downloads, verifies, and installs Syft (a CLI tool for generating 
-#   Software Bill of Materials from container images and filesystems).
-#   Installs to ~/.local/bin for user-level access.
+# Usage: ./syft.sh
 #
-# USAGE:
-#   ./syft.sh
-#
-# REQUIREMENTS:
+# Prerequisites:
 #   - curl: For downloading the Syft package
 #   - sha256sum: For verifying package integrity
 #   - dpkg-deb: For extracting the Debian package
 #
-# INSTALLATION DETAILS:
-#   - Version: 1.40.0
-#   - Architecture: linux_amd64
-#   - Install Location: $HOME/.local/bin/syft
-#   - SHA256 Checksum: Verified against known good hash
+# Installation Process:
+#   1. Validates required dependencies are available
+#   2. Downloads Syft v1.40.0 from GitHub releases
+#   3. Verifies SHA256 checksum for security
+#   4. Extracts and installs to ~/.local/bin
+#   5. Adds installation directory to PATH
+#   6. Validates successful installation
+#   7. Performs cleanup of temporary files
 #
-# EXIT CODES:
+# Exit Codes:
 #   0 - Success
-#   1 - Missing dependencies, checksum failure, or installation error
+#   1 - Failure (missing dependency, checksum mismatch, or installation error)
 #
-# NOTES:
-#   - Automatically adds $HOME/.local/bin to PATH for current session
-#   - Cleans up temporary files after installation
-#   - Validates installation by checking syft availability
+# Environment Variables Modified:
+#   PATH - Prepends $HOME/.local/bin to ensure syft is accessible
 #
-# AUTHOR:
-#   Ministry of Justice DevSecOps Team
+# Notes:
+#   - Installation is user-local (does not require sudo)
+#   - Script uses 'set -euo pipefail' for strict error handling
+#   - Temporary files are cleaned up regardless of installation success
+
 
 set -euo pipefail
 

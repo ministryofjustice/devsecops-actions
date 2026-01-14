@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { isValidJson } from "./is-valid-json.ts";
+import { getArrayFromJson } from "./get-array-from-json.ts";
 
 jest.mock("fs");
 
@@ -17,7 +17,7 @@ describe("isValidJson", () => {
     (readFileSync as jest.Mock).mockReturnValueOnce(data);
 
     // Act
-    isValidJson(mockArgs);
+    getArrayFromJson(mockArgs);
 
     // Assert
     expect(readFileSync).toHaveBeenCalledTimes(1);
@@ -35,7 +35,7 @@ describe("isValidJson", () => {
     (readFileSync as jest.Mock).mockReturnValueOnce(data);
 
     // Act + Assert
-    expect(() => isValidJson(mockArgs)).toThrow(
+    expect(() => getArrayFromJson(mockArgs)).toThrow(
       "invalid property does not exist in supplied JSON."
     );
   });
@@ -48,7 +48,7 @@ describe("isValidJson", () => {
     (readFileSync as jest.Mock).mockReturnValueOnce(data);
 
     // Act + Assert
-    expect(() => isValidJson(mockArgs)).toThrow(
+    expect(() => getArrayFromJson(mockArgs)).toThrow(
       "images property is not an Array of values in the JSON file as expected."
     );
   });
@@ -62,7 +62,7 @@ describe("isValidJson", () => {
     (readFileSync as jest.Mock).mockReturnValueOnce(data);
 
     // Act
-    const response = isValidJson(argument);
+    const response = getArrayFromJson(argument);
 
     // Assert
     expect(response).toEqual([

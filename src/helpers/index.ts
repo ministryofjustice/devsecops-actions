@@ -6,5 +6,5 @@
 
 export { getArguments } from "./get-arguments.ts";
 export { validateArguments } from "./valid-argument.ts";
-export { isValidJson } from "./is-valid-json.ts";
+export { getArrayFromJson } from "./get-array-from-json.ts";
 export { execute } from "./execute.ts";

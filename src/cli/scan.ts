@@ -1,7 +1,7 @@
 import {
   getArguments,
   validateArguments,
-  isValidJson,
+  getArrayFromJson,
   execute,
 } from "../helpers/index.ts";
 
@@ -42,7 +42,7 @@ export const scan = async (): Promise<void | TypeError> => {
       );
     }
 
-    const values = isValidJson(args);
+    const values = getArrayFromJson(args);
     const type = args[0];
 
     await execute(type, values);
