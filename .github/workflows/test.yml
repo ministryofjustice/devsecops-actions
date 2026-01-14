@@ -1,41 +1,24 @@
-# Test Workflow Documentation
+# Test workflow for devsecops-actions repository
 #
-# Purpose:
-#   Runs automated tests for the devsecops-actions repository on pull requests to main branch.
+# This workflow runs automated tests on pull requests targeting the main branch.
+# It consists of two main jobs:
 #
-# Triggers:
-#   - Pull requests targeting the 'main' branch
+# 1. setup: Prepares the test infrastructure by setting up environment variables
+#    - Outputs: environment name and timezone for downstream jobs
+#    - Sets environment to 'base' and uses repository-configured timezone
 #
-# Permissions:
-#   - Root level: None (empty permissions object)
-#   - Lint job: contents:read (for repository checkout)
+# 2. lint: Executes unit tests with coverage reporting
+#    - Requires: setup job completion
+#    - Permissions: read access to repository contents
+#    - Environment: Uses environment output from setup job
+#    - Steps:
+#      a. Checks out the repository code
+#      b. Configures Node.js using the version specified in repository variables
+#      c. Installs npm dependencies and Syft tool (for SBOM generation)
+#      d. Runs unit tests with coverage collection
 #
-# Environment Variables:
-#   - environment: Set to 'base' for test execution context
-#   - timezone: Retrieved from repository variable TIMEZONE
-#
-# Jobs:
-#   1. setup:
-#      - Purpose: Configure test infrastructure and environment settings
-#      - Runs on: ubuntu-latest
-#      - Outputs: environment and timezone values for downstream jobs
-#      - Steps: Echoes environment and timezone configuration
-#
-#   2. lint:
-#      - Purpose: Execute unit tests with coverage
-#      - Runs on: ubuntu-latest
-#      - Dependencies: Requires 'setup' job to complete
-#      - Environment: Uses environment from setup job outputs
-#      - Steps:
-#        a. Checks out repository code (actions/checkout@v6.0.1)
-#        b. Sets up Node.js using version from repository variable
-#        c. Installs npm dependencies with --ignore-scripts flag
-#        d. Runs unit tests with coverage reporting via npm script
-#
-# Notes:
-#   - Uses pinned action versions with SHA hashes for security
-#   - Node version is configurable via repository variable NODE_VERSION
-#   - Job name 'lint' appears misnamed as it runs unit tests, not linting
+# Permissions: Minimal permissions by default, with contents:read for the lint job
+# Trigger: Activated on pull requests to the main branch
 
 name: Tests 🧪
 run-name: Tests 🧪
@@ -90,6 +73,10 @@ jobs:
         run: |
           npm ci --ignore-scripts
           npm run install:syft
+
+      - name: Test
+        shell: bash
+        run: syft --version
 
       - name: Execute
         shell: bash

@@ -1,7 +1,7 @@
-# GitHub Action for generating Software Bill of Materials (SBOM) using Syft
+# GitHub Action for generating Software Bill of Materials (SBOM)
 #
-# This action scans repositories and Docker images to generate CycloneDX SBOM files.
-# It uses Anchore Syft for scanning and supports both repository-level and Docker image scanning.
+# This action scans a repository and optionally Docker images to generate SBOM reports
+# in CycloneDX JSON format using Syft.
 #
 # Usage:
 #   - uses: ministryofjustice/devsecops-actions/sca/steps/SBOM@main
@@ -11,43 +11,36 @@
 #       docker-images-file: "images.json"  # optional
 #
 # Inputs:
-#   token (required):
-#     GitHub repository token with the following permissions:
-#     - Read/Write: contents, pull requests, issues
-#     - Read only: security events
-#
-#   node_version (optional):
-#     Node.js version to use for npm operations.
-#     Default: "24.11.1"
-#
-#   docker-images-file (optional):
-#     Path to a JSON file containing an 'images' property with an array of Docker image URIs.
-#     Example format: {"images": ["ghcr.io/ministryofjustice/devsecops-hooks:latest"]}
-#     Default: "" (skips Docker image scanning)
+#   token:
+#     required: true
+#     description: GitHub repository token with read/write access to contents, pull requests,
+#                  issues and read-only access to security events
+#   node_version:
+#     required: false
+#     default: "24.11.1"
+#     description: Node.js version to use for running the action
+#   docker-images-file:
+#     required: false
+#     default: ""
+#     description: Path to JSON file containing an 'images' array with Docker image URIs
+#                  (e.g., 'ghcr.io/ministryofjustice/devsecops-hooks:latest')
 #
 # Outputs:
 #   Uploads SBOM artifacts in CycloneDX JSON format:
-#   - sca-sbom-repository.cdx.json: Repository-level SBOM
-#   - sca-sbom-*.cdx.json: Additional SBOMs for Docker images (if docker-images-file is provided)
+#   - sca-sbom-repository.cdx.json: SBOM for the repository
+#   - sca-sbom-*.cdx.json: Additional SBOMs for Docker images (if provided)
 #
-# Steps:
-#   1. Installs Anchore Syft CLI tool
-#   2. Scans the repository and generates SBOM
-#   3. Sets up Node.js environment
-#   4. Installs npm dependencies
-#   5. Scans Docker images (if docker-images-file is provided)
-#   6. Uploads all generated SBOM files as artifacts
+# Prerequisites:
+#   - Repository must have a package.json with 'install:syft' and 'scan' scripts
+#   - Syft configuration file must exist at the action path (config.yml)
 #
-# Example:
-#   jobs:
-#     sbom:
-#       runs-on: ubuntu-latest
-#       steps:
-#         - uses: actions/checkout@v4
-#         - uses: ministryofjustice/devsecops-actions/sca/steps/SBOM@main
-#           with:
-#             token: ${{ secrets.GITHUB_TOKEN }}
-#             docker-images-file: "docker-images.json"
+# Example docker-images-file format:
+#   {
+#     "images": [
+#       "ghcr.io/ministryofjustice/app:latest",
+#       "ghcr.io/ministryofjustice/service:v1.0.0"
+#     ]
+#   }
 
 name: ⛓️‍💥 SBOM
 description: Software bill of material generation
