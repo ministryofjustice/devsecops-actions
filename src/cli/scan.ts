@@ -3,7 +3,7 @@ import {
   validateArguments,
   isValidJson,
   execute,
-} from "../helpers";
+} from "../helpers/index.ts";
 
 /**
  * Scans the provided source based on the specified type.

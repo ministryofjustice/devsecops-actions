@@ -47,7 +47,7 @@ runs:
   using: composite
   steps:
     - name: Scan
-      uses: dependency-check/Dependency-Check_Action@1e54355a8b4c8abaa8cc7d0b70aa655a3bb15a6c # frozen: v1.1.0
+      uses: dependency-check/Dependency-Check_Action@1e54355a8b4c8abaa8cc7d0b70aa655a3bb15a6c # v1.1.0
       with:
         project: ${{ github.repository }}
         path: "."
@@ -60,6 +60,6 @@ runs:
 
     - name: Upload
       if: always()
-      uses: github/codeql-action/upload-sarif@cdefb33c0f6224e58673d9004f47f7cb3e328b89 # frozen: v4.31.10
+      uses: github/codeql-action/upload-sarif@cdefb33c0f6224e58673d9004f47f7cb3e328b89 # v4.31.10
       with:
         sarif_file: ./reports/dependency-check-report.sarif

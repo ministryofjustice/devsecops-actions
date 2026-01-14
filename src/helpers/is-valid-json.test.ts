@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { isValidJson } from "./is-valid-json";
+import { isValidJson } from "./is-valid-json.ts";
 
 jest.mock("fs");
 

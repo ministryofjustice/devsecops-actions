@@ -1,4 +1,4 @@
-import { execute } from "./execute";
+import { execute } from "./execute.ts";
 
 console.log = jest.fn();
 console.error = jest.fn();

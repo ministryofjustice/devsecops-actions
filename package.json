@@ -17,14 +17,17 @@
   },
   "license": "MIT",
   "author": "Abhi Markan",
+  "type": "module",
   "scripts": {
     "housekeeping": "npm update --save && npm install && npm audit && npm run validate:all && npx sort-package-json",
+    "install:syft": "src/scripts/syft.sh",
     "scan": "ts-node src/index.ts",
     "spellcheck": "cspell lint --gitignore --no-must-find-files --unique --no-progress --show-suggestions --color **/*",
     "test:unit": "jest --verbose --config=unit.jest.config.js",
     "test:unit:coverage": "jest --coverage --verbose --config=unit.jest.config.js",
-    "validate:all": "npm run validate:yml && npm run validate:md",
+    "validate:all": "npm run validate:ts && npm run validate:yml && npm run validate:md",
     "validate:md": "npx markdownlint-cli --config .markdownlint.json \"**/*.md\"",
+    "validate:ts": "npx tsc --project src/tsconfig.json",
     "validate:yml": "npx yaml-lint **/*.yml --ignore=**/node_modules"
   },
   "devDependencies": {

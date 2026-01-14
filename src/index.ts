@@ -1,21 +1,16 @@
 /**
- * Entry point for the DevSecOps actions CLI.
+ * Main entry point for the DevSecOps actions CLI tool.
  * 
  * Executes the scan command and handles any errors that occur during execution.
- * If an error occurs, it logs the error details and exits the process with a non-zero status code.
+ * If an error is encountered, it logs the error details and exits the process with
+ * a non-zero status code.
  * 
- * @remarks
- * This module serves as the main entry point for the CLI tool. It wraps the scan
- * function call in a try-catch block to ensure proper error handling and logging.
- * 
- * @throws {Error} Catches and logs any errors thrown during the scan execution
- * @process Exits with code 1 if an error occurs during scan execution
+ * @throws {Error} Exits the process with code 1 if the scan operation fails
  */
-
-import { scan } from "./cli";
+import { scan } from "./cli/index.ts";
 
 try {
-  scan();
+  await scan();
 } catch (error) {
   console.error("❌ CLI execution failure %o", error);
   process.exit(1);

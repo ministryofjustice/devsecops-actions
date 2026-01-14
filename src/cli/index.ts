@@ -4,4 +4,4 @@
  * @module cli
  */
 
-export { scan } from "./scan";
+export { scan } from "./scan.ts";

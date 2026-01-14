@@ -1,4 +1,4 @@
-import { scan } from "./scan";
+import { scan } from "./scan.ts";
 
 console.error = jest.fn();
 

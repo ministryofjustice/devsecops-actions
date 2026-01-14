@@ -72,22 +72,20 @@ runs:
   using: composite
 
   steps:
-    - name: Install
-      shell: bash
-      run: curl -sSfL https://get.anchore.io/syft | sudo sh -s -- -b /usr/local/bin
-
-    - name: Repository
-      shell: bash
-      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }} --output cyclonedx-json=sca-sbom-repository.cdx.json"
-
     - name: Node
-      uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # frozen: v6.1.0
+      uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
       with:
         node-version: ${{ inputs.node_version }}
 
     - name: Install
       shell: bash
-      run: npm ci --ignore-scripts
+      run: |
+        npm ci --ignore-scripts
+        npm run install:syft
+
+    - name: Repository
+      shell: bash
+      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }} --output cyclonedx-json=sca-sbom-repository.cdx.json"
 
     - name: Images
       if: ${{ inputs.docker-images-file != '' }}
@@ -95,7 +93,7 @@ runs:
       run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 
     - name: Upload
-      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # frozen: v6.0.0
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
         name: SBOM
         path: sca-sbom-*.cdx.json

@@ -54,7 +54,7 @@ runs:
   using: composite
   steps:
     - name: Scan
-      uses: actions/dependency-review-action@774d14bf50b7a2e2460f9f49e25c52503ecab125 # frozen: v4.8.3
+      uses: actions/dependency-review-action@774d14bf50b7a2e2460f9f49e25c52503ecab125 # v4.8.3
       with:
         config-file: ${{ inputs.dependency-review-config-file }}
         head-ref: ${{ github.head_ref || github.sha }}
