@@ -114,7 +114,7 @@ jobs:
 
       - name: ⚡️ SCA
         # uses: ministryofjustice/devsecops-actions/sca@c210b12f1bd77564cee5c5f5c7306cd63dc89867 # v1.2.0
-        uses: ministryofjustice/devsecops-actions/sca@4bebd14c3e4927e4c88a78c11415a9e4664f8be0
+        uses: ministryofjustice/devsecops-actions/sca@feat/10-sca-sbom # Remove before merge
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
