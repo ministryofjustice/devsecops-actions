@@ -20,7 +20,7 @@
   "type": "module",
   "scripts": {
     "housekeeping": "npm update --save && npm install && npm audit && npm run validate:all && npx sort-package-json",
-    "install:syft": "src/scripts/syft.sh",
+    "install:syft": "bash src/scripts/syft.sh",
     "scan": "ts-node src/index.ts",
     "spellcheck": "cspell lint --gitignore --no-must-find-files --unique --no-progress --show-suggestions --color **/*",
     "test:unit": "jest --verbose --config=src/unit.jest.config.ts",
