@@ -27,9 +27,9 @@ fi
 
 # Install
 mkdir -p "$HOME/.local/bin"
-dpkg-deb -X "$FILE" syft_ci
+dpkg-deb -X "$FILE" tmp
 
-mv syft_ci/syft "$HOME/.local/bin/syft"
+mv tmp/usr/bin/syft "$HOME/.local/bin/"
 chmod +x "$HOME/.local/bin/syft"
 
 export PATH="$HOME/.local/bin:$PATH"
