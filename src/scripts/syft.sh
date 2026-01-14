@@ -1,4 +1,37 @@
 #!/bin/bash
+# syft.sh - Syft SBOM Generator Installation Script
+#
+# DESCRIPTION:
+#   Downloads, verifies, and installs Syft (a CLI tool for generating 
+#   Software Bill of Materials from container images and filesystems).
+#   Installs to ~/.local/bin for user-level access.
+#
+# USAGE:
+#   ./syft.sh
+#
+# REQUIREMENTS:
+#   - curl: For downloading the Syft package
+#   - sha256sum: For verifying package integrity
+#   - dpkg-deb: For extracting the Debian package
+#
+# INSTALLATION DETAILS:
+#   - Version: 1.40.0
+#   - Architecture: linux_amd64
+#   - Install Location: $HOME/.local/bin/syft
+#   - SHA256 Checksum: Verified against known good hash
+#
+# EXIT CODES:
+#   0 - Success
+#   1 - Missing dependencies, checksum failure, or installation error
+#
+# NOTES:
+#   - Automatically adds $HOME/.local/bin to PATH for current session
+#   - Cleans up temporary files after installation
+#   - Validates installation by checking syft availability
+#
+# AUTHOR:
+#   Ministry of Justice DevSecOps Team
+
 set -euo pipefail
 
 # Variables
@@ -39,7 +72,7 @@ command -v syft >/dev/null 2>&1 || { echo "❌ Missing syft executable."; exit 1
 
 # Cleanup
 rm -f "$FILE"
-rm -rf syft_ci
+rm -rf tmp
 
 echo "✅ Syft ${VERSION} has been installed."
 syft --version

@@ -64,4 +64,3 @@ runs:
       with:
         name: OWASP
         sarif_file: ./reports/dependency-check-report.sarif
-        retention-days: 30
