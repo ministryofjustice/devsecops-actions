@@ -72,9 +72,7 @@ runs:
 
     - name: Install
       shell: bash
-      run: |
-        npm ci --ignore-scripts
-        npm run install:syft
+      run: npm ci --ignore-scripts
 
     - name: Repository
       shell: bash
