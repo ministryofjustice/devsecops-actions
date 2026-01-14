@@ -29,7 +29,7 @@ fi
 mkdir -p "$HOME/.local/bin"
 dpkg-deb -X "$FILE" syft_ci
 
-mv syft_ci/usr/local/bin/syft "$HOME/.local/bin/syft"
+mv syft_ci/syft "$HOME/.local/bin/syft"
 chmod +x "$HOME/.local/bin/syft"
 
 export PATH="$HOME/.local/bin:$PATH"
