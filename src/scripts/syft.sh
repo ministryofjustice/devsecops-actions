@@ -35,7 +35,7 @@
 #   This script is currently configured for darwin_amd64 architecture.
 #   Modify FILE and URL variables for different platforms.
 
-#¡/bin/bash
+#!/bin/bash
 set -euo pipefail
 
 # Variables
