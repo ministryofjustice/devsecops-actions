@@ -42,7 +42,7 @@ set -euo pipefail
 
 # Variables
 VERSION="3.92.4"
-FILE="trufflehog_${VERSION}_linux_arm64.tar.gz"
+FILE="trufflehog_${VERSION}_linux_amd64.tar.gz"
 URL="https://github.com/trufflesecurity/trufflehog/releases/download/v${VERSION}/${FILE}"
 SHA256="85868c235ed8871e87191c252c3b8cb6b7da6942aba210f048848a583b964fa4"
 
