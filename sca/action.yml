@@ -54,41 +54,41 @@ runs:
       uses: ministryofjustice/devsecops-actions/sca/repository@fix/recurisve-actions
 
     - name: 📊 Dependencies
-      uses: ./dependencies
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@fix/recurisve-actions
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ./owasp
+      uses: ministryofjustice/devsecops-actions/sca/owasp@fix/recurisve-actions
 
     - name: 🔁 Renovate
       if: ${{ inputs.renovate == 'true' }}
-      uses: ./renovate
+      uses: ministryofjustice/devsecops-actions/sca/renovate@fix/recurisve-actions
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ./secrets
+      uses: ministryofjustice/devsecops-actions/sca/secrets@fix/recurisve-actions
 
     - name: 🐷 Trufflehog
-      uses: ./trufflehog
+      uses: ministryofjustice/devsecops-actions/sca/trufflehog@fix/recurisve-actions
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
 
     - name: ⚙️ CodeQL
-      uses: ./codeql
+      uses: ministryofjustice/devsecops-actions/sca/codeql@fix/recurisve-actions
       with:
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ./ossf
+      uses: ministryofjustice/devsecops-actions/sca/ossf@fix/recurisve-actions
       with:
         token: ${{ inputs.token }}
 
     - name: 📋 SBOM
-      uses: ./sbom
+      uses: ministryofjustice/devsecops-actions/sca/sbom@fix/recurisve-actions
       with:
         token: ${{ inputs.token }}
         node_version: ${{ inputs.node_version }}
