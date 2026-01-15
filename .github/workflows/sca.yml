@@ -32,7 +32,7 @@ env:
 jobs:
   setup:
     name: Infrastructure 🔧
-    runs-on: ["ubuntu-24.04"]
+    runs-on: ["ubuntu-latest"]
     outputs:
       environment: ${{ env.environment }}
       timezone: ${{ env.timezone }}
@@ -52,7 +52,7 @@ jobs:
       actions: read
 
     name: Execute ⚙️
-    runs-on: ["ubuntu-24.04"]
+    runs-on: ["ubuntu-latest"]
     needs: setup
     environment:
       name: ${{ needs.setup.outputs.environment }}
@@ -71,7 +71,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: ⚡️ SCA
-        uses: ministryofjustice/devsecops-actions/sca@6579119e5278e26654aac244c1dd0693bb2dfef8 # v1.2.0
+        uses: ministryofjustice/devsecops-actions/sca@44bc513c68a10482f09704478bf76a27b566d66e # v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
