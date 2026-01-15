@@ -54,41 +54,41 @@ runs:
       uses: ./sca/repository
 
     - name: 📊 Dependencies
-      uses: ministryofjustice/devsecops-actions/sca/dependenciesfix/recurisve-actions
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@fix/recurisve-actions
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ministryofjustice/devsecops-actions/sca/owaspfix/recurisve-actions
+      uses: ministryofjustice/devsecops-actions/sca/owasp@fix/recurisve-actions
 
     - name: 🔁 Renovate
       if: ${{ inputs.renovate == 'true' }}
-      uses: ministryofjustice/devsecops-actions/sca/renovatefix/recurisve-actions
+      uses: ministryofjustice/devsecops-actions/sca/renovate@fix/recurisve-actions
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ministryofjustice/devsecops-actions/sca/mojfix/recurisve-actions
+      uses: ministryofjustice/devsecops-actions/sca/moj@fix/recurisve-actions
 
     - name: 🐷 Trufflehog
-      uses: ministryofjustice/devsecops-actions/sca/trufflehogfix/recurisve-actions
+      uses: ministryofjustice/devsecops-actions/sca/trufflehog@fix/recurisve-actions
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
 
     - name: ⚙️ CodeQL
-      uses: ministryofjustice/devsecops-actions/sca/codeqlfix/recurisve-actions
+      uses: ministryofjustice/devsecops-actions/sca/codeql@fix/recurisve-actions
       with:
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ministryofjustice/devsecops-actions/sca/ossffix/recurisve-actions
+      uses: ministryofjustice/devsecops-actions/sca/ossf@fix/recurisve-actions
       with:
         token: ${{ inputs.token }}
 
     - name: 📋 SBOM
-      uses: ministryofjustice/devsecops-actions/sca/sbomfix/recurisve-actions
+      uses: ministryofjustice/devsecops-actions/sca/sbom@fix/recurisve-actions
       with:
         token: ${{ inputs.token }}
         node_version: ${{ inputs.node_version }}
