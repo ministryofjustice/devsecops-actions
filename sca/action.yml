@@ -3,12 +3,6 @@ description: Software composition analysis GitHub action for dependency manageme
 author: Ministry of Justice UK
 
 inputs:
-  version:
-    required: false
-    description: "MoJ SCA action version number or GitHub commit SHA"
-    # default: "c210b12f1bd77564cee5c5f5c7306cd63dc89867" # v1.2.0
-    default: "fix/recurisve-actions" # v1.2.0
-
   renovate:
     required: false
     description: "Flag to evaluation Renovate execution"
@@ -57,44 +51,44 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ministryofjustice/devsecops-actions/sca/repository@${{ inputs.version }}
+      uses: ./sca/repository
 
     - name: 📊 Dependencies
-      uses: ministryofjustice/devsecops-actions/sca/dependencies@${{ inputs.version }}
+      uses: ministryofjustice/devsecops-actions/sca/dependenciesfix/recurisve-actions
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ministryofjustice/devsecops-actions/sca/owasp@${{ inputs.version }}
+      uses: ministryofjustice/devsecops-actions/sca/owaspfix/recurisve-actions
 
     - name: 🔁 Renovate
       if: ${{ inputs.renovate == 'true' }}
-      uses: ministryofjustice/devsecops-actions/sca/renovate@${{ inputs.version }}
+      uses: ministryofjustice/devsecops-actions/sca/renovatefix/recurisve-actions
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ministryofjustice/devsecops-actions/sca/moj@${{ inputs.version }}
+      uses: ministryofjustice/devsecops-actions/sca/mojfix/recurisve-actions
 
     - name: 🐷 Trufflehog
-      uses: ministryofjustice/devsecops-actions/sca/trufflehog@${{ inputs.version }}
+      uses: ministryofjustice/devsecops-actions/sca/trufflehogfix/recurisve-actions
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
 
     - name: ⚙️ CodeQL
-      uses: ministryofjustice/devsecops-actions/sca/codeql@${{ inputs.version }}
+      uses: ministryofjustice/devsecops-actions/sca/codeqlfix/recurisve-actions
       with:
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ministryofjustice/devsecops-actions/sca/ossf@${{ inputs.version }}
+      uses: ministryofjustice/devsecops-actions/sca/ossffix/recurisve-actions
       with:
         token: ${{ inputs.token }}
 
     - name: 📋 SBOM
-      uses: ministryofjustice/devsecops-actions/sca/sbom@${{ inputs.version }}
+      uses: ministryofjustice/devsecops-actions/sca/sbomfix/recurisve-actions
       with:
         token: ${{ inputs.token }}
         node_version: ${{ inputs.node_version }}
