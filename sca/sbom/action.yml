@@ -1,0 +1,52 @@
+name: ⛓️‍💥 SBOM
+description: Software bill of material generation
+author: Ministry of Justice UK
+
+# This action generates Software Bill of Materials (SBOM) in CycloneDX format for the repository
+# and optionally for Docker images. SBOMs provide a comprehensive inventory of all components,
+# dependencies, and libraries used in the project, facilitating security analysis and compliance.
+
+inputs:
+  token:
+    required: true
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+
+  node_version:
+    required: false
+    description: "Node.js version to use for SBOM generation and related tooling. Specify the exact version number."
+    default: "24.11.1"
+
+  docker-images-file:
+    required: false
+    description: "Path to a JSON file containing an 'images' property with an array of Docker image URIs to scan. Example: 'ghcr.io/ministryofjustice/devsecops-hooks:latest'."
+    default: ""
+
+runs:
+  using: composite
+
+  steps:
+    - name: Node
+      uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
+      with:
+        node-version: ${{ inputs.node_version }}
+
+    - name: Install
+      shell: bash
+      run: |
+        npm ci --ignore-scripts
+        npm run install:syft
+
+    - name: Repository
+      shell: bash
+      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }} --output cyclonedx-json=sca-sbom-repository.cdx.json"
+
+    - name: Images
+      if: ${{ inputs.docker-images-file != '' }}
+      shell: bash
+      run: npm run scan -- --images "${{ inputs.docker-images-file }}"
+
+    - name: Upload
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+      with:
+        name: SBOM
+        path: sca-sbom-*.cdx.json

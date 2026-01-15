@@ -1,0 +1,47 @@
+name: 🐷 Trufflehog
+description: Trufflehog scan
+author: Ministry of Justice UK
+
+# This action uses TruffleHog to scan the filesystem for exposed secrets, credentials, and
+# sensitive data. It detects high-entropy strings and known secret patterns across the entire
+# repository, helping prevent accidental credential exposure.
+
+inputs:
+  trufflehog-config-file:
+    required: false
+    description: "Path to the TruffleHog configuration file for secret scanning customisation. Leave empty to use default settings."
+    default: ""
+
+  token:
+    required: true
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Scan
+      shell: bash
+      run: |
+        CONFIG=""
+
+        if [ -n "${{ inputs.trufflehog-config-file }}" ]; then
+          CONFIG="--config ${{ inputs.trufflehog-config-file }}"
+        fi
+
+        docker run --rm \
+        -v "$(pwd)":/src trufflesecurity/trufflehog:3.92.4@sha256:c28ab4a11e01d6fcc10776f65cce015bdf9795f2393cffa2ec0a7c8464ee58b6 \
+        filesystem ./ \
+        $CONFIG \
+        --concurrency=14 \
+        --no-verification \
+        --no-update \
+        --fail-on-scan-errors \
+        --json > sca-trufflehog.json
+
+    - name: Upload
+      if: always()
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+      with:
+        name: TruffleHog
+        path: sca-trufflehog.json
+        retention-days: 30

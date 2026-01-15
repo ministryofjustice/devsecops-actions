@@ -1,0 +1,29 @@
+name: 🔁 Renovate
+description: Renovate scan
+author: Ministry of Justice UK
+
+# This action runs Renovate to automatically detect outdated dependencies and create pull
+# requests for updates. It helps maintain up-to-date dependencies by scanning package managers,
+# Docker images, and other dependency sources to identify available updates and security patches.
+
+inputs:
+  renovate-version:
+    required: false
+    description: "Renovate CLI version to use for dependency scanning. Specify the version number without the 'v' prefix."
+    default: "42.64.1"
+
+  token:
+    required: true
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Scan
+      uses: renovatebot/github-action@8b7941943a108b2cc2150730963164aa8baeab8c # v44.2.2
+      with:
+        token: ${{ inputs.token }}
+        renovate-version: ${{ inputs.renovate-version }}
+      env:
+        RENOVATE_AUTODISCOVER: "false"
+        RENOVATE_REPOSITORIES: ${{ github.repository }}
