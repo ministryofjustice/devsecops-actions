@@ -162,7 +162,7 @@ permissions: {}
 jobs:
   sca:
     name: Software Composition Analysis
-    runs-on: ubuntu-latest
+    runs-on: ["ubuntu-slim"]
 
     permissions:
       contents: write
@@ -195,7 +195,7 @@ permissions: {}
 jobs:
   sca:
     name: Software Composition Analysis
-    runs-on: ubuntu-latest
+    runs-on: ["ubuntu-slim"]
 
     permissions:
       contents: write

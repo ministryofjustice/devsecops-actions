@@ -74,7 +74,7 @@ env:
 jobs:
   setup:
     name: Infrastructure 🔧
-    runs-on: ubuntu-latest
+    runs-on: ["ubuntu-slim"]
     outputs:
       environment: ${{ env.environment }}
       timezone: ${{ env.timezone }}
@@ -94,7 +94,7 @@ jobs:
       actions: read
 
     name: Execute ⚙️
-    runs-on: ["ubuntu-latest"]
+    runs-on: ["ubuntu-slim"]
     needs: setup
     environment:
       name: ${{ needs.setup.outputs.environment }}
