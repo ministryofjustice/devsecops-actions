@@ -69,7 +69,7 @@ runs:
           CONFIG="--config ${{ inputs.trufflehog-config-file }}"
         fi
 
-        trufflehog filesystem ./ \
+        trufflehog filesystem ${{ github.workspace }} \
         $CONFIG \
         --concurrency=14 \
         --no-verification \

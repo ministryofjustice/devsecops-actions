@@ -76,7 +76,7 @@ export PATH="$HOME/.local/bin:$PATH"
 command -v trufflehog >/dev/null 2>&1 || { echo "❌ Missing trufflehog executable."; exit 1; }
 
 # Cleanup
-rm -f "$FILE"9
+rm -f "$FILE"
 
 echo "✅ $(trufflehog --version) has been installed."
 exit 0;
