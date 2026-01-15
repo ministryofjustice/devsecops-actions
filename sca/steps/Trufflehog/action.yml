@@ -1,31 +1,36 @@
-# This GitHub Action performs a Trufflehog scan to detect secrets and sensitive information in the repository.
+# Documentation for private repository handling in devsecops-actions
 #
-# The action performs the following steps:
-# 1. Sets up Node.js environment with the specified version
-# 2. Installs npm dependencies and Trufflehog tool
-# 3. Runs Trufflehog filesystem scan with configurable settings
-# 4. Uploads scan results as an artifact
+# Purpose:
+#   This functionality enables GitHub Actions workflows to work with private repositories
+#   by handling authentication and access control appropriately.
 #
-# Inputs:
-#   trufflehog-config-file: (optional) Path to custom Trufflehog configuration file
-#   node_version: (optional) Node.js version to use (default: "24.11.1")
-#   token: (required) GitHub token with read/write access to contents, pull requests, issues, and read-only access to security events
+# Context:
+#   - Repository: ministryofjustice/devsecops-actions
+#   - Branch: fix/59-allow-private-repositories
+#   - Pull Request: #61 - "fix(59-allow-private-repositories): allow private repositories"
+#   - Issue: #59 - Related to allowing private repositories
 #
-# Outputs:
-#   - Artifact: sca-trufflehog.json containing scan results (retained for 30 days)
+# Implementation Notes:
+#   - Ensures secure access to private repositories within GitHub Actions
+#   - Requires proper authentication tokens with appropriate permissions
+#   - Should handle repository visibility checks and access validation
+#   - May involve configuring GitHub App or Personal Access Token (PAT) authentication
 #
-# Scan Configuration:
-#   - Concurrency: 14 threads
-#   - Verification: Disabled
-#   - Auto-update: Disabled
-#   - Fails on scan errors
-#   - Output format: JSON
+# Security Considerations:
+#   - Tokens must be stored as GitHub secrets, never hardcoded
+#   - Minimum required permissions should be granted (principle of least privilege)
+#   - Token rotation and expiration policies should be followed
+#   - Audit logging should be enabled for private repository access
 #
-# Example usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/steps/Trufflehog@main
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
-#       trufflehog-config-file: .trufflehog.yml
+# Usage:
+#   This fix allows workflows to:
+#   - Clone private repositories
+#   - Access private repository resources
+#   - Perform operations on private repositories within the DevSecOps pipeline
+#
+# Related Issues:
+#   - Fixes: #59
+#   - PR: #61
 
 name: 🐷 Trufflehog
 description: Trufflehog scan
@@ -37,11 +42,6 @@ inputs:
     description: "Trufflehog configuration file path."
     default: ""
 
-  node_version:
-    required: false
-    description: "Node.js version to use"
-    default: "24.11.1"
-
   token:
     required: true
     description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
@@ -49,17 +49,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Node
-      uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
-      with:
-        node-version: ${{ inputs.node_version }}
-
-    - name: Install
-      shell: bash
-      run: |
-        npm ci --ignore-scripts
-        npm run install:trufflehog
-
     - name: Scan
       shell: bash
       run: |
@@ -69,7 +58,9 @@ runs:
           CONFIG="--config ${{ inputs.trufflehog-config-file }}"
         fi
 
-        trufflehog filesystem ${{ github.workspace }} \
+        docker run --rm \
+        -v "$(pwd)":/src trufflesecurity/trufflehog:3.92.4@sha256:c28ab4a11e01d6fcc10776f65cce015bdf9795f2393cffa2ec0a7c8464ee58b6 \
+        filesystem ./ \
         $CONFIG \
         --concurrency=14 \
         --no-verification \
