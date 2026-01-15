@@ -1,10 +1,124 @@
+# ==============================================================================
+# OpenSSF Scorecard - Security Posture Assessment Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Performs comprehensive security posture assessment using the OpenSSF (Open
+# Source Security Foundation) Scorecard tool. Evaluates repository security
+# practices against industry best practices and generates a security score
+# based on multiple criteria including vulnerability management, code review
+# practices, and security policies.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - 18+ automated security checks
+# - Scored assessment (0-10 scale) for each check
+# - Overall repository security score
+# - Detailed findings with remediation guidance
+# - Integration with GitHub Advanced Security
+# - JSON output for programmatic access
+# - GitHub Step Summary visualization
+#
+# ==============================================================================
+# SECURITY CHECKS PERFORMED
+# ==============================================================================
+# Code Quality & Review:
+# - Code-Review: Ensures code review before merge
+# - Maintained: Checks if project is actively maintained
+# - CII-Best-Practices: OpenSSF best practices badge
+#
+# Vulnerability Management:
+# - Vulnerabilities: Checks for open vulnerabilities
+# - Dependency-Update-Tool: Automated dependency updates
+# - Security-Policy: SECURITY.md file presence
+#
+# Build & Release:
+# - Signed-Releases: Cryptographically signed releases
+# - CI-Tests: Automated testing in CI/CD
+# - Fuzzing: Fuzz testing implementation
+#
+# Access Control:
+# - Token-Permissions: Least-privilege token usage
+# - Dangerous-Workflow: Dangerous workflow patterns
+# - Branch-Protection: Branch protection rules
+#
+# Supply Chain:
+# - Pinned-Dependencies: Pinned dependency versions
+# - Binary-Artifacts: Absence of binary artifacts
+# - SBOM: Software Bill of Materials
+#
+# And more...
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage:
+#   - uses: ministryofjustice/devsecops-actions/sca/ossf@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#
+# Note: This action is typically called as part of the main SCA workflow.
+#
+# ==============================================================================
+# SCORING
+# ==============================================================================
+# Score Range:
+# - 0-3: Critical improvements needed
+# - 4-6: Moderate security posture
+# - 7-8: Good security practices
+# - 9-10: Excellent security posture
+#
+# ==============================================================================
+# OUTPUTS
+# ==============================================================================
+# Generated outputs:
+# - sca-scorecard.json: Complete scorecard results
+# - GitHub Step Summary: Formatted score table
+# - Overall score and individual check scores displayed
+#
+# ==============================================================================
+# REMEDIATION
+# ==============================================================================
+# Each failed or low-scoring check includes:
+# - Detailed explanation of the security risk
+# - Step-by-step remediation guidance
+# - Links to relevant documentation
+# - Best practice recommendations
+#
+# ==============================================================================
+# COMPLIANCE & STANDARDS
+# ==============================================================================
+# Aligned with:
+# - OpenSSF Best Practices
+# - SLSA Framework (Supply Chain Levels for Software Artifacts)
+# - CIS Software Supply Chain Security Guide
+# - NIST Secure Software Development Framework (SSDF)
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: OpenSSF Scorecard
+# Version: v5.4.0
+# Repository: https://github.com/ossf/scorecard
+# Documentation: https://securityscorecards.dev/
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Last Updated: 2026-01-15
+#
+# ==============================================================================
+
 name: 🛡 OSSF
 description: OSSF scan
 author: Ministry of Justice UK
-
-# This action runs the OpenSSF Scorecard tool to assess the security posture of the repository
-# against industry best practises. It evaluates various security criteria including vulnerability
-# management, code review practises, and security policies to provide a comprehensive security score.
 
 inputs:
   token:

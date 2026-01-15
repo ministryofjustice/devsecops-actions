@@ -1,10 +1,52 @@
+# ==============================================================================
+# Secret Scanning - MOJ Custom Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Performs comprehensive secret scanning using the Ministry of Justice
+# DevSecOps hooks tool. Detects exposed secrets, credentials, API tokens,
+# private keys, and other sensitive information in source code, configuration
+# files, and commit history to prevent data breaches and security incidents.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Scans all files in the repository for exposed secrets
+# - Detects multiple secret types: API keys, tokens, passwords, certificates
+# - Pattern-based detection using custom MOJ security rules
+# - Docker-based execution for consistent scanning environment
+# - Zero-configuration setup with sensible defaults
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage:
+#   - uses: ministryofjustice/devsecops-actions/sca/moj@main
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: MOJ DevSecOps Hooks
+# Version: v1.3.0
+# Repository: https://github.com/ministryofjustice/devsecops-hooks
+# Container: ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Last Updated: 2026-01-15
+#
+# ==============================================================================
+
 name: 🔑 Secrets
 description: Secrets, credentials, tokens scan
 author: Ministry of Justice UK
-
-# This action scans the repository for exposed secrets, credentials, API tokens, and other
-# sensitive information using the Ministry of Justice DevSecOps hooks tool. It helps prevent
-# accidental exposure of confidential data in source code, configuration files, and commit history.
 
 inputs:
   token:

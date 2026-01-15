@@ -1,3 +1,104 @@
+# ==============================================================================
+# Syft Configuration File - SBOM Generation
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Enterprise-grade configuration for Syft SBOM generation optimized for
+# CI/CD pipelines and GitHub Actions. Balances comprehensive package detection
+# with performance, suitable for polyglot repositories and containerized
+# applications.
+#
+# ==============================================================================
+# DESIGN PHILOSOPHY
+# ==============================================================================
+# - Performance: Optimized for CI/CD speed without sacrificing accuracy
+# - Compliance: Meets NTIA minimum SBOM requirements
+# - Accuracy: Reduces false positives and noise
+# - Maintainability: Clear, well-documented configuration
+# - Security: Excludes sensitive paths, validates packages
+#
+# ==============================================================================
+# KEY FEATURES
+# ==============================================================================
+# - CycloneDX JSON output format (industry standard)
+# - Multi-language package detection
+# - License identification with 75% coverage threshold
+# - SHA-512 file digests for integrity
+# - Automatic CPU scaling for parallelism
+# - 7-day cache for performance
+# - Comprehensive exclusion patterns
+#
+# ==============================================================================
+# SUPPORTED ECOSYSTEMS
+# ==============================================================================
+# Package Managers:
+# - JavaScript: npm, yarn, pnpm
+# - Python: pip, poetry, pipenv
+# - Java: Maven, Gradle
+# - .NET: NuGet
+# - Go: go modules
+# - Ruby: bundler
+# - Rust: cargo
+# - PHP: composer
+# - Container: Docker, OCI
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# This file is automatically used by the SBOM action. For manual usage:
+#   syft scan ./ --config config.yml -o cyclonedx-json
+#
+# ==============================================================================
+# CUSTOMIZATION
+# ==============================================================================
+# To customize for your organization:
+# 1. Adjust 'exclude' patterns for your directory structure
+# 2. Modify language-specific settings based on your tech stack
+# 3. Enable 'enrich' for additional metadata (slower, more detailed)
+# 4. Adjust 'parallelism' for your CI/CD infrastructure
+#
+# ==============================================================================
+# PERFORMANCE TUNING
+# ==============================================================================
+# Fast CI/CD (current):
+# - search-unindexed-archives: false
+# - include-dev-dependencies: false
+# - parallelism: 0 (auto-scale)
+#
+# Comprehensive (slower):
+# - search-unindexed-archives: true
+# - include-dev-dependencies: true
+# - enrich: [all]
+#
+# ==============================================================================
+# COMPLIANCE
+# ==============================================================================
+# This configuration generates SBOMs compliant with:
+# - NTIA Minimum Elements for a Software Bill of Materials
+# - CycloneDX 1.5 specification
+# - Executive Order 14028 requirements
+# - ISO/IEC 5962 SBOM standard
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Configuration Version: 1.0.0
+# Syft Compatibility: v1.0.0+
+# Last Updated: 2026-01-15
+#
+# ==============================================================================
+# DOCUMENTATION
+# ==============================================================================
+# Full Syft documentation: https://github.com/anchore/syft
+# Configuration options: https://github.com/anchore/syft#configuration
+#
+# ==============================================================================
+
 # =====================================================
 # Syft Configuration – Polyglot / CI / GitHub Actions
 # =====================================================

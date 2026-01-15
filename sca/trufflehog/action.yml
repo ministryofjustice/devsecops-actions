@@ -1,10 +1,112 @@
+# ==============================================================================
+# TruffleHog - Secret Scanning Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Performs comprehensive secret scanning using TruffleHog to detect exposed
+# credentials, API keys, tokens, certificates, and sensitive data across the
+# entire repository filesystem. Uses entropy analysis and pattern matching
+# to identify high-confidence secrets with minimal false positives.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - 700+ built-in secret detectors for popular services
+# - Entropy-based detection for custom secrets
+# - Pattern matching with regular expressions
+# - High-confidence detection to reduce false positives
+# - Scans all files including binary and compressed formats
+# - Historical commit scanning capability
+# - JSON output for integration and reporting
+# - Configurable detection rules and exclusions
+#
+# ==============================================================================
+# DETECTED SECRET TYPES
+# ==============================================================================
+# Common services detected:
+# - Cloud providers: AWS, Azure, GCP
+# - Code repositories: GitHub, GitLab, Bitbucket
+# - CI/CD: CircleCI, Travis CI, Jenkins
+# - Databases: MongoDB, MySQL, PostgreSQL
+# - Communication: Slack, Discord, Telegram
+# - Payment: Stripe, PayPal, Square
+# - And 690+ more services
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage (default settings):
+#   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@main
+#
+# With custom configuration:
+#   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@main
+#     with:
+#       trufflehog-config-file: ".github/trufflehog-config.yml"
+#
+# ==============================================================================
+# CONFIGURATION
+# ==============================================================================
+# Custom configuration file format (YAML):
+#   detectors:
+#     - name: aws
+#     - name: github
+#   exclude_paths:
+#     - "test/**"
+#     - "docs/**"
+#   verify: true
+#
+# See: https://github.com/trufflesecurity/trufflehog#configuration
+#
+# ==============================================================================
+# SCAN PARAMETERS
+# ==============================================================================
+# This action uses the following optimized settings:
+# - concurrency: 14 parallel workers
+# - no-verification: Skips online secret validation (faster)
+# - no-update: Uses pinned detector version
+# - fail-on-scan-errors: Ensures scan completion
+#
+# ==============================================================================
+# OUTPUTS
+# ==============================================================================
+# Artifacts generated:
+# - sca-trufflehog.json: Complete scan results in JSON format
+# - Uploaded to workflow run with 30-day retention
+# - Available in "TruffleHog" artifact
+#
+# ==============================================================================
+# BEST PRACTICES
+# ==============================================================================
+# - Run on all branches and pull requests
+# - Use custom config to exclude test fixtures
+# - Enable verification for high-risk repositories
+# - Integrate with secret rotation workflows
+# - Configure alerting for detected secrets
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: TruffleHog
+# Version: 3.92.4
+# Container: trufflesecurity/trufflehog:3.92.4
+# Documentation: https://github.com/trufflesecurity/trufflehog
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Last Updated: 2026-01-15
+#
+# ==============================================================================
+
 name: 🐷 Trufflehog
 description: Trufflehog scan
 author: Ministry of Justice UK
-
-# This action uses TruffleHog to scan the filesystem for exposed secrets, credentials, and
-# sensitive data. It detects high-entropy strings and known secret patterns across the entire
-# repository, helping prevent accidental credential exposure.
 
 inputs:
   trufflehog-config-file:

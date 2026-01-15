@@ -13,13 +13,14 @@
     "Anchore",
     "cyclonedx",
     "Markan",
+    "NTIA",
     "ossf",
     "prek",
+    "pycache",
     "SARIF",
     "syft",
     "unindexed",
-    "venv",
-    "pycache"
+    "venv"
   ],
   "dictionaries": [
     "en-gb",

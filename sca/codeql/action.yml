@@ -1,10 +1,87 @@
+# ==============================================================================
+# CodeQL - Static Application Security Testing (SAST) Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Performs advanced static application security testing (SAST) using GitHub's
+# CodeQL analysis engine. Identifies security vulnerabilities, coding errors,
+# and potential bugs through semantic code analysis. Supports multiple
+# programming languages and provides actionable remediation guidance integrated
+# with GitHub Code Scanning.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Multi-language support: C/C++, C#, Go, Java, JavaScript/TypeScript, 
+#   Python, Ruby, Swift, Kotlin
+# - Semantic code analysis for deep vulnerability detection
+# - Pre-built security queries for common vulnerability patterns
+# - Custom query support for organization-specific security policies
+# - Automatic language detection and build system integration
+# - SARIF report generation for GitHub Code Scanning
+# - Integration with GitHub Advanced Security
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage (auto-detection):
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@main
+#
+# With custom configuration:
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@main
+#     with:
+#       codeql-config-file: ".github/codeql/codeql-config.yml"
+#       codeql-upload-findings: "always"
+#
+# Disable upload (for default CodeQL setup):
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@main
+#     with:
+#       codeql-upload-findings: "never"
+#
+# ==============================================================================
+# CONFIGURATION
+# ==============================================================================
+# Custom configuration file format (YAML):
+#   name: "Custom CodeQL Config"
+#   queries:
+#     - uses: security-extended
+#     - uses: security-and-quality
+#   paths-ignore:
+#     - "test/**"
+#     - "docs/**"
+#
+# See: https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning
+#
+# ==============================================================================
+# PREREQUISITES
+# ==============================================================================
+# - GitHub Advanced Security license (for private repositories)
+# - Repository must have Code Scanning enabled
+# - Supported programming language in the repository
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: GitHub CodeQL
+# Version: v4.31.9 (Action version)
+# Documentation: https://codeql.github.com/docs/
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Last Updated: 2026-01-15
+#
+# ==============================================================================
+
 name: ⚙️ CodeQL
 description: CodeQL scan
 author: Ministry of Justice UK
-
-# This action performs static code analysis using GitHub's CodeQL engine to identify security
-# vulnerabilities, coding errors, and potential bugs. It supports multiple programming languages
-# and uploads findings to GitHub Code Scanning for tracking and remediation.
 
 inputs:
   codeql-config-file:

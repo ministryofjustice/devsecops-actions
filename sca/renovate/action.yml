@@ -1,10 +1,68 @@
+# ==============================================================================
+# Renovate - Automated Dependency Management Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Automated dependency update management using Renovate Bot. Continuously
+# monitors project dependencies across multiple package managers and creates
+# pull requests for available updates, security patches, and version upgrades.
+# Helps maintain up-to-date dependencies and reduces technical debt.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Multi-language dependency detection (npm, pip, Maven, Go, Docker, etc.)
+# - Automated pull request creation for dependency updates
+# - Security vulnerability patch detection
+# - Configurable versioning strategies (semver, pin, range)
+# - Grouping of related updates to reduce PR noise
+# - Smart scheduling to avoid disrupting development workflows
+# - Supports monorepos and multi-project repositories
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage:
+#   - uses: ministryofjustice/devsecops-actions/sca/renovate@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#
+# Custom version:
+#   - uses: ministryofjustice/devsecops-actions/sca/renovate@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       renovate-version: "42.64.1"
+#
+# ==============================================================================
+# CONFIGURATION
+# ==============================================================================
+# Renovate behavior can be customized using renovate.json or .renovaterc files
+# in the repository root. See: https://docs.renovatebot.com/configuration-options/
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: Renovate Bot
+# GitHub Action: renovatebot/github-action@v44.2.2
+# Documentation: https://docs.renovatebot.com/
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Default Renovate Version: 42.64.1
+# Last Updated: 2026-01-15
+#
+# ==============================================================================
+
 name: 🔁 Renovate
 description: Renovate scan
 author: Ministry of Justice UK
-
-# This action runs Renovate to automatically detect outdated dependencies and create pull
-# requests for updates. It helps maintain up-to-date dependencies by scanning package managers,
-# Docker images, and other dependency sources to identify available updates and security patches.
 
 inputs:
   renovate-version:

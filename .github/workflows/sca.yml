@@ -1,53 +1,11 @@
-# Software Composition Analysis (SCA) Workflow
-#
-# This workflow performs automated security scanning and dependency analysis
-# for the repository on a scheduled basis, pull requests, and pushes to main.
-#
-# Triggers:
-#   - schedule: Runs daily at midnight (00:00 UTC)
-#   - pull_request: Runs on PRs targeting the main branch
-#   - push: Runs on pushes to the main branch
-#   - workflow_dispatch: Allows manual triggering
-#   - branch_protection_rule: Runs on branch protection rule changes
-#
-# Environment Variables:
-#   - environment: Deployment environment (default: base)
-#   - timezone: Timezone configuration from repository variables
-#
+# Workflow: SCA ⚡️
+# Description:
+#   Scheduled and on-demand Security Composition Analysis run.
+#   - Triggers: daily cron, pull/ push to main, workflow dispatch, branch protection rule.
+#   - Environment and timezone shared across jobs.
 # Jobs:
-#   setup:
-#     Description: Configures infrastructure and environment settings
-#     Outputs:
-#       - environment: The deployment environment name
-#       - timezone: The configured timezone
-#
-#   sca:
-#     Description: Executes Software Composition Analysis
-#     Permissions:
-#       - contents: write - For repository content access
-#       - pull-requests: write - For PR comments and updates
-#       - issues: write - For creating/updating security issues
-#       - security-events: write - For uploading security scan results
-#       - id-token: write - For OIDC authentication
-#       - actions: read - For reading workflow artifacts
-#
-#     Steps:
-#       1. Checks out the repository code
-#       2. Sets up Node.js environment using configured version
-#       3. Installs npm dependencies without running scripts
-#       4. Runs SCA action with:
-#          - GitHub token for authentication
-#          - Custom dependency review configuration
-#          - Docker images source file for container scanning
-#
-# Dependencies:
-#   - actions/checkout@v6.0.1: Repository checkout
-#   - actions/setup-node@v6.1.0: Node.js environment setup
-#   - ministryofjustice/devsecops-actions/sca: SCA execution
-#
-# Configuration Files:
-#   - .github/dependency-review-config.yml: Dependency review settings
-#   - sources.json: Docker images to scan (workspace root)
+#   - setup: Prepares environment metadata.
+#   - sca: Checks out repo, installs node, runs npm ci, executes ministryofjustice/sca action with dependency review configuration.
 
 name: SCA ⚡️
 run-name: Software Composition Analysis ⚡️
@@ -113,8 +71,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: ⚡️ SCA
-        # uses: ministryofjustice/devsecops-actions/sca@c210b12f1bd77564cee5c5f5c7306cd63dc89867 # v1.2.0
-        uses: ministryofjustice/devsecops-actions/sca@fix/recurisve-actions
+        uses: ministryofjustice/devsecops-actions/sca@c210b12f1bd77564cee5c5f5c7306cd63dc89867 # v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional

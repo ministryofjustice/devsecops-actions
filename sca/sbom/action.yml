@@ -1,10 +1,101 @@
+# ==============================================================================
+# Software Bill of Materials (SBOM) Generation Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Generates comprehensive Software Bill of Materials (SBOM) in CycloneDX format
+# using Syft. Creates detailed inventory of all software components, dependencies,
+# and container images used in the project. Essential for supply chain security,
+# compliance reporting, vulnerability tracking, and license management.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Multi-language package detection (npm, pip, Maven, Go, NuGet, etc.)
+# - Container image SBOM generation (Docker, OCI)
+# - CycloneDX 1.5 JSON format output
+# - License identification and classification
+# - File digests (SHA-512) for integrity verification
+# - Package relationship mapping
+# - Dependency graph visualization support
+# - Compliance-ready output format
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage (repository scan only):
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#
+# With Docker image scanning:
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       docker-images-file: "docker-images.json"
+#
+# Custom Node.js version:
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       node_version: "24.11.1"
+#
+# ==============================================================================
+# DOCKER IMAGES FILE FORMAT
+# ==============================================================================
+# JSON file structure for docker-images-file input:
+# {
+#   "images": [
+#     "ghcr.io/org/image:latest",
+#     "docker.io/library/nginx:1.25",
+#     "registry.azurecr.io/app:v1.0.0"
+#   ]
+# }
+#
+# ==============================================================================
+# OUTPUTS
+# ==============================================================================
+# Artifacts generated:
+# - sca-sbom-repository.cdx.json: Repository SBOM
+# - sca-sbom-image-*.cdx.json: Individual Docker image SBOMs (if applicable)
+# - All artifacts uploaded to workflow run as "SBOM" artifact
+#
+# ==============================================================================
+# COMPLIANCE & STANDARDS
+# ==============================================================================
+# - CycloneDX 1.5 specification compliant
+# - NTIA Minimum Elements for SBOM compliance
+# - SPDX compatible (via conversion tools)
+# - Suitable for:
+#   - Executive Order 14028 (US Federal)
+#   - EU Cyber Resilience Act
+#   - ISO/IEC 5962 (SBOM standard)
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: Syft (Anchore)
+# Configuration: config.yml (in same directory)
+# Documentation: https://github.com/anchore/syft
+# Format: CycloneDX 1.5 JSON
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Default Node.js: 24.11.1
+# Last Updated: 2026-01-15
+#
+# ==============================================================================
+
 name: ⛓️‍💥 SBOM
 description: Software bill of material generation
 author: Ministry of Justice UK
-
-# This action generates Software Bill of Materials (SBOM) in CycloneDX format for the repository
-# and optionally for Docker images. SBOMs provide a comprehensive inventory of all components,
-# dependencies, and libraries used in the project, facilitating security analysis and compliance.
 
 inputs:
   token:

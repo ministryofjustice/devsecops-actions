@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { getCommand } from "./get-command.ts";
 
 describe("getCommand", () => {
-  const sbom = resolve(__dirname, "..", "..", "sca", "steps", "SBOM");
+  const sbom = resolve(__dirname, "..", "..", "sca", "sbom");
 
   it("should return syft scan command for docker images on GHCR", () => {
     // Arrange
