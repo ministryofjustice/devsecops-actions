@@ -88,7 +88,7 @@ runs:
         token: ${{ inputs.token }}
 
     - name: 📋 SBOM
-      uses: ministryofjustice/devsecops-actions/sca/sbom@fix/recurisve-actions
+      uses: ./sca/sbom
       with:
         token: ${{ inputs.token }}
         node_version: ${{ inputs.node_version }}
