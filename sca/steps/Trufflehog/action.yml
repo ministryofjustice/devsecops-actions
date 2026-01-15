@@ -1,36 +1,33 @@
-# Documentation for private repository handling in devsecops-actions
+# GitHub Action for running Trufflehog secret scanning on a repository
 #
-# Purpose:
-#   This functionality enables GitHub Actions workflows to work with private repositories
-#   by handling authentication and access control appropriately.
+# This action performs the following steps:
+# 1. Runs Trufflehog scanner using Docker to detect secrets in the filesystem
+# 2. Uploads the scan results as an artifact
 #
-# Context:
-#   - Repository: ministryofjustice/devsecops-actions
-#   - Branch: fix/59-allow-private-repositories
-#   - Pull Request: #61 - "fix(59-allow-private-repositories): allow private repositories"
-#   - Issue: #59 - Related to allowing private repositories
+# Inputs:
+#   trufflehog-config-file: (optional) Path to a custom Trufflehog configuration file
+#   token: (required) GitHub token with appropriate permissions (read/write to contents,
+#          pull requests, issues; read-only to security events)
 #
-# Implementation Notes:
-#   - Ensures secure access to private repositories within GitHub Actions
-#   - Requires proper authentication tokens with appropriate permissions
-#   - Should handle repository visibility checks and access validation
-#   - May involve configuring GitHub App or Personal Access Token (PAT) authentication
+# The scan:
+# - Uses Trufflehog version 3.92.4 (pinned with SHA256 digest)
+# - Scans the entire filesystem of the repository
+# - Runs with 14 concurrent workers
+# - Disables verification and updates
+# - Fails on scan errors
+# - Outputs results in JSON format to sca-trufflehog.json
 #
-# Security Considerations:
-#   - Tokens must be stored as GitHub secrets, never hardcoded
-#   - Minimum required permissions should be granted (principle of least privilege)
-#   - Token rotation and expiration policies should be followed
-#   - Audit logging should be enabled for private repository access
+# Artifacts:
+# - Name: TruffleHog
+# - File: sca-trufflehog.json
+# - Retention: 30 days
+# - Upload occurs regardless of scan success/failure (if: always())
 #
 # Usage:
-#   This fix allows workflows to:
-#   - Clone private repositories
-#   - Access private repository resources
-#   - Perform operations on private repositories within the DevSecOps pipeline
-#
-# Related Issues:
-#   - Fixes: #59
-#   - PR: #61
+#   - uses: ministryofjustice/devsecops-actions/sca/steps/Trufflehog@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       trufflehog-config-file: .trufflehog.yml  # optional
 
 name: 🐷 Trufflehog
 description: Trufflehog scan
