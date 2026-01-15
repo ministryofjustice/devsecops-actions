@@ -51,7 +51,7 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ./repository
+      uses: ministryofjustice/devsecops-actions/sca/repository@fix/recurisve-actions
 
     - name: 📊 Dependencies
       uses: ./dependencies

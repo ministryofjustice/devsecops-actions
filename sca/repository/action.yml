@@ -2,10 +2,6 @@ name: 📦 Repository
 description: Git checkout
 author: Ministry of Justice UK
 
-# This action performs a Git checkout of the repository, retrieving the source code for
-# subsequent analysis steps. It serves as the foundational step for all SCA operations,
-# ensuring the latest code is available for scanning and review.
-
 inputs:
   token:
     required: true
