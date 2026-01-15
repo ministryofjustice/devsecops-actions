@@ -2,98 +2,99 @@ name: Ministry of Justice UK - SCA ⚡️
 description: Software composition analysis GitHub action for dependency management, secret scanning, and security vulnerability detection
 author: Ministry of Justice UK
 
-# This composite action orchestrates a comprehensive software composition analysis (SCA) workflow
-# that includes dependency review, security scanning, secret detection, and SBOM generation.
-# It provides a holistic approach to identifying and managing security vulnerabilities and
-# compliance risks within your codebase and dependencies.
-
 inputs:
+  version:
+    required: false
+    description: "MoJ SCA action version number or GitHub commit SHA"
+    # default: "c210b12f1bd77564cee5c5f5c7306cd63dc89867" # v1.2.0
+    default: "fix/recurisve-actions" # v1.2.0
+
   renovate:
     required: false
-    description: "Flag to enable or disable Renovate dependency update scanning. Set to 'false' to skip Renovate execution."
+    description: "Flag to evaluation Renovate execution"
     default: "true"
 
   node_version:
     required: false
-    description: "Node.js version to use for SBOM generation and related tooling. Specify the exact version number."
+    description: "Node.js version to use"
     default: "24.11.1"
 
   renovate-version:
     required: false
-    description: "Renovate CLI version to use for dependency scanning. Specify the version number without the 'v' prefix."
+    description: "Renovate CLI version, an optional argument which defaults to v42.64.1."
     default: "42.64.1"
 
   dependency-review-config-file:
     required: false
-    description: "Path to the configuration file for GitHub Actions dependency review. Leave empty to use default settings."
+    description: "GitHub Actions dependency review configuration file path."
     default: ""
 
   trufflehog-config-file:
     required: false
-    description: "Path to the TruffleHog configuration file for secret scanning customisation. Leave empty to use default settings."
+    description: "Trufflehog configuration file path."
     default: ""
 
   codeql-config-file:
     required: false
-    description: "Path to the CodeQL configuration file for customising code analysis queries and settings. Leave empty to use default settings."
+    description: "CodeQL configuration file path."
     default: ""
 
   codeql-upload-findings:
     required: false
-    description: "Controls whether CodeQL findings are uploaded as SARIF files to GitHub Code Scanning. Set to 'never' if default setup is enabled to avoid conflicts."
+    description: "Upload the findings from CodeQL as SARIF file to Code Scanning, set to never if default setup is enabled."
     default: "always"
 
   docker-images-file:
     required: false
-    description: "Path to a JSON file containing an 'images' property with an array of Docker image URIs to scan. Example: 'ghcr.io/ministryofjustice/devsecops-hooks:latest'."
+    description: "A JSON file an 'images' property as an array containing URIs to docker image, for example 'ghcr.io/ministryofjustice/devsecops-hooks:latest'"
     default: ""
 
   token:
     required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
 
 runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ./repository
+      uses: ministryofjustice/devsecops-actions/sca/repository@${{ inputs.version }}
 
     - name: 📊 Dependencies
-      uses: ./dependencies
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@${{ inputs.version }}
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ./owasp
+      uses: ministryofjustice/devsecops-actions/sca/owasp@${{ inputs.version }}
 
     - name: 🔁 Renovate
       if: ${{ inputs.renovate == 'true' }}
-      uses: ./renovate
+      uses: ministryofjustice/devsecops-actions/sca/renovate@${{ inputs.version }}
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ./moj
+      uses: ministryofjustice/devsecops-actions/sca/moj@${{ inputs.version }}
 
     - name: 🐷 Trufflehog
-      uses: ./trufflehog
+      uses: ministryofjustice/devsecops-actions/sca/trufflehog@${{ inputs.version }}
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
 
     - name: ⚙️ CodeQL
-      uses: ./codeql
+      uses: ministryofjustice/devsecops-actions/sca/codeql@${{ inputs.version }}
       with:
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ./ossf
+      uses: ministryofjustice/devsecops-actions/sca/ossf@${{ inputs.version }}
       with:
         token: ${{ inputs.token }}
 
     - name: 📋 SBOM
-      uses: ./sbom
+      uses: ministryofjustice/devsecops-actions/sca/sbom@${{ inputs.version }}
       with:
         token: ${{ inputs.token }}
         node_version: ${{ inputs.node_version }}
