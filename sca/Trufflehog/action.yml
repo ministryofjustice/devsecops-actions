@@ -24,7 +24,7 @@
 # - Upload occurs regardless of scan success/failure (if: always())
 #
 # Usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/steps/Trufflehog@main
+#   - uses: ministryofjustice/devsecops-actions/sca/Trufflehog@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       trufflehog-config-file: .trufflehog.yml  # optional

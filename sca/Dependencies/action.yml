@@ -21,7 +21,7 @@
 #
 # Usage:
 #   - name: Run Dependencies Scan
-#     uses: ministryofjustice/devsecops-actions/sca/steps/Dependencies@main
+#     uses: ministryofjustice/devsecops-actions/sca/Dependencies@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       dependency-review-config-file: '.github/dependency-review-config.yml'

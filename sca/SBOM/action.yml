@@ -4,7 +4,7 @@
 # in CycloneDX JSON format using Syft.
 #
 # Usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/steps/SBOM@main
+#   - uses: ministryofjustice/devsecops-actions/sca/SBOM@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       node_version: "24.11.1"  # optional

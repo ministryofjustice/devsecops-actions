@@ -11,7 +11,7 @@
 #
 # Usage:
 #   steps:
-#     - uses: ministryofjustice/devsecops-actions/sca/steps/OWASP@main
+#     - uses: ministryofjustice/devsecops-actions/sca/OWASP@main
 #       with:
 #         token: ${{ secrets.GITHUB_TOKEN }}
 #

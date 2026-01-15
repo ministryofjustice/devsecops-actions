@@ -114,7 +114,7 @@ jobs:
 
       - name: ⚡️ SCA
         # uses: ministryofjustice/devsecops-actions/sca@c210b12f1bd77564cee5c5f5c7306cd63dc89867 # v1.2.0
-        uses: ministryofjustice/devsecops-actions/sca@fix/recursive-actions
+        uses: ministryofjustice/devsecops-actions/sca@fix/recurisve-actions
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional

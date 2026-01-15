@@ -12,7 +12,7 @@
 #
 # Usage:
 #   - name: Run CodeQL Analysis
-#     uses: ministryofjustice/devsecops-actions/sca/steps/CodeQL@main
+#     uses: ministryofjustice/devsecops-actions/sca/CodeQL@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       codeql-config-file: .github/codeql-config.yml  # Optional

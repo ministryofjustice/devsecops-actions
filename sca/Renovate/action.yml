@@ -6,7 +6,7 @@
 #
 # Usage:
 #   - name: Run Renovate
-#     uses: ministryofjustice/devsecops-actions/sca/steps/Renovate@main
+#     uses: ministryofjustice/devsecops-actions/sca/Renovate@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate-version: "42.64.1"  # optional
@@ -31,7 +31,7 @@
 #     renovate:
 #       runs-on: ["ubuntu-24.04"]
 #       steps:
-#         - uses: ministryofjustice/devsecops-actions/sca/steps/Renovate@main
+#         - uses: ministryofjustice/devsecops-actions/sca/Renovate@main
 #           with:
 #             token: ${{ secrets.RENOVATE_TOKEN }}
 
