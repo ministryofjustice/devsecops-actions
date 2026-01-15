@@ -1,42 +1,31 @@
-# Trufflehog Composite Action
+# This GitHub Action performs a Trufflehog scan to detect secrets and sensitive information in the repository.
 #
-# This composite action runs Trufflehog filesystem scanning to detect secrets and sensitive information
-# in the repository codebase.
+# The action performs the following steps:
+# 1. Sets up Node.js environment with the specified version
+# 2. Installs npm dependencies and Trufflehog tool
+# 3. Runs Trufflehog filesystem scan with configurable settings
+# 4. Uploads scan results as an artifact
 #
 # Inputs:
-#   trufflehog-config-file:
-#     description: Optional path to a Trufflehog configuration file for custom scan settings
-#     required: false
-#     default: "" (empty string - uses default Trufflehog configuration)
+#   trufflehog-config-file: (optional) Path to custom Trufflehog configuration file
+#   node_version: (optional) Node.js version to use (default: "24.11.1")
+#   token: (required) GitHub token with read/write access to contents, pull requests, issues, and read-only access to security events
 #
-#   token:
-#     description: GitHub repository token with the following permissions:
-#                  - Read/Write: contents, pull requests, issues
-#                  - Read-only: security events
-#     required: true
+# Outputs:
+#   - Artifact: sca-trufflehog.json containing scan results (retained for 30 days)
 #
-# Steps:
-#   1. Scan: Executes Trufflehog filesystem scan with the following options:
-#      - Scans the entire current directory (./)
-#      - Uses custom config if provided via trufflehog-config-file input
-#      - Concurrency set to 14 threads
-#      - Verification disabled (--no-verification)
-#      - Auto-updates disabled (--no-update)
-#      - Fails on scan errors (--fail-on-scan-errors)
-#      - Outputs results to sca-trufflehog.json in JSON format
+# Scan Configuration:
+#   - Concurrency: 14 threads
+#   - Verification: Disabled
+#   - Auto-update: Disabled
+#   - Fails on scan errors
+#   - Output format: JSON
 #
-#   2. Upload: Uploads scan results as an artifact
-#      - Always runs regardless of scan step outcome (if: always())
-#      - Artifact name: "TruffleHog"
-#      - Retention period: 30 days
-#      - Uses pinned version of upload-artifact action (v6.0.0)
-#
-# Usage:
-#   - name: Run Trufflehog Scan
-#     uses: ministryofjustice/devsecops-actions/sca/steps/Trufflehog@<version>
+# Example usage:
+#   - uses: ministryofjustice/devsecops-actions/sca/steps/Trufflehog@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
-#       trufflehog-config-file: .trufflehog.yml  # optional
+#       trufflehog-config-file: .trufflehog.yml
 
 name: 🐷 Trufflehog
 description: Trufflehog scan
@@ -48,6 +37,11 @@ inputs:
     description: "Trufflehog configuration file path."
     default: ""
 
+  node_version:
+    required: false
+    description: "Node.js version to use"
+    default: "24.11.1"
+
   token:
     required: true
     description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
@@ -55,6 +49,17 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Node
+      uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
+      with:
+        node-version: ${{ inputs.node_version }}
+
+    - name: Install
+      shell: bash
+      run: |
+        npm ci --ignore-scripts
+        npm run install:trufflehog
+
     - name: Scan
       shell: bash
       run: |
