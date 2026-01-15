@@ -1,31 +1,15 @@
-# Composite action for scanning secrets, credentials, and tokens in the codebase
-# 
-# This action uses the devsecops-hooks Docker container to perform security scanning
-# for exposed secrets, credentials, and tokens within the repository.
-#
-# Inputs:
-#   token: (required) GitHub repository token with the following permissions:
-#     - read/write: contents, pull requests, issues
-#     - read-only: security events
-#
-# Usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/Secrets@main
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
-#
-# Notes:
-#   - Runs in a Docker container using ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0
-#   - Scans the current working directory mounted at /src
-#   - GIT_MODE is disabled (set to false) for scanning
-
 name: 🔑 Secrets
 description: Secrets, credentials, tokens scan
 author: Ministry of Justice UK
 
+# This action scans the repository for exposed secrets, credentials, API tokens, and other
+# sensitive information using the Ministry of Justice DevSecOps hooks tool. It helps prevent
+# accidental exposure of confidential data in source code, configuration files, and commit history.
+
 inputs:
   token:
     required: true
-    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite

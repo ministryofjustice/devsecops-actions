@@ -1,47 +1,20 @@
-# GitHub Action for running Trufflehog secret scanning on a repository
-#
-# This action performs the following steps:
-# 1. Runs Trufflehog scanner using Docker to detect secrets in the filesystem
-# 2. Uploads the scan results as an artifact
-#
-# Inputs:
-#   trufflehog-config-file: (optional) Path to a custom Trufflehog configuration file
-#   token: (required) GitHub token with appropriate permissions (read/write to contents,
-#          pull requests, issues; read-only to security events)
-#
-# The scan:
-# - Uses Trufflehog version 3.92.4 (pinned with SHA256 digest)
-# - Scans the entire filesystem of the repository
-# - Runs with 14 concurrent workers
-# - Disables verification and updates
-# - Fails on scan errors
-# - Outputs results in JSON format to sca-trufflehog.json
-#
-# Artifacts:
-# - Name: TruffleHog
-# - File: sca-trufflehog.json
-# - Retention: 30 days
-# - Upload occurs regardless of scan success/failure (if: always())
-#
-# Usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/Trufflehog@main
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
-#       trufflehog-config-file: .trufflehog.yml  # optional
-
 name: 🐷 Trufflehog
 description: Trufflehog scan
 author: Ministry of Justice UK
 
+# This action uses TruffleHog to scan the filesystem for exposed secrets, credentials, and
+# sensitive data. It detects high-entropy strings and known secret patterns across the entire
+# repository, helping prevent accidental credential exposure.
+
 inputs:
   trufflehog-config-file:
     required: false
-    description: "Trufflehog configuration file path."
+    description: "Path to the TruffleHog configuration file for secret scanning customisation. Leave empty to use default settings."
     default: ""
 
   token:
     required: true
-    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite

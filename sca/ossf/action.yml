@@ -1,45 +1,15 @@
-# OpenSSF Scorecard Security Scanner Action
-#
-# This composite action runs the OpenSSF Scorecard security health metrics check
-# on a repository to assess its security posture.
-#
-# Overview:
-#   - Downloads and installs the OpenSSF Scorecard CLI tool (v5.4.0)
-#   - Executes a local scan of the repository
-#   - Generates a detailed JSON report with security metrics
-#   - Displays results in the GitHub Actions step summary
-#
-# Inputs:
-#   token: (required)
-#     GitHub repository token with the following permissions:
-#     - contents: read/write
-#     - pull_request: read/write
-#     - issues: read/write
-#     - security_events: read-only
-#
-# Outputs:
-#   - Creates a sca-scorecard.json file with detailed scan results
-#   - Publishes a formatted summary to GitHub Actions step summary including:
-#     * Overall security score (0-10)
-#     * Individual check scores in a table format
-#
-# Usage Example:
-#   - uses: ministryofjustice/devsecops-actions/sca/OpenSSF@main
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
-#
-# Note:
-#   This action requires sudo/root privileges to install the scorecard binary
-#   to /usr/local/bin/. Ensure the workflow has appropriate permissions.
-
 name: 🛡 OSSF
 description: OSSF scan
 author: Ministry of Justice UK
 
+# This action runs the OpenSSF Scorecard tool to assess the security posture of the repository
+# against industry best practises. It evaluates various security criteria including vulnerability
+# management, code review practises, and security policies to provide a comprehensive security score.
+
 inputs:
   token:
     required: true
-    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite

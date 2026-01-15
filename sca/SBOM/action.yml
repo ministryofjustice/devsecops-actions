@@ -1,64 +1,24 @@
-# GitHub Action for generating Software Bill of Materials (SBOM)
-#
-# This action scans a repository and optionally Docker images to generate SBOM reports
-# in CycloneDX JSON format using Syft.
-#
-# Usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/SBOM@main
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
-#       node_version: "24.11.1"  # optional
-#       docker-images-file: "images.json"  # optional
-#
-# Inputs:
-#   token:
-#     required: true
-#     description: GitHub repository token with read/write access to contents, pull requests,
-#                  issues and read-only access to security events
-#   node_version:
-#     required: false
-#     default: "24.11.1"
-#     description: Node.js version to use for running the action
-#   docker-images-file:
-#     required: false
-#     default: ""
-#     description: Path to JSON file containing an 'images' array with Docker image URIs
-#                  (e.g., 'ghcr.io/ministryofjustice/devsecops-hooks:latest')
-#
-# Outputs:
-#   Uploads SBOM artifacts in CycloneDX JSON format:
-#   - sca-sbom-repository.cdx.json: SBOM for the repository
-#   - sca-sbom-*.cdx.json: Additional SBOMs for Docker images (if provided)
-#
-# Prerequisites:
-#   - Repository must have a package.json with 'install:syft' and 'scan' scripts
-#   - Syft configuration file must exist at the action path (config.yml)
-#
-# Example docker-images-file format:
-#   {
-#     "images": [
-#       "ghcr.io/ministryofjustice/app:latest",
-#       "ghcr.io/ministryofjustice/service:v1.0.0"
-#     ]
-#   }
-
 name: ⛓️‍💥 SBOM
 description: Software bill of material generation
 author: Ministry of Justice UK
 
+# This action generates Software Bill of Materials (SBOM) in CycloneDX format for the repository
+# and optionally for Docker images. SBOMs provide a comprehensive inventory of all components,
+# dependencies, and libraries used in the project, facilitating security analysis and compliance.
+
 inputs:
   token:
     required: true
-    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
   node_version:
     required: false
-    description: "Node.js version to use"
+    description: "Node.js version to use for SBOM generation and related tooling. Specify the exact version number."
     default: "24.11.1"
 
   docker-images-file:
     required: false
-    description: "A JSON file an 'images' property as an array containing URIs to docker image, for example 'ghcr.io/ministryofjustice/devsecops-hooks:latest'"
+    description: "Path to a JSON file containing an 'images' property with an array of Docker image URIs to scan. Example: 'ghcr.io/ministryofjustice/devsecops-hooks:latest'."
     default: ""
 
 runs:

@@ -1,47 +1,15 @@
-# OWASP Dependency Check Action
-#
-# This composite action performs OWASP dependency vulnerability scanning on a project
-# and uploads the results to GitHub Security tab.
-#
-# Features:
-# - Scans all dependencies in the repository for known vulnerabilities
-# - Fails builds if vulnerabilities with CVSS score >= 7 are detected
-# - Generates SARIF format reports for GitHub Security integration
-# - Uploads scan results even if the scan fails (if: always())
-#
-# Usage:
-#   steps:
-#     - uses: ministryofjustice/devsecops-actions/sca/OWASP@main
-#       with:
-#         token: ${{ secrets.GITHUB_TOKEN }}
-#
-# Inputs:
-#   token: (required)
-#     GitHub repository token with the following permissions:
-#     - contents: read/write
-#     - pull-requests: read/write
-#     - issues: read/write
-#     - security-events: read
-#
-# Outputs:
-#   None. Results are uploaded to GitHub Security tab via SARIF format.
-#
-# Reports:
-#   Generates reports in ./reports/dependency-check-report.sarif
-#
-# Notes:
-#   - Uses pinned versions of actions for security (frozen commits)
-#   - CVSS threshold set to 7 (High severity)
-#   - Scans entire repository root (path: ".")
-
 name: 🔎 OWASP
 description: OWASP dependency scan
 author: Ministry of Justice UK
 
+# This action performs dependency vulnerability scanning using OWASP Dependency-Check to identify
+# known security vulnerabilities in project dependencies. It generates SARIF reports and uploads
+# findings to GitHub Code Scanning for centralised vulnerability tracking and management.
+
 inputs:
   token:
     required: true
-    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite
