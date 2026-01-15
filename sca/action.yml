@@ -69,7 +69,7 @@ runs:
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ministryofjustice/devsecops-actions/sca/secrets@fix/recurisve-actions
+      uses: ministryofjustice/devsecops-actions/sca/moj@fix/recurisve-actions
 
     - name: 🐷 Trufflehog
       uses: ministryofjustice/devsecops-actions/sca/trufflehog@fix/recurisve-actions
