@@ -9,7 +9,7 @@
 #     - read-only: security events
 #
 # Usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/steps/Secrets@main
+#   - uses: ministryofjustice/devsecops-actions/sca/Secrets@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #

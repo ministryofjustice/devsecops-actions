@@ -128,44 +128,44 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ./Repository
+      uses: ./repository
 
     - name: 📊 Dependencies
-      uses: ./Dependencies
+      uses: ./dependencies
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ./OWASP
+      uses: ./owasp
 
     - name: 🔁 Renovate
       if: ${{ inputs.renovate == 'true' }}
-      uses: ./Renovate
+      uses: ./renovate
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ./Secrets
+      uses: ./moj
 
     - name: 🐷 Trufflehog
-      uses: ./Trufflehog
+      uses: ./trufflehog
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
 
     - name: ⚙️ CodeQL
-      uses: ./CodeQL
+      uses: ./codeql
       with:
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ./OpenSSF
+      uses: ./ossf
       with:
         token: ${{ inputs.token }}
 
     - name: 📋 SBOM
-      uses: ./SBOM
+      uses: ./sbom
       with:
         token: ${{ inputs.token }}
         node_version: ${{ inputs.node_version }}

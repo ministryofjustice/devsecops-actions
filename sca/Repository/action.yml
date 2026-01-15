@@ -17,7 +17,7 @@
 #     - Used for authenticating Git operations and accessing repository resources
 #
 # Usage Example:
-#   - uses: ministryofjustice/devsecops-actions/sca/steps/Repository@main
+#   - uses: ministryofjustice/devsecops-actions/sca/Repository@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #

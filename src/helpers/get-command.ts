@@ -17,7 +17,7 @@ import { resolve } from "node:path";
 
 export const getCommand = (type: string, value: string): string => {
   const source = type.replace("--", "");
-  const sbom = resolve(process.cwd(), "sca", "steps", "SBOM");
+  const sbom = resolve(process.cwd(), "sca", "sbom");
   const image = value.split(":");
 
   switch (source) {

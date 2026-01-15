@@ -24,7 +24,7 @@
 #     * Individual check scores in a table format
 #
 # Usage Example:
-#   - uses: ministryofjustice/devsecops-actions/sca/steps/OpenSSF@main
+#   - uses: ministryofjustice/devsecops-actions/sca/OpenSSF@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
