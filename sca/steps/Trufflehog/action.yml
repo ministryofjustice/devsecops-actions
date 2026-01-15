@@ -1,47 +1,42 @@
-# Trufflehog Secret Scanning Action
+# Trufflehog Composite Action
 #
-# This composite action performs secret scanning using Trufflehog to detect
-# exposed credentials and sensitive information in git repositories.
+# This composite action runs Trufflehog filesystem scanning to detect secrets and sensitive information
+# in the repository codebase.
 #
 # Inputs:
 #   trufflehog-config-file:
-#     description: Optional path to a Trufflehog configuration file for customizing scan behavior
+#     description: Optional path to a Trufflehog configuration file for custom scan settings
 #     required: false
-#     default: ""
-#     type: string
+#     default: "" (empty string - uses default Trufflehog configuration)
 #
 #   token:
-#     description: GitHub Personal Access Token or repository token with the following permissions:
-#                  - contents: read/write
-#                  - pull_requests: read/write
-#                  - issues: read/write
-#                  - security_events: read
+#     description: GitHub repository token with the following permissions:
+#                  - Read/Write: contents, pull requests, issues
+#                  - Read-only: security events
 #     required: true
-#     type: string
 #
-# Workflow Steps:
-#   1. Scan: Executes Trufflehog Docker container to scan the repository
-#      - Uses pinned version 3.92.4 with SHA256 verification
-#      - Scans the current branch or default branch
-#      - Outputs results to sca-trufflehog.json
-#      - Runs with 14 concurrent workers
-#      - Fails on scan errors
+# Steps:
+#   1. Scan: Executes Trufflehog filesystem scan with the following options:
+#      - Scans the entire current directory (./)
+#      - Uses custom config if provided via trufflehog-config-file input
+#      - Concurrency set to 14 threads
+#      - Verification disabled (--no-verification)
+#      - Auto-updates disabled (--no-update)
+#      - Fails on scan errors (--fail-on-scan-errors)
+#      - Outputs results to sca-trufflehog.json in JSON format
 #
 #   2. Upload: Uploads scan results as an artifact
-#      - Always runs regardless of scan outcome
-#      - Retains artifact for 30 days
-#      - Named "🐷 TruffleHog"
+#      - Always runs regardless of scan step outcome (if: always())
+#      - Artifact name: "TruffleHog"
+#      - Retention period: 30 days
+#      - Uses pinned version of upload-artifact action (v6.0.0)
 #
-# Example Usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/steps/Trufflehog@main
+# Usage:
+#   - name: Run Trufflehog Scan
+#     uses: ministryofjustice/devsecops-actions/sca/steps/Trufflehog@<version>
 #     with:
-#       trufflehog-config-file: .trufflehog.yml
 #       token: ${{ secrets.GITHUB_TOKEN }}
-#
-# Security Notes:
-#   - Docker image is pinned to specific SHA256 digest for supply chain security
-#   - Verification is disabled (--no-verification flag)
-#   - Auto-updates are disabled (--no-update flag)
+#       trufflehog-config-file: .trufflehog.yml  # optional
 
 name: 🐷 Trufflehog
 description: Trufflehog scan
@@ -69,14 +64,11 @@ runs:
           CONFIG="--config ${{ inputs.trufflehog-config-file }}"
         fi
 
-        docker run --rm \
-        -v "$(pwd)":/src trufflesecurity/trufflehog:3.92.4@sha256:c28ab4a11e01d6fcc10776f65cce015bdf9795f2393cffa2ec0a7c8464ee58b6 \
-        git https://github.com/${{ github.repository }} \
+        trufflehog filesystem ./ \
         $CONFIG \
         --concurrency=14 \
         --no-verification \
         --no-update \
-        --branch ${{ github.head_ref || github.event.repository.default_branch }} \
         --fail-on-scan-errors \
         --json > sca-trufflehog.json
 
