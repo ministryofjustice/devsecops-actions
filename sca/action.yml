@@ -51,44 +51,44 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ./sca/repository
+      uses: ./repository
 
     - name: 📊 Dependencies
-      uses: ./sca/dependencies
+      uses: ./dependencies
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ./sca/owasp
+      uses: ./owasp
 
     - name: 🔁 Renovate
       if: ${{ inputs.renovate == 'true' }}
-      uses: ./sca/renovate
+      uses: ./renovate
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ./sca/secrets
+      uses: ./secrets
 
     - name: 🐷 Trufflehog
-      uses: ./sca/trufflehog
+      uses: ./trufflehog
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
 
     - name: ⚙️ CodeQL
-      uses: ./sca/codeql
+      uses: ./codeql
       with:
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ./sca/ossf
+      uses: ./ossf
       with:
         token: ${{ inputs.token }}
 
     - name: 📋 SBOM
-      uses: ./sca/sbom
+      uses: ./sbom
       with:
         token: ${{ inputs.token }}
         node_version: ${{ inputs.node_version }}
