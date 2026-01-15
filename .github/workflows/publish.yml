@@ -48,7 +48,7 @@ jobs:
   # 1. Setup test infrastructure
   setup:
     name: Infrastructure 🔧
-    runs-on: ["ubuntu-slim"]
+    runs-on: ["ubuntu-24.04"]
     outputs:
       environment: ${{ env.environment }}
       timezone: ${{ env.timezone }}
@@ -70,7 +70,7 @@ jobs:
     needs: setup
     environment:
       name: ${{ needs.setup.outputs.environment }}
-    runs-on: ["ubuntu-slim"]
+    runs-on: ["ubuntu-24.04"]
 
     steps:
       - name: Repository

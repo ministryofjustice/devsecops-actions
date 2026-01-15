@@ -29,7 +29,7 @@
 # Example:
 #   jobs:
 #     renovate:
-#       runs-on: ["ubuntu-slim"]
+#       runs-on: ["ubuntu-24.04"]
 #       steps:
 #         - uses: ministryofjustice/devsecops-actions/sca/steps/Renovate@main
 #           with:
