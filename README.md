@@ -196,7 +196,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -245,7 +245,7 @@ jobs:
 
     steps:
       - name: Run SCA with Custom Configuration
-        uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -304,7 +304,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: ${{ matrix.renovate }}
@@ -319,7 +319,7 @@ For repositories where dependency updates are managed externally:
 ```yaml
 steps:
   - name: Run SCA without Renovate
-    uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+    uses: ministryofjustice/devsecops-actions/sca@v1.2.0
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
       renovate: "false" # Disable automated dependency updates
@@ -353,7 +353,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: "false" # No updates on PRs
@@ -369,7 +369,7 @@ jobs:
 uses: ministryofjustice/devsecops-actions/sca@v1.0.0
 
 # ✅ Alternative: Use commit SHA for maximum stability
-uses: ministryofjustice/devsecops-actions/sca@c210b12f1bd77564cee5c5f5c7306cd63dc89867
+uses: ministryofjustice/devsecops-actions/sca@6579119e5278e26654aac244c1dd0693bb2dfef8
 
 # ⚠️ Not recommended: Using branch names (unpredictable)
 uses: ministryofjustice/devsecops-actions/sca@main
@@ -415,12 +415,10 @@ npm install
 npm run validate:all
 
 # Run individual validations
+npm run validate:ts     # TS linting
 npm run validate:yml    # YAML linting
 npm run validate:md     # Markdown linting
 npm run spellcheck      # Spell checking
-
-# Format code
-npm run format
 ```
 
 ### Project Structure
@@ -469,10 +467,11 @@ npm outdated
 cd sca/<component-name>
 
 # Validate YAML syntax
-yamllint action.yml
+npm run validate:yml
 
 # Test with act (GitHub Actions local runner)
-act -j sca -s GITHUB_TOKEN=<your-token>
+brew install act
+act -W .github/workflows/sca.yml --container-architecture linux/amd64 -s GITHUB_TOKEN=<your-token>
 ```
 
 ---
@@ -564,21 +563,6 @@ chore(deps): update renovate to v42.64.1
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for full details.
 
-### License Summary
-
-```txt
-Copyright (c) 2024-2026 Ministry of Justice UK
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
-
 ---
 
 ## 📞 Support
@@ -586,7 +570,6 @@ copies or substantial portions of the Software.
 ### Getting Help
 
 - **📖 Documentation**: Check this README and inline action documentation
-- **💬 Discussions**: [GitHub Discussions](https://github.com/ministryofjustice/devsecops-actions/discussions)
 - **🐛 Bug Reports**: [GitHub Issues](https://github.com/ministryofjustice/devsecops-actions/issues)
 - **✨ Feature Requests**: [GitHub Issues](https://github.com/ministryofjustice/devsecops-actions/issues)
 - **🔒 Security Issues**: See [SECURITY.md](SECURITY.md) for responsible disclosure
@@ -611,7 +594,6 @@ When reporting issues, please use the appropriate template:
 
 - **Maintainer**: Ministry of Justice Platform & Architecture Team
 - **Active Development**: ✅ Actively maintained
-- **Production Ready**: ✅ Used in UK Government production services
 - **Support**: Community-driven with MoJ maintainer oversight
 
 ---
