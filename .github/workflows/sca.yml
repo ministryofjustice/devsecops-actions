@@ -48,7 +48,6 @@ jobs:
       pull-requests: write
       issues: write
       security-events: write
-      id-token: write
       actions: read
 
     name: Execute ⚙️
@@ -71,7 +70,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: ⚡️ SCA
-        uses: ministryofjustice/devsecops-actions/sca@44bc513c68a10482f09704478bf76a27b566d66e # v1.2.0
+        uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e # v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
