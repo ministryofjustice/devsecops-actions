@@ -1,10 +1,5 @@
 {
-  "ignorePaths": [
-    "**/node_modules/**",
-    "prek/**",
-    "**/*.drawio",
-    "**/*.svg"
-  ],
+  "ignorePaths": ["**/node_modules/**", "prek/**", "**/*.drawio", "**/*.svg"],
   "language": "en",
   "noConfigSearch": true,
   "allowCompoundWords": true,
@@ -20,7 +15,10 @@
     "SARIF",
     "syft",
     "unindexed",
-    "venv"
+    "venv",
+    "SLSA",
+    "SSDF",
+    "pipenv"
   ],
   "dictionaries": [
     "en-gb",
@@ -36,9 +34,7 @@
   "languageSettings": [
     {
       "languageId": "commit-msg",
-      "ignoreRegExpList": [
-        "/^#.*/gm"
-      ]
+      "ignoreRegExpList": ["/^#.*/gm"]
     }
   ],
   "version": "0.2"
