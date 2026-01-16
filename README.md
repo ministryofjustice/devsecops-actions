@@ -369,7 +369,7 @@ jobs:
 uses: ministryofjustice/devsecops-actions/sca@v1.0.0
 
 # ✅ Alternative: Use commit SHA for maximum stability
-uses: ministryofjustice/devsecops-actions/sca@52084de880fe4279952bb80ffa4eb089a639c3a9
+uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Not recommended: Using branch names (unpredictable)
 uses: ministryofjustice/devsecops-actions/sca@main
