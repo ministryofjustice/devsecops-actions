@@ -11,6 +11,7 @@ dist
 **/node_modules/*
 
 # Secrets
+**/.secrets
 secrets/**
 jwt_key
 

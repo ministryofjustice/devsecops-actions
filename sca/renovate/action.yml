@@ -41,7 +41,7 @@
 # ==============================================================================
 # CONFIGURATION
 # ==============================================================================
-# Renovate behavior can be customized using renovate.json or .renovaterc files
+# Renovate behavior can be customized using renovate.json
 # in the repository root. See: https://docs.renovatebot.com/configuration-options/
 #
 # ==============================================================================
