@@ -65,6 +65,7 @@ mv tmp/usr/bin/syft "$HOME/.local/bin/"
 chmod +x "$HOME/.local/bin/syft"
 
 export PATH="$HOME/.local/bin:$PATH"
+echo "$HOME/.local/bin" >> $GITHUB_PATH
 
 # Validate
 command -v syft >/dev/null 2>&1 || { echo "❌ Missing syft executable."; exit 1; }
