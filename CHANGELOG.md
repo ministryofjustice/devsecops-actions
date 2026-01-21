@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.3.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.2.0...v1.3.0) (2026-01-21)
+
+
+### Features
+
+* **10-sca-codeql:** added CodeQL to SCA action ([#29](https://github.com/ministryofjustice/devsecops-actions/issues/29)) ([ef75571](https://github.com/ministryofjustice/devsecops-actions/commit/ef755713387840fdf560bdfa734bfbc10fe92505))
+* **10-sca-docker:** abstract steps ([#36](https://github.com/ministryofjustice/devsecops-actions/issues/36)) ([9693710](https://github.com/ministryofjustice/devsecops-actions/commit/96937106ea5c53ada8df8317c8bf7f25bc06430f))
+* **10-sca-owasp:** added owasp dependency check ([#35](https://github.com/ministryofjustice/devsecops-actions/issues/35)) ([c210b12](https://github.com/ministryofjustice/devsecops-actions/commit/c210b12f1bd77564cee5c5f5c7306cd63dc89867))
+* **10-sca-sbom:** add SBOM generation ([#43](https://github.com/ministryofjustice/devsecops-actions/issues/43)) ([561edc5](https://github.com/ministryofjustice/devsecops-actions/commit/561edc5f835c9a2c2d71f3f8b62fd89dd97d3176))
+* **10-sca:** added OSSF scan ([#40](https://github.com/ministryofjustice/devsecops-actions/issues/40)) ([5186b13](https://github.com/ministryofjustice/devsecops-actions/commit/5186b131f37675057794aa09ec83811f9685b6ec))
+* **10-sca:** docker image SBOM generation ([#50](https://github.com/ministryofjustice/devsecops-actions/issues/50)) ([c9550fe](https://github.com/ministryofjustice/devsecops-actions/commit/c9550fe864b914e9339f875e911c1a29355085d8))
+* **10-sca:** trufflehog scan ([#32](https://github.com/ministryofjustice/devsecops-actions/issues/32)) ([4811594](https://github.com/ministryofjustice/devsecops-actions/commit/48115941ff3a62a8ef9dfbf0dc761b96453411af))
+
+
+### Bug Fixes
+
+* **59-allow-private-repositories:** allow private repositories ([#61](https://github.com/ministryofjustice/devsecops-actions/issues/61)) ([c14501d](https://github.com/ministryofjustice/devsecops-actions/commit/c14501d4d2798d1422be86e14d2bb20743468ae9))
+* **hash:** sbom script execution ([#72](https://github.com/ministryofjustice/devsecops-actions/issues/72)) ([8e88918](https://github.com/ministryofjustice/devsecops-actions/commit/8e88918398c7aa5c0b496844e2af3917f49ed252))
+* **hash:** updated to stable hash ([#68](https://github.com/ministryofjustice/devsecops-actions/issues/68)) ([04d0595](https://github.com/ministryofjustice/devsecops-actions/commit/04d0595db59fef4ee3d7f6c35575d13c58a5f628))
+* **recursive:** moved one level up ([#65](https://github.com/ministryofjustice/devsecops-actions/issues/65)) ([6579119](https://github.com/ministryofjustice/devsecops-actions/commit/6579119e5278e26654aac244c1dd0693bb2dfef8))
+
 ## [1.2.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.1.0...v1.2.0) (2025-12-29)
 
 
