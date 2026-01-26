@@ -6,11 +6,6 @@ updates:
     schedule:
       interval: "daily"
       time: "00:00"
-    cooldown:
-      default-days: 3
-      semver-major-days: 30
-      semver-minor-days: 7
-      semver-patch-days: 3
     commit-message:
       prefix: ":dependabot: GitHub Actions"
       include: "scope"
@@ -28,11 +23,6 @@ updates:
     schedule:
       interval: "daily"
       time: "00:00"
-    cooldown:
-      default-days: 3
-      semver-major-days: 30
-      semver-minor-days: 7
-      semver-patch-days: 3
     commit-message:
       prefix: ":dependabot: Dockerfile"
       include: "scope"
