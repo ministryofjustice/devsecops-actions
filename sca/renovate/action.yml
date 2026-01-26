@@ -85,3 +85,5 @@ runs:
       env:
         RENOVATE_AUTODISCOVER: "false"
         RENOVATE_REPOSITORIES: ${{ github.repository }}
+        RENOVATE_MINIMUM_RELEASE_AGE_BEHAVIOUR: "timestamp-required"
+        RENOVATE_MINIMUM_RELEASE_AGE: 3

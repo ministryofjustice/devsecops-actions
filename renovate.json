@@ -3,14 +3,34 @@
         "config:recommended"
     ],
     "dependencyDashboard": true,
+    "minimumReleaseAgeBehaviour": "timestamp-required",
     "pre-commit": {
         "enabled": true
     },
     "packageRules": [
         {
+            "matchUpdateTypes": [
+                "patch"
+            ],
+            "minimumReleaseAge": "3 days"
+        },
+        {
+            "matchUpdateTypes": [
+                "minor"
+            ],
+            "minimumReleaseAge": "7 days"
+        },
+        {
+            "matchUpdateTypes": [
+                "major"
+            ],
+            "minimumReleaseAge": "30 days"
+        },
+        {
             "matchManagers": [
                 "github-actions"
             ],
+            "pinDigests": true,
             "groupName": "renovate: github-actions"
         },
         {
@@ -23,6 +43,7 @@
             "matchDatasources": [
                 "docker"
             ],
+            "pinDigests": true,
             "groupName": "renovate: docker"
         },
         {
