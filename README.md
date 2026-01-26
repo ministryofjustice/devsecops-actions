@@ -2,8 +2,6 @@
 
 Enterprise-Grade Reusable GitHub Actions for Security Automation
 
-Ministry of Justice UK
-
 [![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/devsecops-actions/badge)](https://github-community.service.justice.gov.uk/repository-standards/devsecops-actions)
 
 ---
@@ -484,14 +482,7 @@ We welcome contributions from the community! Whether it's bug fixes, feature add
 
 1. **Fork and Clone**: Fork the repository and clone it locally
 2. **Branch**: Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Pre-commit Hooks**: Install pre-commit hooks for automatic validation
-
-   ```bash
-   # Install MOJ DevSecOps Hooks
-   npm install -g @ministryofjustice/prek
-   prek install
-   ```
-
+3. **Pre-commit Hooks**: Install MoJ [pre-commit hooks](https://github.com/ministryofjustice/devsecops-hooks) for automatic validation
 4. **Conventional Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/) for automatic changelog generation
 
    ```bash
@@ -525,7 +516,6 @@ We welcome contributions from the community! Whether it's bug fixes, feature add
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
-- `style`: Code style changes (formatting, etc.)
 - `refactor`: Code refactoring
 - `perf`: Performance improvements
 - `test`: Adding or updating tests
@@ -572,7 +562,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - **📖 Documentation**: Check this README and inline action documentation
 - **🐛 Bug Reports**: [GitHub Issues](https://github.com/ministryofjustice/devsecops-actions/issues)
 - **✨ Feature Requests**: [GitHub Issues](https://github.com/ministryofjustice/devsecops-actions/issues)
-- **🔒 Security Issues**: See [SECURITY.md](SECURITY.md) for responsible disclosure
+- **🔒 Security Issues**: See [Security](https://github.com/ministryofjustice/devsecops-actions?tab=security-ov-file) for responsible disclosure
 
 ### Issue Templates
 
@@ -626,4 +616,4 @@ Special thanks to the open-source security community and all contributors who he
 
 ---
 
-Made with ❤️ by the Ministry of Justice UK - PandA Team
+Made with ❤️ by the Ministry of Justice UK - 🐼 PandA Team
