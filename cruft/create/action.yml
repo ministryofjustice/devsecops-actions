@@ -45,6 +45,12 @@ runs:
         git config user.signingkey ~/.ssh/cruft
         git config commit.gpgsign true
 
+    - name: Commit
+      shell: bash
+      run: |
+        git add .
+        git commit -S -m "chore(update): cruft update"
+
     - name: Push
       shell: bash
       run: git push origin "$BRANCH"
