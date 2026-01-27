@@ -18,6 +18,11 @@ inputs:
     default: ""
     description: "GitHub repository ssh private key for private template repository access"
 
+  github-known-hosts:
+    required: false
+    default: ""
+    description: "GitHub's SSH key fingerprints, we recommend using Ed25519"
+
   token:
     required: true
     description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
@@ -38,6 +43,7 @@ runs:
       uses: ministryofjustice/devsecops-actions/cruft/authenticate@feat/92-cruft-update---reusable-action
       with:
         ssh-key: ${{ inputs.ssh-key }}
+        github-known-hosts: ${{ inputs.github-known-hosts }}
 
     - name: 🧩 Check
       uses: ministryofjustice/devsecops-actions/cruft/check@feat/92-cruft-update---reusable-action

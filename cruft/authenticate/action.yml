@@ -7,6 +7,10 @@ inputs:
     required: true
     description: "GitHub repository ssh private key"
 
+  github-known-hosts:
+    required: true
+    description: "GitHub's SSH key fingerprints, we recommend using Ed25519"
+
 runs:
   using: composite
   steps:
@@ -25,7 +29,7 @@ runs:
     - name: Hosts
       shell: bash
       run: |
-        printf '%s\n' "${{ vars.SSH_KNOWN_HOST_ED25519 }}" > ~/.ssh/known_hosts
+        printf '%s\n' "${{ inputs.github-known-hosts }}" > ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
 
     - name: Configuration

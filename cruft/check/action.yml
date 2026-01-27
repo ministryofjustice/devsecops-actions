@@ -12,4 +12,4 @@ runs:
   steps:
     - name: Update
       shell: bash
-      run: cruft update --non-interactive
+      run: cruft update --skip-apply-ask --strict
