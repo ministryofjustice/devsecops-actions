@@ -29,7 +29,7 @@ runs:
         python_version: ${{ inputs.python_version }}
 
     - name: 🔑 Authenticate
-      if: ${{ inputs.private }} == "true"
+      if: ${{ inputs.private }} == 'true'
       uses: ministryofjustice/devsecops-actions/cruft/authenticate@feat/92-cruft-update---reusable-action
 
     - name: 🧩 Check
