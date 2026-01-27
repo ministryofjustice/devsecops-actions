@@ -52,3 +52,5 @@ runs:
 
     - name: ✏️ Create
       uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
+      with:
+        token: ${{ inputs.token }}
