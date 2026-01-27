@@ -15,3 +15,34 @@ runs:
       run: |
         git config user.name "Ministry of Justice"
         git config user.email "github@justice.gov.uk"
+
+    - name: Branch
+      shell: bash
+      run: git switch -c "chore/cookie-cutter-update-$(date +%Y%m%d)"
+
+    - name: Sign
+      shell: bash
+      run: |
+        git config gpg.format ssh
+        git config user.signingkey ~/.ssh/cruft
+        git config commit.gpgsign true
+
+    - name: Push
+      shell: bash
+      run: git push origin "chore/cookie-cutter-update-$(date +%Y%m%d)"
+
+    - name: PR
+      shell: bash
+      env:
+        TOKEN: ${{ inputs.token }}
+      run: |
+        curl -sSf \
+        "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls" \
+        -X POST \
+        -H "Authorization: Bearer ${TOKEN}" \
+        -H "Accept: application/vnd.github+json" \
+        -d '{
+          "title": "chore(update): cruft update"
+          "base": ${{ github.base_ref }}
+          "head": "chore/cookie-cutter-update-$(date +%Y%m%d)"
+        }'
