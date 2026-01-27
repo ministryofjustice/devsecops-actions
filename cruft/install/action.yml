@@ -1,0 +1,25 @@
+name: ⚒️ Install
+description: Install Python, PIP and Cruft
+author: Ministry of Justice UK
+
+inputs:
+  python_version:
+    required: false
+    description: "Python version to use"
+    default: 3.14.2
+
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Python
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+      with:
+        python-version: ${{ inputs.python_version }}
+
+    - name: Install
+      shell: bash
+      run: pip install -r requirements.txt

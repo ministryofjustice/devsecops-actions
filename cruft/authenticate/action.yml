@@ -1,0 +1,44 @@
+name: 🔑 Authenticate
+description: Authenticate with GitHub using SSH
+author: Ministry of Justice UK
+
+inputs:
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Directory
+      shell: bash
+      run: mkdir -p ~/.ssh
+
+    - name: Keys
+      shell: bash
+      run: echo "${{ secrets.CRUFT_SSH_KEY }}" > ~/.ssh/cruft
+
+    - name: Hosts
+      shell: bash
+      run: echo ${{ vars.GITHUB_SSH_KNOWN_HOST_ED25519}} > ~/.ssh/known_hosts
+
+    - name: Configuration
+      shell: bash
+      run: |
+        cat << 'EOF' ~/.ssh/config
+        Host github.com
+          HostName github.com
+          User git
+          IdentityFile ~/.ssh/cruft
+          IdentitiesOnly yes
+          StrictHostKeyChecking yes
+          AddKeysToAgent no
+          UseKeychain no
+        EOP
+
+    - name: Permissions
+      shell: bash
+      run: |
+        chmod 600 ~/.ssh/cruft
+        chmod 644 ~/.ssh/known_hosts
+        chmod 600 ~/.ssh/config

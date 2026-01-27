@@ -1,0 +1,17 @@
+name: ✏️ Create
+description: Creates a new pull request if an update is available
+author: Ministry of Justice UK
+
+inputs:
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Configure
+      shell: bash
+      run: |
+        git config user.name "Ministry of Justice"
+        git config user.email "github@justice.gov.uk"

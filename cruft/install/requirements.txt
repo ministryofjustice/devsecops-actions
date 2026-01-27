@@ -1,0 +1,1 @@
+cruft @ git+https://github.com/cruft/cruft.git@288fe2b102c396df42bea4fe0eb2ac824ab8f66b

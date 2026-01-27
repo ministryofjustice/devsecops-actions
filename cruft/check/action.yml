@@ -1,0 +1,15 @@
+name: 🧩 Check
+description: Validates whether the template repository has bee updated or not
+author: Ministry of Justice UK
+
+inputs:
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: Update
+      shell: bash
+      run: cruft update --non-interactive

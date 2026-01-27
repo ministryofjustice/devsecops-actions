@@ -1,0 +1,39 @@
+name: Ministry of Justice UK - Cruft update 🚀
+description: Cruft auto update pull request creation GitHub action
+author: Ministry of Justice UK
+
+inputs:
+  python_version:
+    required: false
+    description: "Python version to use"
+    default: 3.14.2
+
+  private:
+    required: false
+    description: "Cruft template repository is private or not?"
+    default: "false"
+
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: 📦 Repository
+      uses: ministryofjustice/devsecops-actions/sca/repository@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+
+    - name: ⚒️ Install
+      uses: ministryofjustice/devsecops-actions/cruft/install@feat/92-cruft-update---reusable-action
+      with:
+        python_version: ${{ inputs.python_version }}
+
+    - name: 🔑 Authenticate
+      if: ${{ inputs.private }} == "true"
+      uses: ministryofjustice/devsecops-actions/cruft/authenticate@feat/92-cruft-update---reusable-action
+
+    - name: 🧩 Check
+      uses: ministryofjustice/devsecops-actions/cruft/check@feat/92-cruft-update---reusable-action
+
+    - name: ✏️ Create
+      uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
