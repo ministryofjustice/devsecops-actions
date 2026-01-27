@@ -12,20 +12,26 @@ runs:
   steps:
     - name: Directory
       shell: bash
-      run: mkdir -p ~/.ssh
+      run: |
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
 
     - name: Keys
       shell: bash
-      run: echo "${{ inputs.ssh-key }}" > ~/.ssh/cruft
+      run: |
+        echo "${{ inputs.ssh-key }}" > ~/.ssh/cruft
+        chmod 600 ~/.ssh/cruft
 
     - name: Hosts
       shell: bash
-      run: echo ${{ vars.SSH_KNOWN_HOST_ED25519}} > ~/.ssh/known_hosts
+      run: |
+        printf '%s\n' "${{ vars.SSH_KNOWN_HOST_ED25519 }}" > ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
 
     - name: Configuration
       shell: bash
       run: |
-        cat << 'EOF' ~/.ssh/config
+        cat << 'EOF' > ~/.ssh/config
         Host github.com
           HostName github.com
           User git
@@ -33,12 +39,6 @@ runs:
           IdentitiesOnly yes
           StrictHostKeyChecking yes
           AddKeysToAgent no
-          UseKeychain no
         EOF
 
-    - name: Permissions
-      shell: bash
-      run: |
-        chmod 600 ~/.ssh/cruft
-        chmod 644 ~/.ssh/known_hosts
         chmod 600 ~/.ssh/config
