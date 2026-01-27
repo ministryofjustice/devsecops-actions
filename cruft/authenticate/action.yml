@@ -3,9 +3,9 @@ description: Authenticate with GitHub using SSH
 author: Ministry of Justice UK
 
 inputs:
-  token:
+  ssh-key:
     required: true
-    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+    description: "GitHub repository ssh private key"
 
 runs:
   using: composite
@@ -16,11 +16,11 @@ runs:
 
     - name: Keys
       shell: bash
-      run: echo "${{ secrets.CRUFT_SSH_KEY }}" > ~/.ssh/cruft
+      run: echo "${{ inputs.ssh-key }}" > ~/.ssh/cruft
 
     - name: Hosts
       shell: bash
-      run: echo ${{ vars.GITHUB_SSH_KNOWN_HOST_ED25519}} > ~/.ssh/known_hosts
+      run: echo ${{ vars.SSH_KNOWN_HOST_ED25519}} > ~/.ssh/known_hosts
 
     - name: Configuration
       shell: bash
@@ -34,7 +34,7 @@ runs:
           StrictHostKeyChecking yes
           AddKeysToAgent no
           UseKeychain no
-        EOP
+        EOF
 
     - name: Permissions
       shell: bash

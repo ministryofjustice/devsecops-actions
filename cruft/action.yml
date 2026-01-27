@@ -3,7 +3,7 @@ description: Cruft auto update pull request creation GitHub action
 author: Ministry of Justice UK
 
 inputs:
-  python_version:
+  python-version:
     required: false
     description: "Python version to use"
     default: 3.14.2
@@ -12,6 +12,11 @@ inputs:
     required: false
     description: "Cruft template repository is private or not?"
     default: "false"
+
+  ssh-key:
+    required: false
+    default: ""
+    description: "GitHub repository ssh private key for private template repository access"
 
   token:
     required: true
@@ -26,11 +31,13 @@ runs:
     - name: ⚒️ Install
       uses: ministryofjustice/devsecops-actions/cruft/install@feat/92-cruft-update---reusable-action
       with:
-        python_version: ${{ inputs.python_version }}
+        python-version: ${{ inputs.python-version }}
 
     - name: 🔑 Authenticate
       if: ${{ inputs.private }} == 'true'
       uses: ministryofjustice/devsecops-actions/cruft/authenticate@feat/92-cruft-update---reusable-action
+      with:
+        ssh-key: ${{ inputs.ssh-key }}
 
     - name: 🧩 Check
       uses: ministryofjustice/devsecops-actions/cruft/check@feat/92-cruft-update---reusable-action
