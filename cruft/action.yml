@@ -23,6 +23,11 @@ inputs:
     default: ""
     description: "GitHub's SSH key fingerprints, we recommend using Ed25519"
 
+  base-branch:
+    required: false
+    default: "main"
+    description: "Base repository branch"
+
   token:
     required: true
     description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."

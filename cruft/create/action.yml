@@ -3,6 +3,11 @@ description: Validates whether the template repository has bee updated or not an
 author: Ministry of Justice UK
 
 inputs:
+  base-branch:
+    required: false
+    default: "main"
+    description: "Base repository branch"
+
   token:
     required: true
     description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
@@ -17,8 +22,11 @@ runs:
     - name: Variables
       shell: bash
       run: |
-        echo 'BASE="${{ github.base_ref }}"' >> "$GITHUB_ENV"
-        echo 'BRANCH="chore/cookie-cutter-update-$(date +%Y%m%d)"' >> "$GITHUB_ENV"
+        BASE="${{ inputs.base-branch }}"
+        BRANCH=chore/cookie-cutter-update-$(date +%Y%m%d)
+
+        echo "BASE=$BASE" >> "$GITHUB_ENV"
+        echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
 
     - name: Configure
       shell: bash
