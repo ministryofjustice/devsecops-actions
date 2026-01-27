@@ -1,5 +1,5 @@
 name: ✏️ Create
-description: Creates a new pull request if an update is available
+description: Validates whether the template repository has bee updated or not and then creates a new pull request if an update is available
 author: Ministry of Justice UK
 
 inputs:
@@ -10,6 +10,16 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Update
+      shell: bash
+      run: cruft update --skip-apply-ask --strict
+
+    - name: Variables
+      shell: bash
+      run: |
+        echo 'BASE="${{ github.base_ref }}"' >> "$GITHUB_ENV"
+        echo 'BRANCH="chore/cookie-cutter-update-$(date +%Y%m%d)"' >> "$GITHUB_ENV"
+
     - name: Configure
       shell: bash
       run: |
@@ -18,7 +28,7 @@ runs:
 
     - name: Branch
       shell: bash
-      run: git switch -c "chore/cookie-cutter-update-$(date +%Y%m%d)"
+      run: git switch -c $BRANCH
 
     - name: Sign
       shell: bash
@@ -29,7 +39,7 @@ runs:
 
     - name: Push
       shell: bash
-      run: git push origin "chore/cookie-cutter-update-$(date +%Y%m%d)"
+      run: git push origin "$BRANCH"
 
     - name: PR
       shell: bash
@@ -43,6 +53,6 @@ runs:
         -H "Accept: application/vnd.github+json" \
         -d '{
           "title": "chore(update): cruft update"
-          "base": ${{ github.base_ref }}
-          "head": "chore/cookie-cutter-update-$(date +%Y%m%d)"
+          "base": "'"$BASE"'"
+          "head": "'"$BRANCH"'"
         }'

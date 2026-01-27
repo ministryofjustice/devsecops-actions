@@ -45,8 +45,5 @@ runs:
         ssh-key: ${{ inputs.ssh-key }}
         github-known-hosts: ${{ inputs.github-known-hosts }}
 
-    - name: 🧩 Check
-      uses: ministryofjustice/devsecops-actions/cruft/check@feat/92-cruft-update---reusable-action
-
     - name: ✏️ Create
       uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
