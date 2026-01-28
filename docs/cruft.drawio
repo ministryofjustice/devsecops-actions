@@ -1,0 +1,233 @@
+<mxfile host="app.diagrams.net" modified="2026-01-28T17:43:00.000Z" agent="5.0" version="22.1.16">
+  <diagram name="Cruft Template Sync" id="cruft-template-sync">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Background -->
+        <mxCell id="bg" value="" style="fillColor=#0d1117;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="850" height="1100" as="geometry" />
+        </mxCell>
+        
+        <!-- Title -->
+        <mxCell id="title" value="Cruft Template Synchronization" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=22;fontStyle=1;fontColor=#f0f6fc;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="175" y="30" width="500" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Subtitle -->
+        <mxCell id="subtitle" value="Automated Template Update Workflow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="175" y="65" width="500" height="25" as="geometry" />
+        </mxCell>
+        
+        <!-- START -->
+        <mxCell id="start" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#238636;strokeColor=#2ea043;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="385" y="120" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="start-text" value="START" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#ffffff;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="385" y="145" width="80" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow 1 -->
+        <mxCell id="arrow1" value="" style="endArrow=classic;html=1;strokeColor=#7d8590;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="start" target="step1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 1: Install -->
+        <mxCell id="step1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1f6feb;strokeColor=#388bfd;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="260" y="240" width="330" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="step1-icon" value="⚒️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="275" y="255" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="step1-title" value="Install Python & Cruft" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=14;fontStyle=1;fontColor=#f0f6fc;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="325" y="255" width="250" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="step1-desc" value="Setup Python 3.14.2 • Install dependencies" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="325" y="280" width="250" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow 2 -->
+        <mxCell id="arrow2" value="" style="endArrow=classic;html=1;strokeColor=#7d8590;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="step1" target="decision1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Decision 1: Private? -->
+        <mxCell id="decision1" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#21262d;strokeColor=#30363d;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="355" y="360" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="decision1-text" value="Private&#xa;Template?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#f0f6fc;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="375" y="415" width="100" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow YES -->
+        <mxCell id="arrow-yes1" value="" style="endArrow=classic;html=1;strokeColor=#3fb950;strokeWidth=2;exitX=0;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="decision1" target="step2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-yes1" value="YES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#3fb950;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="250" y="410" width="50" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 2: Authenticate -->
+        <mxCell id="step2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1f6feb;strokeColor=#388bfd;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="560" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="step2-icon" value="🔐" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="65" y="575" width="35" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="step2-title" value="SSH Authentication" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#f0f6fc;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="110" y="575" width="180" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="step2-desc" value="Configure SSH keys for&#xa;private repository access" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=10;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="110" y="600" width="180" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow from Auth to Merge -->
+        <mxCell id="arrow3" value="" style="endArrow=classic;html=1;strokeColor=#7d8590;strokeWidth=2;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="step2" target="merge">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow NO -->
+        <mxCell id="arrow-no1" value="" style="endArrow=classic;html=1;strokeColor=#7d8590;strokeWidth=2;exitX=1;exitY=0.5;entryX=1;entryY=0.5;dashed=1;dashPattern=5 5;" edge="1" parent="1" source="decision1" target="merge">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-no1" value="NO" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="540" y="410" width="40" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Merge Point -->
+        <mxCell id="merge" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#30363d;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="415" y="690" width="20" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow 4 -->
+        <mxCell id="arrow4" value="" style="endArrow=classic;html=1;strokeColor=#7d8590;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="merge" target="step3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 3: Cruft Update -->
+        <mxCell id="step3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1f6feb;strokeColor=#388bfd;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="260" y="750" width="330" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="step3-icon" value="🔄" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="275" y="765" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="step3-title" value="Run Cruft Update" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=14;fontStyle=1;fontColor=#f0f6fc;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="325" y="765" width="250" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="step3-desc" value="Detect & apply template changes" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="325" y="790" width="250" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow 5 -->
+        <mxCell id="arrow5" value="" style="endArrow=classic;html=1;strokeColor=#7d8590;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="step3" target="decision2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Decision 2: Changes? -->
+        <mxCell id="decision2" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#21262d;strokeColor=#30363d;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="355" y="870" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="decision2-text" value="Changes&#xa;Found?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#f0f6fc;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="375" y="925" width="100" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow NO to End -->
+        <mxCell id="arrow-no2" value="" style="endArrow=classic;html=1;strokeColor=#7d8590;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;dashPattern=5 5;" edge="1" parent="1" source="decision2" target="end-no">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-no2" value="NO" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="530" y="920" width="40" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- End No Changes -->
+        <mxCell id="end-no" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#30363d;strokeColor=#484f58;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="650" y="900" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="end-no-text" value="END" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontStyle=1;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="650" y="925" width="80" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow YES -->
+        <mxCell id="arrow-yes2" value="" style="endArrow=classic;html=1;strokeColor=#3fb950;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="decision2" target="step4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-yes2" value="YES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#3fb950;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="380" y="1020" width="50" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 4: Create Branch & Commit -->
+        <mxCell id="step4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#238636;strokeColor=#2ea043;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="260" y="1080" width="330" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="step4-icon" value="✏️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="275" y="1095" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="step4-title" value="Create PR with Changes" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=14;fontStyle=1;fontColor=#ffffff;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="325" y="1095" width="250" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="step4-desc" value="• Create branch chore/cookie-cutter-update-YYYYMMDD&#xa;• Sign commit with SSH key&#xa;• Push to GitHub & create pull request" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=10;fontColor=#d4fce4;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="325" y="1125" width="250" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow to End -->
+        <mxCell id="arrow-end" value="" style="endArrow=classic;html=1;strokeColor=#7d8590;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="step4" target="end">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- END -->
+        <mxCell id="end" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#238636;strokeColor=#2ea043;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="385" y="1230" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="end-text" value="END" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#ffffff;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="385" y="1255" width="80" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Legend Box -->
+        <mxCell id="legend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#161b22;strokeColor=#30363d;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="120" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontStyle=1;fontColor=#f0f6fc;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="50" y="125" width="140" height="25" as="geometry" />
+        </mxCell>
+        
+        <!-- Legend Items -->
+        <mxCell id="legend-process" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1f6feb;strokeColor=#388bfd;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="30" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-process-text" value="Process" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="95" y="157" width="85" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-decision" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#21262d;strokeColor=#30363d;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="67" y="185" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-decision-text" value="Decision" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="95" y="185" width="85" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-success" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#238636;strokeColor=#2ea043;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="215" width="30" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-success-text" value="Success" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="95" y="212" width="85" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-skip" value="" style="endArrow=classic;html=1;strokeColor=#7d8590;strokeWidth=1;dashed=1;dashPattern=5 5;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="60" y="245" as="sourcePoint" />
+            <mxPoint x="87" y="245" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-skip-text" value="Skip" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontColor=#7d8590;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="95" y="235" width="85" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Footer -->
+        <mxCell id="footer" value="Ministry of Justice UK • Platform &amp; Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontStyle=2;fontColor=#484f58;fontFamily=Segoe UI;" vertex="1" parent="1">
+          <mxGeometry x="225" y="1340" width="400" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

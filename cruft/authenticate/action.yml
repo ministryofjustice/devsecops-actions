@@ -1,15 +1,95 @@
+# ==============================================================================
+# SSH Authentication - Private Template Access Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Configures SSH authentication for secure access to private Cruft/Cookiecutter
+# template repositories. Sets up SSH keys, known hosts verification, and
+# configures Git to use SSH for template repository access. This action ensures
+# secure communication with private GitHub repositories during template
+# synchronization operations.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Secure SSH directory creation with proper permissions (700)
+# - SSH private key configuration with restricted permissions (600)
+# - GitHub SSH host key verification for security
+# - Automated SSH config file generation
+# - StrictHostKeyChecking enforcement for security
+# - Ed25519 key support (recommended)
+# - Isolated identity file per operation
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage:
+#   - uses: ministryofjustice/devsecops-actions/cruft/authenticate@main
+#     with:
+#       ssh-key: ${{ secrets.CRUFT_SSH_KEY }}
+#       github-known-hosts: ${{ secrets.GITHUB_KNOWN_HOSTS }}
+#
+# ==============================================================================
+# PREREQUISITES
+# ==============================================================================
+# - SSH private key with access to private template repository
+# - GitHub SSH host key fingerprints (known_hosts entry)
+# - Private template repository must allow SSH access
+# - Deploy key or personal SSH key configured in GitHub
+#
+# ==============================================================================
+# GENERATING SSH KEYS
+# ==============================================================================
+# Generate Ed25519 key pair (recommended):
+#   ssh-keygen -t ed25519 -C "cruft-template-access" -f cruft_key
+#
+# Get GitHub known hosts:
+#   ssh-keyscan -t ed25519 github.com
+#
+# Expected format:
+#   github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+#
+# ==============================================================================
+# SECURITY CONSIDERATIONS
+# ==============================================================================
+# - Store SSH keys in GitHub Secrets (encrypted at rest)
+# - Use deploy keys when possible (repository-specific access)
+# - Rotate SSH keys regularly
+# - Monitor SSH key usage in audit logs
+# - Never commit SSH private keys to repositories
+# - Use StrictHostKeyChecking to prevent MITM attacks
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: OpenSSH
+# Documentation: https://www.openssh.com/manual.html
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Last Updated: 2026-01-28
+#
+# ==============================================================================
+
 name: 🔑 Authenticate
-description: Authenticate with GitHub using SSH
+description: Authenticate with GitHub using SSH for private template repository access
 author: Ministry of Justice UK
 
 inputs:
   ssh-key:
     required: true
-    description: "GitHub repository ssh private key"
+    description: "SSH private key for authenticating with private GitHub template repositories. Must have read access to the template repository."
 
   github-known-hosts:
     required: true
-    description: "GitHub's SSH key fingerprints, we recommend using Ed25519"
+    description: "GitHub's SSH host key fingerprints for known_hosts verification. We recommend using Ed25519 keys for enhanced security."
 
 runs:
   using: composite
