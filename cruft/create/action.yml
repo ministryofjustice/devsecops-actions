@@ -53,20 +53,20 @@ runs:
 
     - name: Push
       shell: bash
-      run: git push origin "$BRANCH"
+      run: |
+        git remote set-url origin https://x-access-token:${{ inputs.token }}@github.com/${GITHUB_REPOSITORY}.git
+        git push origin "$BRANCH"
 
     - name: PR
       shell: bash
-      env:
-        TOKEN: ${{ inputs.token }}
       run: |
         curl -sSf \
         "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls" \
         -X POST \
-        -H "Authorization: Bearer ${TOKEN}" \
+        -H "Authorization: Bearer ${{ inputs.token }}" \
         -H "Accept: application/vnd.github+json" \
         -d '{
-          "title": "chore(update): cruft update"
-          "base": "'"$BASE"'"
+          "title": "chore(update): cruft update",
+          "base": "'"$BASE"'",
           "head": "'"$BRANCH"'"
         }'
