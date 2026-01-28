@@ -54,7 +54,7 @@ runs:
     - name: Push
       shell: bash
       run: |
-        git remove -v
+        git remote -v
         git remote set-url origin https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git
         git push origin "$BRANCH"
 
