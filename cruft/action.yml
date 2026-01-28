@@ -37,6 +37,8 @@ runs:
   steps:
     - name: 📦 Repository
       uses: ministryofjustice/devsecops-actions/sca/repository@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+      with:
+        token: ${{ inputs.token }}
 
     - name: ⚒️ Install
       uses: ministryofjustice/devsecops-actions/cruft/install@feat/92-cruft-update---reusable-action
