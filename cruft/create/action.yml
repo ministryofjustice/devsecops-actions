@@ -54,9 +54,9 @@ runs:
     - name: Push
       shell: bash
       run: |
-        git remote -v
         git remote set-url origin https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git
-        git push origin "$BRANCH"
+        git remote -v
+        GIT_TRACE=1 GIT_CURL_VERBOSE=1 git push origin "$BRANCH"
 
     - name: PR
       shell: bash
