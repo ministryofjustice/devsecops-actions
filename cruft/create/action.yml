@@ -197,7 +197,7 @@ runs:
       shell: bash
       run: |
         git add .
-        git commit -m ${{ inputs.target-branch-commit-message }}
+        git commit -m "${{ inputs.target-branch-commit-message }}"
 
     - name: Push
       shell: bash
@@ -214,7 +214,7 @@ runs:
         -H "Authorization: Bearer ${{ inputs.token }}" \
         -H "Accept: application/vnd.github+json" \
         -d '{
-          "title": ${{ inputs.target-branch-commit-heading }},
+          "title": "${{ inputs.target-branch-commit-heading }}",
           "base": "'"$BASE"'",
           "head": "'"$BRANCH"'"
         }'
