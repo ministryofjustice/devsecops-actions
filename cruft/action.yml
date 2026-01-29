@@ -152,6 +152,8 @@ runs:
       uses: ministryofjustice/devsecops-actions/cruft/authenticate@feat/92-cruft-update---reusable-action
       with:
         token: ${{ inputs.token }}
+        github-app-id: ${{ inputs.github-app-id }}
+        github-app-private-key: ${{ inputs.github-app-private-key }}
 
     - name: ✏️ Create
       uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action

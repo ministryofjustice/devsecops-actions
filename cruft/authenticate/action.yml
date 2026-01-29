@@ -86,6 +86,16 @@ description: Authenticate with GitHub using HTTPS token for private template rep
 author: Ministry of Justice UK
 
 inputs:
+  github-app-id:
+    required: false
+    description: "GitHubApp ID"
+    default: ""
+
+  github-app-private-key:
+    required: false
+    description: "GitHubApp private key"
+    default: ""
+
   token:
     required: true
     description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
@@ -93,6 +103,13 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Token
+      id: github-app-token
+      uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+      with:
+        app-id: ${{ inputs.github-app-id }}
+        private-key: ${{ inputs.github-app-private-key }}
+
     - name: Directory
       shell: bash
-      run: git config --global url."https://x-access-token:${{ inputs.token }}@github.com/".insteadOf "https://github.com/"
+      run: git config --global url."https://x-access-token:${{ steps.github-app-token.outputs.token }}@github.com/".insteadOf "https://github.com/"
