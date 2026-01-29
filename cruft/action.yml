@@ -39,8 +39,6 @@
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       private: "true"
-#       ssh-key: ${{ secrets.CRUFT_SSH_KEY }}
-#       github-known-hosts: ${{ secrets.GITHUB_KNOWN_HOSTS }}
 #       base-branch: "main"
 #       python-version: "3.14.2"
 #
@@ -94,16 +92,6 @@ inputs:
     description: "Indicates whether the Cruft template repository is private and requires SSH authentication."
     default: "false"
 
-  ssh-key:
-    required: false
-    default: ""
-    description: "SSH private key for authenticating with private template repositories. Required when 'private' is set to 'true'."
-
-  github-known-hosts:
-    required: false
-    default: ""
-    description: "GitHub's SSH key fingerprints for host verification. We recommend using Ed25519. Required when 'private' is set to 'true'."
-
   base-branch:
     required: false
     default: "main"
@@ -125,8 +113,7 @@ runs:
       if: ${{ inputs.private }} == 'true'
       uses: ministryofjustice/devsecops-actions/cruft/authenticate@feat/92-cruft-update---reusable-action
       with:
-        ssh-key: ${{ inputs.ssh-key }}
-        github-known-hosts: ${{ inputs.github-known-hosts }}
+        token: ${{ inputs.token }}
 
     - name: ✏️ Create
       uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action

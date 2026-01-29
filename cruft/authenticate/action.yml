@@ -83,46 +83,13 @@ description: Authenticate with GitHub using SSH for private template repository 
 author: Ministry of Justice UK
 
 inputs:
-  ssh-key:
+  token:
     required: true
-    description: "SSH private key for authenticating with private GitHub template repositories. Must have read access to the template repository."
-
-  github-known-hosts:
-    required: true
-    description: "GitHub's SSH host key fingerprints for known_hosts verification. We recommend using Ed25519 keys for enhanced security."
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite
   steps:
     - name: Directory
       shell: bash
-      run: |
-        mkdir -p ~/.ssh
-        chmod 700 ~/.ssh
-
-    - name: Keys
-      shell: bash
-      run: |
-        echo "${{ inputs.ssh-key }}" > ~/.ssh/cruft
-        chmod 600 ~/.ssh/cruft
-
-    - name: Hosts
-      shell: bash
-      run: |
-        printf '%s\n' "${{ inputs.github-known-hosts }}" > ~/.ssh/known_hosts
-        chmod 644 ~/.ssh/known_hosts
-
-    - name: Configuration
-      shell: bash
-      run: |
-        cat << 'EOF' > ~/.ssh/config
-        Host github.com
-          HostName github.com
-          User git
-          IdentityFile ~/.ssh/cruft
-          IdentitiesOnly yes
-          StrictHostKeyChecking yes
-          AddKeysToAgent no
-        EOF
-
-        chmod 600 ~/.ssh/config
+      run: git config --global url."https://x-access-token:${{ inputs.token }}@github.com/".insteadOf "https://github.com/"
