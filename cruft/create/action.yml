@@ -203,7 +203,7 @@ runs:
           exit 1
         fi
 
-        echo "TOKEN=$TOKEN" >> "$GITHUB_ENV""
+        echo "TOKEN=$TOKEN" >> "$GITHUB_ENV"
 
     - name: Sign
       shell: bash
