@@ -162,22 +162,27 @@ runs:
         echo "BASE=$BASE" >> "$GITHUB_ENV"
         echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
 
-    - name: Configure
-      shell: bash
-      run: |
-        git config user.name "${{ inputs.github-commit-user-name }}"
-        git config user.email "${{ inputs.github-commit-user-email }}"
-
-    - name: Branch
-      shell: bash
-      run: git switch -c $BRANCH
-
     - name: Token
       id: github-app-token
       uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
       with:
         app-id: ${{ inputs.github-app-id }}
         private-key: ${{ inputs.github-app-private-key }}
+
+    - name: Configure
+      shell: bash
+      run: |
+        if [ -z "${{ inputs.github-app-id }}" ]; then
+          git config user.name "${{ inputs.github-commit-user-name }}"
+          git config user.email "${{ inputs.github-commit-user-email }}"
+        else
+          git config user.name "${{ steps.github-app-token.outputs.app-slug }}[bot]"
+          git config user.email "${{ steps.github-app-token.outputs.app-slug }}[bot]@users.noreply.github.com"
+        fi
+
+    - name: Branch
+      shell: bash
+      run: git switch -c $BRANCH
 
     - name: Commit
       shell: bash
@@ -187,9 +192,11 @@ runs:
 
     - name: Push
       shell: bash
+      env:
+        GH_TOKEN: ${{ steps.github-app-token.outputs.token }}
       run: |
         git remote set-url origin https://x-access-token:${{ steps.github-app-token.outputs.token }}@github.com/${{ github.repository }}.git
-        git push origin "$BRANCH"
+        git push origin "$BRANCH" --signed=if-asked
 
     - name: PR
       shell: bash
