@@ -170,6 +170,7 @@ runs:
       with:
         app-id: ${{ inputs.github-app-id }}
         private-key: ${{ inputs.github-app-private-key }}
+        owner: 'JusticeAIUnit'
 
     - name: Debug Installation
       if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
@@ -177,7 +178,7 @@ runs:
       env:
         TOKEN: ${{ steps.github-app-token-write.outputs.token }}
       run: |
-        echo "=== Installation Permissions Debug ==="
+        echo "=== Installation Permissions Debug - 2 ==="
         curl -s -H "Authorization: Bearer $TOKEN" \
              -H "Accept: application/vnd.github.v3+json" \
              https://api.github.com/installation/repositories \

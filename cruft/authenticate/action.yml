@@ -138,3 +138,21 @@ runs:
           echo "Error: No token provided for authentication"
           exit 1
         fi
+
+    - name: Debug Installation
+      if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
+      shell: bash
+      env:
+        TOKEN: ${{ steps.github-app-token.outputs.token }}
+      run: |
+        echo "=== Installation Permissions Debug ==="
+        curl -s -H "Authorization: Bearer $TOKEN" \
+             -H "Accept: application/vnd.github.v3+json" \
+             https://api.github.com/installation/repositories \
+        | jq '{
+            total_count: .total_count,
+            repositories: .repositories[] | {
+              name: .name,
+              permissions: .permissions
+            }
+          }'
