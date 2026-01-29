@@ -118,26 +118,21 @@ inputs:
   github-commit-user-name:
     required: false
     description: "GitHub commiting user name"
-    default: "Ministry of Justice - CI"
+    default: "moj-ci-app[bot]"
 
   github-commit-user-email:
     required: false
     description: "GitHub commiting user email address"
-    default: "moj-ci-bot@users.noreply.github.com"
-
-  github-sign-commits:
-    required: false
-    description: "Sign GitHub commit with GPG key"
-    default: "false"
+    default: "moj-ci-app[bot]@users.noreply.github.com"
 
   github-app-id:
     required: false
     description: "GitHubApp ID"
     default: ""
 
-  github-app-secret:
+  github-app-private-key:
     required: false
-    description: "GitHubApp secret"
+    description: "GitHubApp private key"
     default: ""
 
   token:
@@ -162,9 +157,8 @@ runs:
       uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
       with:
         token: ${{ inputs.token }}
-        github-sign-commits: ${{ inputs.github-sign-commits }}
         github-app-id: ${{ inputs.github-app-id }}
-        github-app-secret: ${{ inputs.github-app-secret }}
+        github-app-private-key: ${{ inputs.github-app-private-key }}
         target-branch-branch: ${{ inputs.target-branch-branch }}
         target-branch-commit-heading: ${{ inputs.target-branch-commit-heading }}
         target-branch-commit-message: ${{ inputs.target-branch-commit-message }}
