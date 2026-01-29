@@ -96,6 +96,16 @@ inputs:
     description: "GitHubApp private key"
     default: ""
 
+  github-app-owner:
+    required: false
+    description: "GitHub App organisation owner token scope"
+    default: ""
+
+  github-app-repositories:
+    required: false
+    description: "GitHub App organisation repositories token scope"
+    default: ""
+
   token:
     required: false
     description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
