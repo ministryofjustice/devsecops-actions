@@ -170,7 +170,24 @@ runs:
       with:
         app-id: ${{ inputs.github-app-id }}
         private-key: ${{ inputs.github-app-private-key }}
-        # Don't specify repositories - defaults to current repo
+
+    - name: Debug Installation
+      if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
+      shell: bash
+      env:
+        TOKEN: ${{ steps.github-app-token-write.outputs.token }}
+      run: |
+        echo "=== Installation Permissions Debug ==="
+        curl -s -H "Authorization: Bearer $TOKEN" \
+             -H "Accept: application/vnd.github.v3+json" \
+             https://api.github.com/installation/repositories \
+        | jq '{
+            total_count: .total_count,
+            repositories: .repositories[] | {
+              name: .name,
+              permissions: .permissions
+            }
+          }'
 
     - name: Variables
       shell: bash
