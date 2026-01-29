@@ -170,7 +170,7 @@ runs:
       with:
         app-id: ${{ inputs.github-app-id }}
         private-key: ${{ inputs.github-app-private-key }}
-        # Scope to current repository only for write access
+        # Don't specify repositories - defaults to current repo
 
     - name: Variables
       shell: bash
@@ -194,6 +194,13 @@ runs:
           git config user.name "${APP_SLUG}[bot]"
           git config user.email "${APP_SLUG}[bot]@users.noreply.github.com"
           echo "Using GitHub App token"
+          
+          # Debug: Check installation permissions
+          echo "Checking installation repositories..."
+          curl -s -H "Authorization: Bearer $TOKEN" \
+               https://api.github.com/installation/repositories \
+          | jq -r '.repositories[] | "\(.name): push=\(.permissions.push // false)"'
+          
         elif [ -n "$INPUT_TOKEN" ]; then
           TOKEN="$INPUT_TOKEN"
           git config user.name "${{ inputs.github-commit-user-name }}"
@@ -205,7 +212,7 @@ runs:
         fi
 
         # Test token permissions
-        echo "Testing token permissions..."
+        echo "Testing token permissions on current repo..."
         curl -s -H "Authorization: Bearer $TOKEN" \
              https://api.github.com/repos/${{ github.repository }} \
         | jq -r '.permissions // "No permissions data"'
