@@ -194,14 +194,22 @@ runs:
           TOKEN="$APP_TOKEN"
           git config user.name "${APP_SLUG}[bot]"
           git config user.email "${APP_SLUG}[bot]@users.noreply.github.com"
+          echo "Using GitHub App token"
         elif [ -n "$INPUT_TOKEN" ]; then
           TOKEN="$INPUT_TOKEN"
           git config user.name "${{ inputs.github-commit-user-name }}"
           git config user.email "${{ inputs.github-commit-user-email }}"
+          echo "Using provided token"
         else
           echo "Error: No token provided for authentication"
           exit 1
         fi
+
+        # Test token permissions
+        echo "Testing token permissions..."
+        curl -s -H "Authorization: Bearer $TOKEN" \
+             https://api.github.com/repos/${{ github.repository }} \
+        | jq -r '.permissions // "No permissions data"'
 
         echo "TOKEN=$TOKEN" >> "$GITHUB_ENV"
 
@@ -222,6 +230,11 @@ runs:
     - name: Push
       shell: bash
       run: |
+        echo "Pushing to repository with token..."
+        if [ -z "$TOKEN" ]; then
+          echo "ERROR: TOKEN is not set!"
+          exit 1
+        fi
         git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git
         git push origin "$BRANCH"
 
