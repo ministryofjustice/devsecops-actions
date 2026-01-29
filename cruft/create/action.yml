@@ -149,10 +149,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Update
-      shell: bash
-      run: cruft update --skip-apply-ask --strict
-
     - name: Variables
       shell: bash
       run: |

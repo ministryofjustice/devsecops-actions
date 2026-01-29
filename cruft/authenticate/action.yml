@@ -126,3 +126,7 @@ runs:
           echo "Error: No token provided for authentication!"
           exit 1
         fi
+
+    - name: Update
+      shell: bash
+      run: cruft update --skip-apply-ask --strict
