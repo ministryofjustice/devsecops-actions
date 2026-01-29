@@ -167,7 +167,7 @@ runs:
         app-id: ${{ inputs.github-app-id }}
         private-key: ${{ inputs.github-app-private-key }}
         owner: ${{ inputs.github-app-owner }}
-        repositories: ${{ join(inputs.github-app-repositories) }}
+        repositories: ${{ inputs.github-app-repositories }}
 
     - name: Configure Git Authentication
       shell: bash
