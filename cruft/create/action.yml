@@ -172,7 +172,6 @@ runs:
         private-key: ${{ inputs.github-app-private-key }}
         owner: ${{ github.repository_owner }}
         repositories: ${{ github.event.repository.name }}
-        permission-issues: write
 
     - name: Variables
       shell: bash
