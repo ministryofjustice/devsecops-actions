@@ -111,6 +111,8 @@ runs:
       with:
         app-id: ${{ inputs.github-app-id }}
         private-key: ${{ inputs.github-app-private-key }}
+        owner: ${{ inputs.github-app-owner }}
+        repositories: ${{ inputs.github-app-repositories }}
 
     - name: Configure Git Authentication
       shell: bash
@@ -119,16 +121,10 @@ runs:
         INPUT_TOKEN: ${{ inputs.token }}
       run: |
         if [ -n "$APP_TOKEN" ]; then
-          echo "Using GitHub App token for authentication"
           git config --global url."https://x-access-token:${APP_TOKEN}@github.com/".insteadOf "https://github.com/"
         elif [ -n "$INPUT_TOKEN" ]; then
-          echo "Using provided token for authentication"
           git config --global url."https://x-access-token:${INPUT_TOKEN}@github.com/".insteadOf "https://github.com/"
         else
           echo "Error: No token provided for authentication"
           exit 1
         fi
-
-        echo "Git configuration applied successfully"
-        git config --global --list | grep "url\.https://x-access-token"
-        git remote -v
