@@ -21,9 +21,11 @@
 # - Non-interactive update application (--skip-apply-ask)
 # - Strict mode enforcement for consistency (--strict)
 # - Dated branch naming for easy tracking
-# - Git-signed commits with SSH keys
+# - Optional GPG-signed commits
+# - HTTPS token-based authentication for pushing changes
 # - Automated pull request creation via GitHub API
 # - Configurable base branch targeting
+# - Customizable commit messages and headings
 # - Proper Git configuration and authentication
 #
 # ==============================================================================
@@ -45,20 +47,21 @@
 # ==============================================================================
 # - Repository must contain .cruft.json file
 # - Cruft must be installed (via install action)
-# - SSH key must be configured (via authenticate action for private templates)
+# - Authentication must be configured (via authenticate action for private templates)
 # - GitHub token with pull request write permissions
 # - Git must be available in the runner environment
+# - For signed commits: GPG signing key must be configured
 #
 # ==============================================================================
 # WORKFLOW PROCESS
 # ==============================================================================
 # 1. Run cruft update to detect and apply template changes
 # 2. Generate environment variables for branch naming
-# 3. Configure Git user identity (Ministry of Justice)
+# 3. Configure Git user identity
 # 4. Create new feature branch with date-based naming
-# 5. Configure Git signing with SSH key
-# 6. Stage and commit all changes with signed commit
-# 7. Push changes to remote branch
+# 5. Configure Git signing (if enabled)
+# 6. Stage and commit all changes
+# 7. Push changes to remote branch using token authentication
 # 8. Create pull request via GitHub REST API
 #
 # ==============================================================================
@@ -83,10 +86,11 @@
 # ==============================================================================
 # SIGNED COMMITS
 # ==============================================================================
-# Commits are signed using SSH keys for verification:
-# - GPG format: ssh
-# - Signing key: ~/.ssh/cruft (from authenticate action)
-# - Commit signing: enabled (commit.gpgsign true)
+# Commits can optionally be signed using GPG keys for verification:
+# - Controlled via github-sign-commits input (default: false)
+# - When enabled, requires user.signingkey to be configured
+# - Uses Git's commit.gpgsign configuration
+# - Note: The actual signing key must be configured separately
 #
 # ==============================================================================
 # TOOL INFORMATION
@@ -98,7 +102,7 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-28
+# Last Updated: 2026-01-29
 #
 # ==============================================================================
 
@@ -111,6 +115,46 @@ inputs:
     required: false
     default: "main"
     description: "Target base branch where the pull request will be created and merged."
+
+  target-branch-branch:
+    required: false
+    description: "Branch name to use when creating the pull request"
+    default: "chore/cookie-cutter-update-$(date +%Y%m%d)"
+
+  target-branch-commit-heading:
+    required: false
+    description: "Commit heading for the update pull request"
+    default: "chore(update): cruft update"
+
+  target-branch-commit-message:
+    required: false
+    description: "Commit message for the update pull request"
+    default: "chore(update): cruft update"
+
+  github-commit-user-name:
+    required: false
+    description: "GitHub commiting user name"
+    default: "Ministry of Justice"
+
+  github-commit-user-email:
+    required: false
+    description: "GitHub commiting user email address"
+    default: ""
+
+  github-sign-commits:
+    required: false
+    description: "Sign GitHub commit with GPG key"
+    default: "false"
+
+  github-app-id:
+    required: false
+    description: "GitHubApp ID"
+    default: ""
+
+  github-app-secret:
+    required: false
+    description: "GitHubApp secret"
+    default: ""
 
   token:
     required: true
@@ -127,7 +171,7 @@ runs:
       shell: bash
       run: |
         BASE="${{ inputs.base-branch }}"
-        BRANCH=chore/cookie-cutter-update-$(date +%Y%m%d)
+        BRANCH="${{ inputs.target-branch-branch }}"
 
         echo "BASE=$BASE" >> "$GITHUB_ENV"
         echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
@@ -135,31 +179,31 @@ runs:
     - name: Configure
       shell: bash
       run: |
-        git config user.name "Ministry of Justice"
-        git config user.email ""
+        git config user.name ${{ inputs.github-commit-user-name }}
+        git config user.email ${{ inputs.github-commit-user-email }}
 
     - name: Branch
       shell: bash
       run: git switch -c $BRANCH
 
     - name: Sign
+      if: ${{ inputs.github-sign-commits == 'true' }}
       shell: bash
       run: |
-        git config gpg.format ssh
-        git config user.signingkey ~/.ssh/cruft
-        git config commit.gpgsign true
+        git config --global commit.gpgsign true
+        git config --global user.signingkey ${{ inputs.github-signing-key }}
 
     - name: Commit
       shell: bash
       run: |
         git add .
-        git commit -S -m "chore(update): cruft update"
+        git commit -m ${{ inputs.target-branch-commit-message }}
 
     - name: Push
       shell: bash
       run: |
         git remote set-url origin https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git
-        push origin "$BRANCH"
+        git push origin "$BRANCH"
 
     - name: PR
       shell: bash
@@ -170,7 +214,7 @@ runs:
         -H "Authorization: Bearer ${{ inputs.token }}" \
         -H "Accept: application/vnd.github+json" \
         -d '{
-          "title": "chore(update): cruft update",
+          "title": ${{ inputs.target-branch-commit-heading }},
           "base": "'"$BASE"'",
           "head": "'"$BRANCH"'"
         }'

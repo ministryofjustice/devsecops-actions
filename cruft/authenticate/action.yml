@@ -1,5 +1,5 @@
 # ==============================================================================
-# SSH Authentication - Private Template Access Action
+# HTTPS Token Authentication - Private Template Access Action
 # ==============================================================================
 #
 # Copyright (c) Ministry of Justice UK
@@ -8,22 +8,22 @@
 # ==============================================================================
 # DESCRIPTION
 # ==============================================================================
-# Configures SSH authentication for secure access to private Cruft/Cookiecutter
-# template repositories. Sets up SSH keys, known hosts verification, and
-# configures Git to use SSH for template repository access. This action ensures
-# secure communication with private GitHub repositories during template
-# synchronisation operations.
+# Configures HTTPS token-based authentication for secure access to private
+# Cruft/Cookiecutter template repositories. Sets up Git URL rewriting to
+# automatically inject authentication tokens for GitHub HTTPS requests. This
+# action ensures secure communication with private GitHub repositories during
+# template synchronisation operations without requiring SSH key management.
 #
 # ==============================================================================
 # FEATURES
 # ==============================================================================
-# - Secure SSH directory creation with proper permissions (700)
-# - SSH private key configuration with restricted permissions (600)
-# - GitHub SSH host key verification for security
-# - Automated SSH config file generation
-# - StrictHostKeyChecking enforcement for security
-# - Ed25519 key support (recommended)
-# - Isolated identity file per operation
+# - Token-based HTTPS authentication for GitHub repositories
+# - Automatic Git URL rewriting for seamless authentication
+# - No SSH key management required
+# - Simplified authentication workflow
+# - Compatible with GitHub Personal Access Tokens and GitHub Actions tokens
+# - Secure token handling via environment variables
+# - Works with both public and private template repositories
 #
 # ==============================================================================
 # USAGE
@@ -31,55 +31,58 @@
 # Basic usage:
 #   - uses: ministryofjustice/devsecops-actions/cruft/authenticate@main
 #     with:
-#       ssh-key: ${{ secrets.CRUFT_SSH_KEY }}
-#       github-known-hosts: ${{ secrets.GITHUB_KNOWN_HOSTS }}
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#
+# With personal access token:
+#   - uses: ministryofjustice/devsecops-actions/cruft/authenticate@main
+#     with:
+#       token: ${{ secrets.PAT_TOKEN }}
 #
 # ==============================================================================
 # PREREQUISITES
 # ==============================================================================
-# - SSH private key with access to private template repository
-# - GitHub SSH host key fingerprints (known_hosts entry)
-# - Private template repository must allow SSH access
-# - Deploy key or personal SSH key configured in GitHub
+# - GitHub token with repository read access
+# - Token must have access to private template repository (if applicable)
+# - Git must be available in the runner environment
 #
 # ==============================================================================
-# GENERATING SSH KEYS
+# AUTHENTICATION MECHANISM
 # ==============================================================================
-# Generate Ed25519 key pair (recommended):
-#   ssh-keygen -t ed25519 -C "cruft-template-access" -f cruft_key
+# This action configures Git to rewrite HTTPS URLs by injecting the access
+# token as a credential. The configuration transforms URLs like:
+#   https://github.com/org/repo.git
+# Into authenticated URLs like:
+#   https://x-access-token:TOKEN@github.com/org/repo.git
 #
-# Get GitHub known hosts:
-#   ssh-keyscan -t ed25519 github.com
-#
-# Expected format:
-#   github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+# This allows Cruft to clone and access private template repositories without
+# additional authentication prompts.
 #
 # ==============================================================================
 # SECURITY CONSIDERATIONS
 # ==============================================================================
-# - Store SSH keys in GitHub Secrets (encrypted at rest)
-# - Use deploy keys when possible (repository-specific access)
-# - Rotate SSH keys regularly
-# - Monitor SSH key usage in audit logs
-# - Never commit SSH private keys to repositories
-# - Use StrictHostKeyChecking to prevent MITM attacks
+# - Store tokens in GitHub Secrets (encrypted at rest)
+# - Use tokens with minimal required permissions
+# - Rotate tokens regularly
+# - Monitor token usage in audit logs
+# - Never commit tokens to repositories
+# - Tokens are automatically masked in GitHub Actions logs
 #
 # ==============================================================================
 # TOOL INFORMATION
 # ==============================================================================
-# Tool: OpenSSH
-# Documentation: https://www.openssh.com/manual.html
+# Tool: Git
+# Documentation: https://git-scm.com/docs/git-config
 #
 # ==============================================================================
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-28
+# Last Updated: 2026-01-29
 #
 # ==============================================================================
 
 name: 🔑 Authenticate
-description: Authenticate with GitHub using SSH for private template repository access
+description: Authenticate with GitHub using HTTPS token for private template repository access
 author: Ministry of Justice UK
 
 inputs:

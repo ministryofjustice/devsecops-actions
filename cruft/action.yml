@@ -20,11 +20,13 @@
 # - Automatic detection of upstream template changes
 # - Intelligent merge conflict resolution
 # - Support for both public and private template repositories
-# - SSH-based authentication for private template access
+# - HTTPS token-based authentication for private template access
 # - Automated pull request creation with synchronized changes
 # - Python environment setup and dependency management
-# - Git configuration with signed commits
+# - Git configuration with optional signed commits
 # - Customizable base branch targeting
+# - Configurable commit messages and branch naming
+# - GitHub App authentication support
 #
 # ==============================================================================
 # USAGE
@@ -51,14 +53,15 @@
 #   - issues: read/write
 # - Repository must be created from a Cruft/Cookiecutter template
 # - .cruft.json file must exist in repository root
-# - For private templates: SSH key with access to template repository
+# - For private templates: Token with access to template repository
+# - For signed commits: GPG key configuration
 #
 # ==============================================================================
 # OUTPUTS
 # ==============================================================================
 # This action generates the following:
 # - Pull request with template synchronisation changes
-# - Signed commits with template updates
+# - Commits with template updates (optionally signed with GPG)
 # - Git branch with naming convention: chore/cookie-cutter-update-YYYYMMDD
 #
 # ==============================================================================
@@ -73,7 +76,7 @@
 # ==============================================================================
 # Action Version: 1.0.0
 # Minimum GitHub Enterprise Server: 3.8
-# Last Updated: 2026-01-28
+# Last Updated: 2026-01-29
 #
 # ==============================================================================
 
@@ -97,6 +100,46 @@ inputs:
     default: "main"
     description: "Base repository branch where pull requests will be targeted."
 
+  target-branch-branch:
+    required: false
+    description: "Branch name to use when creating an update pull request"
+    default: "chore/cookie-cutter-update-$(date +%Y%m%d)"
+
+  target-branch-commit-heading:
+    required: false
+    description: "Commit heading for the update pull request"
+    default: "chore(update): cruft update"
+
+  target-branch-commit-message:
+    required: false
+    description: "Commit message for the update pull request"
+    default: "chore(update): cruft update"
+
+  github-commit-user-name:
+    required: false
+    description: "GitHub commiting user name"
+    default: "Ministry of Justice - CI"
+
+  github-commit-user-email:
+    required: false
+    description: "GitHub commiting user email address"
+    default: "moj-ci-bot@users.noreply.github.com"
+
+  github-sign-commits:
+    required: false
+    description: "Sign GitHub commit with GPG key"
+    default: "false"
+
+  github-app-id:
+    required: false
+    description: "GitHubApp ID"
+    default: ""
+
+  github-app-secret:
+    required: false
+    description: "GitHubApp secret"
+    default: ""
+
   token:
     required: true
     description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
@@ -110,7 +153,7 @@ runs:
         python-version: ${{ inputs.python-version }}
 
     - name: 🔑 Authenticate
-      if: ${{ inputs.private }} == 'true'
+      if: ${{ inputs.private  == 'true' }}
       uses: ministryofjustice/devsecops-actions/cruft/authenticate@feat/92-cruft-update---reusable-action
       with:
         token: ${{ inputs.token }}
@@ -119,3 +162,11 @@ runs:
       uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
       with:
         token: ${{ inputs.token }}
+        github-sign-commits: ${{ inputs.github-sign-commits }}
+        github-app-id: ${{ inputs.github-app-id }}
+        github-app-secret: ${{ inputs.github-app-secret }}
+        target-branch-branch: ${{ inputs.target-branch-branch }}
+        target-branch-commit-heading: ${{ inputs.target-branch-commit-heading }}
+        target-branch-commit-message: ${{ inputs.target-branch-commit-message }}
+        github-commit-user-name: ${{ inputs.github-commit-user-name }}
+        github-commit-user-email: ${{ inputs.github-commit-user-email }}
