@@ -136,7 +136,7 @@ inputs:
     default: ""
 
   token:
-    required: true
+    required: false
     description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
