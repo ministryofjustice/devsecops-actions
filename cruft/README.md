@@ -9,7 +9,7 @@ Enterprise-Grade Template Synchronisation for Cookiecutter Projects
 
 ## Overview
 
-An automated template synchronization action that maintains consistency between repositories created from Cookiecutter/Cruft
+An automated template synchronisation action that maintains consistency between repositories created from Cookiecutter/Cruft
 templates and their upstream sources. This action detects template updates, intelligently applies changes
 and automatically creates pull requests with synchronized modifications, ensuring your projects remain
 aligned with template best practices and improvements.
@@ -20,7 +20,7 @@ aligned with template best practices and improvements.
 - **Pull Request Automation** - Automatic PR creation with synchronized changes
 - **Private Template Support** - SSH authentication for private template repositories
 - **Signed Commits** - Git commit signing for verification and security
-- **Intelligent Updates** - Conflict-aware synchronization with strict mode enforcement
+- **Intelligent Updates** - Conflict-aware synchronisation with strict mode enforcement
 
 ---
 
@@ -114,7 +114,7 @@ jobs:
 ```
 
 This minimal setup provides:
-✅ Weekly template synchronization  
+✅ Weekly template synchronisation  
 ✅ Automatic pull request creation  
 ✅ Signed commits  
 ✅ Date-based branch naming
@@ -522,7 +522,7 @@ cd ../../
 
 This action leverages:
 
-- **Cruft** - Template synchronization tool by [cruft](https://github.com/cruft/cruft)
+- **Cruft** - Template synchronisation tool by [cruft](https://github.com/cruft/cruft)
 - **Cookiecutter** - Project templating by [cookiecutter](https://github.com/cookiecutter/cookiecutter)
 - **GitHub Actions** - CI/CD platform by GitHub
 

@@ -8,7 +8,7 @@
 # ==============================================================================
 # DESCRIPTION
 # ==============================================================================
-# Sets up the Python environment and installs Cruft template synchronization
+# Sets up the Python environment and installs Cruft template synchronisation
 # tool along with its dependencies. This action configures Python using the
 # official GitHub Actions setup-python action and installs Cruft via pip from
 # a pinned requirements file to ensure consistent and reproducible builds.
@@ -45,7 +45,7 @@
 # DEPENDENCIES
 # ==============================================================================
 # Installed packages (via requirements.txt):
-# - cruft: Template synchronization tool
+# - cruft: Template synchronisation tool
 # - cookiecutter: Project templating engine
 # - Additional dependencies as specified in requirements.txt
 #
@@ -70,7 +70,7 @@
 # ==============================================================================
 
 name: ⚒️ Install
-description: Install Python environment and Cruft template synchronization tool with dependencies
+description: Install Python environment and Cruft template synchronisation tool with dependencies
 author: Ministry of Justice UK
 
 inputs:

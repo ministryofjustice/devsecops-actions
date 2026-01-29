@@ -17,7 +17,7 @@ Enterprise-Grade Reusable GitHub Actions for Security Automation
 
 A comprehensive collection of production-ready, enterprise-grade GitHub Actions that standardise and automate
 DevSecOps security practices across the software development lifecycle. This suite provides best-in-class security
-scanning, dependency management, template synchronization, and compliance reporting capabilities.
+scanning, dependency management, template synchronisation, and compliance reporting capabilities.
 
 **Core Capabilities:**
 
@@ -101,7 +101,7 @@ Orchestrates 9 specialized security tools:
 
 **Path**: `ministryofjustice/devsecops-actions/cruft`  
 
-Automated template synchronization action that maintains consistency between repositories created from Cookiecutter/Cruft templates and their upstream sources.
+Automated template synchronisation action that maintains consistency between repositories created from Cookiecutter/Cruft templates and their upstream sources.
 
 #### Introduction
 

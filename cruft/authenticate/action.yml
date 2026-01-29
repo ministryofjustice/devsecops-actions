@@ -12,7 +12,7 @@
 # template repositories. Sets up SSH keys, known hosts verification, and
 # configures Git to use SSH for template repository access. This action ensures
 # secure communication with private GitHub repositories during template
-# synchronization operations.
+# synchronisation operations.
 #
 # ==============================================================================
 # FEATURES

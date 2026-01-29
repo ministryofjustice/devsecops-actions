@@ -8,7 +8,7 @@
 # ==============================================================================
 # DESCRIPTION
 # ==============================================================================
-# Orchestrates the template synchronization workflow by detecting upstream
+# Orchestrates the template synchronisation workflow by detecting upstream
 # template changes, applying updates, and creating automated pull requests
 # with the synchronized modifications. This action runs cruft update to compare
 # the current repository state with the upstream template, commits any changes
