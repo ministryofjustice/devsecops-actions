@@ -127,7 +127,7 @@ runs:
     - name: Configure Git Authentication
       shell: bash
       env:
-        APP_TOKEN: ${{ steps.github-app-token.outputs.token }}
+        APP_TOKEN: ${{ steps.github-app-token-read.outputs.token }}
         INPUT_TOKEN: ${{ inputs.token }}
       run: |
         if [ -n "$APP_TOKEN" ]; then
