@@ -40,7 +40,7 @@
 #     uses: ministryofjustice/devsecops-actions/cruft/check@main
 #
 #   - name: Process updates
-#     if: ${{ steps.check.outputs.has-update == 'true' }}
+#     if: steps.check.outputs.has-update == 'true'
 #     run: echo "Updates available"
 #
 # ==============================================================================
@@ -117,5 +117,5 @@ runs:
 
     - name: Update
       shell: bash
-      if: ${{ steps.check.outputs.has-update == "true" }}
+      if: steps.check.outputs.has-update == 'true'
       run: cruft update --skip-apply-ask --strict
