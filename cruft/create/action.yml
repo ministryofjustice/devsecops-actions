@@ -163,18 +163,18 @@ runs:
       shell: bash
       run: cruft update --skip-apply-ask --strict
 
-    # - name: Token
-    #   id: github-app-token-write
-    #   if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
-    #   uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
-    #   with:
-    #     app-id: "${{ inputs.github-app-id }}"
-    #     private-key: "${{ inputs.github-app-private-key }}"
-    #     github-app-owner: "${{ github.repository_owner }}"
-    #     github-app-repositories: "${{ github.event.repository.name }}"
-    #     # permission-workflows: "write"
-    #     # permission-contents: "write"
-    #     # permission-pull-requests: "write"
+    - name: Token
+      id: github-app-token-write
+      if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
+      uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+      with:
+        app-id: "${{ inputs.github-app-id }}"
+        private-key: "${{ inputs.github-app-private-key }}"
+        github-app-owner: "${{ github.repository_owner }}"
+        github-app-repositories: "${{ github.event.repository.name }}"
+        # permission-workflows: "write"
+        # permission-contents: "write"
+        # permission-pull-requests: "write"
 
     # - name: Configure Git Authentication
     #   shell: bash
