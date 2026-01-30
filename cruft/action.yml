@@ -100,12 +100,12 @@ inputs:
     default: "main"
     description: "Base repository branch where pull requests will be targeted."
 
-  target-branch-branch:
+  target-branch-name:
     required: false
     description: "Branch name to use when creating an update pull request"
     default: "chore/cookie-cutter-update-$(date +%Y%m%d)"
 
-  target-branch-commit-heading:
+  target-branch-heading:
     required: false
     description: "Commit heading for the update pull request"
     default: "chore(update): cruft update"
@@ -115,10 +115,20 @@ inputs:
     description: "Commit message for the update pull request"
     default: "chore(update): cruft update"
 
-  target-branch-commit-body:
+  target-branch-body:
     required: false
     description: "Commit body for the update pull request"
     default: "chore(update): cruft update"
+
+  target-branch-labels:
+    required: false
+    description: "Target branch labels to apply, A comma or newline-separated list of labels."
+    default: ""
+
+  target-branch-reviewers:
+    required: false
+    description: "Target branch reviewers name, A comma or newline-separated list of reviewers (GitHub usernames) to request a review from."
+    default: ""
 
   github-commit-user-name:
     required: false
@@ -172,6 +182,9 @@ runs:
         github-app-id: ${{ inputs.github-app-id }}
         github-app-private-key: ${{ inputs.github-app-private-key }}
 
+    - name: 🔎 Check
+      uses: ministryofjustice/devsecops-actions/cruft/check@feat/92-cruft-update---reusable-action
+
     - name: ✏️ Create
       uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
       with:
@@ -180,9 +193,11 @@ runs:
         github-app-private-key: ${{ inputs.github-app-private-key }}
         github-app-owner: ${{ inputs.github-app-owner }}
         github-app-repositories: ${{ inputs.github-app-repositories }}
-        target-branch-branch: ${{ inputs.target-branch-branch }}
-        target-branch-commit-heading: ${{ inputs.target-branch-commit-heading }}
+        target-branch-name: ${{ inputs.target-branch-name }}
+        target-branch-heading: ${{ inputs.target-branch-heading }}
         target-branch-commit-message: ${{ inputs.target-branch-commit-message }}
-        target-branch-commit-body: ${{ inputs.target-branch-commit-body }}
+        target-branch-body: ${{ inputs.target-branch-body }}
+        target-branch-labels: ${{ inputs.target-branch-labels }}
+        target-branch-reviewers: ${{ inputs.target-branch-reviewers }}
         github-commit-user-name: ${{ inputs.github-commit-user-name }}
         github-commit-user-email: ${{ inputs.github-commit-user-email }}
