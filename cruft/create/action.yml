@@ -172,12 +172,9 @@ runs:
         private-key: "${{ inputs.github-app-private-key }}"
         owner: "${{ github.repository_owner }}"
         repositories: "${{ github.event.repository.name }}"
-        permissions: >-
-          {
-            "workflows": "write",
-            "contents": "write",
-            "pull_requests": "write"
-          }
+        permission-workflows: "write"
+        permission-contents: "write"
+        permission-pull-requests: "write"
 
     - name: Variables
       shell: bash
