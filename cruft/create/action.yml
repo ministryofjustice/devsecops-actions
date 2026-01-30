@@ -267,17 +267,12 @@ runs:
     - name: Commit
       shell: bash
       run: |
-        git add .
+        git add . ':!.github'
         git commit -m "${{ inputs.target-branch-commit-message }}"
 
     - name: Push
       shell: bash
       run: |
-        echo "Pushing to repository with token..."
-        if [ -z "$TOKEN" ]; then
-          echo "ERROR: TOKEN is not set!"
-          exit 1
-        fi
         git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git
         git push origin "$BRANCH"
 
