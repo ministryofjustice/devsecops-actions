@@ -170,9 +170,9 @@ runs:
       with:
         app-id: ${{ inputs.github-app-id }}
         private-key: ${{ inputs.github-app-private-key }}
-        permission-workflows: "write"
-        permission-contents: "write"
-        permission-pull-requests: "write"
+        # permission-workflows: "write"
+        # permission-contents: "write"
+        # permission-pull-requests: "write"
 
     - name: Configure Git Authentication
       shell: bash
@@ -188,22 +188,6 @@ runs:
           echo "Error: No token provided for authentication"
           exit 1
         fi
-
-    - name: Debug Installation
-      if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
-      shell: bash
-      run: |
-        echo "=== Installation Permissions Debug - 2 ==="
-        curl -s -H "Authorization: Bearer ${{ steps.github-app-token-write.outputs.token }}" \
-             -H "Accept: application/vnd.github.v3+json" \
-             https://api.github.com/installation/repositories \
-        | jq '{
-            total_count: .total_count,
-            repositories: .repositories[] | {
-              name: .name,
-              permissions: .permissions
-            }
-          }'
 
     - name: Variables
       shell: bash
@@ -248,7 +232,7 @@ runs:
     - name: Commit
       shell: bash
       run: |
-        git add . ':!.github'
+        git add .
         git commit -m "${{ inputs.target-branch-commit-message }}"
 
     - name: Push
