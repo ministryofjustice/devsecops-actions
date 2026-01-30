@@ -170,7 +170,6 @@ runs:
       with:
         app-id: ${{ inputs.github-app-id }}
         private-key: ${{ inputs.github-app-private-key }}
-        permission-metadata: "read"
         permission-workflows: "write"
         permission-contents: "write"
         permission-pull-requests: "write"
@@ -190,15 +189,12 @@ runs:
           exit 1
         fi
 
-
     - name: Debug Installation
       if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
       shell: bash
-      env:
-        TOKEN: ${{ steps.github-app-token-write.outputs.token }}
       run: |
         echo "=== Installation Permissions Debug - 2 ==="
-        curl -s -H "Authorization: Bearer $TOKEN" \
+        curl -s -H "Authorization: Bearer ${{ steps.github-app-token-write.outputs.token }}" \
              -H "Accept: application/vnd.github.v3+json" \
              https://api.github.com/installation/repositories \
         | jq '{
@@ -229,30 +225,15 @@ runs:
         if [ -n "$APP_TOKEN" ]; then
           TOKEN="$APP_TOKEN"
           git config user.name "${APP_SLUG}[bot]"
-          git config user.email "${APP_SLUG}[bot]@users.noreply.github.com"
-          echo "Using GitHub App token"
-          
-          # Debug: Check installation permissions
-          echo "Checking installation repositories..."
-          curl -s -H "Authorization: Bearer $TOKEN" \
-               https://api.github.com/installation/repositories \
-          | jq -r '.repositories[] | "\(.name): push=\(.permissions.push // false)"'
-          
+          git config user.email "${APP_SLUG}[bot]@users.noreply.github.com"          
         elif [ -n "$INPUT_TOKEN" ]; then
           TOKEN="$INPUT_TOKEN"
           git config user.name "${{ inputs.github-commit-user-name }}"
           git config user.email "${{ inputs.github-commit-user-email }}"
-          echo "Using provided token"
         else
           echo "Error: No token provided for authentication"
           exit 1
         fi
-
-        # Test token permissions
-        echo "Testing token permissions on current repo..."
-        curl -s -H "Authorization: Bearer $TOKEN" \
-             https://api.github.com/repos/${{ github.repository }} \
-        | jq -r '.permissions // "No permissions data"'
 
         echo "TOKEN=$TOKEN" >> "$GITHUB_ENV"
 
