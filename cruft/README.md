@@ -159,7 +159,7 @@ jobs:
           github-app-owner: "${{ github.repository_owner }}"
           github-app-repositories: "${{ github.event.repository.name }},template-repository"
           base-branch: "main"
-          python-version: "3.12"
+          python-version: "3.14.2"
 ```
 
 ### Production Configuration with Custom Base Branch
@@ -208,7 +208,7 @@ jobs:
           github-app-owner: "${{ github.repository_owner }}"
           github-app-repositories: "${{ github.event.repository.name }},template-repository"
           base-branch: ${{ github.event.inputs.base-branch || 'develop' }}
-          python-version: "3.12"
+          python-version: "3.14.2"
 ```
 
 ### Multi-Repository Synchronization
@@ -268,22 +268,22 @@ jobs:
 
 All inputs are optional except when using GitHub App authentication for private templates. The action works with sensible defaults for most use cases.
 
-| Input                          | Type   | Required | Default | Description                                                                                    |
-| ------------------------------ | ------ | -------- | ------- | ---------------------------------------------------------------------------------------------- |
-| `token`                        | string | No       | N/A     | GitHub token with write permissions for contents and pull-requests (required if not using App) |
-| `python-version`               | string | No       | `3.12`  | Python version to use for Cruft installation                                                   |
-| `private`                      | string | No       | `false` | Set to `true` if template repository is private and requires authentication                    |
-| `github-app-id`                | string | No       | `""`    | GitHub App ID for authentication token generation (required for private templates with App)    |
-| `github-app-private-key`       | string | No       | `""`    | GitHub App private key in PEM format (required for private templates with App)                 |
-| `github-app-owner`             | string | No       | `""`    | GitHub organisation or user name for token scope limitation                                    |
-| `github-app-repositories`      | string | No       | `""`    | Comma-separated list of repository names for token scope (e.g., "repo1,template-repo")         |
-| `base-branch`                  | string | No       | `main`  | Base branch where pull requests will be targeted                                               |
-| `target-branch-name`           | string | No       | Auto    | Custom branch name (default: `chore/cookie-cutter-update-YYYYMMDD`)                            |
-| `target-branch-heading`        | string | No       | Auto    | Pull request title (default: `chore(update): cruft update`)                                    |
-| `target-branch-commit-message` | string | No       | Auto    | Git commit message (default: `chore(update): cruft update`)                                    |
-| `target-branch-body`           | string | No       | Auto    | Pull request body text (default: `chore(update): cruft update`)                                |
-| `target-branch-labels`         | string | No       | `""`    | Comma or newline-separated list of labels to apply to PR                                       |
-| `target-branch-reviewers`      | string | No       | `""`    | Comma or newline-separated list of GitHub usernames to request reviews from                    |
+| Input                          | Type   | Required | Default  | Description                                                                                    |
+| ------------------------------ | ------ | -------- | -------- | ---------------------------------------------------------------------------------------------- |
+| `token`                        | string | No       | N/A      | GitHub token with write permissions for contents and pull-requests (required if not using App) |
+| `python-version`               | string | No       | `3.14.2` | Python version to use for Cruft installation                                                   |
+| `private`                      | string | No       | `false`  | Set to `true` if template repository is private and requires authentication                    |
+| `github-app-id`                | string | No       | `""`     | GitHub App ID for authentication token generation (required for private templates with App)    |
+| `github-app-private-key`       | string | No       | `""`     | GitHub App private key in PEM format (required for private templates with App)                 |
+| `github-app-owner`             | string | No       | `""`     | GitHub organisation or user name for token scope limitation                                    |
+| `github-app-repositories`      | string | No       | `""`     | Comma-separated list of repository names for token scope (e.g., "repo1,template-repo")         |
+| `base-branch`                  | string | No       | `main`   | Base branch where pull requests will be targeted                                               |
+| `target-branch-name`           | string | No       | Auto     | Custom branch name (default: `chore/cookie-cutter-update-YYYYMMDD`)                            |
+| `target-branch-heading`        | string | No       | Auto     | Pull request title (default: `chore(update): cruft update`)                                    |
+| `target-branch-commit-message` | string | No       | Auto     | Git commit message (default: `chore(update): cruft update`)                                    |
+| `target-branch-body`           | string | No       | Auto     | Pull request body text (default: `chore(update): cruft update`)                                |
+| `target-branch-labels`         | string | No       | `""`     | Comma or newline-separated list of labels to apply to PR                                       |
+| `target-branch-reviewers`      | string | No       | `""`     | Comma or newline-separated list of GitHub usernames to request reviews from                    |
 
 ---
 
