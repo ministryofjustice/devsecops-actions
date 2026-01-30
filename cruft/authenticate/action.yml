@@ -77,7 +77,7 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-29
+# Last Updated: 2026-01-30
 #
 # ==============================================================================
 
@@ -88,27 +88,27 @@ author: Ministry of Justice UK
 inputs:
   github-app-id:
     required: false
-    description: "GitHubApp ID"
+    description: "GitHub App ID for authentication token generation"
     default: ""
 
   github-app-private-key:
     required: false
-    description: "GitHubApp private key"
+    description: "GitHub App private key in PEM format for authentication"
     default: ""
 
   github-app-owner:
     required: false
-    description: "GitHub App organisation owner token scope"
+    description: "GitHub organisation or user name for token scope limitation"
     default: ""
 
   github-app-repositories:
     required: false
-    description: "GitHub App organisation repositories token scope"
+    description: "Comma-separated list of repository names for token scope limitation"
     default: ""
 
   token:
     required: false
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+    description: "GitHub personal access token or GITHUB_TOKEN with repository read access for private template authentication"
     default: ""
 
 runs:

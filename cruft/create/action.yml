@@ -55,14 +55,13 @@
 # ==============================================================================
 # WORKFLOW PROCESS
 # ==============================================================================
-# 1. Run cruft update to detect and apply template changes
-# 2. Generate environment variables for branch naming
-# 3. Configure Git user identity
-# 4. Create new feature branch with date-based naming
-# 5. Configure Git signing (if enabled)
-# 6. Stage and commit all changes
-# 7. Push changes to remote branch using token authentication
-# 8. Create pull request via GitHub REST API
+# 1. Generate GitHub App token or use provided token for authentication
+# 2. Set environment variables for branch and base branch names
+# 3. Configure token selection (GitHub App or personal access token)
+# 4. Create pull request with template updates using peter-evans/create-pull-request
+# 5. Automatically commit changes with signed commits (if configured)
+# 6. Apply labels and assign reviewers as specified
+# 7. Push changes to new branch and open pull request
 #
 # ==============================================================================
 # BRANCH NAMING CONVENTION
@@ -93,7 +92,7 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-29
+# Last Updated: 2026-01-30
 #
 # ==============================================================================
 
@@ -109,57 +108,57 @@ inputs:
 
   target-branch-name:
     required: false
-    description: "Branch name to use when creating the pull request"
+    description: "Branch name to use when creating the pull request (supports date expansion)"
     default: "chore/cookie-cutter-update-$(date +%Y%m%d)"
 
   target-branch-heading:
     required: false
-    description: "Commit heading for the update pull request"
+    description: "Pull request title following conventional commit format"
     default: "chore(update): cruft update"
 
   target-branch-commit-message:
     required: false
-    description: "Commit message for the update pull request"
+    description: "Git commit message for template synchronisation changes"
     default: "chore(update): cruft update"
 
   target-branch-body:
     required: false
-    description: "Commit body for the update pull request"
+    description: "Pull request body describing template updates and changes"
     default: "chore(update): cruft update"
 
   target-branch-labels:
     required: false
-    description: "Target branch labels to apply, A comma or newline-separated list of labels."
+    description: "Comma or newline-separated list of labels to apply to the pull request"
     default: ""
 
   target-branch-reviewers:
     required: false
-    description: "Target branch reviewers name, A comma or newline-separated list of reviewers (GitHub usernames) to request a review from."
+    description: "Comma or newline-separated list of GitHub usernames to request reviews from"
     default: ""
 
   github-app-id:
     required: false
-    description: "GitHubApp ID"
+    description: "GitHub App ID for authentication token generation with workflow permissions"
     default: ""
 
   github-app-private-key:
     required: false
-    description: "GitHubApp private key"
+    description: "GitHub App private key in PEM format for authentication"
     default: ""
 
   github-app-owner:
     required: false
-    description: "GitHub App organisation owner token scope"
+    description: "GitHub organisation or user name for GitHub App token scope"
     default: ""
 
   github-app-repositories:
     required: false
-    description: "GitHub App organisation repositories token scope"
+    description: "Comma-separated list of repository names for GitHub App token scope"
     default: ""
 
   token:
     required: false
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+    description: "GitHub personal access token or GITHUB_TOKEN with contents, pull-requests, and workflow permissions"
 
 runs:
   using: composite

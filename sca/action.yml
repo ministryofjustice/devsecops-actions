@@ -138,7 +138,7 @@ runs:
       uses: ministryofjustice/devsecops-actions/sca/owasp@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
     - name: 🔁 Renovate
-      if: ${{ inputs.renovate == 'true' }}
+      if: inputs.renovate == 'true'
       uses: ministryofjustice/devsecops-actions/sca/renovate@9babea875cafae0e3b05a5ec5aca76d6b560c42e
       with:
         token: ${{ inputs.token }}

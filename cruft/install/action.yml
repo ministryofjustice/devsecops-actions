@@ -65,7 +65,7 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-29
+# Last Updated: 2026-01-30
 #
 # ==============================================================================
 
@@ -76,7 +76,7 @@ author: Ministry of Justice UK
 inputs:
   python-version:
     required: false
-    description: "Python version to use for Cruft installation. Supports semantic versioning (e.g., 3.14.2)."
+    description: "Python version to use for Cruft installation. Supports semantic versioning (e.g., 3.12, 3.13)."
     default: 3.14.2
 
 runs:

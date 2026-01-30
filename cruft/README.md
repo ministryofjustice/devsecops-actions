@@ -18,8 +18,8 @@ aligned with template best practices and improvements.
 
 - **Template Synchronization** - Automated detection and application of upstream template changes
 - **Pull Request Automation** - Automatic PR creation with synchronized changes
-- **Private Template Support** - SSH authentication for private template repositories
-- **Signed Commits** - Git commit signing for verification and security
+- **Private Template Support** - HTTPS token authentication for private template repositories
+- **Verified Commits** - GitHub App bot commits with automatic verification
 - **Intelligent Updates** - Conflict-aware synchronisation with strict mode enforcement
 
 ---
@@ -45,9 +45,10 @@ aligned with template best practices and improvements.
 
 Each component is an independent composite action that can be configured individually:
 
-1. **⚡️ Install** - Python environment setup and Cruft installation
-2. **➕ Create** - Template update detection and PR creation
-3. **🔑 Authenticate** - SSH authentication for private templates
+1. **⚒️ Install** - Python environment setup and Cruft installation
+2. **🔑 Authenticate** - HTTPS token authentication for private templates
+3. **🔎 Check** - Template update detection and availability checking
+4. **✏️ Create** - Pull request creation with template updates
 
 ---
 
@@ -57,8 +58,8 @@ Each component is an independent composite action that can be configured individ
 
 - ✅ **Automatic Template Updates**: Detects changes in upstream Cookiecutter/Cruft templates
 - ✅ **Pull Request Automation**: Creates PRs automatically with synchronized changes
-- ✅ **Private Template Support**: SSH-based authentication for private repositories
-- ✅ **Signed Commits**: Git commit signing using SSH keys for verification
+- ✅ **Private Template Support**: HTTPS token-based authentication for private repositories
+- ✅ **GitHub App Integration**: Verified commits via GitHub App authentication
 - ✅ **Intelligent Branch Naming**: Date-based branch naming for easy tracking
 - ✅ **Strict Mode**: Enforces template consistency with strict update validation
 - ✅ **Non-Interactive**: Fully automated workflow without manual intervention
@@ -66,11 +67,11 @@ Each component is an independent composite action that can be configured individ
 
 ### Security Features
 
-- 🔒 **SSH Key Management**: Secure SSH key configuration with proper permissions
-- 🔒 **StrictHostKeyChecking**: Prevents man-in-the-middle attacks
-- 🔒 **Ed25519 Support**: Modern cryptographic algorithm support
-- 🔒 **Token Authentication**: GitHub token-based API access
-- 🔒 **Isolated Identity Files**: Per-operation SSH identity isolation
+- 🔒 **Token Authentication**: Secure HTTPS-based authentication with GitHub tokens
+- 🔒 **GitHub App Support**: First-class GitHub App integration for verified commits
+- 🔒 **Verified Commits**: Automatic commit verification via GitHub App bot users
+- 🔒 **Permission Scoping**: Fine-grained permission control for token generation
+- 🔒 **Secure Token Handling**: Environment-based token management
 
 ---
 
@@ -116,12 +117,12 @@ jobs:
 This minimal setup provides:
 ✅ Weekly template synchronisation  
 ✅ Automatic pull request creation  
-✅ Signed commits  
+✅ Verified commits via GitHub App (when configured)  
 ✅ Date-based branch naming
 
-### Advanced Configuration - Private Template
+### Advanced Configuration - Private Template with GitHub App
 
-For repositories using private Cookiecutter templates:
+For repositories using private Cookiecutter templates with GitHub App authentication:
 
 ```yaml
 name: Cruft Update - Private Template
@@ -143,20 +144,22 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      workflows: write
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Run Cruft Update with SSH Authentication
+      - name: Run Cruft Update with GitHub App
         uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           private: "true"
-          ssh-key: ${{ secrets.CRUFT_SSH_KEY }}
-          github-known-hosts: ${{ secrets.GITHUB_KNOWN_HOSTS }}
+          github-app-id: ${{ secrets.CRUFT_APP_ID }}
+          github-app-private-key: ${{ secrets.CRUFT_APP_PRIVATE_KEY }}
+          github-app-owner: "${{ github.repository_owner }}"
+          github-app-repositories: "${{ github.event.repository.name }},template-repository"
           base-branch: "main"
-          python-version: "3.14.2"
+          python-version: "3.12"
 ```
 
 ### Production Configuration with Custom Base Branch
@@ -187,6 +190,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      workflows: write
       issues: write
 
     steps:
@@ -198,12 +202,13 @@ jobs:
       - name: Run Cruft Update
         uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           private: "true"
-          ssh-key: ${{ secrets.CRUFT_SSH_KEY }}
-          github-known-hosts: ${{ secrets.GITHUB_KNOWN_HOSTS }}
+          github-app-id: ${{ secrets.CRUFT_APP_ID }}
+          github-app-private-key: ${{ secrets.CRUFT_APP_PRIVATE_KEY }}
+          github-app-owner: "${{ github.repository_owner }}"
+          github-app-repositories: "${{ github.event.repository.name }},template-repository"
           base-branch: ${{ github.event.inputs.base-branch || 'develop' }}
-          python-version: "3.14.2"
+          python-version: "3.12"
 ```
 
 ### Multi-Repository Synchronization
@@ -251,24 +256,34 @@ jobs:
         with:
           token: ${{ secrets.ORG_ACCESS_TOKEN }}
           private: "true"
-          ssh-key: ${{ secrets.CRUFT_SSH_KEY }}
-          github-known-hosts: ${{ secrets.GITHUB_KNOWN_HOSTS }}
+          github-app-id: ${{ secrets.CRUFT_APP_ID }}
+          github-app-private-key: ${{ secrets.CRUFT_APP_PRIVATE_KEY }}
+          github-app-owner: "${{ github.repository_owner }}"
+          github-app-repositories: "${{ matrix.repository }},template-repository"
 ```
 
 ---
 
 ## 🔧 Inputs
 
-All inputs are optional except `token`. The action works with sensible defaults for most use cases.
+All inputs are optional except when using GitHub App authentication for private templates. The action works with sensible defaults for most use cases.
 
-| Input                | Type   | Required | Default  | Description                                                                                     |
-| -------------------- | ------ | -------- | -------- | ----------------------------------------------------------------------------------------------- |
-| `token`              | string | **Yes**  | N/A      | GitHub token with write permissions for contents and pull-requests                              |
-| `python-version`     | string | No       | `3.14.2` | Python version to use for Cruft installation                                                    |
-| `private`            | string | No       | `false`  | Set to `true` if template repository is private and requires SSH authentication                 |
-| `ssh-key`            | string | No       | `""`     | SSH private key for private template access. Required when `private` is `true`                  |
-| `github-known-hosts` | string | No       | `""`     | GitHub SSH host key fingerprints. Required when `private` is `true`. We recommend using Ed25519 |
-| `base-branch`        | string | No       | `main`   | Base branch where pull requests will be targeted                                                |
+| Input                          | Type   | Required | Default | Description                                                                                    |
+| ------------------------------ | ------ | -------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `token`                        | string | No       | N/A     | GitHub token with write permissions for contents and pull-requests (required if not using App) |
+| `python-version`               | string | No       | `3.12`  | Python version to use for Cruft installation                                                   |
+| `private`                      | string | No       | `false` | Set to `true` if template repository is private and requires authentication                    |
+| `github-app-id`                | string | No       | `""`    | GitHub App ID for authentication token generation (required for private templates with App)    |
+| `github-app-private-key`       | string | No       | `""`    | GitHub App private key in PEM format (required for private templates with App)                 |
+| `github-app-owner`             | string | No       | `""`    | GitHub organisation or user name for token scope limitation                                    |
+| `github-app-repositories`      | string | No       | `""`    | Comma-separated list of repository names for token scope (e.g., "repo1,template-repo")         |
+| `base-branch`                  | string | No       | `main`  | Base branch where pull requests will be targeted                                               |
+| `target-branch-name`           | string | No       | Auto    | Custom branch name (default: `chore/cookie-cutter-update-YYYYMMDD`)                            |
+| `target-branch-heading`        | string | No       | Auto    | Pull request title (default: `chore(update): cruft update`)                                    |
+| `target-branch-commit-message` | string | No       | Auto    | Git commit message (default: `chore(update): cruft update`)                                    |
+| `target-branch-body`           | string | No       | Auto    | Pull request body text (default: `chore(update): cruft update`)                                |
+| `target-branch-labels`         | string | No       | `""`    | Comma or newline-separated list of labels to apply to PR                                       |
+| `target-branch-reviewers`      | string | No       | `""`    | Comma or newline-separated list of GitHub usernames to request reviews from                    |
 
 ---
 
@@ -276,71 +291,94 @@ All inputs are optional except `token`. The action works with sensible defaults 
 
 Your workflow must explicitly grant these permissions:
 
-| Permission      | Level     | Purpose                                |
-| --------------- | --------- | -------------------------------------- |
-| `contents`      | **write** | Repository checkout and commit changes |
-| `pull-requests` | **write** | Creating and updating pull requests    |
+| Permission      | Level     | Purpose                                           |
+| --------------- | --------- | ------------------------------------------------- |
+| `contents`      | **write** | Repository checkout and commit changes            |
+| `pull-requests` | **write** | Creating and updating pull requests               |
+| `workflows`     | **write** | Required when using GitHub App for workflow files |
 
 ---
 
 ## ⚙️ Configuration
 
-### Setting Up SSH for Private Templates
+### Setting Up GitHub App for Private Templates
 
-#### 1. Generate SSH Key Pair
+#### 1. Create or Use Existing GitHub App
 
-Generate an Ed25519 SSH key (recommended for security and performance):
+You can either create a new GitHub App or use an existing one:
 
-```bash
-ssh-keygen -t ed25519 -C "cruft-template-access" -f cruft_key
-```
+Option A: Organisation-Level GitHub App (Recommended)
 
-This creates two files:
+1. Navigate to Organisation Settings → Developer settings → GitHub Apps
+2. Click "New GitHub App"
+3. Configure basic settings:
+   - **Name**: "Cruft Template Sync Bot"
+   - **Homepage URL**: Your organisation's URL
+   - **Webhook**: Uncheck "Active" (not needed)
 
-- `cruft_key` - Private key (keep secret)
-- `cruft_key.pub` - Public key (add to GitHub)
+Option B: Repository-Level GitHub App
 
-#### 2. Add Public Key to GitHub
+1. Navigate to Repository Settings → Developer settings → GitHub Apps
+2. Follow same steps as above
 
-Option A: Deploy Key (Recommended)
+#### 2. Configure Permissions
 
-1. Navigate to template repository → Settings → Deploy keys
-2. Click "Add deploy key"
-3. Paste contents of `cruft_key.pub`
-4. Title: "Cruft Template Sync"
-5. Check "Allow write access" (only if updating template from consumer repo)
+Set the following repository permissions:
 
-#### 3. Get GitHub Known Hosts
+| Permission    | Access     | Purpose                           |
+| ------------- | ---------- | --------------------------------- |
+| Contents      | Read/Write | Clone template and commit changes |
+| Pull Requests | Read/Write | Create and manage pull requests   |
+| Workflows     | Read/Write | Update workflow files in .github/ |
 
-Retrieve GitHub's SSH host key [fingerprint](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints):
+#### 3. Generate Private Key
 
-```bash
-ssh-keyscan -t ed25519 github.com
-```
+1. Scroll to "Private keys" section
+2. Click "Generate a private key"
+3. Save the downloaded `.pem` file securely
+4. **Important**: This key cannot be retrieved again
 
-Expected output:
+#### 4. Install GitHub App
 
-```bash
-github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
-```
+1. Click "Install App" in the left sidebar
+2. Select your organisation or account
+3. Choose repositories:
+   - **All repositories**, or
+   - **Select repositories** (consumer repo + template repo)
+4. Click "Install"
 
-#### 4. Store in GitHub Secrets
+#### 5. Store in GitHub Secrets
 
 Add these secrets to your repository:
 
-1. **CRUFT_SSH_KEY**
-   - Value: Contents of `cruft_key` (entire private key including headers)
+1. **CRUFT_APP_ID**
+   - Value: GitHub App ID (found on app's settings page)
+   - Format: Numeric ID (e.g., `123456`)
+
+2. **CRUFT_APP_PRIVATE_KEY**
+   - Value: Contents of the `.pem` file (entire key including headers)
    - Format:
 
      ```bash
-     -----BEGIN OPENSSH PRIVATE KEY-----
-     b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtz...
-     -----END OPENSSH PRIVATE KEY-----
+     -----BEGIN RSA PRIVATE KEY-----
+     MIIEpAIB...
+     -----END RSA PRIVATE KEY-----
      ```
 
-2. **GITHUB_KNOWN_HOSTS**
-   - Value: Output from `ssh-keyscan` command
-   - Format: `github.com ssh-ed25519 AAC3Nza...`
+### Alternative: Using Personal Access Token
+
+For simpler setups without GitHub App:
+
+1. Generate a Classic PAT with `repo` scope
+2. Store as `GITHUB_TOKEN` secret
+3. Use in workflow:
+
+   ```yaml
+   with:
+     token: ${{ secrets.GITHUB_TOKEN }}
+   ```
+
+**Note**: PAT commits won't show verified badge unless using GPG signing.
 
 ### Branch Naming Convention
 
@@ -378,20 +416,36 @@ This convention:
 cruft link https://github.com/ministryofjustice/template-repository
 ```
 
-#### Issue: SSH Authentication Failure
+#### Issue: GitHub App Authentication Failure
 
-**Cause**: Invalid SSH key or incorrect known_hosts
+**Cause**: Invalid App ID or private key format
 
 **Solution**:
 
-1. Verify SSH key format (must include headers/footers)
-2. Ensure known_hosts is from `ssh-keyscan -t ed25519 github.com`
-3. Check deploy key has correct repository access
-4. Verify secrets are named exactly: `CRUFT_SSH_KEY` and `GITHUB_KNOWN_HOSTS`
+1. Verify App ID is numeric (not App name)
+2. Ensure private key includes complete PEM headers and footers
+3. Check GitHub App is installed on both consumer and template repositories
+4. Verify App has required permissions (contents, pull-requests, workflows)
+5. Ensure secrets are named exactly: `CRUFT_APP_ID` and `CRUFT_APP_PRIVATE_KEY`
+
+#### Issue: "Refusing to allow GitHub App to create workflow without workflows permission"
+
+**Cause**: GitHub App lacks `workflows` permission or workflow doesn't grant it
+
+**Solution**:
+
+```yaml
+permissions:
+  contents: write
+  pull-requests: write
+  workflows: write # Required for workflow files
+```
+
+Also ensure GitHub App has `workflows: read/write` permission in its settings.
 
 #### Issue: "Permission denied" when creating PR
 
-**Cause**: Insufficient GitHub token permissions
+**Cause**: Insufficient GitHub token or App permissions
 
 **Solution**:
 
@@ -399,9 +453,10 @@ cruft link https://github.com/ministryofjustice/template-repository
 permissions:
   contents: write # Required for commits
   pull-requests: write # Required for PR creation
+  workflows: write # Required for workflow file changes
 ```
 
-Also ensure the workflow utilises an appropriately configured PAT.
+Also ensure GitHub App has appropriate permissions configured in its settings.
 
 ### Debug Mode
 
@@ -433,15 +488,28 @@ uses: ministryofjustice/devsecops-actions/cruft@main
 ### Security Best Practices
 
 ```yaml
-# ✅ Always use GitHub's built-in token when possible
+# ✅ Always use GitHub App for verified commits
+github-app-id: ${{ secrets.CRUFT_APP_ID }}
+github-app-private-key: ${{ secrets.CRUFT_APP_PRIVATE_KEY }}
+
+# ✅ Use built-in token for public templates
 token: ${{ secrets.GITHUB_TOKEN }}
 
-# ❌ Never hardcode tokens
+# ❌ Never hardcode credentials
+github-app-id: 123456 # NEVER DO THIS
 token: ghp_abc123... # NEVER DO THIS
 
-# ✅ Use organization tokens for cross-repo operations
+# ✅ Use organisation tokens for cross-repo operations
 token: ${{ secrets.ORG_ACCESS_TOKEN }}
 ```
+
+### GitHub App Management
+
+- 🔐 **Rotate keys regularly**: Regenerate private keys every 90 days
+- 🔐 **Review permissions**: Audit App permissions quarterly
+- 🔐 **Monitor usage**: Review GitHub audit logs for App activity
+- 🔐 **Limit installation**: Only install App on necessary repositories
+- 🔐 **Document Apps**: Keep a record of which Apps are used where
 
 ### Scheduling Best Practices
 

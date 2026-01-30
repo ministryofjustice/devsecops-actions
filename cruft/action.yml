@@ -76,7 +76,7 @@
 # ==============================================================================
 # Action Version: 1.0.0
 # Minimum GitHub Enterprise Server: 3.8
-# Last Updated: 2026-01-29
+# Last Updated: 2026-01-30
 #
 # ==============================================================================
 
@@ -92,7 +92,7 @@ inputs:
 
   private:
     required: false
-    description: "Indicates whether the Cruft template repository is private and requires SSH authentication."
+    description: "Indicates whether the Cruft template repository is private and requires authentication."
     default: "false"
 
   base-branch:
@@ -163,7 +163,7 @@ runs:
         python-version: ${{ inputs.python-version }}
 
     - name: 🔑 Authenticate
-      if: ${{ inputs.private  == 'true' }}
+      if: inputs.private  == 'true'
       uses: ministryofjustice/devsecops-actions/cruft/authenticate@feat/92-cruft-update---reusable-action
       with:
         token: ${{ inputs.token }}
@@ -173,9 +173,11 @@ runs:
         github-app-private-key: ${{ inputs.github-app-private-key }}
 
     - name: 🔎 Check
+      id: check
       uses: ministryofjustice/devsecops-actions/cruft/check@feat/92-cruft-update---reusable-action
 
     - name: ✏️ Create
+      if: steps.check.outputs.has-update == "true"
       uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
       with:
         token: ${{ inputs.token }}

@@ -58,7 +58,7 @@ scanning, dependency management, template synchronisation, and compliance report
 
 ### 🔍 SCA - Software Composition Analysis
 
-**Path**: `ministryofjustice/devsecops-actions/sca`  
+**Path**: `ministryofjustice/devsecops-actions/sca`
 
 Enterprise-grade composite action for comprehensive software composition analysis, dependency management
 and security review across the entire software supply chain.
@@ -99,17 +99,18 @@ Orchestrates 9 specialized security tools:
 
 ### 🚀 Cruft - Template Synchronization
 
-**Path**: `ministryofjustice/devsecops-actions/cruft`  
+**Path**: `ministryofjustice/devsecops-actions/cruft`
 
 Automated template synchronisation action that maintains consistency between repositories created from Cookiecutter/Cruft templates and their upstream sources.
 
 #### Introduction
 
-Orchestrates 3 specialized components:
+Orchestrates 4 specialized components:
 
 1. **⚒️ Install** - Python environment and Cruft setup
-2. **🔑 Authenticate** - SSH authentication for private templates
-3. **✏️ Create** - Template update detection and PR creation
+2. **🔑 Authenticate** - HTTPS token authentication for private templates
+3. **🔎 Check** - Template update detection and availability checking
+4. **✏️ Create** - Pull request creation with template updates
 
 #### Code
 
@@ -126,18 +127,19 @@ Orchestrates 3 specialized components:
 ```yaml
 - uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
   with:
-    token: ${{ secrets.GITHUB_TOKEN }}
     private: "true"
-    ssh-key: ${{ secrets.CRUFT_SSH_KEY }}
-    github-known-hosts: ${{ secrets.GITHUB_KNOWN_HOSTS }}
+    github-app-id: ${{ secrets.CRUFT_APP_ID }}
+    github-app-private-key: ${{ secrets.CRUFT_APP_PRIVATE_KEY }}
+    github-app-owner: "${{ github.repository_owner }}"
+    github-app-repositories: "${{ github.event.repository.name }},template-repository"
 ```
 
 #### Features
 
 - ✅ **Automatic Sync** - Detects upstream template changes
 - ✅ **PR Automation** - Creates pull requests automatically
-- ✅ **Private Support** - SSH authentication for private repos
-- ✅ **Signed Commits** - Git commit signing
+- ✅ **Private Support** - HTTPS token authentication for private repos
+- ✅ **GitHub App Integration** - Verified commits via GitHub App
 - ✅ **Smart Naming** - Date-based branch naming
 
 **[📖 Full Cruft Documentation](cruft/README.md)**
