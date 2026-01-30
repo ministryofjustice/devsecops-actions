@@ -119,10 +119,10 @@ runs:
       if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
       uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
       with:
-        app-id: ${{ inputs.github-app-id }}
-        private-key: ${{ inputs.github-app-private-key }}
-        owner: ${{ inputs.github-app-owner }}
-        repositories: ${{ inputs.github-app-repositories }}
+        app-id: "${{ inputs.github-app-id }}"
+        private-key: "${{ inputs.github-app-private-key }}"
+        owner: "${{ inputs.github-app-owner }}"
+        repositories: "${{ inputs.github-app-repositories }}"
 
     - name: Configure Git Authentication
       shell: bash
