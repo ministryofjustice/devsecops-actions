@@ -219,33 +219,42 @@ runs:
       shell: bash
       run: cruft update --skip-apply-ask --strict
 
-    - name: Branch
-      shell: bash
-      run: git switch -c $BRANCH
-
-    - name: Commit
-      shell: bash
-      run: |
-        git add .
-        git commit -m "${{ inputs.target-branch-commit-message }}"
-
-    - name: Push
-      shell: bash
-      run: |
-        git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git
-        git push origin "$BRANCH"
-
     - name: PR
-      shell: bash
-      run: |
-        curl -sSf \
-        "https://api.github.com/repos/${{ github.repository }}/pulls" \
-        -X POST \
-        -H "Authorization: Bearer ${TOKEN}" \
-        -H "Accept: application/vnd.github.v3+json" \
-        -d '{
-          "title": "${{ inputs.target-branch-commit-heading }}",
-          "base": "'"$BASE"'",
-          "head": "'"$BRANCH"'",
-          "body": "${{ inputs.target-branch-commit-body }}"
-        }'
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ env.TOKEN }}
+        title: "${{ inputs.target-branch-commit-heading }}"
+        commit-message: "${{ inputs.target-branch-commit-message }}"
+        branch: ${{ env.BRANCH }}
+        base: ${{ env.BASE }}
+
+    # - name: Branch
+    #   shell: bash
+    #   run: git switch -c $BRANCH
+
+    # - name: Commit
+    #   shell: bash
+    #   run: |
+    #     git add .
+    #     git commit -m "${{ inputs.target-branch-commit-message }}"
+
+    # - name: Push
+    #   shell: bash
+    #   run: |
+    #     git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git
+    #     git push origin "$BRANCH"
+
+    # - name: PR
+    #   shell: bash
+    #   run: |
+    #     curl -sSf \
+    #     "https://api.github.com/repos/${{ github.repository }}/pulls" \
+    #     -X POST \
+    #     -H "Authorization: Bearer ${TOKEN}" \
+    #     -H "Accept: application/vnd.github.v3+json" \
+    #     -d '{
+    #       "title": "${{ inputs.target-branch-commit-heading }}",
+    #       "base": "'"$BASE"'",
+    #       "head": "'"$BRANCH"'",
+    #       "body": "${{ inputs.target-branch-commit-body }}"
+    #     }'
