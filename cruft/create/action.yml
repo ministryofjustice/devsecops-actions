@@ -174,7 +174,7 @@ runs:
         repositories: "${{ github.event.repository.name }}"
         permission-workflows: "write"
         permission-contents: "write"
-        permission-pull-requests: "write"
+        # permission-pull-requests: "write"
 
     - name: Configure Git Authentication
       shell: bash
@@ -207,7 +207,6 @@ runs:
         INPUT_TOKEN: ${{ inputs.token }}
         APP_SLUG: ${{ steps.github-app-token-write.outputs.app-slug }}
       run: |
-        # Determine which token to use
         if [ -n "$APP_TOKEN" ]; then
           TOKEN="$APP_TOKEN"
           git config user.name "${APP_SLUG}[bot]"
@@ -240,7 +239,7 @@ runs:
     - name: Push
       shell: bash
       run: |
-        git remote set-url origin https://x-access-token:${{ steps.github-app-token-write.outputs.token }}@github.com/${{ github.repository }}.git
+        git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git
         git push origin "$BRANCH"
 
     - name: PR
@@ -249,7 +248,7 @@ runs:
         curl -sSf \
         "https://api.github.com/repos/${{ github.repository }}/pulls" \
         -X POST \
-        -H "Authorization: Bearer ${{ steps.github-app-token-write.outputs.token }}" \
+        -H "Authorization: Bearer ${TOKEN}" \
         -H "Accept: application/vnd.github.v3+json" \
         -d '{
           "title": "${{ inputs.target-branch-commit-heading }}",
