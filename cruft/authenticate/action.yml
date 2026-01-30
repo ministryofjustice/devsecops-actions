@@ -115,7 +115,7 @@ runs:
   using: composite
   steps:
     - name: Token
-      id: github-app-token
+      id: github-app-token-read
       if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
       uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
       with:
@@ -123,8 +123,7 @@ runs:
         private-key: ${{ inputs.github-app-private-key }}
         owner: ${{ inputs.github-app-owner }}
         repositories: ${{ inputs.github-app-repositories }}
-        permission-workflows: "write"
-        permission-contents: "write"
+        permission-contents: "read"
 
     - name: Configure Git Authentication
       shell: bash
@@ -140,21 +139,3 @@ runs:
           echo "Error: No token provided for authentication"
           exit 1
         fi
-
-    - name: Debug Installation
-      if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
-      shell: bash
-      env:
-        TOKEN: ${{ steps.github-app-token.outputs.token }}
-      run: |
-        echo "=== Installation Permissions Debug - 1 ==="
-        curl -s -H "Authorization: Bearer $TOKEN" \
-             -H "Accept: application/vnd.github.v3+json" \
-             https://api.github.com/installation/repositories \
-        | jq '{
-            total_count: .total_count,
-            repositories: .repositories[] | {
-              name: .name,
-              permissions: .permissions
-            }
-          }'
