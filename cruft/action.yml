@@ -167,16 +167,16 @@ runs:
         github-app-id: ${{ inputs.github-app-id }}
         github-app-private-key: ${{ inputs.github-app-private-key }}
 
-    # - name: ✏️ Create
-    #   uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
-    #   with:
-    #     token: ${{ inputs.token }}
-    #     github-app-id: ${{ inputs.github-app-id }}
-    #     github-app-private-key: ${{ inputs.github-app-private-key }}
-    #     github-app-owner: ${{ inputs.github-app-owner }}
-    #     github-app-repositories: ${{ inputs.github-app-repositories }}
-    #     target-branch-branch: ${{ inputs.target-branch-branch }}
-    #     target-branch-commit-heading: ${{ inputs.target-branch-commit-heading }}
-    #     target-branch-commit-message: ${{ inputs.target-branch-commit-message }}
-    #     github-commit-user-name: ${{ inputs.github-commit-user-name }}
-    #     github-commit-user-email: ${{ inputs.github-commit-user-email }}
+    - name: ✏️ Create
+      uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
+      with:
+        token: ${{ inputs.token }}
+        github-app-id: ${{ inputs.github-app-id }}
+        github-app-private-key: ${{ inputs.github-app-private-key }}
+        github-app-owner: ${{ inputs.github-app-owner }}
+        github-app-repositories: ${{ inputs.github-app-repositories }}
+        target-branch-branch: ${{ inputs.target-branch-branch }}
+        target-branch-commit-heading: ${{ inputs.target-branch-commit-heading }}
+        target-branch-commit-message: ${{ inputs.target-branch-commit-message }}
+        github-commit-user-name: ${{ inputs.github-commit-user-name }}
+        github-commit-user-email: ${{ inputs.github-commit-user-email }}

@@ -158,10 +158,3 @@ runs:
               permissions: .permissions
             }
           }'
-
-    - name: App token sanity check
-      shell: bash
-      run: |
-        echo "Who am I?"
-        curl -H "Authorization: Bearer $APP_TOKEN" \
-          https://api.github.com/user
