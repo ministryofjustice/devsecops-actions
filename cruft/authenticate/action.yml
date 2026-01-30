@@ -123,7 +123,6 @@ runs:
         private-key: ${{ inputs.github-app-private-key }}
         owner: ${{ inputs.github-app-owner }}
         repositories: ${{ inputs.github-app-repositories }}
-        permission-contents: "read"
 
     - name: Configure Git Authentication
       shell: bash
