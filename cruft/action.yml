@@ -177,7 +177,7 @@ runs:
       uses: ministryofjustice/devsecops-actions/cruft/check@feat/92-cruft-update---reusable-action
 
     - name: ✏️ Create
-      if: steps.check.outputs.has-update == 'true'
+      if: ${{ steps.check.outputs.has-update == 'true' }}
       uses: ministryofjustice/devsecops-actions/cruft/create@feat/92-cruft-update---reusable-action
       with:
         token: ${{ inputs.token }}
