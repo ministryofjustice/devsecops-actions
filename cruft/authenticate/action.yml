@@ -123,9 +123,8 @@ runs:
         private-key: ${{ inputs.github-app-private-key }}
         owner: ${{ inputs.github-app-owner }}
         repositories: ${{ inputs.github-app-repositories }}
-        permission-actions: "write"
+        permission-workflows: "write"
         permission-contents: "write"
-        permission-pull-requests: "write"
 
     - name: Configure Git Authentication
       shell: bash
