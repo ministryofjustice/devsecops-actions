@@ -122,6 +122,11 @@ inputs:
     description: "Commit message for the update pull request"
     default: "chore(update): cruft update"
 
+  target-branch-commit-body:
+    required: false
+    description: "Commit body for the update pull request"
+    default: "chore(update): cruft update"
+
   github-commit-user-name:
     required: false
     description: "GitHub commiting user name"
@@ -186,31 +191,29 @@ runs:
       env:
         APP_TOKEN: ${{ steps.github-app-token-write.outputs.token }}
         INPUT_TOKEN: ${{ inputs.token }}
+        APP_ID: ${{ inputs.github-app-id }}
         APP_SLUG: ${{ steps.github-app-token-write.outputs.app-slug }}
       run: |
         if [ -n "$APP_TOKEN" ]; then
-          TOKEN="$APP_TOKEN"
           git config user.name "${APP_SLUG}[bot]"
-          git config user.email "${APP_SLUG}[bot]@users.noreply.github.com"          
+          git config user.email "${APP_ID}+${APP_SLUG}[bot]@users.noreply.github.com"
+
+          echo "TOKEN=$APP_TOKEN" >> "$GITHUB_ENV"
         elif [ -n "$INPUT_TOKEN" ]; then
           TOKEN="$INPUT_TOKEN"
           git config user.name "${{ inputs.github-commit-user-name }}"
           git config user.email "${{ inputs.github-commit-user-email }}"
+
+          echo "TOKEN=$INPUT_TOKEN" >> "$GITHUB_ENV"
         else
           echo "Error: No token provided for authentication"
           exit 1
         fi
 
-        echo "TOKEN=$TOKEN" >> "$GITHUB_ENV"
-
-    - name: Sign
-      shell: bash
-      run: git config commit.gpgsign false
-
     - name: Checkout
       uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       with:
-        token: ${{ steps.github-app-token-write.outputs.token }}
+        token: ${TOKEN}
 
     - name: Update
       shell: bash
@@ -229,7 +232,7 @@ runs:
     - name: Push
       shell: bash
       run: |
-        git remote set-url origin https://x-access-token:${{ steps.github-app-token-write.outputs.token }}@github.com/${{ github.repository }}.git
+        git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git
         git push origin "$BRANCH"
 
     - name: PR
@@ -243,5 +246,6 @@ runs:
         -d '{
           "title": "${{ inputs.target-branch-commit-heading }}",
           "base": "'"$BASE"'",
-          "head": "'"$BRANCH"'"
+          "head": "'"$BRANCH"'",
+          "body": "${{ inputs.target-branch-commit-body }}"
         }'

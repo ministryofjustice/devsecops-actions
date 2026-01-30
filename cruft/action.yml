@@ -115,6 +115,11 @@ inputs:
     description: "Commit message for the update pull request"
     default: "chore(update): cruft update"
 
+  target-branch-commit-body:
+    required: false
+    description: "Commit body for the update pull request"
+    default: "chore(update): cruft update"
+
   github-commit-user-name:
     required: false
     description: "GitHub commiting user name"
@@ -178,5 +183,6 @@ runs:
         target-branch-branch: ${{ inputs.target-branch-branch }}
         target-branch-commit-heading: ${{ inputs.target-branch-commit-heading }}
         target-branch-commit-message: ${{ inputs.target-branch-commit-message }}
+        target-branch-commit-body: ${{ inputs.target-branch-commit-body }}
         github-commit-user-name: ${{ inputs.github-commit-user-name }}
         github-commit-user-email: ${{ inputs.github-commit-user-email }}
