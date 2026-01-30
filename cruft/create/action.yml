@@ -159,10 +159,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Update
-      shell: bash
-      run: cruft update --skip-apply-ask --strict
-
     - name: Token
       id: github-app-token-write
       if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
@@ -215,6 +211,10 @@ runs:
       uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       with:
         token: ${{ steps.github-app-token-write.outputs.token }}
+
+    - name: Update
+      shell: bash
+      run: cruft update --skip-apply-ask --strict
 
     - name: Branch
       shell: bash
