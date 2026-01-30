@@ -123,6 +123,9 @@ runs:
         private-key: ${{ inputs.github-app-private-key }}
         owner: ${{ inputs.github-app-owner }}
         repositories: ${{ inputs.github-app-repositories }}
+        permission-actions: "write"
+        permission-contents: "write"
+        permission-pull-requests: "write"
 
     - name: Configure Git Authentication
       shell: bash
@@ -160,11 +163,6 @@ runs:
     - name: App token sanity check
       shell: bash
       run: |
-        echo "Repos app can access:"
-        curl -H "Authorization: Bearer $APP_TOKEN" \
-          https://api.github.com/installation/repositories \
-          | jq '.repositories[].full_name'
-
         echo "Who am I?"
         curl -H "Authorization: Bearer $APP_TOKEN" \
           https://api.github.com/user
