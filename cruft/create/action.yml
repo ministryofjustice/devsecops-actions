@@ -170,7 +170,6 @@ runs:
       with:
         app-id: ${{ inputs.github-app-id }}
         private-key: ${{ inputs.github-app-private-key }}
-        owner: 'JusticeAIUnit'
 
     - name: Debug Installation
       if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
@@ -189,6 +188,17 @@ runs:
               permissions: .permissions
             }
           }'
+    - name: App token sanity check
+      shell: bash
+      run: |
+        echo "Repos app can access:"
+        curl -H "Authorization: Bearer $APP_TOKEN" \
+          https://api.github.com/installation/repositories \
+          | jq '.repositories[].full_name'
+
+        echo "Who am I?"
+        curl -H "Authorization: Bearer $APP_TOKEN" \
+          https://api.github.com/user
 
     - name: Variables
       shell: bash

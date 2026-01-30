@@ -145,7 +145,7 @@ runs:
       env:
         TOKEN: ${{ steps.github-app-token.outputs.token }}
       run: |
-        echo "=== Installation Permissions Debug ==="
+        echo "=== Installation Permissions Debug - 1 ==="
         curl -s -H "Authorization: Bearer $TOKEN" \
              -H "Accept: application/vnd.github.v3+json" \
              https://api.github.com/installation/repositories \
@@ -156,3 +156,15 @@ runs:
               permissions: .permissions
             }
           }'
+
+    - name: App token sanity check
+      shell: bash
+      run: |
+        echo "Repos app can access:"
+        curl -H "Authorization: Bearer $APP_TOKEN" \
+          https://api.github.com/installation/repositories \
+          | jq '.repositories[].full_name'
+
+        echo "Who am I?"
+        curl -H "Authorization: Bearer $APP_TOKEN" \
+          https://api.github.com/user
