@@ -137,16 +137,6 @@ inputs:
     description: "Target branch reviewers name, A comma or newline-separated list of reviewers (GitHub usernames) to request a review from."
     default: ""
 
-  github-commit-user-name:
-    required: false
-    description: "GitHub commiting user name"
-    default: "Ministry of Justice"
-
-  github-commit-user-email:
-    required: false
-    description: "GitHub commiting user email address"
-    default: ""
-
   github-app-id:
     required: false
     description: "GitHubApp ID"

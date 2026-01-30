@@ -130,16 +130,6 @@ inputs:
     description: "Target branch reviewers name, A comma or newline-separated list of reviewers (GitHub usernames) to request a review from."
     default: ""
 
-  github-commit-user-name:
-    required: false
-    description: "GitHub commiting user name"
-    default: "moj-ci-app[bot]"
-
-  github-commit-user-email:
-    required: false
-    description: "GitHub commiting user email address"
-    default: "moj-ci-app[bot]@users.noreply.github.com"
-
   github-app-id:
     required: false
     description: "GitHubApp ID"
@@ -199,5 +189,3 @@ runs:
         target-branch-body: ${{ inputs.target-branch-body }}
         target-branch-labels: ${{ inputs.target-branch-labels }}
         target-branch-reviewers: ${{ inputs.target-branch-reviewers }}
-        github-commit-user-name: ${{ inputs.github-commit-user-name }}
-        github-commit-user-email: ${{ inputs.github-commit-user-email }}
