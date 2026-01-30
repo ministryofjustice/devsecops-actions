@@ -173,7 +173,7 @@ runs:
         owner: "${{ github.repository_owner }}"
         repositories: "${{ github.event.repository.name }}"
         # permission-workflows: "write"
-        # permission-contents: "write"
+        permission-contents: "write"
         # permission-pull-requests: "write"
 
     - name: Configure Git Authentication
