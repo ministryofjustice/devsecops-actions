@@ -170,10 +170,10 @@ runs:
       with:
         app-id: "${{ inputs.github-app-id }}"
         private-key: "${{ inputs.github-app-private-key }}"
-        github-app-owner: "${{ github.repository_owner }}"
-        github-app-repositories: "${{ github.event.repository.name }}"
-        # permission-workflows: "write"
-        # permission-contents: "write"
+        owner: "${{ github.repository_owner }}"
+        repositories: "${{ github.event.repository.name }}"
+        permission-workflows: "write"
+        permission-contents: "write"
         # permission-pull-requests: "write"
 
     # - name: Configure Git Authentication
