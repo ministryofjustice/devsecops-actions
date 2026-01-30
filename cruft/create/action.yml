@@ -195,14 +195,14 @@ runs:
         APP_SLUG: ${{ steps.github-app-token-write.outputs.app-slug }}
       run: |
         if [ -n "$APP_TOKEN" ]; then
-          git config user.name "${APP_SLUG}[bot]"
-          git config user.email "${APP_ID}+${APP_SLUG}[bot]@users.noreply.github.com"
+          # git config user.name "${APP_SLUG}[bot]"
+          # git config user.email "${APP_ID}+${APP_SLUG}[bot]@users.noreply.github.com"
 
           echo "TOKEN=$APP_TOKEN" >> "$GITHUB_ENV"
         elif [ -n "$INPUT_TOKEN" ]; then
           TOKEN="$INPUT_TOKEN"
-          git config user.name "${{ inputs.github-commit-user-name }}"
-          git config user.email "${{ inputs.github-commit-user-email }}"
+          # git config user.name "${{ inputs.github-commit-user-name }}"
+          # git config user.email "${{ inputs.github-commit-user-email }}"
 
           echo "TOKEN=$INPUT_TOKEN" >> "$GITHUB_ENV"
         else
@@ -210,10 +210,10 @@ runs:
           exit 1
         fi
 
-    - name: Checkout
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      with:
-        token: ${{ env.TOKEN }}
+    # - name: Checkout
+    #   uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+    #   with:
+    #     token: ${{ env.TOKEN }}
 
     - name: Update
       shell: bash
@@ -225,8 +225,10 @@ runs:
         token: ${{ env.TOKEN }}
         title: "${{ inputs.target-branch-commit-heading }}"
         commit-message: "${{ inputs.target-branch-commit-message }}"
+        body: "${{ inputs.target-branch-commit-body }}"
         branch: ${{ env.BRANCH }}
         base: ${{ env.BASE }}
+        sign-commits: true
 
     # - name: Branch
     #   shell: bash
