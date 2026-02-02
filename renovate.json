@@ -53,6 +53,6 @@
   },
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["00 00 * * *"]
+    "schedule": ["00 00 * * 0,6"]
   }
 }
