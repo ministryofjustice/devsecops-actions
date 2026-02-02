@@ -1,0 +1,121 @@
+# ==============================================================================
+# Cruft Template Check - Update Detection Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Detects whether upstream template updates are available for the current
+# repository by comparing the local cruft configuration against the remote
+# template repository. This action executes the cruft check command to
+# determine update availability and conditionally applies template updates
+# when changes are detected, ensuring repositories can maintain synchronisation
+# with their upstream templates.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Automated upstream template change detection
+# - Non-blocking check operation (exit code evaluation)
+# - Conditional update application based on availability
+# - Boolean output for workflow orchestration
+# - Silent operation when no updates are available
+# - Strict mode enforcement for consistency (--skip-apply-ask --strict)
+# - Integration with cruft check exit codes
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage:
+#   - name: Check for updates
+#     id: check
+#     uses: ministryofjustice/devsecops-actions/cruft/check@main
+#
+# With conditional step:
+#   - name: Check for updates
+#     id: check
+#     uses: ministryofjustice/devsecops-actions/cruft/check@main
+#
+#   - name: Process updates
+#     if: steps.check.outputs.has-update == 'true'
+#     run: echo "Updates available"
+#
+# ==============================================================================
+# PREREQUISITES
+# ==============================================================================
+# - Repository must contain .cruft.json file
+# - Cruft must be installed (via install action)
+# - Template repository must be accessible
+# - Git must be available in the runner environment
+# - For private templates: Authentication must be configured
+#
+# ==============================================================================
+# WORKFLOW PROCESS
+# ==============================================================================
+# 1. Execute cruft check to compare local vs remote template
+# 2. Evaluate exit code (0 = up-to-date, 1 = updates available)
+# 3. Set output variable based on check result
+# 4. Conditionally run cruft update if changes detected
+# 5. Apply template updates with strict mode enabled
+#
+# ==============================================================================
+# OUTPUT BEHAVIOUR
+# ==============================================================================
+# The has-update output returns:
+# - "false": Repository is up-to-date with template (cruft check exit 0)
+# - "true": Updates are available from template (cruft check exit 1)
+#
+# ==============================================================================
+# CRUFT CHECK EXIT CODES
+# ==============================================================================
+# Exit Code 0: Repository matches template (no updates needed)
+# Exit Code 1: Template has updates available
+# Exit Code 2+: Error condition (missing .cruft.json, etc.)
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: Cruft
+# Documentation: https://cruft.github.io/cruft/
+# Command: cruft check
+# Update Command: cruft update --skip-apply-ask --strict
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Last Updated: 2026-01-30
+#
+# ==============================================================================
+
+name: 🔎 Check
+description: Checks for cruft update availability and conditionally applies template updates when changes are detected
+author: Ministry of Justice UK
+
+outputs:
+  has-update:
+    description: "Indicates whether upstream template updates are available (true/false)"
+    value: ${{ steps.check.outputs.has-update }}
+
+runs:
+  using: composite
+  steps:
+    - name: Check
+      id: check
+      shell: bash
+      run: |
+        if cruft check; then
+          echo "⚠️ No cruft update is available."
+          echo "has-update=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "🔄 Cruft update is available."
+          echo "has-update=true" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Update
+      shell: bash
+      if: steps.check.outputs.has-update == 'true'
+      run: cruft update --skip-apply-ask --strict

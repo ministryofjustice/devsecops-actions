@@ -1,0 +1,140 @@
+# ==============================================================================
+# HTTPS Token Authentication - Private Template Access Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Configures HTTPS token-based authentication for secure access to private
+# Cruft/Cookiecutter template repositories. Sets up Git URL rewriting to
+# automatically inject authentication tokens for GitHub HTTPS requests. This
+# action ensures secure communication with private GitHub repositories during
+# template synchronisation operations without requiring SSH key management.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Token-based HTTPS authentication for GitHub repositories
+# - Automatic Git URL rewriting for seamless authentication
+# - No SSH key management required
+# - Simplified authentication workflow
+# - Compatible with GitHub Personal Access Tokens and GitHub Actions tokens
+# - Secure token handling via environment variables
+# - Works with both public and private template repositories
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage:
+#   - uses: ministryofjustice/devsecops-actions/cruft/authenticate@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#
+# With personal access token:
+#   - uses: ministryofjustice/devsecops-actions/cruft/authenticate@main
+#     with:
+#       token: ${{ secrets.PAT_TOKEN }}
+#
+# ==============================================================================
+# PREREQUISITES
+# ==============================================================================
+# - GitHub token with repository read access
+# - Token must have access to private template repository (if applicable)
+# - Git must be available in the runner environment
+#
+# ==============================================================================
+# AUTHENTICATION MECHANISM
+# ==============================================================================
+# This action configures Git to rewrite HTTPS URLs by injecting the access
+# token as a credential. The configuration transforms URLs like:
+#   https://github.com/org/repo.git
+# Into authenticated URLs like:
+#   https://x-access-token:TOKEN@github.com/org/repo.git
+#
+# This allows Cruft to clone and access private template repositories without
+# additional authentication prompts.
+#
+# ==============================================================================
+# SECURITY CONSIDERATIONS
+# ==============================================================================
+# - Store tokens in GitHub Secrets (encrypted at rest)
+# - Use tokens with minimal required permissions
+# - Rotate tokens regularly
+# - Monitor token usage in audit logs
+# - Never commit tokens to repositories
+# - Tokens are automatically masked in GitHub Actions logs
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: Git
+# Documentation: https://git-scm.com/docs/git-config
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Last Updated: 2026-01-30
+#
+# ==============================================================================
+
+name: 🔑 Authenticate
+description: Authenticate with GitHub using HTTPS token for private template repository access
+author: Ministry of Justice UK
+
+inputs:
+  github-app-id:
+    required: false
+    description: "GitHub App ID for authentication token generation"
+    default: ""
+
+  github-app-private-key:
+    required: false
+    description: "GitHub App private key in PEM format for authentication"
+    default: ""
+
+  github-app-owner:
+    required: false
+    description: "GitHub organisation or user name for token scope limitation"
+    default: ""
+
+  github-app-repositories:
+    required: false
+    description: "Comma-separated list of repository names for token scope limitation"
+    default: ""
+
+  token:
+    required: false
+    description: "GitHub personal access token or GITHUB_TOKEN with repository read access for private template authentication"
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Token
+      id: github-app-token-read
+      if: inputs.github-app-id != '' && inputs.github-app-private-key != ''
+      uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+      with:
+        app-id: "${{ inputs.github-app-id }}"
+        private-key: "${{ inputs.github-app-private-key }}"
+        owner: "${{ inputs.github-app-owner }}"
+        repositories: "${{ inputs.github-app-repositories }}"
+
+    - name: Configure Git Authentication
+      shell: bash
+      env:
+        APP_TOKEN: ${{ steps.github-app-token-read.outputs.token }}
+        INPUT_TOKEN: ${{ inputs.token }}
+      run: |
+        if [ -n "$APP_TOKEN" ]; then
+          git config --global url."https://x-access-token:${APP_TOKEN}@github.com/".insteadOf "https://github.com/"
+        elif [ -n "$INPUT_TOKEN" ]; then
+          git config --global url."https://x-access-token:${INPUT_TOKEN}@github.com/".insteadOf "https://github.com/"
+        else
+          echo "Error: No token provided for authentication"
+          exit 1
+        fi

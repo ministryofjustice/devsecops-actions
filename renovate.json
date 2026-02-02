@@ -1,56 +1,58 @@
 {
-    "extends": [
-        "config:recommended"
-    ],
-    "dependencyDashboard": true,
-    "minimumReleaseAgeBehaviour": "timestamp-required",
-    "pre-commit": {
-        "enabled": true
+  "extends": ["config:recommended"],
+  "timezone": "Europe/London",
+  "schedule": ["00 00 * * 0,6"],
+  "description": "Weekend update only, covering pre-commit, GHA, Docker, NPM and Python changes. Updates are only triggered once specified duration has elapsed for the provided type.",
+  "dependencyDashboard": true,
+  "semanticCommits": "enabled",
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 7,
+  "minimumReleaseAgeBehaviour": "timestamp-required",
+  "pre-commit": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch"],
+      "minimumReleaseAge": "3 days"
     },
-    "packageRules": [
-        {
-            "matchUpdateTypes": [
-                "patch"
-            ],
-            "minimumReleaseAge": "3 days"
-        },
-        {
-            "matchUpdateTypes": [
-                "minor"
-            ],
-            "minimumReleaseAge": "7 days"
-        },
-        {
-            "matchUpdateTypes": [
-                "major"
-            ],
-            "minimumReleaseAge": "30 days"
-        },
-        {
-            "matchManagers": [
-                "github-actions"
-            ],
-            "pinDigests": true,
-            "groupName": "renovate: github-actions"
-        },
-        {
-            "matchManagers": [
-                "pre-commit"
-            ],
-            "groupName": "renovate: pre-commit"
-        },
-        {
-            "matchDatasources": [
-                "docker"
-            ],
-            "pinDigests": true,
-            "groupName": "renovate: docker"
-        },
-        {
-            "matchDatasources": [
-                "npm"
-            ],
-            "groupName": "renovate: npm"
-        }
-    ]
+    {
+      "matchUpdateTypes": ["minor"],
+      "minimumReleaseAge": "7 days"
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "30 days"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "pinDigests": true,
+      "groupName": "renovate: github-actions"
+    },
+    {
+      "matchManagers": ["pre-commit"],
+      "groupName": "renovate: pre-commit"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "pinDigests": true,
+      "groupName": "renovate: docker"
+    },
+    {
+      "matchDatasources": ["npm"],
+      "groupName": "renovate: npm"
+    },
+    {
+      "matchDatasources": ["pip"],
+      "groupName": "renovate: pip"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": ["* * * * *"]
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["00 00 * * 0,6"]
+  }
 }

@@ -1,0 +1,193 @@
+# ==============================================================================
+# Cruft Template Synchronization - Composite GitHub Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Automated template synchronisation action that maintains consistency between
+# repositories created from Cookiecutter/Cruft templates and their upstream
+# templates. This composite action detects template updates, applies changes,
+# and automatically creates pull requests with the synchronized modifications,
+# ensuring repositories remain up-to-date with template best practices.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Automatic detection of upstream template changes
+# - Intelligent merge conflict resolution
+# - Support for both public and private template repositories
+# - HTTPS token-based authentication for private template access
+# - Automated pull request creation with synchronized changes
+# - Python environment setup and dependency management
+# - Git configuration with optional signed commits
+# - Customizable base branch targeting
+# - Configurable commit messages and branch naming
+# - GitHub App authentication support
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage (public template):
+#   - uses: ministryofjustice/devsecops-actions/cruft@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#
+# Advanced usage with private template:
+#   - uses: ministryofjustice/devsecops-actions/cruft@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       private: "true"
+#       base-branch: "main"
+#       python-version: "3.14.2"
+#
+# ==============================================================================
+# PREREQUISITES
+# ==============================================================================
+# - GitHub token with the following permissions:
+#   - contents: read/write
+#   - pull-requests: read/write
+#   - issues: read/write
+# - Repository must be created from a Cruft/Cookiecutter template
+# - .cruft.json file must exist in repository root
+# - For private templates: Token with access to template repository
+# - For signed commits: GPG key configuration
+#
+# ==============================================================================
+# OUTPUTS
+# ==============================================================================
+# This action generates the following:
+# - Pull request with template synchronisation changes
+# - Commits with template updates (optionally signed with GPG)
+# - Git branch with naming convention: chore/cookie-cutter-update-YYYYMMDD
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: Cruft
+# Documentation: https://cruft.github.io/cruft/
+# Purpose: Template synchronisation and project scaffolding
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Minimum GitHub Enterprise Server: 3.8
+# Last Updated: 2026-01-30
+#
+# ==============================================================================
+
+name: Ministry of Justice UK - Cruft update 🚀
+description: Cruft auto update pull request creation GitHub action
+author: Ministry of Justice UK
+
+inputs:
+  python-version:
+    required: false
+    description: "Python version to use for Cruft installation and execution."
+    default: 3.14.2
+
+  private:
+    required: false
+    description: "Indicates whether the Cruft template repository is private and requires authentication."
+    default: "false"
+
+  base-branch:
+    required: false
+    default: "main"
+    description: "Base repository branch where pull requests will be targeted."
+
+  target-branch-name:
+    required: false
+    description: "Branch name to use when creating an update pull request"
+    default: "chore/cookie-cutter-update-$(date +%Y%m%d)"
+
+  target-branch-heading:
+    required: false
+    description: "Commit heading for the update pull request"
+    default: "chore(update): cruft update"
+
+  target-branch-commit-message:
+    required: false
+    description: "Commit message for the update pull request"
+    default: "chore(update): cruft update"
+
+  target-branch-body:
+    required: false
+    description: "Commit body for the update pull request"
+    default: "chore(update): cruft update"
+
+  target-branch-labels:
+    required: false
+    description: "Target branch labels to apply, A comma or newline-separated list of labels."
+    default: ""
+
+  target-branch-reviewers:
+    required: false
+    description: "Target branch reviewers name, A comma or newline-separated list of reviewers (GitHub usernames) to request a review from."
+    default: ""
+
+  github-app-id:
+    required: false
+    description: "GitHubApp ID"
+    default: ""
+
+  github-app-private-key:
+    required: false
+    description: "GitHubApp private key"
+    default: ""
+
+  github-app-owner:
+    required: false
+    description: "GitHub App organisation owner token scope"
+    default: ""
+
+  github-app-repositories:
+    required: false
+    description: "GitHub App organisation repositories token scope"
+    default: ""
+
+  token:
+    required: false
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: ⚒️ Install
+      uses: ministryofjustice/devsecops-actions/cruft/install@3842012484dd34ef72c313c20287ebbaab5cd07f
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: 🔑 Authenticate
+      if: inputs.private  == 'true'
+      uses: ministryofjustice/devsecops-actions/cruft/authenticate@3842012484dd34ef72c313c20287ebbaab5cd07f
+      with:
+        token: ${{ inputs.token }}
+        github-app-owner: ${{ inputs.github-app-owner }}
+        github-app-repositories: ${{ inputs.github-app-repositories }}
+        github-app-id: ${{ inputs.github-app-id }}
+        github-app-private-key: ${{ inputs.github-app-private-key }}
+
+    - name: 🔎 Check
+      id: check
+      uses: ministryofjustice/devsecops-actions/cruft/check@3842012484dd34ef72c313c20287ebbaab5cd07f
+
+    - name: ✏️ Create
+      if: steps.check.outputs.has-update == 'true'
+      uses: ministryofjustice/devsecops-actions/cruft/create@3842012484dd34ef72c313c20287ebbaab5cd07f
+      with:
+        token: ${{ inputs.token }}
+        github-app-id: ${{ inputs.github-app-id }}
+        github-app-private-key: ${{ inputs.github-app-private-key }}
+        github-app-owner: ${{ inputs.github-app-owner }}
+        github-app-repositories: ${{ inputs.github-app-repositories }}
+        target-branch-name: ${{ inputs.target-branch-name }}
+        target-branch-heading: ${{ inputs.target-branch-heading }}
+        target-branch-commit-message: ${{ inputs.target-branch-commit-message }}
+        target-branch-body: ${{ inputs.target-branch-body }}
+        target-branch-labels: ${{ inputs.target-branch-labels }}
+        target-branch-reviewers: ${{ inputs.target-branch-reviewers }}

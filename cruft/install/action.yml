@@ -1,0 +1,93 @@
+# ==============================================================================
+# Cruft Installation - Environment Setup Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Sets up the Python environment and installs Cruft template synchronisation
+# tool along with its dependencies. This action configures Python using the
+# official GitHub Actions setup-python action and installs Cruft via pip from
+# a pinned requirements file to ensure consistent and reproducible builds.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Python environment setup with version pinning
+# - Automated pip dependency installation
+# - Cached Python dependencies for faster execution
+# - Pinned Cruft version for reproducibility
+# - Support for latest Python versions
+# - Cross-platform compatibility (Linux, macOS, Windows)
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage (default Python version):
+#   - uses: ministryofjustice/devsecops-actions/cruft/install@main
+#
+# With custom Python version:
+#   - uses: ministryofjustice/devsecops-actions/cruft/install@main
+#     with:
+#       python-version: "3.14.2"
+#
+# ==============================================================================
+# PREREQUISITES
+# ==============================================================================
+# - GitHub runner with pip and Python support
+# - requirements.txt file in action directory
+# - Internet connectivity for package downloads
+#
+# ==============================================================================
+# DEPENDENCIES
+# ==============================================================================
+# Installed packages (via requirements.txt):
+# - cruft: Template synchronisation tool
+# - cookiecutter: Project templating engine
+# - Additional dependencies as specified in requirements.txt
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: Cruft
+# Version: Specified in requirements.txt
+# Documentation: https://cruft.github.io/cruft/
+# GitHub: https://github.com/cruft/cruft
+#
+# Python Setup Action:
+# Version: v6.2.0
+# Documentation: https://github.com/actions/setup-python
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Last Updated: 2026-01-30
+#
+# ==============================================================================
+
+name: ⚒️ Install
+description: Install Python environment and Cruft template synchronisation tool with dependencies
+author: Ministry of Justice UK
+
+inputs:
+  python-version:
+    required: false
+    description: "Python version to use for Cruft installation. Supports semantic versioning (e.g., 3.12, 3.13)."
+    default: 3.14.2
+
+runs:
+  using: composite
+  steps:
+    - name: Python
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install
+      working-directory: ${{ github.action_path }}
+      shell: bash
+      run: pip install -r requirements.txt

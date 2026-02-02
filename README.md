@@ -15,13 +15,16 @@ Enterprise-Grade Reusable GitHub Actions for Security Automation
 
 ## Overview
 
-A comprehensive collection of production-ready, enterprise-grade GitHub Actions that standardise and automate DevSecOps security practices
-across the software development lifecycle. This suite provides best-in-class security scanning capabilities including:
+A comprehensive collection of production-ready, enterprise-grade GitHub Actions that standardise and automate
+DevSecOps security practices across the software development lifecycle. This suite provides best-in-class security
+scanning, dependency management, template synchronisation, and compliance reporting capabilities.
 
-- **SCA** (Software Composition Analysis) - Dependency vulnerability detection and management
-- **Secret Scanning** - Credential and sensitive data exposure prevention
-- **IaC Security** - Infrastructure as Code security validation
-- **Container Security** - Docker image vulnerability scanning
+**Core Capabilities:**
+
+- **Software Composition Analysis** - Multi-tool dependency vulnerability detection
+- **Secret Scanning** - Dual-engine credential exposure prevention
+- **SAST & Code Analysis** - Semantic security vulnerability detection
+- **Template Synchronization** - Automated Cookiecutter/Cruft updates
 - **SBOM Generation** - Software Bill of Materials for supply chain transparency
 - **Compliance Reporting** - Security posture assessment and audit trails
 
@@ -31,8 +34,7 @@ across the software development lifecycle. This suite provides best-in-class sec
 
 - [Architecture](#️-architecture)
 - [Available Actions](#-available-actions)
-  - [SCA Action](#-sca-action)
-- [Usage Examples](#-usage-examples)
+- [Quick Start](#-quick-start)
 - [Development](#️-development)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -44,141 +46,131 @@ across the software development lifecycle. This suite provides best-in-class sec
 
 ### Key Architecture Concepts
 
-1. **Composite Actions**: Reusable composite actions in dedicated directories (e.g., `sca/`) provide modular functionality
-2. **Explicit Permissions**: Workflows must explicitly declare all required permissions
-3. **Version Pinning**: Use `@vx.x.x` for latest updates or `@<commit-sha>` for stability
-4. **Centralised Maintenance**: Developed and managed by PandA team, with future updates triggered automatically.
+1. **Composite Actions**: Reusable composite actions in dedicated directories provide modular functionality
+2. **Explicit Permissions**: Workflows must explicitly declare all required permissions following least-privilege principle
+3. **Version Pinning**: Use `@vx.x.x` for latest updates or `@<commit-sha>` for maximum stability
+4. **Centralized Maintenance**: Developed and managed by Ministry of Justice PandA team
+5. **Zero Configuration**: Sensible defaults with optional customization via configuration files
 
 ---
 
 ## 🚀 Available Actions
 
-### 🔍 SCA Action
+### 🔍 SCA - Software Composition Analysis
 
-**Enterprise-grade composite action** for comprehensive software composition analysis, dependency management, and security
-review across the entire software supply chain.
+**Path**: `ministryofjustice/devsecops-actions/sca`
 
-#### What It Does
+Enterprise-grade composite action for comprehensive software composition analysis, dependency management
+and security review across the entire software supply chain.
 
-The SCA action orchestrates 9 specialized security tools to provide complete visibility into your application's dependencies,
-vulnerabilities, and supply chain risks:
+#### Introduction
 
-1. **📦 Repository Checkout** - Secure code retrieval with token authentication
-2. **📊 Dependency Review** - GitHub-native vulnerability scanning for pull requests
-3. **🔎 OWASP Dependency-Check** - CVE detection with CVSS threshold enforcement (fails on ≥7.0)
-4. **🔁 Renovate** - Automated dependency updates with intelligent grouping
-5. **🔑 MOJ Secret Scanner** - Custom secret detection using MoJ security rules
-6. **🐷 TruffleHog** - Entropy-based secret scanning with 700+ detectors
-7. **⚙️ CodeQL** - Semantic code analysis for security vulnerabilities (SAST)
-8. **🛡️ OpenSSF Scorecard** - Security posture assessment (18+ checks)
-9. **⛓️‍💥 SBOM Generator** - CycloneDX-compliant bill of materials for compliance
+Orchestrates 9 specialized security tools:
 
-#### Key Benefits
+1. **📦 Repository Checkout** - Secure code retrieval
+2. **📊 Dependency Review** - PR vulnerability scanning
+3. **🔎 OWASP Dependency-Check** - CVE detection (CVSS ≥7.0 fails)
+4. **🔁 Renovate** - Automated dependency updates
+5. **🔑 MOJ Secret Scanner** - Custom secret patterns
+6. **🐷 TruffleHog** - Entropy-based secret detection (700+ detectors)
+7. **⚙️ CodeQL** - SAST semantic analysis
+8. **🛡️ OpenSSF Scorecard** - Security posture (18+ checks)
+9. **📋 SBOM Generator** - CycloneDX-compliant bill of materials
 
-- ✅ **Zero Configuration**: Works out-of-the-box with sensible defaults
-- ✅ **Pull Request Integration**: Automated security checks on every PR
-- ✅ **GitHub Security Integration**: Results appear in Security tab and Code Scanning
-- ✅ **Compliance Ready**: NTIA SBOM compliant, meets Executive Order 14028
-- ✅ **Customizable**: Override defaults with configuration files
-- ✅ **Multi-Language**: Supports JavaScript, Python, Java, .NET, Go, Ruby, and more
-
-#### 🧩 Flowchart
-
-![SCA flowchat](docs/sca.svg)
-
-#### Inputs
-
-All inputs are optional except `token`. The action is designed to work with minimal configuration.
-
-| Input                           | Type   | Required | Default   | Description                                                                                                                         |
-| ------------------------------- | ------ | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `token`                         | string | **Yes**  | N/A       | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read) |
-| `renovate`                      | string | No       | `true`    | Enable or disable Renovate bot for automated dependency updates                                                                     |
-| `renovate-version`              | string | No       | `42.64.1` | Renovate CLI version to use (specify without 'v' prefix)                                                                            |
-| `node_version`                  | string | No       | `24.11.1` | Node.js version to use for SBOM generation with Syft                                                                                |
-| `dependency-review-config-file` | string | No       | `""`      | Path to custom dependency review config (e.g., `.github/dependency-review-config.yml`)                                              |
-| `trufflehog-config-file`        | string | No       | `""`      | Path to custom TruffleHog secret scanning configuration                                                                             |
-| `codeql-config-file`            | string | No       | `""`      | Path to custom CodeQL query configuration for SAST                                                                                  |
-| `codeql-upload-findings`        | string | No       | `always`  | Control SARIF upload to Code Scanning. Set to `never` if using GitHub's default CodeQL setup                                        |
-| `docker-images-file`            | string | No       | `""`      | Path to JSON file with Docker image URIs for container SBOM generation                                                              |
-
-#### Required Permissions
-
-Your workflow must explicitly grant these permissions for the action to function correctly:
-
-| Permission        | Level     | Purpose                                              |
-| ----------------- | --------- | ---------------------------------------------------- |
-| `contents`        | **write** | Repository checkout, file access, and update commits |
-| `pull-requests`   | **write** | Creating and updating pull requests (Renovate)       |
-| `issues`          | **write** | Creating issues for security findings                |
-| `security-events` | **read**  | Accessing and uploading security scan results        |
-
-#### Docker Images Configuration
-
-Enable container vulnerability scanning and SBOM generation by providing a JSON file listing your Docker images.
-
-**File Structure:**
-
-Create a JSON file (e.g., `docker-images.json` or `sources.json`) in your repository root:
-
-```json
-{
-  "images": [
-    "ghcr.io/ministryofjustice/devsecops-hooks:latest",
-    "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
-    "docker.io/library/nginx:1.25-alpine",
-    "mcr.microsoft.com/dotnet/aspnet:8.0"
-  ]
-}
-```
-
-**Key Requirements:**
-
-- ✅ Must contain an `images` property as an array
-- ✅ Each element should be a fully qualified image URI with registry
-- ✅ Include version tags (avoid `latest` in production)
-- ✅ Supports all OCI-compliant registries (Docker Hub, GHCR, ACR, ECR, etc.)
-- ✅ Multiple images can be scanned in a single workflow run
-
-**Usage in Workflow:**
+#### Code
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+- uses: ministryofjustice/devsecops-actions/sca@v1.2.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
-    docker-images-file: "docker-images.json"
 ```
 
-**Generated Artifacts:**
+#### Features
 
-The action generates CycloneDX 1.5 compliant SBOMs:
+- ✅ **Zero Configuration** - Works out-of-the-box
+- ✅ **Multi-Language** - JavaScript, Python, Java, .NET, Go, Ruby, Swift, Kotlin, C/C++
+- ✅ **Container Scanning** - Docker image SBOM generation
+- ✅ **GitHub Integration** - Results in Security tab
+- ✅ **Compliance Ready** - NTIA SBOM & EO 14028 compliant
 
-- `sca-sbom-repository.cdx.json` - Repository dependencies
-- `sca-sbom-<sanitized-image-name>.cdx.json` - Per-image SBOMs
-
-All artifacts are uploaded to the workflow run and available for download for 90 days.
+**[📖 Full SCA Documentation](sca/README.md)**
 
 ---
 
-## 📖 Usage Examples
+### 🚀 Cruft - Template Synchronization
 
-### Quick Start - SCA Action
+**Path**: `ministryofjustice/devsecops-actions/cruft`
 
-The simplest way to get started with comprehensive security scanning:
+Automated template synchronisation action that maintains consistency between repositories created from Cookiecutter/Cruft templates and their upstream sources.
 
-#### Minimal Configuration
+#### Introduction
+
+Orchestrates 4 specialized components:
+
+1. **⚒️ Install** - Python environment and Cruft setup
+2. **🔑 Authenticate** - HTTPS token authentication for private templates
+3. **🔎 Check** - Template update detection and availability checking
+4. **✏️ Create** - Pull request creation with template updates
+
+#### Code
+
+**Public Template:**
+
+```yaml
+- uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+**Private Template:**
+
+```yaml
+- uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+  with:
+    private: "true"
+    github-app-id: ${{ secrets.CRUFT_APP_ID }}
+    github-app-private-key: ${{ secrets.CRUFT_APP_PRIVATE_KEY }}
+    github-app-owner: "${{ github.repository_owner }}"
+    github-app-repositories: "${{ github.event.repository.name }},template-repository"
+```
+
+#### Features
+
+- ✅ **Automatic Sync** - Detects upstream template changes
+- ✅ **PR Automation** - Creates pull requests automatically
+- ✅ **Private Support** - HTTPS token authentication for private repos
+- ✅ **GitHub App Integration** - Verified commits via GitHub App
+- ✅ **Smart Naming** - Date-based branch naming
+
+**[📖 Full Cruft Documentation](cruft/README.md)**
+
+---
+
+## 🎯 Quick Start
+
+### Prerequisites
+
+| Component        | Requirement                                 |
+| ---------------- | ------------------------------------------- |
+| **GitHub Token** | Workflow token with appropriate permissions |
+| **Repository**   | GitHub repository with Actions enabled      |
+| **Permissions**  | Explicitly declared in workflow file        |
+
+### Basic SCA Workflow
+
+Create `.github/workflows/sca.yml`:
 
 ```yaml
 name: SCA
-run-name: SCA ⚡️
+run-name: Security Scanning ⚡️
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Daily at midnight UTC
+    - cron: "0 0 * * *"
   pull_request:
     branches: ["main"]
 
-permissions: {} # Top-level permissions set to none (explicit security)
+permissions: {}
 
 jobs:
   sca:
@@ -193,197 +185,55 @@ jobs:
       security-events: read
 
     steps:
-      - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+      - uses: ministryofjustice/devsecops-actions/sca@v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-This minimal setup provides:
-✅ Dependency vulnerability scanning  
-✅ Secret detection (2 tools)  
-✅ CodeQL analysis  
-✅ OWASP security checks  
-✅ OpenSSF Scorecard  
-✅ SBOM generation  
-✅ Automated dependency updates
+### Basic Cruft Workflow
 
-#### Production Configuration with Custom Settings
+Create `.github/workflows/cruft.yml`:
 
 ```yaml
-name: SCA
-run-name: SCA ⚡️
+name: Template Sync
+run-name: Cruft Update 🚀
 
 on:
   schedule:
-    - cron: "0 2 * * *" # Daily at 2 AM UTC
-
-  pull_request:
-    branches: ["main", "develop", "release/*"]
-    types: [opened, synchronize, reopened]
-
-  push:
-    branches: ["main"]
-
-  workflow_dispatch: # Manual trigger
-
-permissions: {}
-
-jobs:
-  sca:
-    name: Software Composition Analysis
-    runs-on: ubuntu-latest
-    timeout-minutes: 45
-
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: write
-      security-events: read
-
-    steps:
-      - name: Run SCA with Custom Configuration
-        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-          # Dependency Management
-          renovate: "true"
-          renovate-version: "42.64.1"
-          node_version: "24.11.1"
-
-          # Custom Configurations
-          dependency-review-config-file: ".github/config/dependency-review.yml"
-          trufflehog-config-file: ".github/config/trufflehog.yml"
-          codeql-config-file: ".github/config/codeql-config.yml"
-          codeql-upload-findings: "always"
-
-          # Container Scanning
-          docker-images-file: "docker-images.json"
-```
-
-#### Enterprise Configuration with Matrix Strategy
-
-For large organizations scanning multiple configurations:
-
-```yaml
-name: SCA Matrix
-run-name: SCA Matrix ⚡️
-
-on:
-  schedule:
-    - cron: "0 3 * * *"
+    - cron: "0 2 * * 1" # Weekly
   workflow_dispatch:
 
 permissions: {}
 
 jobs:
-  sca:
-    name: SCA (${{ matrix.config-name }})
+  cruft:
+    name: Synchronize Template
     runs-on: ubuntu-latest
-    timeout-minutes: 60
-
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - config-name: "Strict"
-            codeql-config: ".github/codeql-strict.yml"
-            renovate: "true"
-          - config-name: "Standard"
-            codeql-config: ".github/codeql-standard.yml"
-            renovate: "true"
+    timeout-minutes: 15
 
     permissions:
       contents: write
       pull-requests: write
-      issues: write
-      security-events: read
 
     steps:
-      - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+      - uses: actions/checkout@v4.2.2
+
+      - uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          renovate: ${{ matrix.renovate }}
-          codeql-config-file: ${{ matrix.codeql-config }}
-          docker-images-file: "docker-images.json"
 ```
 
-#### Disable Renovate Bot
-
-For repositories where dependency updates are managed externally:
+### Versioning Best Practices
 
 ```yaml
-steps:
-  - name: Run SCA without Renovate
-    uses: ministryofjustice/devsecops-actions/sca@v1.2.0
-    with:
-      token: ${{ secrets.GITHUB_TOKEN }}
-      renovate: "false" # Disable automated dependency updates
-```
+# ✅ Recommended: Specific version tags
+uses: ministryofjustice/devsecops-actions/sca@v1.2.0
 
-#### Pull Request Only (No Scheduled Scans)
-
-Lightweight configuration for PR checks only:
-
-```yaml
-name: SCA - PR Check
-run-name: SCA PR Check ⚡️
-
-on:
-  pull_request:
-    branches: ["main"]
-    types: [opened, synchronize]
-
-permissions: {}
-
-jobs:
-  sca-pr:
-    name: SCA Pull Request Check
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-
-    permissions:
-      contents: read # Read-only for PR checks
-      pull-requests: write
-      security-events: read
-
-    steps:
-      - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          renovate: "false" # No updates on PRs
-          codeql-upload-findings: "always"
-```
-
-### Best Practices
-
-#### Versioning Strategy
-
-```yaml
-# ✅ Recommended: Use specific version tags
-uses: ministryofjustice/devsecops-actions/sca@v1.0.0
-
-# ✅ Alternative: Use commit SHA for maximum stability
+# ✅ Alternative: Commit SHA (maximum stability)
 uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
-# ⚠️ Not recommended: Using branch names (unpredictable)
+# ⚠️ Not recommended: Branch names
 uses: ministryofjustice/devsecops-actions/sca@main
-```
-
-#### Token Security
-
-```yaml
-# ✅ Always use GitHub's built-in token
-token: ${{ secrets.GITHUB_TOKEN }}
-
-# ❌ Never hardcode tokens
-token: ghp_abc123... # NEVER DO THIS
-
-# ⚠️ Use custom tokens only if required
-token: ${{ secrets.CUSTOM_GITHUB_TOKEN }} # Only if GITHUB_TOKEN lacks permissions
 ```
 
 ---
@@ -417,29 +267,6 @@ npm run validate:ts     # TS linting
 npm run validate:yml    # YAML linting
 npm run validate:md     # Markdown linting
 npm run spellcheck      # Spell checking
-```
-
-### Project Structure
-
-```txt
-devsecops-actions/
-├── .github/              # GitHub workflows and templates
-│   └── workflows/        # CI/CD automation
-├── docs/                 # Documentation and diagrams
-├── sca/                  # Software Composition Analysis actions
-│   ├── action.yml        # Main composite action
-│   ├── codeql/           # CodeQL SAST integration
-│   ├── dependencies/     # Dependency review
-│   ├── moj/              # MOJ custom secret scanner
-│   ├── ossf/             # OpenSSF Scorecard
-│   ├── owasp/            # OWASP Dependency-Check
-│   ├── renovate/         # Renovate Bot integration
-│   ├── repository/       # Repository checkout
-│   ├── sbom/             # SBOM generation
-│   └── trufflehog/       # TruffleHog secret scanner
-├── src/                  # Source code (if applicable)
-├── package.json          # Node.js dependencies
-└── README.md             # This file
 ```
 
 ### Quality Assurance
@@ -585,22 +412,6 @@ When reporting issues, please use the appropriate template:
 - **Maintainer**: Ministry of Justice Platform & Architecture Team
 - **Active Development**: ✅ Actively maintained
 - **Support**: Community-driven with MoJ maintainer oversight
-
----
-
-## 🏆 Acknowledgments
-
-This project leverages and integrates several industry-leading open-source security tools:
-
-- **GitHub CodeQL** - Semantic code analysis engine
-- **OWASP Dependency-Check** - Dependency vulnerability scanning
-- **Renovate Bot** - Automated dependency management
-- **TruffleHog** - Secret scanning and detection
-- **OpenSSF Scorecard** - Security posture assessment
-- **Syft** - SBOM generation
-- **GitHub Actions** - CI/CD platform
-
-Special thanks to the open-source security community and all contributors who help make this project better.
 
 ---
 
