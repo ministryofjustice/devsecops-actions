@@ -1,45 +1,10 @@
-# Lint Check Workflow
-#
-# Purpose:
-#   Performs linting validation on YAML and Markdown files for pull requests targeting the main branch.
-#
-# Trigger:
-#   - Pull requests to the main branch
-#
-# Permissions:
-#   - Root level: None (empty permissions object)
-#   - Lint job: contents:read
-#
-# Environment Variables:
-#   - environment: Set to 'base'
-#   - timezone: Retrieved from repository variable TIMEZONE
-#
-# Jobs:
-#
-#   1. setup:
-#      Description: Configures the test infrastructure and sets up environment context
-#      Runner: ubuntu-latest
-#      Outputs:
-#        - environment: The deployment environment name
-#        - timezone: The configured timezone
-#      Steps:
-#        - Logs the environment configuration
-#        - Logs the timezone configuration
-#
-#   2. lint:
-#      Description: Executes linting checks on repository files
-#      Dependencies: Requires 'setup' job completion
-#      Runner: ubuntu-latest
-#      Environment: Uses environment output from setup job
-#      Steps:
-#        - Checks out repository code using actions/checkout@v6.0.1
-#        - Validates YAML files using npm run validate:yml
-#        - Validates Markdown files using npm run validate:md
-#
-# Security:
-#   - Uses pinned commit SHA for checkout action (8e8c483db84b4bee98b60c0593521ed34d9990e8)
-#   - Minimal permissions granted (read-only content access for lint job)
-#
+# Lint check workflow:
+# - Triggers on pull requests to main.
+# - Sets shared environment/timezone variables.
+# - Runs setup job to expose environment/timezone outputs.
+# - Runs lint job with read-only contents permission.
+# - Checks out repository, installs Node, installs dependencies.
+# - Executes spellcheck, markdown, YAML, TypeScript, and Renovate validations.
 
 name: Lint check ✏️
 run-name: Lint check ✏️
@@ -90,10 +55,25 @@ jobs:
           node-version: ${{ vars.NODE_VERSION }}
 
       - name: Install
+        shell: bash
         run: npm ci --ignore-scripts
 
-      - name: YML
-        run: npm run validate:yml
+      - name: Spellcheck
+        shell: bash
+        run: npm run spellcheck
 
       - name: MD
+        shell: bash
         run: npm run validate:md
+
+      - name: YML
+        shell: bash
+        run: npm run validate:yml
+
+      - name: TS
+        shell: bash
+        run: npm run validate:ts
+
+      - name: Renovate
+        shell: bash
+        run: npm run validate:renovate
