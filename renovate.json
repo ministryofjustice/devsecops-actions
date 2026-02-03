@@ -1,7 +1,7 @@
 {
   "extends": ["config:recommended"],
   "timezone": "Europe/London",
-  "schedule": ["00 00 * * 0,6"],
+  "schedule": ["* 00 * * 0,6"],
   "description": "Weekend update only, covering pre-commit, GHA, Docker, NPM and Python changes. Updates are only triggered once specified duration has elapsed for the provided type.",
   "dependencyDashboard": true,
   "semanticCommits": "enabled",
@@ -54,7 +54,7 @@
   },
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["00 00 * * 0,6"],
+    "schedule": ["* 00 * * 0,6"],
     "minimumReleaseAge": "7 days"
   }
 }

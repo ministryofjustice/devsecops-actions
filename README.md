@@ -263,10 +263,11 @@ npm install
 npm run validate:all
 
 # Run individual validations
-npm run validate:ts     # TS linting
-npm run validate:yml    # YAML linting
-npm run validate:md     # Markdown linting
-npm run spellcheck      # Spell checking
+npm run validate:ts       # TS linting
+npm run validate:yml      # YAML linting
+npm run validate:md       # Markdown linting
+npm run validate:renovate # Renovate config validation
+npm run spellcheck        # Spell checking
 ```
 
 ### Quality Assurance

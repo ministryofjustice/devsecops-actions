@@ -25,10 +25,11 @@
     "spellcheck": "cspell lint --gitignore --no-must-find-files --unique --no-progress --show-suggestions --color **/*",
     "test:unit": "jest --verbose --config=src/unit.jest.config.ts",
     "test:unit:coverage": "jest --coverage --verbose --config=src/unit.jest.config.ts",
-    "validate:all": "npm run validate:ts && npm run validate:yml && npm run validate:md",
+    "validate:all": "npm run validate:ts && npm run validate:yml && npm run validate:md && npm run validate:renovate",
     "validate:md": "npx markdownlint-cli --config .markdownlint.json \"**/*.md\"",
     "validate:ts": "npx tsc --project src/tsconfig.json",
-    "validate:yml": "npx yaml-lint **/*.yml --ignore=**/node_modules"
+    "validate:yml": "npx yaml-lint **/*.yml --ignore=**/node_modules",
+    "validate:renovate": "npx --package renovate -- renovate-config-validator"
   },
   "devDependencies": {
     "@jest/types": "^30.2.0",
