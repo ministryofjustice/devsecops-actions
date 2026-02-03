@@ -1,10 +1,10 @@
-# Documentation:
-# - Workflow: "Lint check ✏️" runs on pull requests targeting main.
-# - Global env: sets base environment and timezone from repository variables.
-# - Job: setup initializes and outputs environment/timezone for downstream jobs.
-# - Job: lint checks out code, sets up Node, installs dependencies, and runs
-#   markdown, YAML, TypeScript, and Renovate validations.
-# - Permissions: top-level empty; lint job grants read-only contents access.
+# Lint check workflow:
+# - Triggers on pull requests to main.
+# - Sets shared environment/timezone variables.
+# - Runs setup job to expose environment/timezone outputs.
+# - Runs lint job with read-only contents permission.
+# - Checks out repository, installs Node, installs dependencies.
+# - Executes spellcheck, markdown, YAML, TypeScript, and Renovate validations.
 
 name: Lint check ✏️
 run-name: Lint check ✏️
@@ -57,6 +57,10 @@ jobs:
       - name: Install
         shell: bash
         run: npm ci --ignore-scripts
+
+      - name: Spellcheck
+        shell: bash
+        run: npm run spellcheck
 
       - name: MD
         shell: bash
