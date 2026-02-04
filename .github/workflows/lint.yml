@@ -69,7 +69,7 @@ jobs:
       - name: TS
         shell: bash
         run: |
-          npm run lint
+          npm run lint:ts
           npm run validate:ts
 
       - name: Renovate
