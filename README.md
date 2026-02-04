@@ -80,7 +80,7 @@ Orchestrates 9 specialized security tools:
 #### Code
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+- uses: ministryofjustice/devsecops-actions/sca@v1.3.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -185,7 +185,7 @@ jobs:
       security-events: read
 
     steps:
-      - uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+      - uses: ministryofjustice/devsecops-actions/sca@v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -227,7 +227,7 @@ jobs:
 
 ```yaml
 # ✅ Recommended: Specific version tags
-uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+uses: ministryofjustice/devsecops-actions/sca@v1.3.0
 
 # ✅ Alternative: Commit SHA (maximum stability)
 uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e
@@ -263,7 +263,8 @@ npm install
 npm run validate:all
 
 # Run individual validations
-npm run validate:ts       # TS linting
+npm run lint              # ESLint checks
+npm run validate:ts       # TypeScript type checking
 npm run validate:yml      # YAML linting
 npm run validate:md       # Markdown linting
 npm run validate:renovate # Renovate config validation

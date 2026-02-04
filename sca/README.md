@@ -235,7 +235,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -287,7 +287,7 @@ jobs:
 
     steps:
       - name: Run SCA with Custom Configuration
-        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -346,7 +346,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: ${{ matrix.renovate }}
@@ -382,7 +382,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: "false" # No automated updates on PRs
@@ -396,7 +396,7 @@ For repositories with external dependency management:
 ```yaml
 steps:
   - name: Run SCA without Renovate
-    uses: ministryofjustice/devsecops-actions/sca@v1.2.0
+    uses: ministryofjustice/devsecops-actions/sca@v1.3.0
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
       renovate: "false"
@@ -477,7 +477,7 @@ Create a JSON file (e.g., `docker-images.json` or `sources.json`) in your reposi
 #### Usage
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+- uses: ministryofjustice/devsecops-actions/sca@v1.3.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     docker-images-file: "docker-images.json"
@@ -681,7 +681,7 @@ env:
 
 ```yaml
 # ✅ Recommended: Specific version tags
-uses: ministryofjustice/devsecops-actions/sca@v1.0.0
+uses: ministryofjustice/devsecops-actions/sca@v1.3.0
 
 # ✅ Alternative: Commit SHA (maximum stability)
 uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e
