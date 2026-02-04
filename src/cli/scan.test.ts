@@ -75,7 +75,7 @@ describe("scan", () => {
     );
   });
 
-  it("should thrown an error when invalid source type is provided", async () => {
+  it("should throw an error when invalid source type is provided", async () => {
     // Arrange
     const mockCause = new TypeError(
       "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",
@@ -94,7 +94,7 @@ describe("scan", () => {
     );
   });
 
-  it("should thrown an error when invalid source type is provided", async () => {
+  it("should throw an error when invalid source type is provided", async () => {
     // Arrange
     const mockCause = new TypeError(
       "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",

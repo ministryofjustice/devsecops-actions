@@ -16,8 +16,8 @@ aligned with template best practices and improvements.
 
 **Key Capabilities:**
 
-- **Template Synchronization** - Automated detection and application of upstream template changes
-- **Pull Request Automation** - Automatic PR creation with synchronized changes
+- **Template Synchronisation** - Automated detection and application of upstream template changes
+- **Pull Request Automation** - Automatic PR creation with synchronised changes
 - **Private Template Support** - HTTPS token authentication for private template repositories
 - **Verified Commits** - GitHub App bot commits with automatic verification
 - **Intelligent Updates** - Conflict-aware synchronisation with strict mode enforcement

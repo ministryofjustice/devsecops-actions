@@ -475,7 +475,7 @@ npm run spellcheck
 - Prefer arrow functions for callbacks
 - Use explicit types for function parameters and returns
 - Avoid `any` type unless absolutely necessary
-- Use meaningful variable names (no single-letter names except loop counters)
+- Use meaningful variable names (avoid single-letter names except loop counters)
 
 **Documentation:**
 
@@ -753,7 +753,7 @@ This project is licensed under the **MIT License**.
 ```txt
 MIT License
 
-Copyright (c) 2024 Ministry of Justice
+Copyright (c) 2026 Ministry of Justice
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
