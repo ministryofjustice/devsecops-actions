@@ -26,13 +26,13 @@
     "spellcheck": "cspell lint --gitignore --no-must-find-files --unique --no-progress --show-suggestions --color **/*",
     "test:unit": "jest --verbose --config=src/unit.jest.config.ts",
     "test:unit:coverage": "jest --coverage --verbose --config=src/unit.jest.config.ts",
-    "validate:all": "npm run validate:ts && npm run lint && npm run validate:yml && npm run validate:md && npm run validate:renovate",
+    "validate:all": "npm run validate:ts && npm run lint:ts && npm run validate:yml && npm run validate:md && npm run validate:renovate",
     "validate:md": "npx markdownlint-cli --config .markdownlint.json \"**/*.md\"",
     "validate:ts": "npx tsc --noEmit --project src/tsconfig.json",
     "validate:yml": "npx yaml-lint **/*.yml --ignore=**/node_modules",
     "validate:renovate": "npx --package renovate -- renovate-config-validator",
-    "lint": "npx eslint --color --cache --max-warnings 0 ./src",
-    "lint:fix": "npx eslint --fix --color --cache --max-warnings 0 ."
+    "lint:ts": "npx eslint --color --cache --max-warnings 0 ./src",
+    "lint:ts:fix": "npx eslint --fix --color --cache --max-warnings 0 ."
   },
   "devDependencies": {
     "@jest/types": "^30.2.0",

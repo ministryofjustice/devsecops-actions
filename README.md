@@ -263,7 +263,7 @@ npm install
 npm run validate:all
 
 # Run individual validations
-npm run lint              # ESLint checks
+npm run lint:ts           # ESLint checks
 npm run validate:ts       # TypeScript type checking
 npm run validate:yml      # YAML linting
 npm run validate:md       # Markdown linting
