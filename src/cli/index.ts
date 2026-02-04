@@ -4,6 +4,6 @@
  * @module cli
  */
 
-import scan from "./scan.js";
+import scan from "./scan";
 
 export default scan;

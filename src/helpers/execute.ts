@@ -1,6 +1,6 @@
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
-import getCommand from "./get-command.js";
+import getCommand from "./get-command";
 
 /**
  * Executes a command for each value in the provided array and reports the results.

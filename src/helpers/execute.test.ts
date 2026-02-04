@@ -1,4 +1,4 @@
-import execute from "./execute.js";
+import execute from "./execute";
 
 console.info = jest.fn();
 console.error = jest.fn();

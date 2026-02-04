@@ -4,6 +4,10 @@ const base = config();
 
 export default [
   ...base,
+  // Ignore directories
+  {
+    ignores: ["src/dist/"],
+  },
   // Override configurations
   {
     rules: {

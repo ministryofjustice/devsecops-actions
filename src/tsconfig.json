@@ -1,9 +1,15 @@
 {
   "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
     "noEmit": false,
+    "allowJs": false,
     "pretty": true
   },
-  "exclude": ["node_modules", "eslint.config.mjs"],
+  "exclude": ["node_modules", "dist", "eslint.config.mjs"],
   "include": ["**/*.ts"]
 }

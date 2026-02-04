@@ -74,6 +74,10 @@ jobs:
           npm ci --ignore-scripts
           npm run install:syft
 
+      - name: Build
+        shell: bash
+        run: npm run build
+
       - name: Execute
         shell: bash
         run: npm run test:unit:coverage

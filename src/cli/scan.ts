@@ -3,7 +3,7 @@ import {
   validateArguments,
   getArrayFromJson,
   execute,
-} from "../helpers/index.js";
+} from "../helpers/index";
 
 /**
  * Scans the provided source based on the specified type.

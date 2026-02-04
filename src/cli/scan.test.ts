@@ -1,4 +1,4 @@
-import scan from "./scan.js";
+import scan from "./scan";
 
 console.error = jest.fn();
 

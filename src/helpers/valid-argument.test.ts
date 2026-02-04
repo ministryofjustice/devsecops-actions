@@ -1,4 +1,4 @@
-import validateArguments from "./valid-argument.js";
+import validateArguments from "./valid-argument";
 
 console.error = jest.fn();
 

@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import getArrayFromJson from "./get-array-from-json.js";
+import getArrayFromJson from "./get-array-from-json";
 
 jest.mock("fs");
 

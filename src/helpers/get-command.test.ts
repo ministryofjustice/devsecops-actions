@@ -1,5 +1,5 @@
 import { resolve } from "node:path";
-import getCommand from "./get-command.js";
+import getCommand from "./get-command";
 
 describe("getCommand", () => {
   const sbom = resolve(__dirname, "..", "..", "sca", "sbom");
