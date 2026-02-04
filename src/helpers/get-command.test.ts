@@ -1,5 +1,5 @@
 import { resolve } from "node:path";
-import { getCommand } from "./get-command.ts";
+import getCommand from "./get-command.js";
 
 describe("getCommand", () => {
   const sbom = resolve(__dirname, "..", "..", "sca", "sbom");
@@ -15,7 +15,7 @@ describe("getCommand", () => {
 
     // Assert
     expect(response).toEqual(
-      `syft scan ${mockValue} --source-name ${mockValue} --config ${sbom}/config.yml --source-name "${mockImage[0]}" --source-version "${mockImage[1]}" --output cyclonedx-json=sca-sbom-${mockImage[1]}.cdx.json`
+      `syft scan ${mockValue} --source-name ${mockValue} --config ${sbom}/config.yml --source-name "${mockImage[0]}" --source-version "${mockImage[1]}" --output cyclonedx-json=sca-sbom-${mockImage[1]}.cdx.json`,
     );
   });
 
@@ -30,7 +30,7 @@ describe("getCommand", () => {
 
     // Assert
     expect(response).toEqual(
-      `syft scan ${mockValue} --source-name ${mockValue} --config ${sbom}/config.yml --source-name "${mockImage[0]}" --source-version "${mockImage[1]}" --output cyclonedx-json=sca-sbom-${mockImage[1]}.cdx.json`
+      `syft scan ${mockValue} --source-name ${mockValue} --config ${sbom}/config.yml --source-name "${mockImage[0]}" --source-version "${mockImage[1]}" --output cyclonedx-json=sca-sbom-${mockImage[1]}.cdx.json`,
     );
   });
 

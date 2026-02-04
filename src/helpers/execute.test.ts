@@ -1,6 +1,6 @@
-import { execute } from "./execute.ts";
+import execute from "./execute.js";
 
-console.log = jest.fn();
+console.info = jest.fn();
 console.error = jest.fn();
 
 describe("execute", () => {
@@ -22,24 +22,24 @@ describe("execute", () => {
     await execute(mockType, mockValues);
 
     // Assert
-    expect(console.log).toHaveBeenCalledTimes(4);
+    expect(console.info).toHaveBeenCalledTimes(4);
 
-    expect(console.log).toHaveBeenCalledWith(
+    expect(console.info).toHaveBeenCalledWith(
       "✅ Successfully scanned %s",
-      mockValues[0]
+      mockValues[0],
     );
-    expect(console.log).toHaveBeenCalledWith(
+    expect(console.info).toHaveBeenCalledWith(
       "✅ Successfully scanned %s",
-      mockValues[1]
+      mockValues[1],
     );
-    expect(console.log).toHaveBeenCalledWith(
+    expect(console.info).toHaveBeenCalledWith(
       "✅ Successfully scanned %s",
-      mockValues[2]
+      mockValues[2],
     );
 
-    expect(console.log).toHaveBeenCalledWith(
+    expect(console.info).toHaveBeenCalledWith(
       "\n\r\n\r✅ All %i images have been successfully scanned.",
-      mockValues.length
+      mockValues.length,
     );
   });
 
@@ -61,7 +61,7 @@ describe("execute", () => {
 
     expect(console.error).toHaveBeenCalledWith(
       "\n\r\n\r❌ %i images did not scan successfully: \n\r",
-      mockValues.length
+      mockValues.length,
     );
 
     expect(console.error).toHaveBeenCalledWith("%i. %s", 1, mockValues[0]);

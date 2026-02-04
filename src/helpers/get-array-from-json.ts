@@ -20,7 +20,7 @@ import * as file from "node:fs";
  * // Returns: ["tag1", "tag2"]
  * ```
  */
-export const getArrayFromJson = (args: Array<string>): Array<string> => {
+const getArrayFromJson = (args: Array<string>): Array<string> => {
   // Sanitise argument
   const type = args[0].replace("--", "");
   const source = args[1];
@@ -29,7 +29,7 @@ export const getArrayFromJson = (args: Array<string>): Array<string> => {
   const raw = file.readFileSync(source, { encoding: "utf8" });
   const json = JSON.parse(raw);
 
-  if (!json.hasOwnProperty(type)) {
+  if (!Object.hasOwn(json, type)) {
     throw new TypeError(`${type} property does not exist in supplied JSON.`);
   }
 
@@ -37,9 +37,11 @@ export const getArrayFromJson = (args: Array<string>): Array<string> => {
 
   if (!Array.isArray(data)) {
     throw new TypeError(
-      `${type} property is not an Array of values in the JSON file as expected.`
+      `${type} property is not an Array of values in the JSON file as expected.`,
     );
   }
 
   return data;
 };
+
+export default getArrayFromJson;

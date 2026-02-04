@@ -1,5 +1,10 @@
 {
-  "ignorePaths": ["**/node_modules/**", "prek/**", "**/*.drawio", "**/*.svg"],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "prek/**",
+    "**/*.drawio",
+    "**/*.svg"
+  ],
   "language": "en",
   "noConfigSearch": true,
   "allowCompoundWords": true,
@@ -7,18 +12,19 @@
     "Abhi",
     "Anchore",
     "cyclonedx",
+    "hmpps",
     "Markan",
     "NTIA",
     "ossf",
+    "pipenv",
     "prek",
     "pycache",
     "SARIF",
-    "syft",
-    "unindexed",
-    "venv",
     "SLSA",
     "SSDF",
-    "pipenv"
+    "syft",
+    "unindexed",
+    "venv"
   ],
   "dictionaries": [
     "en-gb",
@@ -34,7 +40,9 @@
   "languageSettings": [
     {
       "languageId": "commit-msg",
-      "ignoreRegExpList": ["/^#.*/gm"]
+      "ignoreRegExpList": [
+        "/^#.*/gm"
+      ]
     }
   ],
   "version": "0.2"

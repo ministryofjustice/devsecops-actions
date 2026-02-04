@@ -4,7 +4,9 @@
  * @module helpers
  */
 
-export { getArguments } from "./get-arguments.ts";
-export { validateArguments } from "./valid-argument.ts";
-export { getArrayFromJson } from "./get-array-from-json.ts";
-export { execute } from "./execute.ts";
+import getArguments from "./get-arguments.js";
+import validateArguments from "./valid-argument.js";
+import getArrayFromJson from "./get-array-from-json.js";
+import execute from "./execute.js";
+
+export { getArguments, validateArguments, getArrayFromJson, execute };

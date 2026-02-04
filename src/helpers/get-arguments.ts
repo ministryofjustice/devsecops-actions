@@ -15,7 +15,7 @@
  * ```
  */
 
-export const getArguments = (): Array<string> => {
+const getArguments = (): Array<string> => {
   // Node.js arguments
   const ignoreArguments = 2;
   const minimumArguments = 2;
@@ -31,3 +31,5 @@ export const getArguments = (): Array<string> => {
 
   return args;
 };
+
+export default getArguments;

@@ -1,4 +1,4 @@
-import { validateArguments } from "./valid-argument.ts";
+import validateArguments from "./valid-argument.js";
 
 console.error = jest.fn();
 
@@ -40,6 +40,6 @@ describe("validateArguments", () => {
 
       // Assert
       expect(response).toBe(value);
-    }
+    },
   );
 });

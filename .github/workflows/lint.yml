@@ -58,10 +58,6 @@ jobs:
         shell: bash
         run: npm ci --ignore-scripts
 
-      - name: Spellcheck
-        shell: bash
-        run: npm run spellcheck
-
       - name: MD
         shell: bash
         run: npm run validate:md
@@ -72,8 +68,14 @@ jobs:
 
       - name: TS
         shell: bash
-        run: npm run validate:ts
+        run: |
+          npm run lint
+          npm run validate:ts
 
       - name: Renovate
         shell: bash
         run: npm run validate:renovate
+
+      - name: Spellcheck
+        shell: bash
+        run: npm run spellcheck

@@ -3,7 +3,7 @@ import {
   validateArguments,
   getArrayFromJson,
   execute,
-} from "../helpers/index.ts";
+} from "../helpers/index.js";
 
 /**
  * Scans the provided source based on the specified type.
@@ -31,14 +31,14 @@ import {
  * if any part of the scanning process fails.
  */
 
-export const scan = async (): Promise<void | TypeError> => {
+const scan = async (): Promise<void | TypeError> => {
   try {
     const args = getArguments();
     const valid = validateArguments(args);
 
     if (!valid) {
       throw new TypeError(
-        "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r"
+        "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",
       );
     }
 
@@ -51,3 +51,5 @@ export const scan = async (): Promise<void | TypeError> => {
     throw new TypeError(`Scanning failed: ${error}`);
   }
 };
+
+export default scan;

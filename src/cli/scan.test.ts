@@ -1,4 +1,4 @@
-import { scan } from "./scan.ts";
+import scan from "./scan.js";
 
 console.error = jest.fn();
 
@@ -20,7 +20,7 @@ describe("scan", () => {
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(console.error).toHaveBeenCalledWith(
       "❌ An error has occurred during execution %s",
-      mockCause
+      mockCause,
     );
   });
 
@@ -37,7 +37,7 @@ describe("scan", () => {
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(console.error).toHaveBeenCalledWith(
       "❌ An error has occurred during execution %s",
-      mockCause
+      mockCause,
     );
   });
 
@@ -54,7 +54,7 @@ describe("scan", () => {
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(console.error).toHaveBeenCalledWith(
       "❌ An error has occurred during execution %s",
-      mockCause
+      mockCause,
     );
   });
 
@@ -71,14 +71,14 @@ describe("scan", () => {
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(console.error).toHaveBeenCalledWith(
       "❌ An error has occurred during execution %s",
-      mockCause
+      mockCause,
     );
   });
 
   it("should thrown an error when invalid source type is provided", async () => {
     // Arrange
     const mockCause = new TypeError(
-      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r"
+      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",
     );
     const mockError = new TypeError(`Scanning failed: ${mockCause}`);
     process.argv = ["internal1", "internal2", "--invalid", "sources.json"];
@@ -90,14 +90,14 @@ describe("scan", () => {
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(console.error).toHaveBeenCalledWith(
       "❌ An error has occurred during execution %s",
-      mockCause
+      mockCause,
     );
   });
 
   it("should thrown an error when invalid source type is provided", async () => {
     // Arrange
     const mockCause = new TypeError(
-      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r"
+      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",
     );
     const mockError = new TypeError(`Scanning failed: ${mockCause}`);
     process.argv = ["internal1", "internal2", "--invalid", "sources.json"];
@@ -109,14 +109,14 @@ describe("scan", () => {
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(console.error).toHaveBeenCalledWith(
       "❌ An error has occurred during execution %s",
-      mockCause
+      mockCause,
     );
   });
 
   it("should thrown an error when invalid source file is provided", async () => {
     // Arrange
     const mockCause = new TypeError(
-      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r"
+      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",
     );
     const mockError = new TypeError(`Scanning failed: ${mockCause}`);
     process.argv = ["internal1", "internal2", "--images", "invalid.json"];
@@ -129,7 +129,7 @@ describe("scan", () => {
 
     expect(console.error).toHaveBeenCalledWith(
       "❌ An error has occurred during execution %s",
-      mockCause
+      mockCause,
     );
   });
 

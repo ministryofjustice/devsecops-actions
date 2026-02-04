@@ -22,7 +22,7 @@ import { resolve } from "node:path";
  * ```
  */
 
-export const validateArguments = (args: Array<string>): boolean => {
+const validateArguments = (args: Array<string>): boolean => {
   try {
     const types = new Set(["--images"]);
 
@@ -45,3 +45,5 @@ export const validateArguments = (args: Array<string>): boolean => {
     return false;
   }
 };
+
+export default validateArguments;

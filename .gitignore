@@ -47,3 +47,6 @@ coverage
 
 # SARIF
 **/*.sarif
+
+# Lint
+**/.eslintcache

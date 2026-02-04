@@ -15,7 +15,7 @@ import { resolve } from "node:path";
  * ```
  */
 
-export const getCommand = (type: string, value: string): string => {
+const getCommand = (type: string, value: string): string => {
   const source = type.replace("--", "");
   const sbom = resolve(process.cwd(), "sca", "sbom");
   const image = value.split(":");
@@ -27,3 +27,5 @@ export const getCommand = (type: string, value: string): string => {
       return "";
   }
 };
+
+export default getCommand;

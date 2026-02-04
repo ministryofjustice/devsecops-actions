@@ -1,6 +1,6 @@
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
-import { getCommand } from "./get-command.ts";
+import getCommand from "./get-command.js";
 
 /**
  * Executes a command for each value in the provided array and reports the results.
@@ -26,9 +26,9 @@ import { getCommand } from "./get-command.ts";
  * ```
  */
 
-export const execute = async (
+const execute = async (
   type: string,
-  values: Array<string>
+  values: Array<string>,
 ): Promise<void | TypeError> => {
   const execAsync = promisify(exec);
 
@@ -38,13 +38,13 @@ export const execute = async (
 
       await execAsync(command);
 
-      console.log("✅ Successfully scanned %s", value);
+      console.info("✅ Successfully scanned %s", value);
       return { image: value, success: true };
     } catch (error) {
       console.error(
         "❌ Failed to scan %s with the provided command %o",
         value,
-        error
+        error,
       );
       return { image: value, success: false };
     }
@@ -57,7 +57,7 @@ export const execute = async (
   if (failed.length) {
     console.error(
       "\n\r\n\r❌ %i images did not scan successfully: \n\r",
-      failed.length
+      failed.length,
     );
     failed.forEach(({ image }, index) => {
       console.error("%i. %s", index + 1, image);
@@ -65,9 +65,11 @@ export const execute = async (
 
     throw new TypeError("Image scanning failed");
   } else {
-    console.log(
+    console.info(
       "\n\r\n\r✅ All %i images have been successfully scanned.",
-      values.length
+      values.length,
     );
   }
 };
+
+export default execute;
