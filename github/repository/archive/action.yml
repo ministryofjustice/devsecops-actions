@@ -27,7 +27,7 @@ inputs:
 
   token:
     required: true
-    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+    description: "GitHub repository token with read and write privileges to contents, pull requests, issues and read-only permission to security events."
 
 runs:
   using: composite
@@ -35,17 +35,17 @@ runs:
     - name: 📦 Repository
       uses: ministryofjustice/devsecops-actions/sca/repository@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
-    - name: Node
+    - name: ⚡️ Node
       uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
       with:
         node-version: ${{ inputs.node-version }}
 
-    - name: Install
+    - name: 💾 Install
       shell: bash
       working-directory: ${{ github.action_path }}
       run: npm ci --ignore-scripts
 
-    - name: Execute
+    - name: ⚙️ Execute
       shell: bash
       working-directory: ${{ github.action_path }}
       run: npm run scan -- --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
