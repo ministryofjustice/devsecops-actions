@@ -25,7 +25,7 @@ const getCommand = (type: string, value: string = ""): string => {
 
   switch (source) {
     case SCAN.DOCKER:
-      return `syft scan ${value} --source-name ${value} --config ${sbom}/config.yml --source-name "${image[0]}" --source-version "${image[1]}" --output cyclonedx-json=sca-sbom-${image[1]}.cdx.json`;
+      return `syft scan ${value} --config ${sbom}/config.yml --source-name "${image[0]}" --source-version "${image[1]}" --output cyclonedx-json=sca-sbom-${image[1]}.cdx.json`;
     case GITHUB_SCANS.ARCHIVE:
       return "git log -1 --format=%ct";
     default:

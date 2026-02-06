@@ -15,7 +15,7 @@ import { docker, github } from "./scans";
  * @example
  * ```typescript
  * // For Docker scanning: node scan.js --images ./images.json
- * // For GitHub scanning: node scan.js --github --archive --days 90 --email user@gov.uk --key key123 --template 123 --repository-name repository
+ * // For GitHub scanning: node scan.js --github --archive --days 90 --email user@gov.uk --key key123 --template-id 123 --repository-name repository
  * await scan();
  * ```
  */

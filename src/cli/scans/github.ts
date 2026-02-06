@@ -1,6 +1,6 @@
 import { GITHUB_SCANS } from "../../constants";
 
-import { isValidateGitHubArguments } from "../../validators";
+import { areGitHubArgumentsValid } from "../../validators";
 import { sanitiseArgumentProperty } from "../../helpers";
 import { scanGithub } from "../../services";
 
@@ -16,12 +16,12 @@ import { scanGithub } from "../../services";
  *
  * @example
  * ```typescript
- * await github(['--github', '--archive', '--days', '90', '--email', 'team@example.gov.uk', '--key', 'api-key', '--template', '123', '--repository-name', 'repository']);
+ * await github(['--github', '--archive', '--days', '90', '--email', 'team@example.gov.uk', '--key', 'api-key', '--template-id', '123', '--repository-name', 'repository']);
  * // Initiates GitHub repository archival scanning
  * ```
  */
 const github = async (args: Array<string>): Promise<void> => {
-  const valid = isValidateGitHubArguments(args);
+  const valid = areGitHubArgumentsValid(args);
 
   if (!valid) {
     throw new TypeError(

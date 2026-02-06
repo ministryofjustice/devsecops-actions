@@ -5,7 +5,7 @@
  */
 
 import isValidEmail from "./is-valid-email";
-import isValidateImageArguments from "./valid-image-arguments";
-import isValidateGitHubArguments from "./validate-github-arguments";
+import areImageArgumentsValid from "./valid-image-arguments";
+import areGitHubArgumentsValid from "./validate-github-arguments";
 
-export { isValidEmail, isValidateImageArguments, isValidateGitHubArguments };
+export { isValidEmail, areImageArgumentsValid, areGitHubArgumentsValid };

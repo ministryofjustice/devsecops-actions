@@ -13,16 +13,17 @@ import { GITHUB_SCANS } from "../constants";
  *
  * @example
  * ```typescript
- * const valid = isValidateGitHubArguments(['--github', 'archive', '--days', '90', '--email', 'test@gov.uk', '--key', 'key123']);
+ * const valid = areGitHubArgumentsValid(['--github', 'archive', '--days', '90', '--email', 'test@gov.uk', '--key', 'key123']);
  * // Returns: true
  * ```
  */
-const isValidateGitHubArguments = (args: Array<string>): boolean => {
+const areGitHubArgumentsValid = (args: Array<string>): boolean => {
   try {
     const type = sanitiseArgumentProperty(args[1]);
     const days = Number(args[3]);
     const email = args[5];
     const key = args[7];
+    const template = args[9];
     const name = args[11];
 
     if (!Object.values(GITHUB_SCANS).includes(type)) {
@@ -45,6 +46,10 @@ const isValidateGitHubArguments = (args: Array<string>): boolean => {
       throw new Error("Invalid --key argument value, must be a valid API key.");
     }
 
+    if (!template.trim()) {
+      throw new Error("Invalid -- argument value, must be a valid name.");
+    }
+
     if (!name.trim()) {
       throw new Error(
         "Invalid --repository-name argument value, must be a valid name.",
@@ -53,9 +58,12 @@ const isValidateGitHubArguments = (args: Array<string>): boolean => {
 
     return true;
   } catch (error) {
-    console.error("❌ An error has occurred while reading file %o", error);
+    console.error(
+      "❌ An error has occurred while validating GitHub CLI arguments %o",
+      error,
+    );
     return false;
   }
 };
 
-export default isValidateGitHubArguments;
+export default areGitHubArgumentsValid;

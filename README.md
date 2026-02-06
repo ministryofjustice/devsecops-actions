@@ -117,7 +117,7 @@ Orchestrates 4 specialized components:
 **Public Template:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+- uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -125,7 +125,7 @@ Orchestrates 4 specialized components:
 **Private Template:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+- uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
   with:
     private: "true"
     github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -143,6 +143,58 @@ Orchestrates 4 specialized components:
 - ✅ **Smart Naming** - Date-based branch naming
 
 **[📖 Full Cruft Documentation](cruft/README.md)**
+
+---
+
+### 🔎 GitHub - Repository Management
+
+**Path**: `ministryofjustice/devsecops-actions/github`
+
+Enterprise-grade repository health monitoring and lifecycle management actions that automate governance, compliance, and archival workflows.
+
+#### Introduction
+
+Orchestrates repository management capabilities:
+
+1. **🔎 Archive Check** - Identifies dormant repositories eligible for archival
+2. **📧 Notification System** - GOV.UK Notify email alerts
+3. **📊 Activity Analysis** - Commit history scanning
+4. **⚙️ Lifecycle Automation** - Proactive governance workflows
+
+#### Code
+
+**Basic Archive Check:**
+
+```yaml
+- uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.3.0
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    notification-email: "team@example.gov.uk"
+    gov-notify-key: ${{ secrets.GOV_NOTIFY_API_KEY }}
+    gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
+```
+
+**Custom Threshold:**
+
+```yaml
+- uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.3.0
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    archival-days: "180"
+    notification-email: "governance@example.gov.uk"
+    gov-notify-key: ${{ secrets.GOV_NOTIFY_API_KEY }}
+    gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
+```
+
+#### Features
+
+- ✅ **Configurable Thresholds** - Custom inactivity periods
+- ✅ **Email Notifications** - GOV.UK Notify integration
+- ✅ **Commit Analysis** - Deep repository activity scanning
+- ✅ **Non-Destructive** - Analysis only, no auto-archival
+- ✅ **Audit Trail** - Complete logging of checks
+
+**[📖 Full GitHub Actions Documentation](github/README.md)**
 
 ---
 
@@ -218,7 +270,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.2
 
-      - uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+      - uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```

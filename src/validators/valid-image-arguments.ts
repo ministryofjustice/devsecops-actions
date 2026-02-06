@@ -12,11 +12,11 @@ import { resolve } from "node:path";
  *
  * @example
  * ```typescript
- * const valid = isValidateImageArguments(['--images', './images.json']);
+ * const valid = areImageArgumentsValid(['--images', './images.json']);
  * // Returns: true if images.json exists and is a file
  * ```
  */
-const isValidateImageArguments = (args: Array<string>): boolean => {
+const areImageArgumentsValid = (args: Array<string>): boolean => {
   try {
     const source = args[1];
 
@@ -36,4 +36,4 @@ const isValidateImageArguments = (args: Array<string>): boolean => {
   }
 };
 
-export default isValidateImageArguments;
+export default areImageArgumentsValid;

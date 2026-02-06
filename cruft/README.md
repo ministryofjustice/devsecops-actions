@@ -109,7 +109,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Run Cruft Update
-        uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+        uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -151,7 +151,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Run Cruft Update with GitHub App
-        uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+        uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
         with:
           private: "true"
           github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -200,7 +200,7 @@ jobs:
           fetch-depth: 0 # Full history for better diff
 
       - name: Run Cruft Update
-        uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+        uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
         with:
           private: "true"
           github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -252,7 +252,7 @@ jobs:
           token: ${{ secrets.ORG_ACCESS_TOKEN }}
 
       - name: Sync Template
-        uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+        uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
         with:
           token: ${{ secrets.ORG_ACCESS_TOKEN }}
           private: "true"
@@ -476,7 +476,7 @@ env:
 
 ```yaml
 # ✅ Recommended: Use specific version tags
-uses: ministryofjustice/devsecops-actions/cruft@v1.0.0
+uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
 
 # ✅ Alternative: Use commit SHA for maximum stability
 uses: ministryofjustice/devsecops-actions/cruft@9babea875cafae0e3b05a5ec5aca76d6b560c42e

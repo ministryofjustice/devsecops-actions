@@ -44,7 +44,7 @@ const scanGithub = async (
     const lastCommitMs = Number(date.trim()) * 1000;
     const nowMs = Date.now();
     const differenceMs = nowMs - lastCommitMs;
-    const differenceDays = Math.round(differenceMs / DAYS_MS);
+    const differenceDays = Math.floor(differenceMs / DAYS_MS);
 
     if (differenceDays > days) {
       console.warn(

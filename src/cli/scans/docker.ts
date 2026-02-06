@@ -1,4 +1,4 @@
-import { isValidateImageArguments } from "../../validators";
+import { areImageArgumentsValid } from "../../validators";
 import { getArrayFromJson, scanImages } from "../../services";
 
 /**
@@ -21,7 +21,7 @@ import { getArrayFromJson, scanImages } from "../../services";
  * ```
  */
 const docker = async (args: Array<string>): Promise<void> => {
-  const valid = isValidateImageArguments(args);
+  const valid = areImageArgumentsValid(args);
 
   if (!valid) {
     throw new TypeError(
