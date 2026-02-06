@@ -46,7 +46,6 @@
     "cspell": "^9.6.2",
     "jest": "^30.2.0",
     "markdownlint-cli": "^0.47.0",
-    "renovate": "^43.4.0",
     "sort-package-json": "^3.6.1",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
