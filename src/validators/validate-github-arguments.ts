@@ -23,6 +23,7 @@ const isValidateGitHubArguments = (args: Array<string>): boolean => {
     const days = Number(args[3]);
     const email = args[5];
     const key = args[7];
+    const name = args[11];
 
     if (!Object.values(GITHUB_SCANS).includes(type)) {
       throw new Error("Invalid --github scan type argument.");
@@ -42,6 +43,12 @@ const isValidateGitHubArguments = (args: Array<string>): boolean => {
 
     if (!key.trim()) {
       throw new Error("Invalid --key argument value, must be a valid API key.");
+    }
+
+    if (!name.trim()) {
+      throw new Error(
+        "Invalid --repository-name argument value, must be a valid name.",
+      );
     }
 
     return true;

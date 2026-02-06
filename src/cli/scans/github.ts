@@ -25,7 +25,7 @@ const github = async (args: Array<string>): Promise<void> => {
 
   if (!valid) {
     throw new TypeError(
-      "Invalid arguments provided.\n\r\n\r\n\rUsage: scan --github --archive --days <days> --email <email> --key <key> --template-id <id> --repository-name repository",
+      "Invalid arguments provided.\n\r\n\r\n\rUsage: scan --github --archive --days <days> --email <email> --key <key> --template-id <id> --repository-name <name>",
     );
   }
 
