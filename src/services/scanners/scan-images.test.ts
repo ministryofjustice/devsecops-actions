@@ -1,4 +1,4 @@
-import execute from "./execute";
+import scanImages from "./scan-images";
 
 console.info = jest.fn();
 console.error = jest.fn();
@@ -19,7 +19,7 @@ describe("execute", () => {
     ];
 
     // Act
-    await execute(mockType, mockValues);
+    await scanImages(mockType, mockValues);
 
     // Assert
     expect(console.info).toHaveBeenCalledTimes(4);
@@ -54,7 +54,7 @@ describe("execute", () => {
     const mockError = new TypeError("Image scanning failed");
 
     // Act + Assert
-    await expect(execute(mockType, mockValues)).rejects.toThrow(mockError);
+    await expect(scanImages(mockType, mockValues)).rejects.toThrow(mockError);
 
     // Assert
     expect(console.error).toHaveBeenCalledTimes(7);

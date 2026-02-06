@@ -41,7 +41,7 @@
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate: "true"
-#       node_version: "24.11.1"
+#       node-version: "24.11.1"
 #       codeql-config-file: ".github/codeql-config.yml"
 #       docker-images-file: "docker-images.json"
 #
@@ -84,7 +84,7 @@ inputs:
     description: "Flag to evaluation Renovate execution"
     default: "true"
 
-  node_version:
+  node-version:
     required: false
     description: "Node.js version to use"
     default: "24.11.1"
@@ -167,5 +167,5 @@ runs:
       uses: ministryofjustice/devsecops-actions/sca/sbom@9babea875cafae0e3b05a5ec5aca76d6b560c42e
       with:
         token: ${{ inputs.token }}
-        node_version: ${{ inputs.node_version }}
+        node-version: ${{ inputs.node-version }}
         docker-images-file: ${{ inputs.docker-images-file }}

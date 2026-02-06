@@ -43,7 +43,7 @@
 #   - uses: ministryofjustice/devsecops-actions/sca/sbom@main
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
-#       node_version: "24.11.1"
+#       node-version: "24.11.1"
 #
 # ==============================================================================
 # DOCKER IMAGES FILE FORMAT
@@ -102,7 +102,7 @@ inputs:
     required: true
     description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
-  node_version:
+  node-version:
     required: false
     description: "Node.js version to use for SBOM generation and related tooling. Specify the exact version number."
     default: "24.11.1"
@@ -119,7 +119,7 @@ runs:
     - name: Node
       uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
       with:
-        node-version: ${{ inputs.node_version }}
+        node-version: ${{ inputs.node-version }}
 
     - name: Install
       shell: bash

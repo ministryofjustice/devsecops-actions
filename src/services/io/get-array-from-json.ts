@@ -1,5 +1,7 @@
 import * as file from "node:fs";
 
+import { sanitiseArgumentProperty } from "../../helpers";
+
 /**
  * Extracts an array from a JSON file based on a specified property name.
  *
@@ -21,11 +23,9 @@ import * as file from "node:fs";
  * ```
  */
 const getArrayFromJson = (args: Array<string>): Array<string> => {
-  // Sanitise argument
-  const type = args[0].replace("--", "");
+  const type = sanitiseArgumentProperty(args[0]);
   const source = args[1];
 
-  // Fetch as an array
   const raw = file.readFileSync(source, { encoding: "utf8" });
   const json = JSON.parse(raw);
 

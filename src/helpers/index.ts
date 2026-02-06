@@ -5,8 +5,7 @@
  */
 
 import getArguments from "./get-arguments";
-import validateArguments from "./valid-argument";
-import getArrayFromJson from "./get-array-from-json";
-import execute from "./execute";
+import getScanType from "./get-scan-type";
+import sanitiseArgumentProperty from "./sanitise-argument-property";
 
-export { getArguments, validateArguments, getArrayFromJson, execute };
+export { getArguments, getScanType, sanitiseArgumentProperty };

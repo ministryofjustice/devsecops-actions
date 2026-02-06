@@ -78,7 +78,7 @@ describe("scan", () => {
   it("should throw an error when invalid source type is provided", async () => {
     // Arrange
     const mockCause = new TypeError(
-      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",
+      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>",
     );
     const mockError = new TypeError(`Scanning failed: ${mockCause}`);
     process.argv = ["internal1", "internal2", "--invalid", "sources.json"];
@@ -97,7 +97,7 @@ describe("scan", () => {
   it("should throw an error when invalid source type is provided", async () => {
     // Arrange
     const mockCause = new TypeError(
-      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",
+      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>",
     );
     const mockError = new TypeError(`Scanning failed: ${mockCause}`);
     process.argv = ["internal1", "internal2", "--invalid", "sources.json"];
@@ -116,7 +116,7 @@ describe("scan", () => {
   it("should thrown an error when invalid source file is provided", async () => {
     // Arrange
     const mockCause = new TypeError(
-      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",
+      "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>",
     );
     const mockError = new TypeError(`Scanning failed: ${mockCause}`);
     process.argv = ["internal1", "internal2", "--images", "invalid.json"];

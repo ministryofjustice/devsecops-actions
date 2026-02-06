@@ -1,32 +1,29 @@
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
-import getCommand from "./get-command";
+
+import getCommand from "../commands";
 
 /**
- * Executes a command for each value in the provided array and reports the results.
+ * Executes a scanning command for each Docker image in the provided array and reports the results.
+ *
+ * Processes all images in parallel, collecting results for successful and failed scans.
+ * Logs individual scan outcomes and throws an error if any scans fail.
  *
  * @param type - The type of command to execute, used to determine the command via getCommand()
- * @param values - An array of string values (e.g., image names) to process
- * @returns A Promise that resolves to void on success, or rejects with a TypeError if any scans fail
- * @throws {TypeError} Throws a TypeError with message "Image scanning failed" if one or more values fail to scan
- *
- * @remarks
- * This function:
- * - Executes commands asynchronously for all values in parallel
- * - Logs success (✅) or failure (❌) for each individual value
- * - Collects all results and reports failed scans at the end
- * - Throws an error if any scans failed, listing all failed values
+ * @param values - An array of string values (e.g., Docker image names with tags) to process
+ * @returns A promise that resolves to void on success, or rejects with a TypeError if any scans fail
+ * @throws {TypeError} If one or more images fail to scan successfully
  *
  * @example
  * ```typescript
- * await execute('scan', ['image1:latest', 'image2:latest']);
- * // Logs: ✅ Successfully scanned image1:latest
- * // Logs: ✅ Successfully scanned image2:latest
+ * await scanImages('--images', ['nginx:latest', 'alpine:3.18']);
+ * // Logs: ✅ Successfully scanned nginx:latest
+ * // Logs: ✅ Successfully scanned alpine:3.18
  * // Logs: ✅ All 2 images have been successfully scanned.
  * ```
  */
 
-const execute = async (
+const scanImages = async (
   type: string,
   values: Array<string>,
 ): Promise<void | TypeError> => {
@@ -72,4 +69,4 @@ const execute = async (
   }
 };
 
-export default execute;
+export default scanImages;

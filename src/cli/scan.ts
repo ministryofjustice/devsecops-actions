@@ -1,51 +1,39 @@
-import {
-  getArguments,
-  validateArguments,
-  getArrayFromJson,
-  execute,
-} from "../helpers/index";
+import { SCAN } from "../constants";
+
+import { getArguments, getScanType } from "../helpers/index";
+import { docker, github } from "./scans";
 
 /**
- * Scans the provided source based on the specified type.
+ * Executes a scan based on CLI arguments, delegating to the appropriate scan handler.
  *
- * This function processes command-line arguments to perform a scan operation.
- * It validates the arguments, checks if the source is valid JSON, and executes
- * the scan based on the specified type.
+ * Parses command-line arguments to determine the scan type (Docker or GitHub) and
+ * invokes the corresponding scanner implementation.
  *
- * @throws {TypeError} When invalid arguments are provided. The error message
- * includes usage instructions for the scan command.
- * @throws {Error} When scanning fails due to any error during execution.
+ * @returns A promise that resolves when the scan completes
+ * @throws {TypeError} When the scan fails or an invalid scan type is supplied
  *
  * @example
- * ```bash
- * # Command-line usage
- * scan --images source.json
+ * ```typescript
+ * // For Docker scanning: node scan.js --images ./images.json
+ * // For GitHub scanning: node scan.js --github --archive --days 90 --email user@gov.uk --key key123 --template 123 --repository-name repository
+ * await scan();
  * ```
- *
- * @remarks
- * Expected arguments format:
- * - First argument: `--images` (scan type)
- * - Second argument: Path to a JSON file containing the source data
- *
- * The function will log errors to the console before throwing an exception
- * if any part of the scanning process fails.
  */
-
 const scan = async (): Promise<void | TypeError> => {
   try {
     const args = getArguments();
-    const valid = validateArguments(args);
+    const type = getScanType(args);
 
-    if (!valid) {
-      throw new TypeError(
-        "Invalid arguments provided.\n\rFirst argument: --images\n\rSecond argument: Source JSON\n\r\n\rUsage: scan <type> <source>\n\rUsage: scan --images source.json\n\r",
-      );
+    switch (type) {
+      case SCAN.DOCKER:
+        await docker(args);
+        break;
+      case SCAN.GITHUB:
+        await github(args);
+        break;
+      default:
+        throw new Error("Invalid scan type argument supplied");
     }
-
-    const values = getArrayFromJson(args);
-    const type = args[0];
-
-    await execute(type, values);
   } catch (error) {
     console.error("❌ An error has occurred during execution %s", error);
     throw new TypeError(`Scanning failed: ${error}`);

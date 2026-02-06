@@ -1,0 +1,51 @@
+name: Ministry of Justice UK - GitHub - Archive check 🔎
+description: Scan GitHub repository commit history to ascertain repository is due for an archival, if it is then dispatch an alert email to the provided email address.
+author: Ministry of Justice UK
+
+inputs:
+  archival-days:
+    required: false
+    description: "Number of non-activity days in a repository"
+    default: "90"
+
+  notification-email:
+    required: true
+    description: "Notification email address to dispatch an email for the repository which has been dormant for 'archival-days' and therefore eligible for archival"
+
+  gov-notify-key:
+    required: true
+    description: "GovNotify API key"
+
+  gov-notify-template-id:
+    required: true
+    description: "GovNotify template ID"
+
+  node-version:
+    required: false
+    description: "Node.js version to use"
+    default: "24.11.1"
+
+  token:
+    required: true
+    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+
+runs:
+  using: composite
+  steps:
+    - name: 📦 Repository
+      uses: ministryofjustice/devsecops-actions/sca/repository@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+
+    - name: Node
+      uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: npm ci --ignore-scripts
+
+    - name: Execute
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: npm run scan -- --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"

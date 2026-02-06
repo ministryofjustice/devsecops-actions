@@ -1,5 +1,5 @@
 /**
- * Main entry point for the CLI module.
+ * @fileoverview Main entry point for the CLI module.
  *
  * @module cli
  */
