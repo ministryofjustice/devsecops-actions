@@ -1,6 +1,6 @@
 # 🔎 GitHub Repository Management Actions
 
-Enterprise-Grade Repository Health and Lifecycle Management
+Repository Health and Lifecycle Management
 
 ---
 
@@ -30,7 +30,6 @@ and compliance workflows. These actions help organisations maintain clean, secur
 - [Inputs](#-inputs)
 - [Required Permissions](#-required-permissions)
 - [Configuration](#️-configuration)
-- [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 
 ---
@@ -78,7 +77,6 @@ This action analyses repository activity patterns and dispatches notifications w
 - ✅ **Commit History Analysis** - Deep scanning of repository activity
 - ✅ **Zero Configuration** - Works with sensible defaults
 - ✅ **Non-Destructive** - Analysis only, no automatic archival
-- ✅ **Audit Trail** - Complete logging of all checks
 
 #### Technical Details
 
@@ -337,20 +335,14 @@ Create an email template with placeholders:
 **Template Example:**
 
 ```text
-Subject: Repository Archival Alert - ((repository_name))
+Subject: Repository Archival Alert
 
 Dear Team,
 
-The repository ((repository_name)) has been dormant for ((days)) days and is now eligible for archival.
+The repository ((name)) has been dormant for ((days)) days and is now eligible for archival.
 
-Repository: ((repository_name))
-Last Activity: ((last_commit_date))
-Inactivity Period: ((days)) days
-
-Please review and take appropriate action:
-- Archive if no longer needed
-- Update if still in use
-- Contact governance team if uncertain
+Repository: ((name))
+Last Activity: ((date))
 
 Best regards,
 DevSecOps Team
@@ -358,9 +350,8 @@ DevSecOps Team
 
 **Template Variables:**
 
-- `repository_name` - Full repository name (org/repo)
-- `days` - Number of inactive days
-- `last_commit_date` - Date of last commit
+- `name` - Repository name
+- `date` - Last commit date
 
 #### 4. Store Secrets in GitHub
 
@@ -397,8 +388,7 @@ archival-days: "365"
 **Recipient Guidelines:**
 
 - ✅ Use team distribution lists
-- ✅ Include governance team
-- ✅ CC compliance officers
+- ✅ Include SRE / Cyber teams
 - ✅ Use monitored mailboxes
 - ❌ Avoid personal email addresses
 
@@ -409,98 +399,6 @@ archival-days: "365"
 - ✅ Contact information
 - ✅ Relevant links
 - ✅ Compliance context
-
----
-
-## 🔍 Troubleshooting
-
-### Common Issues and Solutions
-
-#### Issue: "Failed to send notification"
-
-**Cause**: Invalid GOV.UK Notify API key or template ID
-
-**Solution**:
-
-1. Verify API key format is correct
-2. Ensure template ID exists in GOV.UK Notify
-3. Check API key has appropriate permissions
-4. Verify service is active in GOV.UK Notify
-
-```yaml
-# Verify secrets are set correctly
-gov-notify-key: ${{ secrets.GOV_NOTIFY_API_KEY }}
-gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
-```
-
-#### Issue: "Repository not found" or "Permission denied"
-
-**Cause**: Insufficient GitHub token permissions
-
-**Solution**:
-
-```yaml
-permissions:
-  contents: read # Required for repository access
-```
-
-Ensure `GITHUB_TOKEN` has repository access or use personal access token with `repo` scope.
-
-#### Issue: No email received despite successful run
-
-**Cause**: Repository may not meet archival criteria
-
-**Solution**:
-
-1. Check workflow logs for activity detection
-2. Verify `archival-days` threshold is appropriate
-3. Ensure repository has commit history
-4. Confirm email address is correct in template
-
-#### Issue: "Node.js module not found"
-
-**Cause**: Dependencies not installed correctly
-
-**Solution**:
-
-The action installs dependencies automatically. If issues persist:
-
-```yaml
-# Specify different Node.js version
-node-version: "24.11.1"
-```
-
-#### Issue: Rate limiting errors
-
-**Cause**: Too frequent execution or many repositories
-
-**Solution**:
-
-```yaml
-# Reduce execution frequency
-schedule:
-  - cron: "0 0 1 * *" # Monthly instead of weekly
-
-# Add delays between checks
-timeout-minutes: 20 # Increase timeout
-```
-
-### Debug Mode
-
-Enable detailed logging:
-
-```yaml
-env:
-  ACTIONS_STEP_DEBUG: true
-  ACTIONS_RUNNER_DEBUG: true
-```
-
-This provides:
-
-- Detailed commit history analysis
-- API call traces
-- Email notification attempts
-- Error stack traces
 
 ---
 
@@ -576,11 +474,11 @@ notification-email: "team-leads@example.gov.uk"
 
 # Stage 2: 90-day alert
 archival-days: "90"
-notification-email: "governance@example.gov.uk"
+notification-email: "sre@example.gov.uk"
 
 # Stage 3: 120-day final notice
 archival-days: "120"
-notification-email: "compliance@example.gov.uk"
+notification-email: "cyber@example.gov.uk"
 ```
 
 ---
@@ -597,35 +495,6 @@ We welcome contributions! See the main repository [Contributing Guidelines](../R
 4. Test with a sample repository
 5. Update this README if adding features
 6. Submit a pull request
-
-### Testing Locally
-
-```bash
-# Test archive check action
-cd github/repository/archive
-
-# Review action.yml configuration
-cat action.yml
-
-# Test with sample repository
-# Create test workflow in .github/workflows/test-archive.yml
-```
-
-### Adding New GitHub Actions
-
-When adding new repository management actions:
-
-1. Create action directory under `github/`
-2. Add `action.yml` with composite action definition
-3. Document in this README
-4. Add usage examples
-5. Update main repository README
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](../LICENSE) file for details.
 
 ---
 

@@ -1,7 +1,6 @@
-import { exec } from "node:child_process";
+import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-
-import getCommand from "../commands";
+import { resolve } from "node:path";
 
 /**
  * Executes a scanning command for each Docker image in the provided array and reports the results.
@@ -27,13 +26,30 @@ const scanImages = async (
   type: string,
   values: Array<string>,
 ): Promise<void | TypeError> => {
-  const execAsync = promisify(exec);
+  const execAsync = promisify(execFile);
 
   const promises = values.map(async (value) => {
     try {
-      const command = getCommand(type, value);
+      const command = "syft";
+      const sbom = resolve(process.cwd(), "sca", "sbom");
+      const image = value.split(":");
 
-      await execAsync(command);
+      const argument = [
+        "scan",
+        value,
+        "--config",
+        `${sbom}/config.yml`,
+        "--source-name",
+        image[0],
+        "--source-version",
+        image[1],
+        "--output",
+        `cyclonedx-json=sca-sbom-${image[1]}.cdx.json`,
+      ];
+
+      await execAsync(command, argument, {
+        encoding: "utf8",
+      });
 
       console.info("✅ Successfully scanned %s", value);
       return { image: value, success: true };

@@ -1,7 +1,4 @@
-import { exec } from "node:child_process";
-import { promisify } from "node:util";
-
-import getCommand from "../commands";
+import { execFileSync } from "node:child_process";
 import sendEmail from "../notifications";
 
 /**
@@ -34,14 +31,16 @@ const scanGithub = async (
   template: string,
 ): Promise<boolean> => {
   try {
-    const execAsync = promisify(exec);
+    const command = "git";
+    const argument = ["log", "-1", "--format=%ct"];
 
-    const command = getCommand(type);
-    const { stdout: date } = await execAsync(command);
+    const date = execFileSync(command, argument, {
+      encoding: "utf8",
+    }).trim();
 
     const DAYS_MS = 24 * 60 * 60 * 1000;
 
-    const lastCommitMs = Number(date.trim()) * 1000;
+    const lastCommitMs = Number(date) * 1000;
     const nowMs = Date.now();
     const differenceMs = nowMs - lastCommitMs;
     const differenceDays = Math.floor(differenceMs / DAYS_MS);
