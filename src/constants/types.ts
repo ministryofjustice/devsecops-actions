@@ -23,4 +23,8 @@ const GITHUB_SCANS = {
   ARCHIVE: "archive",
 };
 
-export { SCAN, GITHUB_SCANS };
+const SOURCES_FILE_EXTENSION = {
+  JSON: ".json",
+};
+
+export { SCAN, GITHUB_SCANS, SOURCES_FILE_EXTENSION };

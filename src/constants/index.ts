@@ -4,4 +4,4 @@
  * @module constants
  */
 
-export { SCAN, GITHUB_SCANS } from "./types";
+export { SCAN, GITHUB_SCANS, SOURCES_FILE_EXTENSION } from "./types";

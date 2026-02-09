@@ -1,3 +1,5 @@
+import sanitiseArgumentProperty from "./sanitise-argument-property";
+
 /**
  * Determines the scan type based on the first CLI argument.
  *
@@ -12,12 +14,7 @@
  * // Returns: 'images'
  * ```
  */
-const getScanType = (args: Array<string>): string => {
-  if (args[0]) {
-    return args[0].replace("--", "");
-  }
-
-  return "";
-};
+const getScanType = (args: Array<string>): string =>
+  args[0] ? sanitiseArgumentProperty(args[0]) : "";
 
 export default getScanType;

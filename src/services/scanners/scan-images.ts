@@ -30,10 +30,10 @@ const scanImages = async (
 
   const promises = values.map(async (value) => {
     try {
-      const command = "syft";
       const sbom = resolve(process.cwd(), "sca", "sbom");
       const image = value.split(":");
 
+      const command = "syft";
       const argument = [
         "scan",
         value,

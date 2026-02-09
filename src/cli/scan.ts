@@ -32,7 +32,7 @@ const scan = async (): Promise<void | TypeError> => {
         await github(args);
         break;
       default:
-        throw new Error("Invalid scan type argument supplied");
+        throw new TypeError("Invalid scan type argument supplied");
     }
   } catch (error) {
     console.error("❌ An error has occurred during execution %s", error);

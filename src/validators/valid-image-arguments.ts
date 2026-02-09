@@ -1,20 +1,24 @@
 import { statSync } from "node:fs";
-import { resolve } from "node:path";
+import { resolve, extname } from "node:path";
+
+import { SOURCES_FILE_EXTENSION } from "../constants";
 
 /**
- * Validates that the second argument is a path to an existing file.
+ * Validates that the provided image arguments contain a valid file with an acceptable extension.
  *
- * Resolves the path relative to the current working directory and checks if it points
- * to a valid file (not a directory or other type).
- *
- * @param args - The argument list where index 1 is expected to be the file path
- * @returns `true` if the path resolves to a file; otherwise `false`
+ * @param {Array<string>} args - The command arguments array where args[1] should contain the file path
+ * @returns {boolean} True if the file exists, is a regular file, and has a valid extension; false otherwise
  *
  * @example
- * ```typescript
- * const valid = areImageArgumentsValid(['--images', './images.json']);
- * // Returns: true if images.json exists and is a file
+ * ```ts
+ * const isValid = areImageArgumentsValid(['command', './path/to/image.dockerfile']);
  * ```
+ *
+ * @remarks
+ * - Resolves the file path relative to the current working directory
+ * - Checks if the path points to a file (not a directory)
+ * - Validates the file extension against SOURCES_FILE_EXTENSION enum values
+ * - Logs errors to console if file reading fails
  */
 const areImageArgumentsValid = (args: Array<string>): boolean => {
   try {
@@ -24,8 +28,11 @@ const areImageArgumentsValid = (args: Array<string>): boolean => {
     const file = statSync(path);
 
     const isValidFile = file.isFile();
+    const isValidExtension = Object.values(SOURCES_FILE_EXTENSION).includes(
+      extname(path),
+    );
 
-    if (!isValidFile) {
+    if (!isValidFile || !isValidExtension) {
       return false;
     }
 

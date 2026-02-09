@@ -5,10 +5,6 @@ console.error = jest.fn();
 describe("validateImageArguments", () => {
   const assertions = [
     {
-      args: ["--images", "sources.json"],
-      value: true,
-    },
-    {
       args: ["", ""],
       value: false,
     },
@@ -17,12 +13,36 @@ describe("validateImageArguments", () => {
       value: false,
     },
     {
-      args: ["--image", "sources.json"],
+      args: ["--images", "invalid_file.json"],
       value: false,
     },
     {
-      args: ["--images", "invalid_file.json"],
+      args: ["--images", "https://invalid-url/invalid_file.json"],
       value: false,
+    },
+    {
+      args: ["--images", "../../invalid_path.json"],
+      value: false,
+    },
+    {
+      args: ["--images", "~/invalid"],
+      value: false,
+    },
+    {
+      args: ["--images", "sources.xml"],
+      value: false,
+    },
+    {
+      args: ["--images", "README.md"],
+      value: false,
+    },
+    {
+      args: ["--images", "Dockerfile"],
+      value: false,
+    },
+    {
+      args: ["--images", "sources.json"],
+      value: true,
     },
   ];
 
