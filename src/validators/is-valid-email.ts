@@ -14,7 +14,7 @@
  * ```
  */
 const isValidEmail = (email: string): boolean => {
-  const trimmed = email.trim();
+  const trimmed = email?.trim();
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!trimmed) {

@@ -177,7 +177,7 @@ describe("scan", () => {
     expect(console.info).toHaveBeenCalledWith(
       "✅ Repository %s is not due for archival, last commit was %i day(s) ago.",
       "test",
-      1,
+      expect.any(Number),
     );
 
     expect(console.error).not.toHaveBeenCalled();

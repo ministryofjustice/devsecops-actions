@@ -12,7 +12,7 @@
  * // Returns: 'images'
  * ```
  */
-const sanitiseArgumentProperty = (arg: string): string =>
+const sanitiseArgumentProperty = (arg: string = ""): string =>
   arg.replaceAll("--", "");
 
 export default sanitiseArgumentProperty;

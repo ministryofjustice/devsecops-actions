@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import getArrayFromJson from "./get-array-from-json";
 
-jest.mock("fs");
+jest.mock("node:fs");
 
 describe("isValidJson", () => {
   afterEach(() => {

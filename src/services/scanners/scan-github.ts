@@ -8,7 +8,6 @@ import sendEmail from "../notifications";
  * If the repository exceeds the threshold, sends a notification email.
  *
  * @param name - Repository name
- * @param type - The type of GitHub scan to perform (e.g., 'archive')
  * @param days - The maximum number of days since last commit before archival notification
  * @param email - The email address to notify if the repository should be archived
  * @param key - The GOV.UK Notify API key for sending notification emails
@@ -24,7 +23,6 @@ import sendEmail from "../notifications";
  */
 const scanGithub = async (
   name: string,
-  type: string,
   days: number,
   email: string,
   key: string,
@@ -36,7 +34,7 @@ const scanGithub = async (
 
     const date = execFileSync(command, argument, {
       encoding: "utf8",
-    }).trim();
+    });
 
     const DAYS_MS = 24 * 60 * 60 * 1000;
 

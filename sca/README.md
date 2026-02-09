@@ -284,6 +284,7 @@ jobs:
       pull-requests: write
       issues: write
       security-events: read
+      actions: read
 
     steps:
       - name: Run SCA with Custom Configuration
@@ -617,7 +618,7 @@ permissions:
 
 **Cause**: Auto-build failed for compiled languages
 
-**Solution**: Add manual build steps before CodeQL analyze:
+**Solution**: Add manual build steps before CodeQL analyse:
 
 ```yaml
 - name: Build

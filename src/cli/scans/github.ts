@@ -40,7 +40,7 @@ const github = async (args: Array<string>): Promise<void> => {
 
     console.info("⚡️ Scanning %s repository for archival", name);
 
-    await scanGithub(name, type, days, email, key, template);
+    await scanGithub(name, days, email, key, template);
   }
 };
 

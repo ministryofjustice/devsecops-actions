@@ -13,7 +13,7 @@ import { GITHUB_SCANS } from "../constants";
  *
  * @example
  * ```typescript
- * const valid = areGitHubArgumentsValid(['--github', 'archive', '--days', '90', '--email', 'test@gov.uk', '--key', 'key123']);
+ * const valid = areGitHubArgumentsValid(['--github', 'archive', '--days', '90', '--email', 'test@gov.uk', '--key', 'key123', '--template-id', '123', '--repository-name', 'test']);
  * // Returns: true
  * ```
  */
@@ -30,7 +30,7 @@ const areGitHubArgumentsValid = (args: Array<string>): boolean => {
       throw new Error("Invalid --github scan type argument.");
     }
 
-    if (days <= 0) {
+    if (days <= 0 || Number.isNaN(days)) {
       throw new Error(
         "Invalid --days argument value, it must be more than zero days.",
       );
@@ -42,15 +42,17 @@ const areGitHubArgumentsValid = (args: Array<string>): boolean => {
       );
     }
 
-    if (!key.trim()) {
+    if (!key?.trim()) {
       throw new Error("Invalid --key argument value, must be a valid API key.");
     }
 
-    if (!template.trim()) {
-      throw new Error("Invalid -- argument value, must be a valid name.");
+    if (!template?.trim()) {
+      throw new Error(
+        "Invalid --template-id argument value, must be a valid name.",
+      );
     }
 
-    if (!name.trim()) {
+    if (!name?.trim()) {
       throw new Error(
         "Invalid --repository-name argument value, must be a valid name.",
       );
