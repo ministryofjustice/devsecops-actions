@@ -34,7 +34,7 @@ const sendEmail = async (
 
     console.info("📧 Email has been dispatched.");
   } catch (error) {
-    console.error("❌ Unable to send an email %s", error);
+    console.error("❌ Unable to send an email %o", error);
     throw new Error("Unable to send email");
   }
 };

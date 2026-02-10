@@ -20,14 +20,14 @@
  * @example
  * ```typescript
  * const emailOptions: EmailOptions = {
- *   personalisation: { repository_name: 'my-repo', archive_date: new Date() },
+ *   personalisation: { name: 'my-repo', date: new Date() },
  *   reference: 'archive-notification-12345',
  *   emailReplyToId: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890'
  * };
  * ```
  */
 export interface EmailOptions {
-  personalisation: Record<string, string | Date>;
+  personalisation: Record<string, string>;
   reference: string;
   emailReplyToId?: string;
 }

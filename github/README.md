@@ -339,7 +339,7 @@ Subject: Repository Archival Alert
 
 Dear Team,
 
-The repository ((name)) has been dormant for ((days)) days and is now eligible for archival.
+The repository ((name)) has been dormant for ((date)) days and is now eligible for archival.
 
 Repository: ((name))
 Last Activity: ((date))

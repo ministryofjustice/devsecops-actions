@@ -63,7 +63,7 @@ describe("sendEmail", () => {
 
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(console.error).toHaveBeenCalledWith(
-      "❌ Unable to send an email %s",
+      "❌ Unable to send an email %o",
       mockError,
     );
   });

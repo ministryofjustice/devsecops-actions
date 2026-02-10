@@ -38,7 +38,7 @@ describe("scanGithub", () => {
     const mockEpoch = new Date("1989-09-20").valueOf() / 1000;
     const mockOptions = {
       personalisation: {
-        date: new Date(mockLastCommit),
+        date: String(new Date(mockLastCommit)),
         name: mockName,
       },
       reference: expect.stringContaining(`${mockName}`),

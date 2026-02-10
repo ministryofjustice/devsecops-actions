@@ -1,5 +1,7 @@
 import { execFileSync } from "node:child_process";
+
 import sendEmail from "../notifications";
+import { EmailOptions } from "../../types/notifications";
 
 /**
  * Scans a GitHub repository to determine if it should be archived based on commit age.
@@ -51,9 +53,9 @@ const scanGithub = async (
         new Date(lastCommitMs),
       );
 
-      const options = {
+      const options: EmailOptions = {
         personalisation: {
-          date: new Date(lastCommitMs),
+          date: String(new Date(lastCommitMs)),
           name,
         },
         reference: `${name}-${lastCommitMs}-${nowMs}`,
