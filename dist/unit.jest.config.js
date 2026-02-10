@@ -10,4 +10,3 @@ exports.default = {
     coverageReporters: ["text", "text-summary"],
     testTimeout: 20000, // 20 seconds
 };
-//# sourceMappingURL=unit.jest.config.js.map

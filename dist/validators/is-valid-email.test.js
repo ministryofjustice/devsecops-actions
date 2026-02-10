@@ -42,4 +42,3 @@ describe("isValidEmail", () => {
         expect(result).toBe(response);
     });
 });
-//# sourceMappingURL=is-valid-email.test.js.map

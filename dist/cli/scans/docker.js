@@ -31,4 +31,3 @@ const docker = async (args) => {
     await (0, services_1.scanImages)(values);
 };
 exports.default = docker;
-//# sourceMappingURL=docker.js.map

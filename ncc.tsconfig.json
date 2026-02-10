@@ -1,0 +1,16 @@
+{
+  "extends": "@tsconfig/node24/tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node10",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "sourceMap": false,
+    "declaration": false,
+    "allowJs": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["src/**/*.ts"]
+}

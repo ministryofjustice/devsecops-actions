@@ -13,4 +13,3 @@ const scan_images_1 = __importDefault(require("./scan-images"));
 exports.scanImages = scan_images_1.default;
 const scan_github_1 = __importDefault(require("./scan-github"));
 exports.scanGithub = scan_github_1.default;
-//# sourceMappingURL=index.js.map

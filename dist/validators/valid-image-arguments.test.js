@@ -56,4 +56,3 @@ describe("areImageArgumentsValid", () => {
         expect(response).toBe(value);
     });
 });
-//# sourceMappingURL=valid-image-arguments.test.js.map

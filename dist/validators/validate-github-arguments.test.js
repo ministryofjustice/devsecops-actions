@@ -269,4 +269,3 @@ describe("areGitHubArgumentsValid", () => {
         expect(console.error).toHaveBeenCalledTimes(0);
     });
 });
-//# sourceMappingURL=validate-github-arguments.test.js.map

@@ -38,4 +38,3 @@ const areImageArgumentsValid = (args) => {
     }
 };
 exports.default = areImageArgumentsValid;
-//# sourceMappingURL=valid-image-arguments.js.map

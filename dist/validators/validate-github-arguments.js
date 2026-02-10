@@ -55,4 +55,3 @@ const areGitHubArgumentsValid = (args) => {
     }
 };
 exports.default = areGitHubArgumentsValid;
-//# sourceMappingURL=validate-github-arguments.js.map

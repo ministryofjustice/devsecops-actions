@@ -41,4 +41,3 @@ describe("execute", () => {
         expect(console.error).toHaveBeenCalledWith("%i. %s", 1, mockValues[0]);
     });
 });
-//# sourceMappingURL=scan-images.test.js.map

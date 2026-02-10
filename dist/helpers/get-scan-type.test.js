@@ -42,4 +42,3 @@ describe("getScanType", () => {
         expect(result).toBe(response);
     });
 });
-//# sourceMappingURL=get-scan-type.test.js.map

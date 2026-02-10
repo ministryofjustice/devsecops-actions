@@ -16,4 +16,3 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const sanitiseArgumentProperty = (arg = "") => arg.replaceAll("--", "");
 exports.default = sanitiseArgumentProperty;
-//# sourceMappingURL=sanitise-argument-property.js.map

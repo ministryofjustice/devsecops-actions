@@ -15,4 +15,3 @@ const valid_image_arguments_1 = __importDefault(require("./valid-image-arguments
 exports.areImageArgumentsValid = valid_image_arguments_1.default;
 const validate_github_arguments_1 = __importDefault(require("./validate-github-arguments"));
 exports.areGitHubArgumentsValid = validate_github_arguments_1.default;
-//# sourceMappingURL=index.js.map

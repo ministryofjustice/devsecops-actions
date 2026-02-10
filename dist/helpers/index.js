@@ -15,4 +15,3 @@ const get_scan_type_1 = __importDefault(require("./get-scan-type"));
 exports.getScanType = get_scan_type_1.default;
 const sanitise_argument_property_1 = __importDefault(require("./sanitise-argument-property"));
 exports.sanitiseArgumentProperty = sanitise_argument_property_1.default;
-//# sourceMappingURL=index.js.map

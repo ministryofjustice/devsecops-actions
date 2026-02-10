@@ -26,4 +26,3 @@ const getArguments = () => {
     return args;
 };
 exports.default = getArguments;
-//# sourceMappingURL=get-arguments.js.map

@@ -101,4 +101,3 @@ describe("scanGithub", () => {
         expect(response).toBeFalsy();
     });
 });
-//# sourceMappingURL=scan-github.test.js.map

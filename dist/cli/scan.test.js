@@ -151,4 +151,3 @@ describe("scan", () => {
         expect(console.error).toHaveBeenCalledWith("❌ An error has occurred during execution %s", mockCause);
     });
 });
-//# sourceMappingURL=scan.test.js.map

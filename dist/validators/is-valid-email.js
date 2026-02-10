@@ -24,4 +24,3 @@ const isValidEmail = (email) => {
     return regex.test(trimmed);
 };
 exports.default = isValidEmail;
-//# sourceMappingURL=is-valid-email.js.map

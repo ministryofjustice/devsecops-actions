@@ -16,4 +16,3 @@ exports.sendEmail = notifications_1.default;
 const scanners_1 = require("./scanners");
 Object.defineProperty(exports, "scanImages", { enumerable: true, get: function () { return scanners_1.scanImages; } });
 Object.defineProperty(exports, "scanGithub", { enumerable: true, get: function () { return scanners_1.scanGithub; } });
-//# sourceMappingURL=index.js.map

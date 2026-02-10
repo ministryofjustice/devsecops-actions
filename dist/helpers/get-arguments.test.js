@@ -40,4 +40,3 @@ describe("getArguments", () => {
         expect(() => (0, get_arguments_1.default)()).toThrow("Invalid arguments provided.");
     });
 });
-//# sourceMappingURL=get-arguments.test.js.map

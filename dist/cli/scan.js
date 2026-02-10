@@ -40,4 +40,3 @@ const scan = async () => {
     }
 };
 exports.default = scan;
-//# sourceMappingURL=scan.js.map

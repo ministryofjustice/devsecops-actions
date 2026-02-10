@@ -70,4 +70,3 @@ const getArrayFromJson = (args) => {
     return data;
 };
 exports.default = getArrayFromJson;
-//# sourceMappingURL=get-array-from-json.js.map

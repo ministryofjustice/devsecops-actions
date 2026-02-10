@@ -20,4 +20,3 @@ const sanitise_argument_property_1 = __importDefault(require("./sanitise-argumen
  */
 const getScanType = (args) => args[0] ? (0, sanitise_argument_property_1.default)(args[0]) : "";
 exports.default = getScanType;
-//# sourceMappingURL=get-scan-type.js.map

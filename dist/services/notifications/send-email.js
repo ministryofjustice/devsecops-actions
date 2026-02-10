@@ -34,4 +34,3 @@ const sendEmail = async (email, key, template, options) => {
     }
 };
 exports.default = sendEmail;
-//# sourceMappingURL=send-email.js.map

@@ -50,4 +50,3 @@ describe("sanitiseArgumentProperty", () => {
         expect(result).toBe(response);
     });
 });
-//# sourceMappingURL=sanitise-argument-property.test.js.map

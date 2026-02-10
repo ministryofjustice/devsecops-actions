@@ -59,4 +59,3 @@ const scanGithub = async (name, days, email, key, template) => {
     }
 };
 exports.default = scanGithub;
-//# sourceMappingURL=scan-github.js.map

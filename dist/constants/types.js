@@ -29,4 +29,3 @@ const SOURCES_FILE_EXTENSION = {
     JSON: ".json",
 };
 exports.SOURCES_FILE_EXTENSION = SOURCES_FILE_EXTENSION;
-//# sourceMappingURL=types.js.map

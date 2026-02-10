@@ -13,4 +13,3 @@ const docker_1 = __importDefault(require("./docker"));
 exports.docker = docker_1.default;
 const github_1 = __importDefault(require("./github"));
 exports.github = github_1.default;
-//# sourceMappingURL=index.js.map

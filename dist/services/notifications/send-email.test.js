@@ -52,4 +52,3 @@ describe("sendEmail", () => {
         expect(console.error).toHaveBeenCalledWith("❌ Unable to send an email %o", mockError);
     });
 });
-//# sourceMappingURL=send-email.test.js.map

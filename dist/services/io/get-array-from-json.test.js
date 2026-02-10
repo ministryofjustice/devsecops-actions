@@ -55,4 +55,3 @@ describe("isValidJson", () => {
         ]);
     });
 });
-//# sourceMappingURL=get-array-from-json.test.js.map

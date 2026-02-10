@@ -65,4 +65,3 @@ const scanImages = async (values) => {
     }
 };
 exports.default = scanImages;
-//# sourceMappingURL=scan-images.js.map

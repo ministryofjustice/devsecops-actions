@@ -37,4 +37,3 @@ const github = async (args) => {
     }
 };
 exports.default = github;
-//# sourceMappingURL=github.js.map
