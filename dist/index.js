@@ -658,7 +658,7 @@ const scanGithub = async (name, days, email, key, template) => {
             await (0, notifications_1.default)(email, key, template, options);
             return false;
         }
-        console.info("✅ Repository %s is not due for archival, last commit was %i day(s) ago.", name, differenceDays);
+        console.info("✅ Repository %s is not due for archival, last commit was %i day(s) ago on %s", name, differenceDays, new Date(lastCommitMs));
         return true;
     }
     catch (error) {
