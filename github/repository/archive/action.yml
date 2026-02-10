@@ -27,7 +27,7 @@ inputs:
 
   token:
     required: true
-    description: "GitHub repository token with read and write privileges to contents, pull requests, issues and read-only permission to security events."
+    description: "GitHub token with read-only access to repository contents (for example, contents: read)."
 
 runs:
   using: composite

@@ -19,7 +19,7 @@ import { docker, github } from "./scans";
  * await scan();
  * ```
  */
-const scan = async (): Promise<void | TypeError> => {
+const scan = async (): Promise<void> => {
   try {
     const args = getArguments();
     const type = getScanType(args);

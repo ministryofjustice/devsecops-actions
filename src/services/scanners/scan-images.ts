@@ -21,7 +21,7 @@ import { resolve } from "node:path";
  * ```
  */
 
-const scanImages = async (values: Array<string>): Promise<void | TypeError> => {
+const scanImages = async (values: Array<string>): Promise<void> => {
   const execAsync = promisify(execFile);
 
   const promises = values.map(async (value) => {
