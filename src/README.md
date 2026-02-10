@@ -257,7 +257,7 @@ npm run build
 This command performs the following operations:
 
 - 🔨 **TypeScript Compilation** - Compiles all `.ts` files in `src/` to JavaScript
-- 📦 **Output Generation** - Creates compiled files in the `src/dist/` directory
+- 📦 **Output Generation** - Creates compiled files in the `dist/` directory
 - 🗺️ **Source Maps** - Generates source map files for debugging
 - 📝 **Type Declarations** - Creates `.d.ts` files for TypeScript consumers
 

@@ -63,5 +63,5 @@
 
 ## Ignore
 
-- Ignore `./src/dist` directory
+- Ignore `./dist` directory
 

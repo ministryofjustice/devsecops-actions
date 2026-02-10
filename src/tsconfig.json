@@ -2,7 +2,7 @@
   "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
     "rootDir": "./",
-    "outDir": "./dist",
+    "outDir": "../dist",
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
@@ -13,6 +13,6 @@
   "ts-node": {
     "files": true
   },
-  "exclude": ["./node_modules", "./dist", "../eslint.config.mjs"],
+  "exclude": ["./node_modules", "../dist", "../eslint.config.mjs"],
   "include": ["**/*.ts", "**/*.d.ts"]
 }
