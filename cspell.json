@@ -1,5 +1,6 @@
 {
   "ignorePaths": [
+    "dist/",
     "**/node_modules/**",
     "prek/**",
     "**/*.drawio",
