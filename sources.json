@@ -3,6 +3,7 @@
         "ghcr.io/ministryofjustice/devsecops-hooks:latest",
         "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
         "ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0",
-        "ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0"
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.4.0@sha256:457a7e82b47146f56902607c4ec598c852f2afda640990d08fc3d00f28e38fbc"
     ]
 }

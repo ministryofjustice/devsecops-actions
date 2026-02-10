@@ -48,7 +48,7 @@ const areGitHubArgumentsValid = (args: Array<string>): boolean => {
 
     if (!template?.trim()) {
       throw new Error(
-        "Invalid --template-id argument value, must be a valid name.",
+        "Invalid --template-id argument value, must be a valid GovNotify template identifier.",
       );
     }
 

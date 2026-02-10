@@ -8,24 +8,20 @@ import { resolve } from "node:path";
  * Processes all images in parallel, collecting results for successful and failed scans.
  * Logs individual scan outcomes and throws an error if any scans fail.
  *
- * @param type - The type of command to execute, used to determine the command via getCommand()
  * @param values - An array of string values (e.g., Docker image names with tags) to process
  * @returns A promise that resolves to void on success, or rejects with a TypeError if any scans fail
  * @throws {TypeError} If one or more images fail to scan successfully
  *
  * @example
  * ```typescript
- * await scanImages('--images', ['nginx:latest', 'alpine:3.18']);
+ * await scanImages(['nginx:latest', 'alpine:3.18']);
  * // Logs: ✅ Successfully scanned nginx:latest
  * // Logs: ✅ Successfully scanned alpine:3.18
  * // Logs: ✅ All 2 images have been successfully scanned.
  * ```
  */
 
-const scanImages = async (
-  type: string,
-  values: Array<string>,
-): Promise<void | TypeError> => {
+const scanImages = async (values: Array<string>): Promise<void | TypeError> => {
   const execAsync = promisify(execFile);
 
   const promises = values.map(async (value) => {

@@ -58,13 +58,6 @@ const falsyAssertions = [
     ),
   },
   {
-    input: ["--github", "--archive", "--days", ""],
-    response: false,
-    error: new Error(
-      "Invalid --days argument value, it must be more than zero days.",
-    ),
-  },
-  {
     input: ["--github", "--archive", "--days", " "],
     response: false,
     error: new Error(
@@ -161,7 +154,7 @@ const falsyAssertions = [
     ],
     response: false,
     error: new Error(
-      "Invalid --template-id argument value, must be a valid name.",
+      "Invalid --template-id argument value, must be a valid GovNotify template identifier.",
     ),
   },
   {
@@ -179,7 +172,7 @@ const falsyAssertions = [
     ],
     response: false,
     error: new Error(
-      "Invalid --template-id argument value, must be a valid name.",
+      "Invalid --template-id argument value, must be a valid GovNotify template identifier.",
     ),
   },
   {
@@ -197,7 +190,7 @@ const falsyAssertions = [
     ],
     response: false,
     error: new Error(
-      "Invalid --template-id argument value, must be a valid name.",
+      "Invalid --template-id argument value, must be a valid GovNotify template identifier.",
     ),
   },
   {

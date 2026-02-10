@@ -11,16 +11,15 @@ describe("execute", () => {
 
   it("should successfully scan three docker images", async () => {
     // Arrange
-    const mockType = "--images";
     const mockValues = [
       "ghcr.io/ministryofjustice/devsecops-hooks:latest",
       "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
       "ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0",
-      "ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0",
+      "ghcr.io/ministryofjustice/devsecops-hooks:v1.4.0@sha256:457a7e82b47146f56902607c4ec598c852f2afda640990d08fc3d00f28e38fbc",
     ];
 
     // Act
-    await scanImages(mockType, mockValues);
+    await scanImages(mockValues);
 
     // Assert
     expect(console.info).toHaveBeenCalledTimes(5);
@@ -50,12 +49,11 @@ describe("execute", () => {
 
   it("should throw an error for an invalid source type", async () => {
     // Arrange
-    const mockType = "--invalid";
     const mockValues = ["ghcr.io/ministryofjustice/devsecops-hooks:invalid"];
     const mockError = new TypeError("Image scanning failed");
 
     // Act + Assert
-    await expect(scanImages(mockType, mockValues)).rejects.toThrow(mockError);
+    await expect(scanImages(mockValues)).rejects.toThrow(mockError);
 
     // Assert
     expect(console.error).toHaveBeenCalledTimes(3);

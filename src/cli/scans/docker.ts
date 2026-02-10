@@ -32,9 +32,8 @@ const docker = async (args: Array<string>): Promise<void> => {
   console.info("⚡️ Docker images scanning");
 
   const values = getArrayFromJson(args);
-  const type = args[0];
 
-  await scanImages(type, values);
+  await scanImages(values);
 };
 
 export default docker;

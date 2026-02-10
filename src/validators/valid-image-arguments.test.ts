@@ -1,8 +1,8 @@
-import validateImageArguments from "./valid-image-arguments";
+import areImageArgumentsValid from "./valid-image-arguments";
 
 console.error = jest.fn();
 
-describe("validateImageArguments", () => {
+describe("areImageArgumentsValid", () => {
   const assertions = [
     {
       args: ["", ""],
@@ -52,7 +52,7 @@ describe("validateImageArguments", () => {
       // Arrange
 
       // Act
-      const response = validateImageArguments(args);
+      const response = areImageArgumentsValid(args);
 
       // Assert
       expect(response).toBe(value);

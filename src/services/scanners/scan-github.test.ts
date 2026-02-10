@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import sendEmail from "../notifications/send-email";
+import sendEmail from "../notifications";
 
 import scanGithub from "./scan-github";
 
@@ -7,7 +7,7 @@ jest.mock("node:child_process", () => ({
   execFileSync: jest.fn(),
 }));
 
-jest.mock("../notifications/send-email", () => ({
+jest.mock("../notifications", () => ({
   __esModule: true,
   default: jest.fn(),
 }));

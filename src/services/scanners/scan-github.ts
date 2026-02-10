@@ -17,7 +17,7 @@ import sendEmail from "../notifications";
  *
  * @example
  * ```typescript
- * await scanGithub('archive', 90, 'team@example.gov.uk', 'api-key-123');
+ * await scanGithub('repository-name', 90, 'user@gov.uk', 'api-key-123', 'template-id');
  * // Logs: ✅ Repository is not due for archival, last commit was 45 day(s) ago.
  * ```
  */
