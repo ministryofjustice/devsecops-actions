@@ -134,7 +134,7 @@ runs:
 
     - name: Images
       if: inputs.docker-images-file != ''
-      working-directory: ${{ github.action_path }}
+      working-directory: ${{ github.workspace }}
       shell: bash
       run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 

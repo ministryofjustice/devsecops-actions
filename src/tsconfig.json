@@ -11,5 +11,5 @@
     "pretty": true
   },
   "exclude": ["./node_modules", "./dist", "../eslint.config.mjs"],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "types/**/*.d.ts"]
 }
