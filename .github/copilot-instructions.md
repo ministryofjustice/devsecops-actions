@@ -60,3 +60,8 @@
 - Ensure all code passes existing validation scripts: `validate:ts`, `validate:yml`, `validate:md`, `spellcheck`
 - Add new technical terms to `cspell.json` words array when necessary
 - Follow existing test patterns using Jest for TypeScript files
+
+## Ignore
+
+- Ignore `./src/dist` directory
+
