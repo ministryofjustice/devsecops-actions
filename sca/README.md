@@ -309,7 +309,7 @@ jobs:
 
 ### Enterprise Configuration - Matrix Strategy
 
-For organizations scanning multiple configurations:
+For organisations scanning multiple configurations:
 
 ```yaml
 name: SCA Matrix

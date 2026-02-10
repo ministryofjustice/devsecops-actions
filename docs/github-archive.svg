@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1001px" height="1051px" viewBox="-0.5 -0.5 1001 1051" style="background-color: rgb(13, 17, 23);">
+  <defs/>
+  <g>
+    <!-- Title -->
+    <g>
+      <rect x="100" y="40" width="800" height="40" fill="none" stroke="none" pointer-events="all"/>
+      <text x="500" y="65" fill="#c9d1d9" font-family="Segoe UI" font-size="24px" font-weight="bold" text-anchor="middle">GitHub Repository Archive Check Action</text>
+    </g>
+    
+    <!-- Subtitle -->
+    <g>
+      <rect x="100" y="75" width="800" height="25" fill="none" stroke="none" pointer-events="all"/>
+      <text x="500" y="92" fill="#8b949e" font-family="Segoe UI" font-size="14px" text-anchor="middle">ministryofjustice/devsecops-actions/github/repository/archive</text>
+    </g>
+    
+    <!-- Start Circle -->
+    <g>
+      <ellipse cx="500" cy="160" rx="50" ry="30" fill="#238636" stroke="#2ea043" stroke-width="2" pointer-events="all"/>
+      <text x="500" y="167" fill="#ffffff" font-family="Segoe UI" font-size="12px" font-weight="bold" text-anchor="middle">START</text>
+    </g>
+    
+    <!-- Arrow 1 -->
+    <path d="M 500 190 L 500 230" fill="none" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 500 234 L 496 226 L 500 230 L 504 226 Z" fill="#8b949e" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- Step 1: Checkout Repository -->
+    <g>
+      <rect x="200" y="230" width="600" height="100" rx="10" ry="10" fill="#1c2d41" stroke="#388bfd" stroke-width="2" pointer-events="all"/>
+      <text x="250" y="270" fill="#ffffff" font-size="32px">📦</text>
+      <text x="300" y="265" fill="#c9d1d9" font-family="Segoe UI" font-size="16px" font-weight="bold">Checkout Repository</text>
+      <text x="300" y="285" fill="#8b949e" font-family="Segoe UI" font-size="12px">ministryofjustice/devsecops-actions/sca/repository@9babea87</text>
+      <text x="300" y="305" fill="#8b949e" font-family="Segoe UI" font-size="12px">Clones repository with full commit history for activity analysis</text>
+    </g>
+    
+    <!-- Arrow 2 -->
+    <path d="M 500 330 L 500 370" fill="none" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 500 374 L 496 366 L 500 370 L 504 366 Z" fill="#8b949e" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- Step 2: Setup Node.js -->
+    <g>
+      <rect x="200" y="370" width="600" height="100" rx="10" ry="10" fill="#1a2536" stroke="#388bfd" stroke-width="2" pointer-events="all"/>
+      <text x="250" y="410" fill="#ffffff" font-size="32px">⚡️</text>
+      <text x="300" y="405" fill="#c9d1d9" font-family="Segoe UI" font-size="16px" font-weight="bold">Setup Node.js Environment</text>
+      <text x="300" y="425" fill="#8b949e" font-family="Segoe UI" font-size="12px">actions/setup-node@v6.1.0</text>
+      <text x="300" y="445" fill="#8b949e" font-family="Segoe UI" font-size="12px">Configures Node.js runtime environment for TypeScript CLI execution</text>
+    </g>
+    
+    <!-- Arrow 3 -->
+    <path d="M 500 470 L 500 510" fill="none" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 500 514 L 496 506 L 500 510 L 504 506 Z" fill="#8b949e" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- Step 3: Execute Archive Check -->
+    <g>
+      <rect x="200" y="510" width="600" height="100" rx="10" ry="10" fill="#341a00" stroke="#9e6a03" stroke-width="2" pointer-events="all"/>
+      <text x="250" y="550" fill="#ffffff" font-size="32px">⚙️</text>
+      <text x="300" y="545" fill="#c9d1d9" font-family="Segoe UI" font-size="16px" font-weight="bold">Execute Archive Check</text>
+      <text x="300" y="565" fill="#8b949e" font-family="Segoe UI" font-size="12px">TypeScript CLI (dist/index.js)</text>
+      <text x="300" y="585" fill="#8b949e" font-family="Segoe UI" font-size="12px">Analyses Git commit history to determine repository inactivity period</text>
+    </g>
+    
+    <!-- Arrow 4 -->
+    <path d="M 500 610 L 500 650" fill="none" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 500 654 L 496 646 L 500 650 L 504 646 Z" fill="#8b949e" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- Decision Diamond -->
+    <g>
+      <path d="M 500 650 L 600 700 L 500 750 L 400 700 Z" fill="#21262d" stroke="#30363d" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+      <text x="500" y="695" fill="#c9d1d9" font-family="Segoe UI" font-size="13px" font-weight="bold" text-anchor="middle">Last commit &gt;</text>
+      <text x="500" y="710" fill="#c9d1d9" font-family="Segoe UI" font-size="13px" font-weight="bold" text-anchor="middle">archival-days ?</text>
+    </g>
+    
+    <!-- Arrow Yes (Left) -->
+    <path d="M 400 700 L 350 700 L 350 790" fill="none" stroke="#f85149" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 350 794 L 346 786 L 350 790 L 354 786 Z" fill="#f85149" stroke="#f85149" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+    <text x="365" y="695" fill="#f85149" font-family="Segoe UI" font-size="12px" font-weight="bold">YES</text>
+    
+    <!-- Step 4: Send Notification -->
+    <g>
+      <rect x="200" y="790" width="300" height="100" rx="10" ry="10" fill="#2c1810" stroke="#d73a49" stroke-width="2" pointer-events="all"/>
+      <text x="220" y="830" fill="#ffffff" font-size="32px">📧</text>
+      <text x="280" y="825" fill="#c9d1d9" font-family="Segoe UI" font-size="16px" font-weight="bold">Send Notification</text>
+      <text x="280" y="845" fill="#8b949e" font-family="Segoe UI" font-size="12px">GOV.UK Notify API</text>
+      <text x="280" y="865" fill="#8b949e" font-family="Segoe UI" font-size="12px">Dispatch archival alert email</text>
+    </g>
+    
+    <!-- Arrow No (Right) -->
+    <path d="M 600 700 L 675 700 L 675 790" fill="none" stroke="#3fb950" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 675 794 L 671 786 L 675 790 L 679 786 Z" fill="#3fb950" stroke="#3fb950" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+    <text x="610" y="695" fill="#3fb950" font-family="Segoe UI" font-size="12px" font-weight="bold">NO</text>
+    
+    <!-- Skip Step: Repository Active -->
+    <g>
+      <rect x="550" y="790" width="250" height="100" rx="10" ry="10" fill="#0d1e1a" stroke="#2ea043" stroke-width="2" pointer-events="all"/>
+      <text x="570" y="830" fill="#ffffff" font-size="32px">✅</text>
+      <text x="630" y="825" fill="#c9d1d9" font-family="Segoe UI" font-size="16px" font-weight="bold">Repository Active</text>
+      <text x="630" y="845" fill="#8b949e" font-family="Segoe UI" font-size="12px">No action required</text>
+      <text x="630" y="865" fill="#8b949e" font-family="Segoe UI" font-size="12px">Repository is healthy</text>
+    </g>
+    
+    <!-- Merge lines -->
+    <path d="M 350 890 L 350 925 L 490 925" fill="none" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 675 890 L 675 925 L 510 925" fill="none" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+    
+    <!-- Merge point -->
+    <ellipse cx="500" cy="925" rx="10" ry="10" fill="#8b949e" stroke="#8b949e" pointer-events="all"/>
+    
+    <!-- Arrow to End -->
+    <path d="M 500 935 L 500 970" fill="none" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 500 974 L 496 966 L 500 970 L 504 966 Z" fill="#8b949e" stroke="#8b949e" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- End Circle -->
+    <g>
+      <ellipse cx="500" cy="1000" rx="50" ry="30" fill="#484f58" stroke="#6e7681" stroke-width="2" pointer-events="all"/>
+      <text x="500" y="1007" fill="#ffffff" font-family="Segoe UI" font-size="12px" font-weight="bold" text-anchor="middle">END</text>
+    </g>
+    
+    <!-- Legend Box -->
+    <g>
+      <rect x="850" y="130" width="140" height="180" rx="10" ry="10" fill="#161b22" stroke="#30363d" stroke-width="1" pointer-events="all"/>
+      <text x="920" y="150" fill="#c9d1d9" font-family="Segoe UI" font-size="14px" font-weight="bold" text-anchor="middle">Legend</text>
+      
+      <!-- Legend Item 1 -->
+      <rect x="860" y="170" width="30" height="20" rx="5" ry="5" fill="#1c2d41" stroke="#388bfd" stroke-width="2" pointer-events="all"/>
+      <text x="895" y="185" fill="#c9d1d9" font-family="Segoe UI" font-size="11px">Process Step</text>
+      
+      <!-- Legend Item 2 -->
+      <path d="M 875 200 L 885 210 L 875 220 L 865 210 Z" fill="#21262d" stroke="#30363d" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+      <text x="895" y="215" fill="#c9d1d9" font-family="Segoe UI" font-size="11px">Condition</text>
+      
+      <!-- Legend Item 3 -->
+      <ellipse cx="875" cy="245" rx="15" ry="10" fill="#238636" stroke="#2ea043" pointer-events="all"/>
+      <text x="895" y="250" fill="#c9d1d9" font-family="Segoe UI" font-size="11px">Start/End</text>
+      
+      <!-- Legend Item 4 -->
+      <rect x="860" y="265" width="30" height="20" rx="5" ry="5" fill="#0d1e1a" stroke="#2ea043" stroke-width="2" pointer-events="all"/>
+      <text x="895" y="280" fill="#c9d1d9" font-family="Segoe UI" font-size="11px">Success</text>
+    </g>
+  </g>
+</svg>

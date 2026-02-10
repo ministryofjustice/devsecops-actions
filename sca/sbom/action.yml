@@ -124,9 +124,7 @@ runs:
     - name: Install
       shell: bash
       working-directory: ${{ github.action_path }}
-      run: |
-        npm ci --ignore-scripts --omit=dev
-        npm run install:syft
+      run: npm run install:syft
 
     - name: Repository
       shell: bash

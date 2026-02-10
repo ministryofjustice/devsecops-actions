@@ -213,7 +213,7 @@ jobs:
 
 ### Multi-Repository Synchronization
 
-For organizations managing multiple template-based repositories:
+For organisations managing multiple template-based repositories:
 
 ```yaml
 name: Bulk Template Sync

@@ -5,9 +5,6 @@ on:
   schedule:
     - cron: "0 0 * * 0"
 
-  pull_request:
-    branches: ["*"]
-
 permissions: {}
 
 env:
@@ -42,7 +39,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Archive
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@feat/100-once-a-month-scan-email-cybersre-team-if-the-repo-has-not-had-any-commits-in-the-last-90-days
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@0518a21b6c0b76d397609feaceaf1820bfe4f401
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: 30

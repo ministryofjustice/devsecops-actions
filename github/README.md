@@ -36,7 +36,9 @@ and compliance workflows. These actions help organisations maintain clean, secur
 
 ## 🏗️ Architecture
 
-### Component Overview
+### Component Workflow
+
+![GitHub Archive Workflow](../docs/github-archive.svg)
 
 The GitHub actions suite provides modular repository management capabilities:
 
