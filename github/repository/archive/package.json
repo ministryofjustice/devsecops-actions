@@ -1,0 +1,26 @@
+{
+    "name": "moj-actions",
+    "version": "1.3.0",
+    "description": "A collection of reusable GitHub Actions that standardise DevSecOps security scanning i.e. SCA, SAST, DAST, secrets, IaC, and container security.",
+    "keywords": [
+        "moj",
+        "devsecops",
+        "actions"
+    ],
+    "homepage": "https://github.com/ministryofjustice/devsecops-actions#readme",
+    "bugs": {
+        "url": "https://github.com/ministryofjustice/devsecops-actions/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ministryofjustice/devsecops-actions.git"
+    },
+    "license": "MIT",
+    "author": "Abhi Markan",
+    "scripts": {
+        "scan": "node ../../../dist/index.js"
+    },
+    "dependencies": {
+        "notifications-node-client": "^8.2.1"
+    }
+}
