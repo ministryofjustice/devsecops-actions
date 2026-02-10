@@ -47,5 +47,5 @@ runs:
 
     - name: ⚙️ Execute
       shell: bash
-      working-directory: ${{ github.action_path }}
+      working-directory: ${{ github.workspace }}
       run: npm run scan -- --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
