@@ -1,0 +1,86 @@
+# GitHub Repository Check Workflow
+#
+# This workflow performs security and compliance checks on the GitHub repository,
+# including Software Composition Analysis (SCA) and automated repository archival.
+#
+# Triggers:
+#   - Scheduled: Runs weekly at midnight on Sundays (cron: "0 0 * * * 0")
+#   - Pull Request: Triggered on pull requests targeting the "main" branch
+#
+# Jobs:
+#   1. setup (Infrastructure):
+#      - Configures the base environment and timezone settings
+#      - Outputs environment and timezone values for downstream jobs
+#
+#   2. sca (Execute):
+#      - Depends on the setup job for environment configuration
+#      - Checks out the repository source code
+#      - Runs the repository archival action which:
+#        - Identifies repositories inactive beyond the configured archival period (30 days)
+#        - Sends notification emails via GOV.UK Notify service to inform stakeholders
+#          before archival takes place
+#
+# Permissions:
+#   - Top-level permissions are set to none (least privilege)
+#   - The SCA job explicitly requests read-only access to repository contents
+#
+# Required Configuration:
+#   Secrets:
+#     - GITHUB_TOKEN: GitHub authentication token (automatically provided)
+#     - PANDA_GOV_NOTIFY_KEY: API key for GOV.UK Notify service
+#   Variables:
+#     - TIMEZONE: Timezone setting for the workflow
+#     - PANDA_NOTIFICATION_EMAIL: Email address for archival notifications
+#     - ARCHIVAL_GOV_NOTIFY_TEMPLATE_ID: GOV.UK Notify template ID for archival emails
+
+name: GitHub 🔎
+run-name: GitHub repository check
+
+on:
+  schedule:
+    - cron: "0 0 * * * 0"
+
+  pull_request:
+    branches: ["*"]
+
+permissions: {}
+
+env:
+  environment: base
+  timezone: ${{ vars.TIMEZONE }}
+
+jobs:
+  setup:
+    name: Infrastructure 🔧
+    runs-on: ["ubuntu-latest"]
+    outputs:
+      environment: ${{ env.environment }}
+      timezone: ${{ env.timezone }}
+    steps:
+      - name: Environment 🧪
+        run: echo "Environment set to ${{ env.environment }}"
+
+      - name: Timezone 🌐
+        run: echo "Timezone set to ${{ env.timezone }}"
+  sca:
+    permissions:
+      contents: read
+
+    name: Execute ⚙️
+    runs-on: ["ubuntu-latest"]
+    needs: setup
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Archive
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@bd0e7ec506118a2c3a567c887dc3d4e1398ffc49 # v1.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          archival-days: 30
+          notification-email: "${{ vars.PANDA_NOTIFICATION_EMAIL }}"
+          gov-notify-key: "${{ secrets.PANDA_GOV_NOTIFY_KEY }}"
+          gov-notify-template-id: "${{ vars.ARCHIVAL_GOV_NOTIFY_TEMPLATE_ID }}"
