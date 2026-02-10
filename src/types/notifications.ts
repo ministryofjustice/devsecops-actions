@@ -13,7 +13,7 @@
  * Configuration object passed to the Notify client for email operations.
  * Includes template personalisation, tracking reference, and optional reply-to settings.
  *
- * @property {Record<string, string | Date>} personalisation - Key-value pairs for template variable substitutions
+ * @property {Record<string, string>} personalisation - Key-value pairs for template variable substitutions
  * @property {string} reference - Unique reference identifier for tracking the notification
  * @property {string} [emailReplyToId] - Optional GOV.UK Notify reply-to email address ID
  *
