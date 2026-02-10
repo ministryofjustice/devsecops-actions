@@ -78,8 +78,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: debug
+        shell: bash
+        run: |
+          pwd
+          ls -lah
+          git status
+
       - name: Archive
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@3a107303e0d3da6389048f8e84b9fb91b2e4f942 # v1.3.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@feat/100-once-a-month-scan-email-cybersre-team-if-the-repo-has-not-had-any-commits-in-the-last-90-days # v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: 30
