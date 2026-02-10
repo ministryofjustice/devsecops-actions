@@ -81,7 +81,7 @@ author: Ministry of Justice UK
 inputs:
   renovate:
     required: false
-    description: "Flag to evaluation Renovate execution"
+    description: "Flag to evaluate Renovate execution"
     default: "true"
 
   node-version:
@@ -121,7 +121,7 @@ inputs:
 
   token:
     required: true
-    description: "GitHub repostiroy token with read and write privileges to contents, pull request, issues and read only perimission to security events."
+    description: "GitHub repository token with read and write privileges to contents, pull request, issues and read only permission to security events."
 
 runs:
   using: composite

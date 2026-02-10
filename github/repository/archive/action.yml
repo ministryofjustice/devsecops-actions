@@ -1,5 +1,77 @@
+# ==============================================================================
+# GitHub Repository Archive Check - Composite Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Automated repository health monitoring action that scans GitHub repository
+# commit history to identify dormant repositories eligible for archival. Analyses
+# repository activity patterns and dispatches email notifications when
+# repositories have been inactive for a specified period, helping organisations
+# maintain clean repository portfolios and proactive governance workflows.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Automated commit history analysis
+# - Configurable inactivity thresholds
+# - GOV.UK Notify email integration
+# - Non-destructive read-only scanning
+# - Comprehensive activity reporting
+# - Date-based eligibility detection
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage:
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       notification-email: "team@example.gov.uk"
+#       gov-notify-key: ${{ secrets.GOV_NOTIFY_API_KEY }}
+#       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
+#
+# Advanced usage with custom threshold:
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       archival-days: "180"
+#       notification-email: "governance@example.gov.uk"
+#       gov-notify-key: ${{ secrets.GOV_NOTIFY_API_KEY }}
+#       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
+#
+# ==============================================================================
+# PREREQUISITES
+# ==============================================================================
+# - GitHub token with the following permissions:
+#   - contents: read
+# - GOV.UK Notify account with API key
+# - GOV.UK Notify email template configured
+# - Repository with commit history
+#
+# ==============================================================================
+# OUTPUTS
+# ==============================================================================
+# This action generates the following:
+# - Email notification via GOV.UK Notify (if repository exceeds threshold)
+# - Console logs with repository activity status
+# - Exit status indicating archival eligibility
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Minimum GitHub Enterprise Server: 3.8
+# Last Updated: 2026-02-10
+#
+# ==============================================================================
+
 name: Ministry of Justice UK - GitHub - Archive check 🔎
-description: Scan GitHub repository commit history to ascertain repository is due for an archival, if it is then dispatch an alert email to the provided email address.
+description: Scan GitHub repository commit history to determine if repository is due for archival, then dispatch an alert email to the provided email address.
 author: Ministry of Justice UK
 
 inputs:

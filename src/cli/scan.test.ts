@@ -175,9 +175,10 @@ describe("scan", () => {
       "test",
     );
     expect(console.info).toHaveBeenCalledWith(
-      "✅ Repository %s is not due for archival, last commit was %i day(s) ago.",
+      "✅ Repository %s is not due for archival, last commit was %i day(s) ago on %s",
       "test",
       expect.any(Number),
+      expect.any(Date),
     );
 
     expect(console.error).not.toHaveBeenCalled();

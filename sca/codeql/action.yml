@@ -21,7 +21,7 @@
 #   Python, Ruby, Swift, Kotlin
 # - Semantic code analysis for deep vulnerability detection
 # - Pre-built security queries for common vulnerability patterns
-# - Custom query support for organization-specific security policies
+# - Custom query support for organisation-specific security policies
 # - Automatic language detection and build system integration
 # - SARIF report generation for GitHub Code Scanning
 # - Integration with GitHub Advanced Security

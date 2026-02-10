@@ -1,5 +1,5 @@
 # Dependency Review Configuration
-# This configuration file controls the behavior of GitHub's Dependency Review action.
+# This configuration file controls the behaviour of GitHub's Dependency Review action.
 # https://github.com/actions/dependency-review-action
 #
 # comment-summary-in-pr: Controls when dependency review summaries are posted as PR comments

@@ -89,7 +89,7 @@ describe("scanGithub", () => {
     const mockEmail = "user@gov.uk";
     const mockKey = "test";
     const mockTemplate = "123";
-    const mockEpoch = new Date().valueOf() / 1000;
+    const mockEpoch = Date.now() / 1000;
 
     (execFileSync as jest.Mock).mockReturnValueOnce(mockEpoch);
 
@@ -111,9 +111,10 @@ describe("scanGithub", () => {
 
     expect(console.info).toHaveBeenCalledTimes(1);
     expect(console.info).toHaveBeenCalledWith(
-      "✅ Repository %s is not due for archival, last commit was %i day(s) ago.",
+      "✅ Repository %s is not due for archival, last commit was %i day(s) ago on %s",
       mockName,
       expect.any(Number),
+      expect.any(Date),
     );
 
     expect(sendEmail).toHaveBeenCalledTimes(0);
@@ -135,12 +136,12 @@ describe("scanGithub", () => {
     });
 
     // Act
-    const response = await scanGithub(
-      mockName,
-      mockDays,
-      mockEmail,
-      mockKey,
-      mockTemplate,
+    await expect(
+      scanGithub(mockName, mockDays, mockEmail, mockKey, mockTemplate),
+    ).rejects.toThrow(
+      new TypeError(
+        `Failed to scan the GitHub repository for archival action: ${mockError}`,
+      ),
     );
 
     // Assert
@@ -157,6 +158,5 @@ describe("scanGithub", () => {
     );
 
     expect(sendEmail).toHaveBeenCalledTimes(0);
-    expect(response).toBeFalsy();
   });
 });

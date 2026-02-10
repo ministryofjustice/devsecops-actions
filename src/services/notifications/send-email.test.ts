@@ -53,7 +53,7 @@ describe("sendEmail", () => {
     // Act + Assert
     await expect(
       sendEmail(mockEmail, mockKey, mockTemplate, mockOptions),
-    ).rejects.toThrow("Unable to send email");
+    ).rejects.toThrow(new Error("Unable to send email"));
 
     // Assert
     expect(NotifyClient).toHaveBeenCalledTimes(1);

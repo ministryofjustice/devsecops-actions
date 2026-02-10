@@ -56,7 +56,7 @@
 # ==============================================================================
 # CUSTOMIZATION
 # ==============================================================================
-# To customize for your organization:
+# To customise for your organisation:
 # 1. Adjust 'exclude' patterns for your directory structure
 # 2. Modify language-specific settings based on your tech stack
 # 3. Enable 'enrich' for additional metadata (slower, more detailed)
@@ -121,7 +121,7 @@ format:
     pretty: false
 
 # -------------------------
-# Package behavior
+# Package behaviour
 # -------------------------
 package:
   search-indexed-archives: true
