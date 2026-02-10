@@ -7,7 +7,6 @@
 
 # NPM
 .npm
-dist
 **/node_modules/*
 
 # Secrets

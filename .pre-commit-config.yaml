@@ -20,3 +20,11 @@ repos:
         entry: npm run spellcheck
         language: system
         pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: build
+        name: Build
+        entry: npm run build
+        language: system
+        pass_filenames: false
