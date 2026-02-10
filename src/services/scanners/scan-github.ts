@@ -80,7 +80,9 @@ const scanGithub = async (
       error,
     );
 
-    return false;
+    throw new TypeError(
+      `Failed to scan the GitHub repository for archival action: ${error}`,
+    );
   }
 };
 

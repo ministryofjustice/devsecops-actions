@@ -62,11 +62,11 @@ jobs:
 
       - name: Timezone 🌐
         run: echo "Timezone set to ${{ env.timezone }}"
-  sca:
+  archive:
     permissions:
       contents: read
 
-    name: Execute ⚙️
+    name: Archive ⚙️
     runs-on: ["ubuntu-latest"]
     needs: setup
     environment:
@@ -75,6 +75,8 @@ jobs:
     steps:
       - name: Repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
 
       - name: Archive
         uses: ministryofjustice/devsecops-actions/github/repository/archive@3a107303e0d3da6389048f8e84b9fb91b2e4f942 # v1.3.0

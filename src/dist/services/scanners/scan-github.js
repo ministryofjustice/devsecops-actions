@@ -55,7 +55,7 @@ const scanGithub = async (name, days, email, key, template) => {
     }
     catch (error) {
         console.error("❌ Failed to scan the GitHub repository for archival action", error);
-        return false;
+        throw new TypeError(`Failed to scan the GitHub repository for archival action: ${error}`);
     }
 };
 exports.default = scanGithub;
