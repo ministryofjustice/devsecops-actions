@@ -1,38 +1,3 @@
-# GitHub Repository Check Workflow
-#
-# This workflow performs security and compliance checks on the GitHub repository,
-# including Software Composition Analysis (SCA) and automated repository archival.
-#
-# Triggers:
-#   - Scheduled: Runs weekly at midnight on Sundays (cron: "0 0 * * * 0")
-#   - Pull Request: Triggered on pull requests targeting the "main" branch
-#
-# Jobs:
-#   1. setup (Infrastructure):
-#      - Configures the base environment and timezone settings
-#      - Outputs environment and timezone values for downstream jobs
-#
-#   2. sca (Execute):
-#      - Depends on the setup job for environment configuration
-#      - Checks out the repository source code
-#      - Runs the repository archival action which:
-#        - Identifies repositories inactive beyond the configured archival period (30 days)
-#        - Sends notification emails via GOV.UK Notify service to inform stakeholders
-#          before archival takes place
-#
-# Permissions:
-#   - Top-level permissions are set to none (least privilege)
-#   - The SCA job explicitly requests read-only access to repository contents
-#
-# Required Configuration:
-#   Secrets:
-#     - GITHUB_TOKEN: GitHub authentication token (automatically provided)
-#     - PANDA_GOV_NOTIFY_KEY: API key for GOV.UK Notify service
-#   Variables:
-#     - TIMEZONE: Timezone setting for the workflow
-#     - PANDA_NOTIFICATION_EMAIL: Email address for archival notifications
-#     - ARCHIVAL_GOV_NOTIFY_TEMPLATE_ID: GOV.UK Notify template ID for archival emails
-
 name: GitHub 🔎
 run-name: GitHub repository check
 
