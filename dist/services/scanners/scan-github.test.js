@@ -63,7 +63,7 @@ describe("scanGithub", () => {
         const mockEmail = "user@gov.uk";
         const mockKey = "test";
         const mockTemplate = "123";
-        const mockEpoch = new Date().valueOf() / 1000;
+        const mockEpoch = Date.now() / 1000;
         node_child_process_1.execFileSync.mockReturnValueOnce(mockEpoch);
         // Act
         const response = await (0, scan_github_1.default)(mockName, mockDays, mockEmail, mockKey, mockTemplate);
@@ -73,7 +73,7 @@ describe("scanGithub", () => {
         expect(console.warn).not.toHaveBeenCalled();
         expect(console.error).not.toHaveBeenCalled();
         expect(console.info).toHaveBeenCalledTimes(1);
-        expect(console.info).toHaveBeenCalledWith("✅ Repository %s is not due for archival, last commit was %i day(s) ago.", mockName, expect.any(Number));
+        expect(console.info).toHaveBeenCalledWith("✅ Repository %s is not due for archival, last commit was %i day(s) ago on %s", mockName, expect.any(Number), expect.any(Date));
         expect(notifications_1.default).toHaveBeenCalledTimes(0);
         expect(response).toBeTruthy();
     });
@@ -89,7 +89,7 @@ describe("scanGithub", () => {
             throw mockError;
         });
         // Act
-        const response = await (0, scan_github_1.default)(mockName, mockDays, mockEmail, mockKey, mockTemplate);
+        await expect((0, scan_github_1.default)(mockName, mockDays, mockEmail, mockKey, mockTemplate)).rejects.toThrow(new TypeError(`Failed to scan the GitHub repository for archival action: ${mockError}`));
         // Assert
         expect(node_child_process_1.execFileSync).toHaveBeenCalledTimes(1);
         expect(node_child_process_1.execFileSync).toHaveBeenCalledWith(command, argument, options);
@@ -98,6 +98,5 @@ describe("scanGithub", () => {
         expect(console.error).toHaveBeenCalledTimes(1);
         expect(console.error).toHaveBeenCalledWith("❌ Failed to scan the GitHub repository for archival action", mockError);
         expect(notifications_1.default).toHaveBeenCalledTimes(0);
-        expect(response).toBeFalsy();
     });
 });

@@ -43,7 +43,7 @@ describe("sendEmail", () => {
             sendEmail: jest.fn().mockRejectedValueOnce(mockError),
         }));
         // Act + Assert
-        await expect((0, send_email_1.default)(mockEmail, mockKey, mockTemplate, mockOptions)).rejects.toThrow("Unable to send email");
+        await expect((0, send_email_1.default)(mockEmail, mockKey, mockTemplate, mockOptions)).rejects.toThrow(new Error("Unable to send email"));
         // Assert
         expect(notifications_node_client_1.NotifyClient).toHaveBeenCalledTimes(1);
         expect(notifications_node_client_1.NotifyClient).toHaveBeenCalledWith(mockKey);

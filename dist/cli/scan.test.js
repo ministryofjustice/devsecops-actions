@@ -120,7 +120,7 @@ describe("scan", () => {
         // Assert
         expect(console.info).toHaveBeenCalledTimes(2);
         expect(console.info).toHaveBeenCalledWith("⚡️ Scanning %s repository for archival", "test");
-        expect(console.info).toHaveBeenCalledWith("✅ Repository %s is not due for archival, last commit was %i day(s) ago.", "test", expect.any(Number));
+        expect(console.info).toHaveBeenCalledWith("✅ Repository %s is not due for archival, last commit was %i day(s) ago on %s", "test", expect.any(Number), expect.any(Date));
         expect(console.error).not.toHaveBeenCalled();
     });
     it("should throw an error when invalid GitHub repository archival arguments are provided", async () => {
