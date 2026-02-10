@@ -68,9 +68,10 @@ const scanGithub = async (
     }
 
     console.info(
-      "✅ Repository %s is not due for archival, last commit was %i day(s) ago.",
+      "✅ Repository %s is not due for archival, last commit was %i day(s) ago on %s",
       name,
       differenceDays,
+      new Date(lastCommitMs),
     );
 
     return true;
