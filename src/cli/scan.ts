@@ -7,15 +7,21 @@ import { docker, github } from "./scans";
  * Executes a scan based on CLI arguments, delegating to the appropriate scan handler.
  *
  * Parses command-line arguments to determine the scan type (Docker or GitHub) and
- * invokes the corresponding scanner implementation.
+ * invokes the corresponding scanner implementation. Supported scan types are defined
+ * in the `SCAN` constant.
  *
- * @returns A promise that resolves when the scan completes
+ * @returns A promise that resolves when the scan completes successfully
  * @throws {TypeError} When the scan fails or an invalid scan type is supplied
  *
  * @example
  * ```typescript
- * // For Docker scanning: node scan.js --images ./images.json
- * // For GitHub scanning: node scan.js --github --archive --days 90 --email user@gov.uk --key key123 --template-id 123 --repository-name repository
+ * // For Docker image scanning:
+ * // Command: node dist/index.js --images ./images.json
+ * await scan();
+ *
+ * // For GitHub repository archival scanning:
+ * // Command: node dist/index.js --github archive --days 90 --email user@gov.uk
+ * //          --key api-key --template-id template-123 --repository-name my-repo
  * await scan();
  * ```
  */

@@ -5,11 +5,12 @@ import { resolve } from "node:path";
 /**
  * Executes a scanning command for each Docker image in the provided array and reports the results.
  *
- * Processes all images in parallel, collecting results for successful and failed scans.
- * Logs individual scan outcomes and throws an error if any scans fail.
+ * Processes all images in parallel using Syft to generate CycloneDX SBOM files.
+ * Collects results for successful and failed scans, logging individual outcomes.
+ * Throws an error if any scans fail.
  *
- * @param values - An array of string values (e.g., Docker image names with tags) to process
- * @returns A promise that resolves to void on success, or rejects with a TypeError if any scans fail
+ * @param values - An array of Docker image URIs with tags (e.g., `['nginx:latest', 'alpine:3.18']`)
+ * @returns A promise that resolves when all scans complete successfully
  * @throws {TypeError} If one or more images fail to scan successfully
  *
  * @example

@@ -3,19 +3,40 @@ import { sanitiseArgumentProperty } from "../helpers";
 import { GITHUB_SCANS } from "../constants";
 
 /**
- * Validates GitHub CLI-style arguments for scan type, days threshold, email, and API key.
+ * Validates GitHub CLI-style arguments for repository archive scanning.
  *
- * Ensures that the scan type is valid, days is a positive number, email is properly formatted,
- * and the API key is present.
+ * Ensures that the scan type is valid (`archive`), days threshold is a positive number,
+ * email address is properly formatted, API key is present, template identifier is provided,
+ * and repository name is specified.
  *
- * @param args - Argument list where type is at index 1, days at index 3, email at index 5, and key at index 7
- * @returns `true` when all arguments are valid; otherwise `false`
+ * @param args - Argument list with the following structure:
+ *   - `args[0]`: `'--github'` flag
+ *   - `args[1]`: Scan type (e.g., `'archive'`)
+ *   - `args[2]`: `'--days'` flag
+ *   - `args[3]`: Number of days threshold
+ *   - `args[4]`: `'--email'` flag
+ *   - `args[5]`: Email address
+ *   - `args[6]`: `'--key'` flag
+ *   - `args[7]`: GOV.UK Notify API key
+ *   - `args[8]`: `'--template-id'` flag
+ *   - `args[9]`: GOV.UK Notify template identifier
+ *   - `args[10]`: `'--repository-name'` flag
+ *   - `args[11]`: Repository name
+ * @returns `true` when all arguments are valid; `false` otherwise
  *
  * @example
  * ```typescript
- * const valid = areGitHubArgumentsValid(['--github', 'archive', '--days', '90', '--email', 'test@gov.uk', '--key', 'key123', '--template-id', '123', '--repository-name', 'test']);
+ * const valid = areGitHubArgumentsValid([
+ *   '--github', 'archive', '--days', '90',
+ *   '--email', 'test@gov.uk', '--key', 'key123',
+ *   '--template-id', 'template-123', '--repository-name', 'my-repo'
+ * ]);
  * // Returns: true
  * ```
+ *
+ * @remarks
+ * This function catches validation errors internally and logs them to the console,
+ * returning `false` instead of throwing exceptions.
  */
 const areGitHubArgumentsValid = (args: Array<string>): boolean => {
   try {

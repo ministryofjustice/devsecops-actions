@@ -2,13 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const notifications_node_client_1 = require("notifications-node-client");
 /**
- * Sends an email notification using GOV.UK Notify service.
+ * Sends an email notification using the GOV.UK Notify service.
  *
- * Sends archival notifications to repository teams via the GOV.UK Notify API.
+ * Dispatches archival notifications to repository teams via the GOV.UK Notify API.
+ * The email uses a pre-configured template with personalised variables.
  *
  * @param email - The recipient email address
  * @param key - The GOV.UK Notify API key for authentication
- * @param template - The GOV.UK Notify template ID
+ * @param template - The GOV.UK Notify template identifier
  * @param options - Additional email options including personalisation data and reference
  * @returns A promise that resolves when the email is sent successfully
  * @throws {Error} If the API request fails or the key is invalid
@@ -16,8 +17,8 @@ const notifications_node_client_1 = require("notifications-node-client");
  * @example
  * ```typescript
  * await sendEmail('team@example.gov.uk', 'notify-api-key-123', 'template-id', {
- *   personalisation: { name: 'repo-name', date: new Date() },
- *   reference: 'notification-ref'
+ *   personalisation: { name: 'repo-name', date: '2026-02-10' },
+ *   reference: 'repo-name-archival-notification'
  * });
  * // Logs: 📧 Email has been dispatched.
  * ```

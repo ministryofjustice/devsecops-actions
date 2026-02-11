@@ -5,21 +5,23 @@ import { sanitiseArgumentProperty } from "../../helpers";
 /**
  * Extracts an array from a JSON file based on a specified property name.
  *
- * @param args - An array containing two elements:
- *               - args[0]: The property name prefixed with "--" (e.g., "--items")
- *               - args[1]: The file path to the JSON file to read
+ * Reads a JSON file from the file system, parses it, and extracts the array value
+ * from the specified property after sanitising the property name.
  *
+ * @param args - An array containing exactly two elements:
+ *   - `args[0]`: The property name prefixed with `--` (e.g., `'--images'`)
+ *   - `args[1]`: The file path to the JSON file to read
  * @returns An array of strings extracted from the specified property in the JSON file
- *
  * @throws {TypeError} If the specified property does not exist in the JSON file
  * @throws {TypeError} If the specified property is not an array
- * @throws {Error} If the file cannot be read or parsed as valid JSON
+ * @throws {SyntaxError} If the file cannot be parsed as valid JSON
+ * @throws {Error} If the file cannot be read (e.g., file not found, permission denied)
  *
  * @example
  * ```typescript
- * // Given a JSON file at './config.json' with content: { "tags": ["tag1", "tag2"] }
- * const tags = getArrayFromJson(["--tags", "./config.json"]);
- * // Returns: ["tag1", "tag2"]
+ * // Given a JSON file at './config.json' with content: { "images": ["nginx:latest", "alpine:3.18"] }
+ * const images = getArrayFromJson(['--images', './config.json']);
+ * // Returns: ['nginx:latest', 'alpine:3.18']
  * ```
  */
 const getArrayFromJson = (args: Array<string>): Array<string> => {

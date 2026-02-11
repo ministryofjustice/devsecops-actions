@@ -8,16 +8,32 @@ import { scanGithub } from "../../services";
  * Processes GitHub scan CLI arguments and initiates the appropriate GitHub scan operation.
  *
  * Validates the provided arguments and delegates to the specific scan handler based on
- * the scan type (e.g., archive scanning).
+ * the scan type (currently supports `archive` scanning only).
  *
- * @param args - CLI arguments containing scan type, days threshold, email, and API key
+ * @param args - CLI arguments array containing scan configuration:
+ *   - `args[0]`: `'--github'` flag
+ *   - `args[1]`: Scan type (e.g., `'archive'`)
+ *   - `args[2]`: `'--days'` flag
+ *   - `args[3]`: Number of days threshold
+ *   - `args[4]`: `'--email'` flag
+ *   - `args[5]`: Notification email address
+ *   - `args[6]`: `'--key'` flag
+ *   - `args[7]`: GOV.UK Notify API key
+ *   - `args[8]`: `'--template-id'` flag
+ *   - `args[9]`: GOV.UK Notify template identifier
+ *   - `args[10]`: `'--repository-name'` flag
+ *   - `args[11]`: Repository name
  * @returns A promise that resolves when the scan completes
  * @throws {TypeError} If the provided arguments are invalid or missing required values
  *
  * @example
  * ```typescript
- * await github(['--github', '--archive', '--days', '90', '--email', 'team@example.gov.uk', '--key', 'api-key', '--template-id', '123', '--repository-name', 'repository']);
- * // Initiates GitHub repository archival scanning
+ * await github([
+ *   '--github', 'archive', '--days', '90',
+ *   '--email', 'team@example.gov.uk', '--key', 'api-key',
+ *   '--template-id', 'template-123', '--repository-name', 'my-repository'
+ * ]);
+ * // Logs: ⚡️ Scanning my-repository repository for archival
  * ```
  */
 const github = async (args: Array<string>): Promise<void> => {
