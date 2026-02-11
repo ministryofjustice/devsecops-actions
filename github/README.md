@@ -416,7 +416,7 @@ uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.3.0
 uses: ministryofjustice/devsecops-actions/github/repository/archive@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Not recommended: Branch names
-uses: ministryofjustice/devsecops-actions/github/repository/archive@main
+uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.3.0
 ```
 
 ### Scheduling Best Practices

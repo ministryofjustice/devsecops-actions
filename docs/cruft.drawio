@@ -25,7 +25,7 @@
                 <mxCell id="step1-title" value="Install Python &amp; Cruft" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="245" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step1-desc" value="cruft/install@main&lt;br&gt;Setup Python 3.12 • Install Cruft dependencies • Configure environment" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step1-desc" value="cruft/install@v1.3.0&lt;br&gt;Setup Python 3.12 • Install Cruft dependencies • Configure environment" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="275" width="480" height="45" as="geometry"/>
                 </mxCell>
                 <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step1" target="decision1">
@@ -46,7 +46,7 @@
                 <mxCell id="step2-title" value="HTTPS Token Authentication" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="525" width="180" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step2-desc" value="cruft/authenticate@main&lt;br&gt;Configure GitHub App or token auth" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step2-desc" value="cruft/authenticate@v1.3.0&lt;br&gt;Configure GitHub App or token auth" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="555" width="180" height="45" as="geometry"/>
                 </mxCell>
                 <mxCell id="merge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="step2" target="merge-point">
@@ -91,7 +91,7 @@
                 <mxCell id="step3-title" value="Check for Template Updates" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="705" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step3-desc" value="cruft/check@main&lt;br&gt;Compare with upstream template • Run cruft check • Conditionally apply updates" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step3-desc" value="cruft/check@v1.3.0&lt;br&gt;Compare with upstream template • Run cruft check • Conditionally apply updates" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="735" width="480" height="45" as="geometry"/>
                 </mxCell>
                 <mxCell id="arrow3b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step3" target="step4">
@@ -106,7 +106,7 @@
                 <mxCell id="step4-title" value="Create Pull Request" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="845" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step4-desc" value="cruft/create@main&lt;br&gt;Configure token • Create branch • Generate PR with verified commits • Apply labels" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step4-desc" value="cruft/create@v1.3.0&lt;br&gt;Configure token • Create branch • Generate PR with verified commits • Apply labels" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="875" width="480" height="45" as="geometry"/>
                 </mxCell>
                 <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b949e;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step4" target="decision2">

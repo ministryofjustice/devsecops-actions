@@ -28,7 +28,7 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/owasp@main
+#   - uses: ministryofjustice/devsecops-actions/sca/owasp@v1.3.0
 #
 # ==============================================================================
 # SEVERITY THRESHOLDS

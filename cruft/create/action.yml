@@ -32,12 +32,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/cruft/create@main
+#   - uses: ministryofjustice/devsecops-actions/cruft/create@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With custom base branch:
-#   - uses: ministryofjustice/devsecops-actions/cruft/create@main
+#   - uses: ministryofjustice/devsecops-actions/cruft/create@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       base-branch: "develop"

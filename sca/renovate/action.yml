@@ -28,12 +28,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/renovate@main
+#   - uses: ministryofjustice/devsecops-actions/sca/renovate@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # Custom version:
-#   - uses: ministryofjustice/devsecops-actions/sca/renovate@main
+#   - uses: ministryofjustice/devsecops-actions/sca/renovate@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate-version: "42.64.1"

@@ -688,7 +688,7 @@ uses: ministryofjustice/devsecops-actions/sca@v1.3.0
 uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Not recommended: Branch names
-uses: ministryofjustice/devsecops-actions/sca@main
+uses: ministryofjustice/devsecops-actions/sca@v1.3.0
 ```
 
 ### Security Best Practices

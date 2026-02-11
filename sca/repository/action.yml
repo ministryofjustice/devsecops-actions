@@ -26,7 +26,7 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/repository@main
+#   - uses: ministryofjustice/devsecops-actions/sca/repository@v1.3.0
 #
 # Note: This action is typically called internally by the main SCA action
 # and does not need to be invoked separately.

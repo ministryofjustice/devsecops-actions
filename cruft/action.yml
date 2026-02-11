@@ -32,12 +32,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage (public template):
-#   - uses: ministryofjustice/devsecops-actions/cruft@main
+#   - uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # Advanced usage with private template:
-#   - uses: ministryofjustice/devsecops-actions/cruft@main
+#   - uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       private: "true"

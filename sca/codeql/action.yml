@@ -30,16 +30,16 @@
 # USAGE
 # ==============================================================================
 # Basic usage (auto-detection):
-#   - uses: ministryofjustice/devsecops-actions/sca/codeql@main
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@v1.3.0
 #
 # With custom configuration:
-#   - uses: ministryofjustice/devsecops-actions/sca/codeql@main
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@v1.3.0
 #     with:
 #       codeql-config-file: ".github/codeql/codeql-config.yml"
 #       codeql-upload-findings: "always"
 #
 # Disable upload (for default CodeQL setup):
-#   - uses: ministryofjustice/devsecops-actions/sca/codeql@main
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@v1.3.0
 #     with:
 #       codeql-upload-findings: "never"
 #

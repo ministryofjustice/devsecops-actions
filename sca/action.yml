@@ -32,12 +32,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca@main
+#   - uses: ministryofjustice/devsecops-actions/sca@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # Advanced usage with custom configuration:
-#   - uses: ministryofjustice/devsecops-actions/sca@main
+#   - uses: ministryofjustice/devsecops-actions/sca@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate: "true"
