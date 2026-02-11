@@ -1,23 +1,26 @@
-# GitHub Actions workflow for automated releases
+# Automated Release Workflow
 #
-# This workflow automates the release process using Google's release-please action.
-# It triggers on pushes to the main branch and creates versioned releases based on
-# conventional commits.
+# Purpose:
+#   Automates the release process using Google's release-please action,
+#   creating versioned releases based on conventional commits.
 #
-# Workflow Structure:
-#   1. setup: Configures the infrastructure and environment settings
-#      - Outputs: environment name and timezone for downstream jobs
-#      - Sets up base environment configuration
-#
-#   2. release: Executes the release process
-#      - Dependencies: Requires setup job to complete
-#      - Uses release-please-action to automate version bumps and changelog generation
-#      - Requires RELEASE_TOKEN secret for repository write access
+# Triggers:
+#   - push: When code is pushed to the main branch
 #
 # Permissions:
 #   - contents: write - Required for creating releases and tags
 #   - issues: write - Required for closing/updating release-related issues
 #   - pull-requests: write - Required for managing release PRs
+#
+# Jobs:
+#   setup:
+#     - Prepares the infrastructure and environment configuration
+#     - Outputs: environment name and timezone for downstream jobs
+#
+#   release:
+#     - Checks out the repository code
+#     - Executes release-please action to automate version bumps and changelog generation
+#     - Creates releases following Node.js versioning conventions
 #
 # Configuration:
 #   - Environment: base (configurable via env vars)
@@ -25,11 +28,10 @@
 #   - Release type: node (follows Node.js versioning conventions)
 #
 # Required Secrets:
-#   - RELEASE_TOKEN: GitHub token with appropriate permissions for release operations
+#   - GITHUB_TOKEN: Automatically provided token for repository operations
 #
 # Required Variables:
 #   - TIMEZONE: Repository variable defining the timezone for operations
-#
 
 name: Automated release 🚀
 run-name: Automated release 🚀

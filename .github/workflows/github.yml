@@ -1,3 +1,39 @@
+# GitHub Repository Archive Workflow
+#
+# Purpose:
+#   Monitors and manages repository archival status, sending notifications
+#   for inactive repositories based on configured thresholds.
+#
+# Triggers:
+#   - schedule: Weekly on Sunday at midnight (00:00 UTC)
+#
+# Permissions:
+#   - contents: read - Required for accessing repository metadata
+#
+# Jobs:
+#   setup:
+#     - Prepares the infrastructure and environment configuration
+#     - Outputs: environment name and timezone for downstream jobs
+#
+#   archive:
+#     - Checks out the repository code
+#     - Executes repository archival check
+#     - Sends notifications via GOV.UK Notify for repositories approaching archival threshold
+#
+# Configuration:
+#   - Environment: base (configurable via env vars)
+#   - Timezone: Configurable via repository variables (TIMEZONE)
+#
+# Required Secrets:
+#   - GITHUB_TOKEN: Automatically provided token for repository operations
+#   - PANDA_GOV_NOTIFY_KEY: GOV.UK Notify API key for sending notifications
+#
+# Required Variables:
+#   - TIMEZONE: Repository variable defining the timezone for operations
+#   - ARCHIVAL_DAYS: Number of days of inactivity before archival consideration
+#   - PANDA_NOTIFICATION_EMAIL: Email address for archival notifications
+#   - ARCHIVAL_GOV_NOTIFY_TEMPLATE_ID: GOV.UK Notify template ID for notifications
+
 name: GitHub 🔎
 run-name: GitHub repository check
 
@@ -39,10 +75,10 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Archive
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@0518a21b6c0b76d397609feaceaf1820bfe4f401
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@582b43adf072ef7d15af8e33e78a6997509e25b0 # v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          archival-days: 30
+          archival-days: ${{ vars.ARCHIVAL_DAYS }}
           notification-email: "${{ vars.PANDA_NOTIFICATION_EMAIL }}"
           gov-notify-key: "${{ secrets.PANDA_GOV_NOTIFY_KEY }}"
           gov-notify-template-id: "${{ vars.ARCHIVAL_GOV_NOTIFY_TEMPLATE_ID }}"

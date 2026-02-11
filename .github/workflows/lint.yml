@@ -1,10 +1,38 @@
-# Lint check workflow:
-# - Triggers on pull requests to main.
-# - Sets shared environment/timezone variables.
-# - Runs setup job to expose environment/timezone outputs.
-# - Runs lint job with read-only contents permission.
-# - Checks out repository, installs Node, installs dependencies.
-# - Executes spellcheck, markdown, YAML, TypeScript, and Renovate validations.
+# Lint Check Workflow
+#
+# Purpose:
+#   Performs automated code quality and formatting checks to ensure consistency
+#   and adherence to project standards.
+#
+# Triggers:
+#   - pull_request: When PRs target the main branch
+#
+# Permissions:
+#   - contents: read - Required for accessing repository contents
+#
+# Jobs:
+#   setup:
+#     - Prepares the infrastructure and environment configuration
+#     - Outputs: environment name and timezone for downstream jobs
+#
+#   lint:
+#     - Checks out the repository code
+#     - Configures Node.js environment
+#     - Installs project dependencies
+#     - Executes validation checks:
+#       * Markdown formatting (validate:md)
+#       * YAML formatting (validate:yml)
+#       * TypeScript linting and type checking (lint:ts, validate:ts)
+#       * Renovate configuration validation (validate:renovate)
+#       * Spell checking (spellcheck)
+#
+# Configuration:
+#   - Environment: base (configurable via env vars)
+#   - Timezone: Configurable via repository variables (TIMEZONE)
+#
+# Required Variables:
+#   - TIMEZONE: Repository variable defining the timezone for operations
+#   - NODE_VERSION: Node.js version for the runtime environment
 
 name: Lint check ✏️
 run-name: Lint check ✏️

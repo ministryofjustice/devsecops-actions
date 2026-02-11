@@ -1,24 +1,34 @@
-# Test workflow for devsecops-actions repository
+# Unit Tests Workflow
 #
-# This workflow runs automated tests on pull requests targeting the main branch.
-# It consists of two main jobs:
+# Purpose:
+#   Executes automated unit tests with coverage reporting to ensure code quality
+#   and validate functionality across the codebase.
 #
-# 1. setup: Prepares the test infrastructure by setting up environment variables
-#    - Outputs: environment name and timezone for downstream jobs
-#    - Sets environment to 'base' and uses repository-configured timezone
+# Triggers:
+#   - pull_request: When PRs target the main branch
 #
-# 2. lint: Executes unit tests with coverage reporting
-#    - Requires: setup job completion
-#    - Permissions: read access to repository contents
-#    - Environment: Uses environment output from setup job
-#    - Steps:
-#      a. Checks out the repository code
-#      b. Configures Node.js using the version specified in repository variables
-#      c. Installs npm dependencies and Syft tool (for SBOM generation)
-#      d. Runs unit tests with coverage collection
+# Permissions:
+#   - contents: read - Required for accessing repository contents
 #
-# Permissions: Minimal permissions by default, with contents:read for the lint job
-# Trigger: Activated on pull requests to the main branch
+# Jobs:
+#   setup:
+#     - Prepares the infrastructure and environment configuration
+#     - Outputs: environment name and timezone for downstream jobs
+#
+#   lint:
+#     - Checks out the repository code
+#     - Configures Node.js environment
+#     - Installs project dependencies and Syft tool (for SBOM generation testing)
+#     - Builds the project and verifies compiled output matches committed dist/
+#     - Executes unit tests with coverage collection
+#
+# Configuration:
+#   - Environment: base (configurable via env vars)
+#   - Timezone: Configurable via repository variables (TIMEZONE)
+#
+# Required Variables:
+#   - TIMEZONE: Repository variable defining the timezone for operations
+#   - NODE_VERSION: Node.js version for the runtime environment
 
 name: Tests 🧪
 run-name: Tests 🧪

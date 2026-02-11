@@ -1,11 +1,43 @@
-# Workflow: SCA ⚡️
-# Description:
-#   Scheduled and on-demand Security Composition Analysis run.
-#   - Triggers: daily cron, pull/ push to main, workflow dispatch, branch protection rule.
-#   - Environment and timezone shared across jobs.
+# Software Composition Analysis (SCA) Workflow
+#
+# Purpose:
+#   Performs automated security composition analysis to identify vulnerabilities
+#   in project dependencies and container images.
+#
+# Triggers:
+#   - schedule: Daily at midnight (00:00 UTC)
+#   - pull_request: When PRs target the main branch
+#   - push: When code is pushed to the main branch
+#   - workflow_dispatch: Manual workflow execution
+#   - branch_protection_rule: When branch protection rules are modified
+#
+# Permissions:
+#   - contents: write - Required for updating dependency graphs
+#   - pull-requests: write - Required for creating dependency review comments
+#   - issues: write - Required for creating security advisories
+#   - security-events: write - Required for uploading security scan results
+#   - actions: read - Required for reading workflow run data
+#
 # Jobs:
-#   - setup: Prepares environment metadata.
-#   - sca: Checks out repo, installs node, runs npm ci, executes ministryofjustice/sca action with dependency review configuration.
+#   setup:
+#     - Prepares the infrastructure and environment configuration
+#     - Outputs: environment name and timezone for downstream jobs
+#
+#   sca:
+#     - Checks out the repository code
+#     - Configures Node.js environment
+#     - Installs project dependencies
+#     - Executes SCA scan with dependency review and container image scanning
+#
+# Configuration:
+#   - Environment: base (configurable via env vars)
+#   - Timezone: Configurable via repository variables (TIMEZONE)
+#   - Dependency review config: .github/dependency-review-config.yml
+#   - Docker images config: sources.json
+#
+# Required Variables:
+#   - TIMEZONE: Repository variable defining the timezone for operations
+#   - NODE_VERSION: Node.js version for the runtime environment
 
 name: SCA ⚡️
 run-name: Software Composition Analysis ⚡️
