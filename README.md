@@ -50,7 +50,7 @@ scanning, dependency management, template synchronisation, and compliance report
 2. **Explicit Permissions**: Workflows must explicitly declare all required permissions following least-privilege principle
 3. **Version Pinning**: Use `@vx.x.x` for latest updates or `@<commit-sha>` for maximum stability
 4. **Centralized Maintenance**: Developed and managed by Ministry of Justice PandA team
-5. **Zero Configuration**: Sensible defaults with optional customization via configuration files
+5. **Zero Configuration**: Sensible defaults with optional customisation via configuration files
 
 ---
 
