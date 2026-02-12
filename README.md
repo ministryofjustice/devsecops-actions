@@ -278,7 +278,7 @@ jobs:
 ### Versioning Best Practices
 
 ```yaml
-# ✅ Alternative: Commit SHA (maximum stability)
+# ✅ Recommended: Commit SHA (maximum stability)
 uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Not recommended: Branch names
