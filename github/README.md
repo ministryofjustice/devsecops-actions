@@ -409,9 +409,6 @@ archival-days: "365"
 ### Versioning Strategy
 
 ```yaml
-# ✅ Recommended: Specific version tags
-uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.3.0
-
 # ✅ Alternative: Commit SHA (maximum stability)
 uses: ministryofjustice/devsecops-actions/github/repository/archive@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
