@@ -49,7 +49,7 @@ scanning, dependency management, template synchronisation, and compliance report
 1. **Composite Actions**: Reusable composite actions in dedicated directories provide modular functionality
 2. **Explicit Permissions**: Workflows must explicitly declare all required permissions following least-privilege principle
 3. **Version Pinning**: Use `@vx.x.x` for latest updates or `@<commit-sha>` for maximum stability
-4. **Centralized Maintenance**: Developed and managed by Ministry of Justice PandA team
+4. **Centralized Maintenance**: Developed and managed by Ministry of Justice - OCTO Cyber team
 5. **Zero Configuration**: Sensible defaults with optional customisation via configuration files
 
 ---
@@ -478,4 +478,4 @@ When reporting issues, please use the appropriate template:
 
 ---
 
-Made with ❤️ by the Ministry of Justice UK - 🐼 PandA Team
+Made with ❤️ by the Ministry of Justice UK - OCTO Cyber

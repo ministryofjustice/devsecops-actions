@@ -717,7 +717,7 @@ Closes #123
 
 1. Ensure all tests pass
 2. Update documentation if needed
-3. Request review from maintainers (PandA team)
+3. Request review from maintainers (OCTO Cyber team)
 4. Address review feedback
 5. Await approval and merge
 
@@ -780,7 +780,7 @@ See [LICENSE](../LICENSE) for full license text.
 
 ### Maintainers
 
-This project is maintained by the **Ministry of Justice PandA Team**.
+This project is maintained by the **Ministry of Justice OCTO Cyber Team**.
 
 **Author:** Abhi Markan
 
