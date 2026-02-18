@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Main scan orchestration logic for CLI commands.
+ *
+ * @module cli/scan
+ */
+
 import { SCAN } from "../constants";
 
 import { getArguments, getScanType } from "../helpers/index";

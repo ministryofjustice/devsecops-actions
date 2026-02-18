@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Docker image scanner using Syft for SBOM generation.
+ *
+ * @module services/scanners/scan-images
+ */
+
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { resolve } from "node:path";

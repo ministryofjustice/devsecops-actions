@@ -1,3 +1,9 @@
+/**
+ * @fileoverview GitHub repository archival scanner based on commit age.
+ *
+ * @module services/scanners/scan-github
+ */
+
 import { execFileSync } from "node:child_process";
 
 import sendEmail from "../notifications";

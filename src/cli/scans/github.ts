@@ -1,3 +1,9 @@
+/**
+ * @fileoverview GitHub repository scanning CLI handler.
+ *
+ * @module cli/scans/github
+ */
+
 import { GITHUB_SCANS } from "../../constants";
 
 import { areGitHubArgumentsValid } from "../../validators";

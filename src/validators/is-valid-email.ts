@@ -1,4 +1,10 @@
 /**
+ * @fileoverview Email address validation utility.
+ *
+ * @module validators/is-valid-email
+ */
+
+/**
  * Checks whether the provided string is a syntactically valid email address.
  *
  * Trims leading and trailing whitespace from the input and validates the result

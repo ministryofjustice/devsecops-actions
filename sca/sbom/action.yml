@@ -146,5 +146,5 @@ runs:
     - name: Upload
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
-        name: SBOM
+        name: SBOM-${{ github.run_number }}${{ github.run_attempt }}${{ strategy.job-index }}
         path: ./${{ inputs.output-directory-name }}/sca-sbom-*.cdx.json

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Validates Docker image scanning arguments.
+ *
+ * @module validators/valid-image-arguments
+ */
+
 import { statSync } from "node:fs";
 import { resolve, extname } from "node:path";
 

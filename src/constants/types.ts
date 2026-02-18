@@ -23,6 +23,11 @@ const GITHUB_SCANS = {
   ARCHIVE: "archive",
 };
 
+/**
+ * Supported source file extension constants.
+ *
+ * Defines the acceptable file extensions for source configuration files.
+ */
 const SOURCES_FILE_EXTENSION = {
   JSON: ".json",
 };

@@ -1,4 +1,10 @@
 /**
+ * @fileoverview Sanitises CLI argument properties by removing double hyphens.
+ *
+ * @module helpers/sanitise-argument-property
+ */
+
+/**
  * Removes all occurrences of double hyphens from the provided argument string.
  *
  * Used to clean CLI argument flags by stripping the `--` prefix, typically for

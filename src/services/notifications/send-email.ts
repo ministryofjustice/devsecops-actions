@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Email notification service using GOV.UK Notify.
+ *
+ * @module services/notifications/send-email
+ */
+
 import { NotifyClient } from "notifications-node-client";
 import { EmailOptions } from "../../types/notifications";
 

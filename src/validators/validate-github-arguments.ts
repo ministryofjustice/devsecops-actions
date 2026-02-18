@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Validates GitHub repository scanning arguments.
+ *
+ * @module validators/validate-github-arguments
+ */
+
 import isValidEmail from "./is-valid-email";
 import { sanitiseArgumentProperty } from "../helpers";
 import { GITHUB_SCANS } from "../constants";

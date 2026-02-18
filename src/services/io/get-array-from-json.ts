@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Extracts array data from JSON files.
+ *
+ * @module services/io/get-array-from-json
+ */
+
 import * as file from "node:fs";
 
 import { sanitiseArgumentProperty } from "../../helpers";

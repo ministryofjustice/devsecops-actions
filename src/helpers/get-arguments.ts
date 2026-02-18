@@ -1,4 +1,10 @@
 /**
+ * @fileoverview Retrieves command-line arguments for CLI processing.
+ *
+ * @module helpers/get-arguments
+ */
+
+/**
  * Retrieves command-line arguments passed to the process, excluding the first two default arguments.
  *
  * Extracts arguments from `process.argv`, skipping the first two elements which are

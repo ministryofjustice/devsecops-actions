@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Determines the scan type from CLI arguments.
+ *
+ * @module helpers/get-scan-type
+ */
+
 import sanitiseArgumentProperty from "./sanitise-argument-property";
 
 /**
