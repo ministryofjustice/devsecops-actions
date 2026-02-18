@@ -147,48 +147,48 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ministryofjustice/devsecops-actions/sca/repository@650c7930e0e52d4e66a8dd833aaec90768d6a892
+      uses: ministryofjustice/devsecops-actions/sca/repository@8d31a0dbf5086c6cb9487981afbbe5e0731b1e06
 
     - name: 📊 Dependencies
-      uses: ministryofjustice/devsecops-actions/sca/dependencies@650c7930e0e52d4e66a8dd833aaec90768d6a892
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@8d31a0dbf5086c6cb9487981afbbe5e0731b1e06
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ministryofjustice/devsecops-actions/sca/owasp@650c7930e0e52d4e66a8dd833aaec90768d6a892
+      uses: ministryofjustice/devsecops-actions/sca/owasp@8d31a0dbf5086c6cb9487981afbbe5e0731b1e06
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
-      uses: ministryofjustice/devsecops-actions/sca/renovate@650c7930e0e52d4e66a8dd833aaec90768d6a892
+      uses: ministryofjustice/devsecops-actions/sca/renovate@8d31a0dbf5086c6cb9487981afbbe5e0731b1e06
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ministryofjustice/devsecops-actions/sca/moj@650c7930e0e52d4e66a8dd833aaec90768d6a892
+      uses: ministryofjustice/devsecops-actions/sca/moj@8d31a0dbf5086c6cb9487981afbbe5e0731b1e06
 
     - name: 🐷 TruffleHog
-      uses: ministryofjustice/devsecops-actions/sca/trufflehog@650c7930e0e52d4e66a8dd833aaec90768d6a892
+      uses: ministryofjustice/devsecops-actions/sca/trufflehog@8d31a0dbf5086c6cb9487981afbbe5e0731b1e06
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
         trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
         output-directory-name: ${{ inputs.output-directory-name }}
 
     - name: ⚙️ CodeQL
-      uses: ministryofjustice/devsecops-actions/sca/codeql@650c7930e0e52d4e66a8dd833aaec90768d6a892
+      uses: ministryofjustice/devsecops-actions/sca/codeql@8d31a0dbf5086c6cb9487981afbbe5e0731b1e06
       with:
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ministryofjustice/devsecops-actions/sca/ossf@650c7930e0e52d4e66a8dd833aaec90768d6a892
+      uses: ministryofjustice/devsecops-actions/sca/ossf@8d31a0dbf5086c6cb9487981afbbe5e0731b1e06
       with:
         token: ${{ inputs.token }}
 
     - name: 📋 SBOM
-      uses: ministryofjustice/devsecops-actions/sca/sbom@650c7930e0e52d4e66a8dd833aaec90768d6a892
+      uses: ministryofjustice/devsecops-actions/sca/sbom@8d31a0dbf5086c6cb9487981afbbe5e0731b1e06
       with:
         token: ${{ inputs.token }}
         node-version: ${{ inputs.node-version }}

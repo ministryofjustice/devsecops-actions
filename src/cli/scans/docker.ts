@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Docker image scanning CLI handler.
+ *
+ * @module cli/scans/docker
+ */
+
 import { areImageArgumentsValid } from "../../validators";
 import { getArrayFromJson, scanImages } from "../../services";
 

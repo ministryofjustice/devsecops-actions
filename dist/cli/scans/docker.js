@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @fileoverview Docker image scanning CLI handler.
+ *
+ * @module cli/scans/docker
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 const validators_1 = require("../../validators");
 const services_1 = require("../../services");
