@@ -217,7 +217,7 @@ on:
   schedule:
     - cron: "0 0 * * *" # Daily at midnight UTC
   pull_request:
-    branches: ["main"]
+    branches: ["**"]
 
 permissions: {}
 
@@ -267,7 +267,7 @@ on:
     types: [opened, synchronize, reopened]
 
   push:
-    branches: ["main"]
+    branches: ["**"]
 
   workflow_dispatch:
 
@@ -365,7 +365,7 @@ run-name: SCA PR Check ⚡️
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: ["**"]
     types: [opened, synchronize]
 
 permissions: {}

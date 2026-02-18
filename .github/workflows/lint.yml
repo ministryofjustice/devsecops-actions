@@ -39,7 +39,7 @@ run-name: Lint check ✏️
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: ["**"]
 
 permissions: {}
 

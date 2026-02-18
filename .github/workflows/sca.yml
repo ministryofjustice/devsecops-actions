@@ -47,10 +47,10 @@ on:
     - cron: "0 0 * * *"
 
   pull_request:
-    branches: ["main"]
+    branches: ["**"]
 
   push:
-    branches: ["main"]
+    branches: ["**"]
 
   workflow_dispatch:
   branch_protection_rule:
