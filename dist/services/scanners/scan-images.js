@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @fileoverview Docker image scanner using Syft for SBOM generation.
+ *
+ * @module services/scanners/scan-images
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_child_process_1 = require("node:child_process");
 const node_util_1 = require("node:util");
@@ -28,6 +33,7 @@ const scanImages = async (values) => {
         try {
             const sbom = (0, node_path_1.resolve)(process.cwd(), "sca", "sbom");
             const image = value.split(":");
+            const epoch = Date.now();
             const command = "syft";
             const argument = [
                 "scan",
@@ -39,7 +45,7 @@ const scanImages = async (values) => {
                 "--source-version",
                 image[1],
                 "--output",
-                `cyclonedx-json=sca-sbom-${image[1]}.cdx.json`,
+                `cyclonedx-json=sca-sbom-${image[1]}-${epoch}.cdx.json`,
             ];
             await execAsync(command, argument, {
                 encoding: "utf8",

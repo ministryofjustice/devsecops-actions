@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @fileoverview Email address validation utility.
+ *
+ * @module validators/is-valid-email
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Checks whether the provided string is a syntactically valid email address.

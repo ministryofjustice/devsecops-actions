@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @fileoverview Main scan orchestration logic for CLI commands.
+ *
+ * @module cli/scan
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../constants");
 const index_1 = require("../helpers/index");

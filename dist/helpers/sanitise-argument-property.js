@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @fileoverview Sanitises CLI argument properties by removing double hyphens.
+ *
+ * @module helpers/sanitise-argument-property
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Removes all occurrences of double hyphens from the provided argument string.

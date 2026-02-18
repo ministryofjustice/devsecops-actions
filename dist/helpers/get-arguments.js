@@ -1,5 +1,11 @@
 "use strict";
 /**
+ * @fileoverview Retrieves command-line arguments for CLI processing.
+ *
+ * @module helpers/get-arguments
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
  * Retrieves command-line arguments passed to the process, excluding the first two default arguments.
  *
  * Extracts arguments from `process.argv`, skipping the first two elements which are
@@ -15,7 +21,6 @@
  * // Returns: ['--images', 'config.json']
  * ```
  */
-Object.defineProperty(exports, "__esModule", { value: true });
 const getArguments = () => {
     const ignoreArguments = 2;
     const minimumArguments = 2;

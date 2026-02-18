@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @fileoverview Validates Docker image scanning arguments.
+ *
+ * @module validators/valid-image-arguments
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_fs_1 = require("node:fs");
 const node_path_1 = require("node:path");

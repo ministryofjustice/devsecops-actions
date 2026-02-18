@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @fileoverview GitHub repository scanning CLI handler.
+ *
+ * @module cli/scans/github
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../../constants");
 const validators_1 = require("../../validators");

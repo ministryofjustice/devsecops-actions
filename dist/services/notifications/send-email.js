@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @fileoverview Email notification service using GOV.UK Notify.
+ *
+ * @module services/notifications/send-email
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 const notifications_node_client_1 = require("notifications-node-client");
 /**
