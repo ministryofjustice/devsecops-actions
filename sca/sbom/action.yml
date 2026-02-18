@@ -114,11 +114,6 @@ inputs:
     description: "Path to a JSON file containing an 'images' property with an array of Docker image URIs to scan. Example: 'ghcr.io/ministryofjustice/devsecops-hooks:latest'."
     default: ""
 
-  output-directory-name:
-    required: false
-    description: "Output directory path for generated reports and scan results"
-    default: "reports"
-
 runs:
   using: composite
 
@@ -135,7 +130,7 @@ runs:
 
     - name: Repository
       shell: bash
-      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=./${{ inputs.output-directory-name }}/sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}.cdx.json
+      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}.cdx.json
 
     - name: Images
       if: inputs.docker-images-file != ''
@@ -147,4 +142,4 @@ runs:
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
         name: SBOM-${{ github.run_number }}${{ github.run_attempt }}${{ strategy.job-index }}
-        path: ./${{ inputs.output-directory-name }}/sca-sbom-*.cdx.json
+        path: sca-sbom-*.cdx.json

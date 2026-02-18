@@ -192,4 +192,3 @@ runs:
         token: ${{ inputs.token }}
         node-version: ${{ inputs.node-version }}
         docker-images-file: ${{ inputs.docker-images-file }}
-        output-directory-name: ${{ inputs.output-directory-name }}
