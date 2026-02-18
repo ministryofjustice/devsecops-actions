@@ -94,6 +94,7 @@ runs:
       with:
         project: ${{ github.repository }}
         path: "."
+        out: ${{ inputs.output-directory-name }}
         format: JSON
         args: >
           --failOnCVSS 7
