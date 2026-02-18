@@ -49,9 +49,6 @@ on:
   pull_request:
     branches: ["**"]
 
-  push:
-    branches: ["**"]
-
   workflow_dispatch:
   branch_protection_rule:
 

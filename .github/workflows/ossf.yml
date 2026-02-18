@@ -37,7 +37,7 @@ on:
     - cron: "0 0 * * *"
 
   push:
-    branches: ["**"]
+    branches: ["main"]
 
   branch_protection_rule:
 
