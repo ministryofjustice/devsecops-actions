@@ -160,5 +160,5 @@ runs:
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
         name: TruffleHog
-        path: ./${{ inputs.output-directory-name }}/${{ inputs.trufflehog-output-filename }}.json
+        path: ./${{ inputs.output-directory-name }}/${{ inputs.trufflehog-output-filename }}-${{ github.event.pull_request.number }}-${{ github.run_number }}.json
         retention-days: 30
