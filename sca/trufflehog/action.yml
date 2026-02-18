@@ -42,11 +42,16 @@
 # ==============================================================================
 # Basic usage (default settings):
 #   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@v1.3.0
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With custom configuration:
 #   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@v1.3.0
 #     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
 #       trufflehog-config-file: ".github/trufflehog-config.yml"
+#       trufflehog-output-filename: "sca-trufflehog"
+#       output-directory-name: "./reports"
 #
 # ==============================================================================
 # CONFIGURATION
@@ -100,23 +105,33 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-15
+# Last Updated: 2026-02-18
 #
 # ==============================================================================
 
-name: 🐷 Trufflehog
-description: Trufflehog scan
+name: 🐷 TruffleHog
+description: Entropy-based secret detection
 author: Ministry of Justice UK
 
 inputs:
+  token:
+    required: true
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+
   trufflehog-config-file:
     required: false
     description: "Path to the TruffleHog configuration file for secret scanning customisation. Leave empty to use default settings."
     default: ""
 
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+  trufflehog-output-filename:
+    required: false
+    description: "TruffleHog JSON output file name (`.json` extension will be appended automatically)"
+    default: "sca-trufflehog"
+
+  output-directory-name:
+    required: false
+    description: "Output directory path for generated reports and scan results"
+    default: "./reports"
 
 runs:
   using: composite
@@ -138,12 +153,12 @@ runs:
         --no-verification \
         --no-update \
         --fail-on-scan-errors \
-        --json > sca-trufflehog.json
+        --json > ${{ inputs.output-directory-name }}/${{ inputs.trufflehog-output-filename }}.json
 
     - name: Upload
       if: always()
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
         name: TruffleHog
-        path: sca-trufflehog.json
+        path: ${{ inputs.output-directory-name }}/${{ inputs.trufflehog-output-filename }}.json
         retention-days: 30

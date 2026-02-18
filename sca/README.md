@@ -409,17 +409,19 @@ steps:
 
 All inputs are optional except `token`. Designed for zero-configuration operation.
 
-| Input                           | Type   | Required | Default   | Description                                                                                                                         |
-| ------------------------------- | ------ | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `token`                         | string | **Yes**  | N/A       | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read) |
-| `renovate`                      | string | No       | `true`    | Enable or disable Renovate bot for automated dependency updates                                                                     |
-| `renovate-version`              | string | No       | `42.64.1` | Renovate CLI version to use (specify without 'v' prefix)                                                                            |
-| `node-version`                  | string | No       | `24.11.1` | Node.js version to use for SBOM generation with Syft                                                                                |
-| `dependency-review-config-file` | string | No       | `""`      | Path to custom dependency review config (e.g., `.github/dependency-review-config.yml`)                                              |
-| `trufflehog-config-file`        | string | No       | `""`      | Path to custom TruffleHog secret scanning configuration                                                                             |
-| `codeql-config-file`            | string | No       | `""`      | Path to custom CodeQL query configuration for SAST                                                                                  |
-| `codeql-upload-findings`        | string | No       | `always`  | Control SARIF upload to Code Scanning. Set to `never` if using GitHub's default CodeQL setup                                        |
-| `docker-images-file`            | string | No       | `""`      | Path to JSON file with Docker image URIs for container SBOM generation                                                              |
+| Input                            | Type   | Required | Default           | Description                                                                                                                         |
+| -------------------------------- | ------ | -------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `token`                          | string | **Yes**  | N/A               | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read) |
+| `renovate`                       | string | No       | `true`            | Enable or disable Renovate bot for automated dependency updates                                                                     |
+| `renovate-version`               | string | No       | `42.64.1`         | Renovate CLI version to use (specify without 'v' prefix)                                                                            |
+| `node-version`                   | string | No       | `24.11.1`         | Node.js version to use for SBOM generation with Syft                                                                                |
+| `dependency-review-config-file`  | string | No       | `""`              | Path to custom dependency review config (e.g., `.github/dependency-review-config.yml`)                                              |
+| `trufflehog-config-file`         | string | No       | `""`              | Path to custom TruffleHog secret scanning configuration                                                                             |
+| `trufflehog-output-filename`     | string | No       | `"sca-trufflehog"`| TruffleHog JSON output file name (`.json` will be appended)                                                                         |
+| `codeql-config-file`             | string | No       | `""`              | Path to custom CodeQL query configuration for SAST                                                                                  |
+| `codeql-upload-findings`         | string | No       | `always`          | Control SARIF upload to Code Scanning. Set to `never` if using GitHub's default CodeQL setup                                        |
+| `docker-images-file`             | string | No       | `""`              | Path to JSON file with Docker image URIs for container SBOM generation                                                              |
+| `output-directory-name`          | string | No       | `"./reports"`     | Output directory for reports generation                                                                                             |
 
 ---
 

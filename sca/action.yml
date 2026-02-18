@@ -41,9 +41,15 @@
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate: "true"
+#       renovate-version: "42.64.1"
 #       node-version: "24.11.1"
+#       dependency-review-config-file: ".github/dependency-review-config.yml"
+#       trufflehog-config-file: ".github/trufflehog-config.yml"
+#       trufflehog-output-filename: "sca-trufflehog"
 #       codeql-config-file: ".github/codeql-config.yml"
+#       codeql-upload-findings: "always"
 #       docker-images-file: "docker-images.json"
+#       output-directory-name: "./reports"
 #
 # ==============================================================================
 # PREREQUISITES
@@ -60,68 +66,82 @@
 # OUTPUTS
 # ==============================================================================
 # This action generates the following artifacts:
-# - SARIF files uploaded to GitHub Code Scanning
-# - SBOM artifacts in CycloneDX JSON format
-# - TruffleHog scan results (JSON)
+# - SARIF files uploaded to GitHub Code Scanning (OWASP, CodeQL)
+# - SBOM artifacts in CycloneDX JSON format (repository and Docker images)
+# - TruffleHog scan results (JSON format in reports directory)
 # - OpenSSF Scorecard results (displayed in job summary)
+# - OWASP Dependency-Check reports (SARIF, JSON in reports directory)
+#
+# Default output directory: ./reports
+# Customisable via output-directory-name input parameter
 #
 # ==============================================================================
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
 # Minimum GitHub Enterprise Server: 3.8
-# Last Updated: 2026-01-15
+# Last Updated: 2026-02-18
 #
 # ==============================================================================
 
 name: Ministry of Justice UK - SCA ⚡️
-description: Software composition analysis GitHub action for dependency management, secret scanning, and security vulnerability detection
+description: Software Composition Analysis for dependency management, secret scanning, and security vulnerability detection
 author: Ministry of Justice UK
 
 inputs:
   renovate:
     required: false
-    description: "Flag to evaluate Renovate execution"
+    description: "Enable or disable Renovate bot for automated dependency updates"
     default: "true"
 
   node-version:
     required: false
-    description: "Node.js version to use"
+    description: "Node.js version to use for SBOM generation and related tooling"
     default: "24.11.1"
 
   renovate-version:
     required: false
-    description: "Renovate CLI version, an optional argument which defaults to v42.64.1."
+    description: "Renovate CLI version to use for dependency scanning (specify without 'v' prefix)"
     default: "42.64.1"
 
   dependency-review-config-file:
     required: false
-    description: "GitHub Actions dependency review configuration file path."
+    description: "Path to custom dependency review configuration file for GitHub Actions dependency scanning"
     default: ""
 
   trufflehog-config-file:
     required: false
-    description: "Trufflehog configuration file path."
+    description: "Path to custom TruffleHog configuration file for secret scanning customisation"
     default: ""
+
+  trufflehog-output-filename:
+    required: false
+    description: "TruffleHog JSON output file name (`.json` extension will be appended automatically)"
+    default: "sca-trufflehog"
 
   codeql-config-file:
     required: false
-    description: "CodeQL configuration file path."
+    description: "Path to custom CodeQL configuration file for SAST query customisation"
     default: ""
 
   codeql-upload-findings:
     required: false
-    description: "Upload the findings from CodeQL as SARIF file to Code Scanning, set to never if default setup is enabled."
+    description: "Control SARIF upload to Code Scanning. Set to 'never' if GitHub's default CodeQL setup is enabled"
     default: "always"
 
   docker-images-file:
     required: false
-    description: "A JSON file an 'images' property as an array containing URIs to docker image, for example 'ghcr.io/ministryofjustice/devsecops-hooks:latest'"
+    description: "Path to JSON file containing 'images' array with Docker image URIs for container SBOM generation (e.g., 'ghcr.io/ministryofjustice/devsecops-hooks:latest')"
     default: ""
+
+  output-directory-name:
+    required: false
+    description: "Output directory path for generated reports and scan results"
+    default: "./reports"
 
   token:
     required: true
-    description: "GitHub repository token with read and write privileges to contents, pull request, issues and read only permission to security events."
+    description: "GitHub repository token with read/write permissions for contents, pull requests, and issues, plus read-only access to security events"
 
 runs:
   using: composite
@@ -136,6 +156,8 @@ runs:
 
     - name: 🔎 OWASP
       uses: ministryofjustice/devsecops-actions/sca/owasp@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+      with:
+        output-directory-name: ${{ inputs.output-directory-name }}
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
@@ -147,10 +169,12 @@ runs:
     - name: 🔑 Secrets
       uses: ministryofjustice/devsecops-actions/sca/moj@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
-    - name: 🐷 Trufflehog
+    - name: 🐷 TruffleHog
       uses: ministryofjustice/devsecops-actions/sca/trufflehog@9babea875cafae0e3b05a5ec5aca76d6b560c42e
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
+        trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
+        output-directory-name: ${{ inputs.output-directory-name }}
 
     - name: ⚙️ CodeQL
       uses: ministryofjustice/devsecops-actions/sca/codeql@9babea875cafae0e3b05a5ec5aca76d6b560c42e
@@ -169,3 +193,4 @@ runs:
         token: ${{ inputs.token }}
         node-version: ${{ inputs.node-version }}
         docker-images-file: ${{ inputs.docker-images-file }}
+        output-directory-name: ${{ inputs.output-directory-name }}

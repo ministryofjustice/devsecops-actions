@@ -101,7 +101,7 @@
                 <mxCell id="step4-title" value="Renovate Bot" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="805" width="180" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step4-desc" value="renovatebot/github-action@v44.2.1&lt;br&gt;Automated dependency updates" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step4-desc" value="renovatebot/github-action@v44.2.2&lt;br&gt;Automated dependency updates" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="835" width="180" height="45" as="geometry"/>
                 </mxCell>
                 
@@ -174,7 +174,7 @@
                 <mxCell id="step6-icon" value="🐷" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
                     <mxGeometry x="220" y="1125" width="60" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="step6-title" value="Trufflehog Secret Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step6-title" value="TruffleHog Secret Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1125" width="480" height="25" as="geometry"/>
                 </mxCell>
                 <mxCell id="step6-desc" value="trufflesecurity/trufflehog:3.92.4&lt;br&gt;Advanced secret detection and scanning, uploads findings as artifact" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
@@ -228,7 +228,7 @@
                 <mxCell id="step9" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a2536;strokeColor=#388bfd;strokeWidth=2;shadow=1;" vertex="1" parent="1">
                     <mxGeometry x="200" y="1530" width="600" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="step9-icon" value="⛓️‍💥" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+                <mxCell id="step9-icon" value="📋" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
                     <mxGeometry x="220" y="1545" width="60" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="step9-title" value="SBOM Generation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">

@@ -5,7 +5,7 @@
 #   and validate functionality across the codebase.
 #
 # Triggers:
-#   - pull_request: When PRs target the main branch
+#   - pull_request: When PRs target any branch
 #
 # Permissions:
 #   - contents: read - Required for accessing repository contents

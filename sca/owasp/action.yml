@@ -29,6 +29,14 @@
 # ==============================================================================
 # Basic usage:
 #   - uses: ministryofjustice/devsecops-actions/sca/owasp@v1.3.0
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#
+# With custom output directory:
+#   - uses: ministryofjustice/devsecops-actions/sca/owasp@v1.3.0
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       output-directory-name: "./reports"
 #
 # ==============================================================================
 # SEVERITY THRESHOLDS
@@ -60,18 +68,23 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-15
+# Last Updated: 2026-02-18
 #
 # ==============================================================================
 
 name: 🔎 OWASP
-description: OWASP dependency scan
+description: Dependency vulnerability scanning
 author: Ministry of Justice UK
 
 inputs:
   token:
     required: true
     description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+
+  output-directory-name:
+    required: false
+    description: "Output directory path for generated reports and scan results"
+    default: "./reports"
 
 runs:
   using: composite
@@ -86,10 +99,10 @@ runs:
           --failOnCVSS 7
           --prettyPrint
           --format SARIF
-          --out ./reports
+          --out ${{ inputs.output-directory-name }}
 
     - name: Upload
       if: always()
       uses: github/codeql-action/upload-sarif@cdefb33c0f6224e58673d9004f47f7cb3e328b89 # v4.31.10
       with:
-        sarif_file: ./reports/dependency-check-report.sarif
+        sarif_file: ${{ inputs.output-directory-name }}/dependency-check-report.sarif

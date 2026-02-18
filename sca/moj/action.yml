@@ -27,6 +27,8 @@
 # ==============================================================================
 # Basic usage:
 #   - uses: ministryofjustice/devsecops-actions/sca/moj@v1.3.0
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # ==============================================================================
 # TOOL INFORMATION
@@ -40,12 +42,12 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-15
+# Last Updated: 2026-02-18
 #
 # ==============================================================================
 
 name: 🔑 Secrets
-description: Secrets, credentials, tokens scan
+description: Secret scanning using MOJ DevSecOps Hooks
 author: Ministry of Justice UK
 
 inputs:

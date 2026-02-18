@@ -40,7 +40,7 @@ permissions: {}
 
 on:
   push:
-    branches: [main]
+    branches: ["main"]
 
 env:
   environment: base

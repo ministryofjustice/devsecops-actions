@@ -28,7 +28,7 @@
 # ==============================================================================
 # USAGE
 # ==============================================================================
-# Basic usage (repository scan only):
+# Basic usage:
 #   - uses: ministryofjustice/devsecops-actions/sca/sbom@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
@@ -38,12 +38,14 @@
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       docker-images-file: "docker-images.json"
+#       output-directory-name: "./reports"
 #
 # Custom Node.js version:
 #   - uses: ministryofjustice/devsecops-actions/sca/sbom@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       node-version: "24.11.1"
+#       output-directory-name: "./reports"
 #
 # ==============================================================================
 # DOCKER IMAGES FILE FORMAT
@@ -89,12 +91,12 @@
 # ==============================================================================
 # Action Version: 1.0.0
 # Default Node.js: 24.11.1
-# Last Updated: 2026-01-15
+# Last Updated: 2026-02-18
 #
 # ==============================================================================
 
-name: ⛓️‍💥 SBOM
-description: Software bill of material generation
+name: 📋 SBOM
+description: Software Bill of Materials generation
 author: Ministry of Justice UK
 
 inputs:
@@ -112,6 +114,11 @@ inputs:
     description: "Path to a JSON file containing an 'images' property with an array of Docker image URIs to scan. Example: 'ghcr.io/ministryofjustice/devsecops-hooks:latest'."
     default: ""
 
+  output-directory-name:
+    required: false
+    description: "Output directory path for generated reports and scan results"
+    default: "./reports"
+
 runs:
   using: composite
 
@@ -128,7 +135,7 @@ runs:
 
     - name: Repository
       shell: bash
-      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=sca-sbom-repository.cdx.json
+      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=${{ inputs.output-directory-name }}/sca-sbom-repository.cdx.json
 
     - name: Images
       if: inputs.docker-images-file != ''
@@ -140,4 +147,4 @@ runs:
       uses: actions/upload-artifact@9babea875cafae0e3b05a5ec5aca76d6b560c42e # v6.0.0
       with:
         name: SBOM
-        path: sca-sbom-*.cdx.json
+        path: ${{ inputs.output-directory-name }}/sca-sbom-*.cdx.json

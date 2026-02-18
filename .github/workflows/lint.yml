@@ -5,7 +5,7 @@
 #   and adherence to project standards.
 #
 # Triggers:
-#   - pull_request: When PRs target the main branch
+#   - pull_request: When PRs target the any branch
 #
 # Permissions:
 #   - contents: read - Required for accessing repository contents

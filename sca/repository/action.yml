@@ -27,6 +27,8 @@
 # ==============================================================================
 # Basic usage:
 #   - uses: ministryofjustice/devsecops-actions/sca/repository@v1.3.0
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # Note: This action is typically called internally by the main SCA action
 # and does not need to be invoked separately.
@@ -49,7 +51,7 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-15
+# Last Updated: 2026-02-18
 #
 # ==============================================================================
 

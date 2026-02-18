@@ -6,8 +6,7 @@
 #
 # Triggers:
 #   - schedule: Daily at midnight (00:00 UTC)
-#   - pull_request: When PRs target the main branch
-#   - push: When code is pushed to the main branch
+#   - pull_request: When PRs target the any branch
 #   - workflow_dispatch: Manual workflow execution
 #   - branch_protection_rule: When branch protection rules are modified
 #

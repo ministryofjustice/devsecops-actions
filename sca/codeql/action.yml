@@ -17,7 +17,7 @@
 # ==============================================================================
 # FEATURES
 # ==============================================================================
-# - Multi-language support: C/C++, C#, Go, Java, JavaScript/TypeScript, 
+# - Multi-language support: C/C++, C#, Go, Java, JavaScript/TypeScript,
 #   Python, Ruby, Swift, Kotlin
 # - Semantic code analysis for deep vulnerability detection
 # - Pre-built security queries for common vulnerability patterns
@@ -31,16 +31,20 @@
 # ==============================================================================
 # Basic usage (auto-detection):
 #   - uses: ministryofjustice/devsecops-actions/sca/codeql@v1.3.0
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With custom configuration:
 #   - uses: ministryofjustice/devsecops-actions/sca/codeql@v1.3.0
 #     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
 #       codeql-config-file: ".github/codeql/codeql-config.yml"
 #       codeql-upload-findings: "always"
 #
 # Disable upload (for default CodeQL setup):
 #   - uses: ministryofjustice/devsecops-actions/sca/codeql@v1.3.0
 #     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
 #       codeql-upload-findings: "never"
 #
 # ==============================================================================
@@ -75,15 +79,19 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-01-15
+# Last Updated: 2026-02-18
 #
 # ==============================================================================
 
 name: ⚙️ CodeQL
-description: CodeQL scan
+description: Static application security testing (SAST)
 author: Ministry of Justice UK
 
 inputs:
+  token:
+    required: true
+    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
+
   codeql-config-file:
     required: false
     description: "Path to the CodeQL configuration file for customising code analysis queries and settings. Leave empty to use default settings."
@@ -93,10 +101,6 @@ inputs:
     required: false
     description: "Controls whether CodeQL findings are uploaded as SARIF files to GitHub Code Scanning. Set to 'never' if default setup is enabled to avoid conflicts."
     default: "always"
-
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite
