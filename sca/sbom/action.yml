@@ -135,7 +135,7 @@ runs:
 
     - name: Repository
       shell: bash
-      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=./${{ inputs.output-directory-name }}/sca-sbom-repository-${{ github.event.pull_request.number }}-${{ github.run_number }}-${{ github.jobs.job_id }}.cdx.json
+      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=./${{ inputs.output-directory-name }}/sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ github.job-index }}.cdx.json
 
     - name: Images
       if: inputs.docker-images-file != ''
