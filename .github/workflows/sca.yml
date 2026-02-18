@@ -78,6 +78,11 @@ jobs:
       security-events: write
       actions: read
 
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["javascript", "typescript", "shell"]
+
     name: Execute ⚙️
     runs-on: ["ubuntu-latest"]
     needs: setup
@@ -98,8 +103,11 @@ jobs:
         run: npm ci --ignore-scripts --omit=dev
 
       - name: ⚡️ SCA
-        uses: ministryofjustice/devsecops-actions/sca@234ac1dca7bb965417bae451d3ea284a1286d68c # v1.3.0
+        uses: ministryofjustice/devsecops-actions/sca@0912d3399f89c2c96fb1964c16b5c326607eeea4 # v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
           docker-images-file: ${{ github.workspace }}/sources.json # Optional
+          output-directory-name: "sca" # Optional
+          trufflehog-output-filename: "sca-${{ matrix.language }}" # Optional
+
