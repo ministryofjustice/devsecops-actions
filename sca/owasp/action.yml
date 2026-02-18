@@ -100,7 +100,6 @@ runs:
           --failOnCVSS 7
           --prettyPrint
           --format SARIF
-          --out ./${{ inputs.output-directory-name }}
 
     - name: Upload
       if: always()

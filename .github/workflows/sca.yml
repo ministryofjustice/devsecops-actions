@@ -109,5 +109,5 @@ jobs:
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
           docker-images-file: ${{ github.workspace }}/sources.json # Optional
           output-directory-name: "sca" # Optional
-          trufflehog-output-filename: "sca-${{ matrix.language }}" # Optional
+          trufflehog-output-filename: "sca-trufflehog-${{ matrix.language }}" # Optional
 
