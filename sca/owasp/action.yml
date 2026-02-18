@@ -105,4 +105,4 @@ runs:
       if: always()
       uses: github/codeql-action/upload-sarif@cdefb33c0f6224e58673d9004f47f7cb3e328b89 # v4.31.10
       with:
-        sarif_file: ./${{ inputs.output-directory-name }}/dependency-check-report-${{ github.run_number }}${{ github.run_attempt }}${{ strategy.job-index }}.sarif
+        sarif_file: ./${{ inputs.output-directory-name }}/dependency-check-report.sarif
