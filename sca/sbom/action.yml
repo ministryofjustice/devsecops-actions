@@ -38,14 +38,14 @@
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       docker-images-file: "docker-images.json"
-#       output-directory-name: "./reports"
+#       output-directory-name: "reports"
 #
 # Custom Node.js version:
 #   - uses: ministryofjustice/devsecops-actions/sca/sbom@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       node-version: "24.11.1"
-#       output-directory-name: "./reports"
+#       output-directory-name: "reports"
 #
 # ==============================================================================
 # DOCKER IMAGES FILE FORMAT
@@ -117,7 +117,7 @@ inputs:
   output-directory-name:
     required: false
     description: "Output directory path for generated reports and scan results"
-    default: "./reports"
+    default: "reports"
 
 runs:
   using: composite
@@ -135,7 +135,7 @@ runs:
 
     - name: Repository
       shell: bash
-      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=${{ inputs.output-directory-name }}/sca-sbom-repository.cdx.json
+      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=./${{ inputs.output-directory-name }}/sca-sbom-repository.cdx.json
 
     - name: Images
       if: inputs.docker-images-file != ''
@@ -147,4 +147,4 @@ runs:
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
         name: SBOM
-        path: ${{ inputs.output-directory-name }}/sca-sbom-*.cdx.json
+        path: ./${{ inputs.output-directory-name }}/sca-sbom-*.cdx.json

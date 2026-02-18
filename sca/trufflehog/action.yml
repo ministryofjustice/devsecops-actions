@@ -51,7 +51,7 @@
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       trufflehog-config-file: ".github/trufflehog-config.yml"
 #       trufflehog-output-filename: "sca-trufflehog"
-#       output-directory-name: "./reports"
+#       output-directory-name: "reports"
 #
 # ==============================================================================
 # CONFIGURATION
@@ -131,7 +131,7 @@ inputs:
   output-directory-name:
     required: false
     description: "Output directory path for generated reports and scan results"
-    default: "./reports"
+    default: "reports"
 
 runs:
   using: composite
@@ -153,12 +153,12 @@ runs:
         --no-verification \
         --no-update \
         --fail-on-scan-errors \
-        --json > ${{ inputs.output-directory-name }}/${{ inputs.trufflehog-output-filename }}.json
+        --json > ./${{ inputs.output-directory-name }}/${{ inputs.trufflehog-output-filename }}.json
 
     - name: Upload
       if: always()
       uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
         name: TruffleHog
-        path: ${{ inputs.output-directory-name }}/${{ inputs.trufflehog-output-filename }}.json
+        path: ./${{ inputs.output-directory-name }}/${{ inputs.trufflehog-output-filename }}.json
         retention-days: 30

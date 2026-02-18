@@ -36,7 +36,7 @@
 #   - uses: ministryofjustice/devsecops-actions/sca/owasp@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
-#       output-directory-name: "./reports"
+#       output-directory-name: "reports"
 #
 # ==============================================================================
 # SEVERITY THRESHOLDS
@@ -84,7 +84,7 @@ inputs:
   output-directory-name:
     required: false
     description: "Output directory path for generated reports and scan results"
-    default: "./reports"
+    default: "reports"
 
 runs:
   using: composite
@@ -99,10 +99,10 @@ runs:
           --failOnCVSS 7
           --prettyPrint
           --format SARIF
-          --out ${{ inputs.output-directory-name }}
+          --out ./${{ inputs.output-directory-name }}
 
     - name: Upload
       if: always()
       uses: github/codeql-action/upload-sarif@cdefb33c0f6224e58673d9004f47f7cb3e328b89 # v4.31.10
       with:
-        sarif_file: ${{ inputs.output-directory-name }}/dependency-check-report.sarif
+        sarif_file: ./${{ inputs.output-directory-name }}/dependency-check-report.sarif
