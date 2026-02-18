@@ -103,7 +103,7 @@ jobs:
         run: npm ci --ignore-scripts --omit=dev
 
       - name: ⚡️ SCA
-        uses: ministryofjustice/devsecops-actions/sca@feat/114-trufflehog-file-name-as-an-input # v1.3.0
+        uses: ministryofjustice/devsecops-actions/sca@212de90918816fb71fcc957ba27c0a0969b68b0b # v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
