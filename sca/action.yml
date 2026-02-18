@@ -137,7 +137,7 @@ inputs:
   output-directory-name:
     required: false
     description: "Output directory path for generated reports and scan results"
-    default: "reports"
+    default: "scans"
 
   token:
     required: true
