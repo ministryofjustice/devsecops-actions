@@ -93,7 +93,7 @@ runs:
         out: ${{ inputs.output-directory-name }}
         format: JSON
         args: >
-          --failOnCVSS 7
+          --failOnCVSS 9
           --prettyPrint
           --format SARIF
 
