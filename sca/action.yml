@@ -145,7 +145,7 @@ inputs:
 
   codeql-languages:
     required: false
-    description: "CodeQL languages to analyse"
+    description: "A comma-separated list of CodeQL languages to analyse"
 
 runs:
   using: composite
