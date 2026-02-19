@@ -38,8 +38,12 @@ name: Lint check ✏️
 run-name: Lint check ✏️
 
 on:
+  push:
+    branches:
+      - "**" # All branches
   pull_request:
-    branches: ["**"]
+    branches:
+      - "**" # All branches
 
 permissions: {}
 

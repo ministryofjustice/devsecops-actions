@@ -34,9 +34,9 @@
 # TOOL INFORMATION
 # ==============================================================================
 # Tool: MOJ DevSecOps Hooks
-# Version: v1.3.0
+# Version: v1.5.0
 # Repository: https://github.com/ministryofjustice/devsecops-hooks
-# Container: ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0
+# Container: ghcr.io/ministryofjustice/devsecops-hooks:v1.5.0
 #
 # ==============================================================================
 # VERSION INFORMATION
@@ -51,6 +51,7 @@ description: Secret scanning using MOJ DevSecOps Hooks
 author: Ministry of Justice UK
 
 inputs:
+  # No inputs required - uses default MOJ DevSecOps Hooks configuration
 
 runs:
   using: composite

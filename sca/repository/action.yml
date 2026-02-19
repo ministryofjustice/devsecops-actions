@@ -59,8 +59,6 @@ name: 📦 Repository
 description: Git checkout
 author: Ministry of Justice UK
 
-inputs:
-
 runs:
   using: composite
   steps:

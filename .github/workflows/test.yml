@@ -34,8 +34,12 @@ name: Tests 🧪
 run-name: Tests 🧪
 
 on:
+  push:
+    branches:
+      - "**" # All branches
   pull_request:
-    branches: ["**"]
+    branches:
+      - "**" # All branches
 
 permissions: {}
 

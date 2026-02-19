@@ -63,9 +63,9 @@
 # OUTPUTS
 # ==============================================================================
 # Artifacts generated:
-# - sca-sbom-repository.cdx.json: Repository SBOM
+# - sca-sbom-repository-{run_number}-{run_attempt}-{job_index}.cdx.json: Repository SBOM
 # - sca-sbom-image-*.cdx.json: Individual Docker image SBOMs (if applicable)
-# - All artifacts uploaded to workflow run as "SBOM" artifact
+# - All artifacts uploaded to workflow run as "SBOM-{run_number}{run_attempt}{job_index}" artifact
 #
 # ==============================================================================
 # COMPLIANCE & STANDARDS

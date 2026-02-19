@@ -120,8 +120,6 @@ name: 🛡 OpenSSF
 description: Security posture assessment
 author: Ministry of Justice UK
 
-inputs:
-
 runs:
   using: composite
   steps:
