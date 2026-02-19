@@ -37,9 +37,6 @@ on:
   push:
     branches:
       - "**" # All branches
-  pull_request:
-    branches:
-      - "**" # All branches
 
 permissions: {}
 
