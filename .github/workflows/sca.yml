@@ -45,9 +45,6 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
-  push:
-    branches:
-      - "**" # All branches
   pull_request:
     branches:
       - "**" # All branches

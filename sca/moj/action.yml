@@ -50,9 +50,6 @@ name: 🔑 Secrets
 description: Secret scanning using MOJ DevSecOps Hooks
 author: Ministry of Justice UK
 
-inputs:
-  # No inputs required - uses default MOJ DevSecOps Hooks configuration
-
 runs:
   using: composite
   steps:
