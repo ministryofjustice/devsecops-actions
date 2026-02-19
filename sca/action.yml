@@ -89,6 +89,10 @@ description: Software Composition Analysis for dependency management, secret sca
 author: Ministry of Justice UK
 
 inputs:
+  token:
+    required: true
+    description: "GitHub repository token with read/write permissions for contents, pull requests, and issues, plus read-only access to security events"
+
   renovate:
     required: false
     description: "Enable or disable Renovate bot for automated dependency updates"
@@ -139,9 +143,9 @@ inputs:
     description: "Output directory path for generated reports and scan results"
     default: "reports"
 
-  token:
-    required: true
-    description: "GitHub repository token with read/write permissions for contents, pull requests, and issues, plus read-only access to security events"
+  codeql-languages:
+    required: false
+    description: "CodeQL languages to analyse"
 
 runs:
   using: composite
@@ -178,6 +182,7 @@ runs:
     - name: ⚙️ CodeQL
       uses: ministryofjustice/devsecops-actions/sca/codeql@feat/114-trufflehog-file-name-as-an-input
       with:
+        codeql-languages: ${{ inputs.codeql-languages }}
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
