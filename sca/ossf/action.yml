@@ -121,9 +121,6 @@ description: Security posture assessment
 author: Ministry of Justice UK
 
 inputs:
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite
@@ -142,11 +139,11 @@ runs:
     - name: Display
       shell: bash
       run: |
-        echo "## 🛡 OSSF " >> $GITHUB_STEP_SUMMARY
-        echo "### Score" >> $GITHUB_STEP_SUMMARY
+        echo "## 🛡 OpenSSF Scorecard" >> $GITHUB_STEP_SUMMARY
+        echo "### Overall Score" >> $GITHUB_STEP_SUMMARY
         echo "**$(jq '.score' sca-scorecard.json)** / 10" >> $GITHUB_STEP_SUMMARY
-        echo "### Overview" >> $GITHUB_STEP_SUMMARY
-        echo "|Scan|Score (/10)|" >> $GITHUB_STEP_SUMMARY
+        echo "### Individual Checks" >> $GITHUB_STEP_SUMMARY
+        echo "|Check|Score (/10)|" >> $GITHUB_STEP_SUMMARY
         echo "|-----------|-----------|" >> $GITHUB_STEP_SUMMARY
         jq -r '.checks[] | "| \(.name) | \(.score) |"' sca-scorecard.json >> $GITHUB_STEP_SUMMARY
         echo "---" >> $GITHUB_STEP_SUMMARY

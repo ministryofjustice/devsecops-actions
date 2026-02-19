@@ -77,20 +77,20 @@ author: Ministry of Justice UK
 inputs:
   archival-days:
     required: false
-    description: "Number of non-activity days in a repository"
+    description: "Number of inactivity days required before a repository is considered eligible for archival"
     default: "90"
 
   notification-email:
     required: true
-    description: "Notification email address to dispatch an email for the repository which has been dormant for 'archival-days' and therefore eligible for archival"
+    description: "Notification email address to send alerts when a repository has been dormant for the specified 'archival-days' and is therefore eligible for archival"
 
   gov-notify-key:
     required: true
-    description: "GovNotify API key"
+    description: "GOV.UK Notify API key for sending email notifications"
 
   gov-notify-template-id:
     required: true
-    description: "GovNotify template ID"
+    description: "GOV.UK Notify email template ID for formatting archival notification messages"
 
   node-version:
     required: false

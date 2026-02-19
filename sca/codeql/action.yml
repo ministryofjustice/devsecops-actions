@@ -88,10 +88,6 @@ description: Static application security testing (SAST)
 author: Ministry of Justice UK
 
 inputs:
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
-
   codeql-config-file:
     required: false
     description: "Path to the CodeQL configuration file for customising code analysis queries and settings. Leave empty to use default settings."

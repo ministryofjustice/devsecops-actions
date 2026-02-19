@@ -60,9 +60,6 @@ description: Git checkout
 author: Ministry of Justice UK
 
 inputs:
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite

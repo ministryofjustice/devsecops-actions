@@ -114,10 +114,6 @@ description: Entropy-based secret detection
 author: Ministry of Justice UK
 
 inputs:
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
-
   trufflehog-config-file:
     required: false
     description: "Path to the TruffleHog configuration file for secret scanning customisation. Leave empty to use default settings."
@@ -133,6 +129,7 @@ runs:
   steps:
     - name: Scan
       shell: bash
+      working-directory: ${{ github.workspace }}
       run: |
         CONFIG=""
 

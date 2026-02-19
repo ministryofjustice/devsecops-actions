@@ -77,10 +77,6 @@ description: Dependency vulnerability scanning
 author: Ministry of Justice UK
 
 inputs:
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
-
   output-directory-name:
     required: false
     description: "Output directory path for generated reports and scan results"

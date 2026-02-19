@@ -100,10 +100,6 @@ description: Software Bill of Materials generation
 author: Ministry of Justice UK
 
 inputs:
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
-
   node-version:
     required: false
     description: "Node.js version to use for SBOM generation and related tooling. Specify the exact version number."
@@ -130,6 +126,7 @@ runs:
 
     - name: Repository
       shell: bash
+      working-directory: ${{ github.workspace }}
       run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}.cdx.json
 
     - name: Images

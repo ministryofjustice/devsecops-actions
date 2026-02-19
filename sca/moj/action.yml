@@ -51,16 +51,11 @@ description: Secret scanning using MOJ DevSecOps Hooks
 author: Ministry of Justice UK
 
 inputs:
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite
   steps:
     - name: Scan
       shell: bash
-      run: docker run --rm
-        \-e GIT_MODE=false
-        \-v "$(pwd)":/src
-        \ghcr.io/ministryofjustice/devsecops-hooks:v1.5.0 # https://github.com/ministryofjustice/devsecops-hooks
+      working-directory: ${{ github.workspace }}
+      run: docker run --rm -e GIT_MODE=false -v "$(pwd)":/src ghcr.io/ministryofjustice/devsecops-hooks:v1.5.0

@@ -147,48 +147,45 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ministryofjustice/devsecops-actions/sca/repository@feat/114-trufflehog-file-name-as-an-input
+      uses: ministryofjustice/devsecops-actions/sca/repository@b09d85f0d9adf6eb40ee1611f3dbf9e8e5243e5a
 
     - name: 📊 Dependencies
-      uses: ministryofjustice/devsecops-actions/sca/dependencies@feat/114-trufflehog-file-name-as-an-input
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@b09d85f0d9adf6eb40ee1611f3dbf9e8e5243e5a
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ministryofjustice/devsecops-actions/sca/owasp@feat/114-trufflehog-file-name-as-an-input
+      uses: ministryofjustice/devsecops-actions/sca/owasp@b09d85f0d9adf6eb40ee1611f3dbf9e8e5243e5a
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
-      uses: ministryofjustice/devsecops-actions/sca/renovate@feat/114-trufflehog-file-name-as-an-input
+      uses: ministryofjustice/devsecops-actions/sca/renovate@b09d85f0d9adf6eb40ee1611f3dbf9e8e5243e5a
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ministryofjustice/devsecops-actions/sca/moj@feat/114-trufflehog-file-name-as-an-input
+      uses: ministryofjustice/devsecops-actions/sca/moj@b09d85f0d9adf6eb40ee1611f3dbf9e8e5243e5a
 
     - name: 🐷 TruffleHog
-      uses: ministryofjustice/devsecops-actions/sca/trufflehog@feat/114-trufflehog-file-name-as-an-input
+      uses: ministryofjustice/devsecops-actions/sca/trufflehog@b09d85f0d9adf6eb40ee1611f3dbf9e8e5243e5a
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
         trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
 
     - name: ⚙️ CodeQL
-      uses: ministryofjustice/devsecops-actions/sca/codeql@feat/114-trufflehog-file-name-as-an-input
+      uses: ministryofjustice/devsecops-actions/sca/codeql@b09d85f0d9adf6eb40ee1611f3dbf9e8e5243e5a
       with:
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ministryofjustice/devsecops-actions/sca/ossf@feat/114-trufflehog-file-name-as-an-input
-      with:
-        token: ${{ inputs.token }}
+      uses: ministryofjustice/devsecops-actions/sca/ossf@b09d85f0d9adf6eb40ee1611f3dbf9e8e5243e5a
 
     - name: 📋 SBOM
-      uses: ministryofjustice/devsecops-actions/sca/sbom@feat/114-trufflehog-file-name-as-an-input
+      uses: ministryofjustice/devsecops-actions/sca/sbom@b09d85f0d9adf6eb40ee1611f3dbf9e8e5243e5a
       with:
-        token: ${{ inputs.token }}
         node-version: ${{ inputs.node-version }}
         docker-images-file: ${{ inputs.docker-images-file }}

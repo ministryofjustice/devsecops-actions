@@ -75,14 +75,11 @@ description: Dependency vulnerability scanning
 author: Ministry of Justice UK
 
 inputs:
+
   dependency-review-config-file:
     required: false
     description: "Path to the configuration file for GitHub Actions dependency review. Leave empty to use default settings."
     default: ""
-
-  token:
-    required: true
-    description: "GitHub repository token with read and write permissions for contents, pull requests, and issues, plus read-only access to security events."
 
 runs:
   using: composite

@@ -54,7 +54,7 @@
 #   syft scan ./ --config config.yml -o cyclonedx-json
 #
 # ==============================================================================
-# customisation
+# CUSTOMISATION
 # ==============================================================================
 # To customise for your organisation:
 # 1. Adjust 'exclude' patterns for your directory structure
