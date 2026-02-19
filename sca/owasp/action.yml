@@ -87,6 +87,8 @@ runs:
   steps:
     - name: Scan
       uses: dependency-check/Dependency-Check_Action@1e54355a8b4c8abaa8cc7d0b70aa655a3bb15a6c # v1.1.0
+      env:
+        JAVA_HOME: /opt/jdk
       with:
         project: ${{ github.repository }}
         path: "."
