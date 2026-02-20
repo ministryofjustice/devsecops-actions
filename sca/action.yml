@@ -32,12 +32,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca@feat/114-trufflehog-file-name-as-an-input
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # Advanced usage with custom configuration:
-#   - uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca@feat/114-trufflehog-file-name-as-an-input
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate: "true"
@@ -48,8 +48,10 @@
 #       trufflehog-output-filename: "sca-trufflehog"
 #       codeql-config-file: ".github/codeql-config.yml"
 #       codeql-upload-findings: "always"
+#       codeql-languages: "javascript,typescript,python"
 #       docker-images-file: "docker-images.json"
 #       output-directory-name: "./reports"
+#       dependency-check-suppression-file: "dependency-check-suppression.xml"
 #
 # ==============================================================================
 # PREREQUISITES
@@ -67,10 +69,20 @@
 # ==============================================================================
 # This action generates the following artifacts:
 # - SARIF files uploaded to GitHub Code Scanning (OWASP, CodeQL)
-# - SBOM artifacts in CycloneDX JSON format (repository and Docker images)
-# - TruffleHog scan results (JSON format in reports directory)
-# - OpenSSF Scorecard results (displayed in job summary)
-# - OWASP Dependency-Check reports (SARIF, JSON in reports directory)
+# - SBOM artifacts in CycloneDX JSON format:
+#   - sca-sbom-repository-{run_number}-{run_attempt}-{job_index}.cdx.json
+#   - sca-sbom-*.cdx.json (for Docker images, if configured)
+#   - Uploaded as "SBOM-{run_number}{run_attempt}{job_index}" artifact
+# - TruffleHog scan results:
+#   - {trufflehog-output-filename}-{run_number}{run_attempt}{job_index}.json
+#   - Uploaded as "TruffleHog-{run_number}{run_attempt}{job_index}" artifact
+#   - 30-day retention
+# - OpenSSF Scorecard results:
+#   - sca-scorecard.json
+#   - Displayed in GitHub job summary
+# - OWASP Dependency-Check reports in reports directory:
+#   - dependency-check-report.sarif (uploaded to Code Scanning)
+#   - dependency-check-report.json
 #
 # Default output directory: ./reports
 # Customisable via output-directory-name input parameter

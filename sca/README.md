@@ -128,6 +128,7 @@ Each component is an independent composite action that can be configured individ
 - Generates SARIF report for GitHub Code Scanning
 - Supports 30+ package ecosystems
 - Includes CVE details and remediation guidance
+- **Customisable**: Use `dependency-check-suppression-file` input to suppress false positives
 
 ### 4. 🔁 Renovate
 
@@ -175,7 +176,7 @@ Each component is an independent composite action that can be configured individ
 - Pre-built security queries
 - Custom query support
 - SARIF upload to GitHub Code Scanning
-- **Customizable**: Use `codeql-config-file` and `codeql-upload-findings` inputs
+- **Customizable**: Use `codeql-config-file`, `codeql-upload-findings`, and `codeql-languages` inputs
 
 ### 8. 🛡️ OpenSSF Scorecard
 
@@ -302,6 +303,8 @@ jobs:
           trufflehog-config-file: ".github/config/trufflehog.yml"
           codeql-config-file: ".github/config/codeql-config.yml"
           codeql-upload-findings: "always"
+          codeql-languages: "javascript,typescript,python"
+          dependency-check-suppression-file: "dependency-check-suppression.xml"
 
           # Container Scanning
           docker-images-file: "docker-images.json"
@@ -409,19 +412,21 @@ steps:
 
 All inputs are optional except `token`. Designed for zero-configuration operation.
 
-| Input                           | Type   | Required | Default            | Description                                                                                                                         |
-| ------------------------------- | ------ | -------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `token`                         | string | **Yes**  | N/A                | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read) |
-| `renovate`                      | string | No       | `true`             | Enable or disable Renovate bot for automated dependency updates                                                                     |
-| `renovate-version`              | string | No       | `42.64.1`          | Renovate CLI version to use (specify without 'v' prefix)                                                                            |
-| `node-version`                  | string | No       | `24.11.1`          | Node.js version to use for SBOM generation with Syft                                                                                |
-| `dependency-review-config-file` | string | No       | `""`               | Path to custom dependency review config (e.g., `.github/dependency-review-config.yml`)                                              |
-| `trufflehog-config-file`        | string | No       | `""`               | Path to custom TruffleHog secret scanning configuration                                                                             |
-| `trufflehog-output-filename`    | string | No       | `"sca-trufflehog"` | TruffleHog JSON output file name (`.json` will be appended)                                                                         |
-| `codeql-config-file`            | string | No       | `""`               | Path to custom CodeQL query configuration for SAST                                                                                  |
-| `codeql-upload-findings`        | string | No       | `always`           | Control SARIF upload to Code Scanning. Set to `never` if using GitHub's default CodeQL setup                                        |
-| `docker-images-file`            | string | No       | `""`               | Path to JSON file with Docker image URIs for container SBOM generation                                                              |
-| `output-directory-name`         | string | No       | `"reports"`        | Output directory for reports generation, prefixed with `./`                                                                         |
+| Input                               | Type   | Required | Default            | Description                                                                                                                         |
+| ----------------------------------- | ------ | -------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `token`                             | string | **Yes**  | N/A                | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read) |
+| `renovate`                          | string | No       | `true`             | Enable or disable Renovate bot for automated dependency updates                                                                     |
+| `renovate-version`                  | string | No       | `42.64.1`          | Renovate CLI version to use (specify without 'v' prefix)                                                                            |
+| `node-version`                      | string | No       | `24.11.1`          | Node.js version to use for SBOM generation with Syft                                                                                |
+| `dependency-review-config-file`     | string | No       | `""`               | Path to custom dependency review config (e.g., `.github/dependency-review-config.yml`)                                              |
+| `trufflehog-config-file`            | string | No       | `""`               | Path to custom TruffleHog secret scanning configuration                                                                             |
+| `trufflehog-output-filename`        | string | No       | `"sca-trufflehog"` | TruffleHog JSON output file name (`.json` will be appended)                                                                         |
+| `codeql-config-file`                | string | No       | `""`               | Path to custom CodeQL query configuration for SAST                                                                                  |
+| `codeql-upload-findings`            | string | No       | `always`           | Control SARIF upload to Code Scanning. Set to `never` if using GitHub's default CodeQL setup                                        |
+| `codeql-languages`                  | string | No       | `""`               | A comma-separated list of CodeQL languages to analyse                                                                               |
+| `docker-images-file`                | string | No       | `""`               | Path to JSON file with Docker image URIs for container SBOM generation                                                              |
+| `output-directory-name`             | string | No       | `"reports"`        | Output directory for reports generation, prefixed with `./`                                                                         |
+| `dependency-check-suppression-file` | string | No       | `""`               | The file paths to the suppression XML files for OWASP Dependency-Check                                                              |
 
 ---
 
@@ -554,6 +559,37 @@ paths:
   - "src/**"
 ```
 
+### OWASP Dependency-Check Suppression
+
+Create a suppression XML file (e.g., `dependency-check-suppression.xml`) to suppress false positives:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <!-- Suppress false positive CVE -->
+    <suppress>
+        <notes>
+            <![CDATA[
+            False positive - this CVE does not affect our usage
+            ]]>
+        </notes>
+        <cve>CVE-2024-12345</cve>
+    </suppress>
+
+    <!-- Suppress by file path -->
+    <suppress>
+        <notes>
+            <![CDATA[
+            Development dependency not used in production
+            ]]>
+        </notes>
+        <filePath regex="true">.*test.*\.jar</filePath>
+    </suppress>
+</suppressions>
+```
+
+See: [OWASP Dependency-Check Suppression Documentation](https://dependency-check.github.io/DependencyCheck/general/suppression.html)
+
 ---
 
 ## 📤 Outputs
@@ -564,10 +600,10 @@ The action generates the following artifacts available in workflow runs:
 
 #### 1. SBOM Artifacts
 
-- **`sca-sbom-repository.cdx.json`** - Repository dependency SBOM (CycloneDX 1.5)
-- **`sca-sbom-<image-name>.cdx.json`** - Per-container image SBOM
+- **`sca-sbom-repository-{run_number}{run_attempt}{job_index}.cdx.json`** - Repository dependency SBOM (CycloneDX 1.5)
+- **`sca-sbom-*.cdx.json`** - Per-container image SBOMs (if `docker-images-file` is provided)
 
-Artifacts are retained for **90 days** and available for download.
+Artifacts are retained for **90 days** and available for download in the **SBOM-{run_number}{run_attempt}{job_index}** artifact.
 
 #### 2. SARIF Reports
 
@@ -580,12 +616,14 @@ View in: Repository → Security → Code scanning alerts
 
 #### 3. TruffleHog Results
 
-- **JSON output** - Detailed secret detection results
-- Available in job logs
+- **`{trufflehog-output-filename}-{run_number}{run_attempt}{job_index}.json`** - Detailed secret detection results
+- Available in the **TruffleHog-{run_number}{run_attempt}{job_index}** artifact
+- Retained for **30 days**
 
 #### 4. OpenSSF Scorecard
 
-- **Markdown report** - Displayed in job summary
+- **`sca-scorecard.json`** - Complete scorecard results in JSON format
+- **Markdown report** - Displayed in GitHub job summary
 - **JSON output** - Available for processing
 
 ### GitHub Security Tab Integration
