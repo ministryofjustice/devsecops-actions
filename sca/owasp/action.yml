@@ -100,7 +100,6 @@ runs:
         path: "."
         out: ${{ inputs.output-directory-name }}
         args: >
-          --nvdApiKey ${{ secrets.NVD_API_KEY }}
           --failOnCVSS 7
           --prettyPrint
           --format SARIF
