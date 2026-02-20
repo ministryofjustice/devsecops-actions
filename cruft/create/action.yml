@@ -25,7 +25,7 @@
 # - HTTPS token-based authentication for pushing changes
 # - Automated pull request creation via GitHub API
 # - Configurable base branch targeting
-# - Customizable commit messages and headings
+# - Customisable commit messages and headings
 # - Proper Git configuration and authentication
 #
 # ==============================================================================

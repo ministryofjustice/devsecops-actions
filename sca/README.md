@@ -68,7 +68,7 @@ Each component is an independent composite action that can be configured individ
 - ✅ **Pull Request Integration**: Automated security checks on every PR
 - ✅ **GitHub Security Integration**: Results appear in Security tab and Code Scanning alerts
 - ✅ **Compliance Ready**: NTIA SBOM compliant, meets Executive Order 14028
-- ✅ **Customizable**: Override defaults with configuration files
+- ✅ **Customisable**: Override defaults with configuration files
 - ✅ **Container Scanning**: Docker image vulnerability detection and SBOM generation
 - ✅ **Automated Remediation**: Renovate creates PRs for dependency updates
 
@@ -116,7 +116,7 @@ Each component is an independent composite action that can be configured individ
 - Identifies newly introduced vulnerabilities
 - Validates license compliance
 - Blocks PRs with high-severity vulnerabilities
-- **Customizable**: Use `dependency-review-config-file` input
+- **Customisable**: Use `dependency-review-config-file` input
 
 ### 3. 🔎 OWASP Dependency-Check
 
@@ -140,7 +140,7 @@ Each component is an independent composite action that can be configured individ
 - Intelligent grouping of related updates
 - Respects semantic versioning
 - Configurable update strategies
-- **Customizable**: Set `renovate: "false"` to disable
+- **Customisable**: Set `renovate: "false"` to disable
 
 ### 5. 🔑 MOJ Secret Scanner
 
@@ -163,7 +163,7 @@ Each component is an independent composite action that can be configured individ
 - Git history scanning
 - Verified secret detection
 - Excludes false positives
-- **Customizable**: Use `trufflehog-config-file` input
+- **Customisable**: Use `trufflehog-config-file` input
 
 ### 7. ⚙️ CodeQL
 
@@ -176,7 +176,7 @@ Each component is an independent composite action that can be configured individ
 - Pre-built security queries
 - Custom query support
 - SARIF upload to GitHub Code Scanning
-- **Customizable**: Use `codeql-config-file`, `codeql-upload-findings`, and `codeql-languages` inputs
+- **Customisable**: Use `codeql-config-file`, `codeql-upload-findings`, and `codeql-languages` inputs
 
 ### 8. 🛡️ OpenSSF Scorecard
 
@@ -200,7 +200,7 @@ Each component is an independent composite action that can be configured individ
 - Container image SBOMs (if configured)
 - NTIA minimum elements compliant
 - Executive Order 14028 compliant
-- **Customizable**: Use `docker-images-file` for container scanning
+- **Customisable**: Use `docker-images-file` for container scanning
 
 ---
 

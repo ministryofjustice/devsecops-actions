@@ -24,7 +24,7 @@
 # - Automated pull request creation with synchronized changes
 # - Python environment setup and dependency management
 # - Git configuration with optional signed commits
-# - Customizable base branch targeting
+# - Customisable base branch targeting
 # - Configurable commit messages and branch naming
 # - GitHub App authentication support
 #
