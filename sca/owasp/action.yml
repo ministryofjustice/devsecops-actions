@@ -100,10 +100,11 @@ runs:
         path: "."
         out: ${{ inputs.output-directory-name }}
         args: >
+          --nvdApiKey ${{ secrets.NVD_API_KEY }}
           --failOnCVSS 7
           --prettyPrint
           --format SARIF
-          --suppression ${{ github.workspace }}/${{ inputs.dependency-check-suppression-file }}
+          --suppression ${{ inputs.dependency-check-suppression-file }}
 
     - name: Upload
       if: always()

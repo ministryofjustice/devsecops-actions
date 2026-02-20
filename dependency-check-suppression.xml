@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
-
     <suppress>
-        <notes>
-            Temporary suppression of CVE-2026-26996.
-            Reason: ESLint has not patched their minimatch and ajv in "eslint": "^9.39.2".
-            Re-review: 20/03/2026
-        </notes>
-        <cve>CVE-2026-26996</cve>
+        <notes><![CDATA[
+      file name: minimatch:10.1.3
+      ]]></notes>
+        <packageUrl regex="true">^pkg:npm/minimatch@.*$</packageUrl>
+        <vulnerabilityName>GHSA-3ppc-4f35-3m26</vulnerabilityName>
     </suppress>
-
 </suppressions>
