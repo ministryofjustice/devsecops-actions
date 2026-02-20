@@ -30,22 +30,17 @@
 # ==============================================================================
 # Basic usage:
 #   - uses: ministryofjustice/devsecops-actions/sca/sbom@v1.3.0
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With Docker image scanning:
 #   - uses: ministryofjustice/devsecops-actions/sca/sbom@v1.3.0
 #     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
 #       docker-images-file: "docker-images.json"
-#       output-directory-name: "reports"
 #
 # Custom Node.js version:
 #   - uses: ministryofjustice/devsecops-actions/sca/sbom@v1.3.0
 #     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
 #       node-version: "24.11.1"
-#       output-directory-name: "reports"
+#       docker-images-file: "docker-images.json"
 #
 # ==============================================================================
 # DOCKER IMAGES FILE FORMAT

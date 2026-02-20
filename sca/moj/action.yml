@@ -27,8 +27,6 @@
 # ==============================================================================
 # Basic usage:
 #   - uses: ministryofjustice/devsecops-actions/sca/moj@v1.3.0
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # ==============================================================================
 # TOOL INFORMATION

@@ -42,16 +42,12 @@
 # ==============================================================================
 # Basic usage (default settings):
 #   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@v1.3.0
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With custom configuration:
 #   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@v1.3.0
 #     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
 #       trufflehog-config-file: ".github/trufflehog-config.yml"
 #       trufflehog-output-filename: "sca-trufflehog"
-#       output-directory-name: "reports"
 #
 # ==============================================================================
 # CONFIGURATION

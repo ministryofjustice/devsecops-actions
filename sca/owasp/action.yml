@@ -82,6 +82,11 @@ inputs:
     description: "Output directory path for generated reports and scan results"
     default: "reports"
 
+  dependency-check-suppression-file:
+    required: false
+    description: "The file paths to the suppression XML files"
+    default: ""
+
 runs:
   using: composite
   steps:
@@ -91,13 +96,14 @@ runs:
         JAVA_HOME: /opt/jdk
       with:
         project: ${{ github.repository }}
+        format: "SARIF"
         path: "."
         out: ${{ inputs.output-directory-name }}
-        format: JSON
         args: >
           --failOnCVSS 7
           --prettyPrint
           --format SARIF
+          --suppression ${{ inputs.dependency-check-suppression-file }}
 
     - name: Upload
       if: always()

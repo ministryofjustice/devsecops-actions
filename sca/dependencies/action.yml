@@ -30,13 +30,10 @@
 # ==============================================================================
 # Basic usage (default settings):
 #   - uses: ministryofjustice/devsecops-actions/sca/dependencies@v1.3.0
-#     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With custom configuration:
 #   - uses: ministryofjustice/devsecops-actions/sca/dependencies@v1.3.0
 #     with:
-#       token: ${{ secrets.GITHUB_TOKEN }}
 #       dependency-review-config-file: ".github/dependency-review-config.yml"
 #
 # ==============================================================================

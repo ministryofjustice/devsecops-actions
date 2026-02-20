@@ -147,50 +147,56 @@ inputs:
     required: false
     description: "A comma-separated list of CodeQL languages to analyse"
 
+  dependency-check-suppression-file:
+    required: false
+    description: "The file paths to the suppression XML files"
+    default: ""
+
 runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ministryofjustice/devsecops-actions/sca/repository@6ee39935bd4ae400abbd53a2920964834631fa29
+      uses: ministryofjustice/devsecops-actions/sca/repository@feat/114-trufflehog-file-name-as-an-input
 
     - name: 📊 Dependencies
-      uses: ministryofjustice/devsecops-actions/sca/dependencies@6ee39935bd4ae400abbd53a2920964834631fa29
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@feat/114-trufflehog-file-name-as-an-input
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ministryofjustice/devsecops-actions/sca/owasp@6ee39935bd4ae400abbd53a2920964834631fa29
+      uses: ministryofjustice/devsecops-actions/sca/owasp@feat/114-trufflehog-file-name-as-an-input
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
+        dependency-check-suppression-file: ${{ inputs.dependency-check-suppression-file }}
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
-      uses: ministryofjustice/devsecops-actions/sca/renovate@6ee39935bd4ae400abbd53a2920964834631fa29
+      uses: ministryofjustice/devsecops-actions/sca/renovate@feat/114-trufflehog-file-name-as-an-input
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ministryofjustice/devsecops-actions/sca/moj@6ee39935bd4ae400abbd53a2920964834631fa29
+      uses: ministryofjustice/devsecops-actions/sca/moj@feat/114-trufflehog-file-name-as-an-input
 
     - name: 🐷 TruffleHog
-      uses: ministryofjustice/devsecops-actions/sca/trufflehog@6ee39935bd4ae400abbd53a2920964834631fa29
+      uses: ministryofjustice/devsecops-actions/sca/trufflehog@feat/114-trufflehog-file-name-as-an-input
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
         trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
 
     - name: ⚙️ CodeQL
-      uses: ministryofjustice/devsecops-actions/sca/codeql@6ee39935bd4ae400abbd53a2920964834631fa29
+      uses: ministryofjustice/devsecops-actions/sca/codeql@feat/114-trufflehog-file-name-as-an-input
       with:
         codeql-languages: ${{ inputs.codeql-languages }}
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ministryofjustice/devsecops-actions/sca/ossf@6ee39935bd4ae400abbd53a2920964834631fa29
+      uses: ministryofjustice/devsecops-actions/sca/ossf@feat/114-trufflehog-file-name-as-an-input
 
     - name: 📋 SBOM
-      uses: ministryofjustice/devsecops-actions/sca/sbom@6ee39935bd4ae400abbd53a2920964834631fa29
+      uses: ministryofjustice/devsecops-actions/sca/sbom@feat/114-trufflehog-file-name-as-an-input
       with:
         node-version: ${{ inputs.node-version }}
         docker-images-file: ${{ inputs.docker-images-file }}
