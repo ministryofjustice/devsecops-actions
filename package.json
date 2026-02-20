@@ -34,6 +34,9 @@
     "validate:ts": "npx tsc --noEmit --project src/tsconfig.json",
     "validate:yml": "npx yaml-lint **/*.yml --ignore=**/node_modules"
   },
+  "overrides": {
+    "tar": "^7.5.3"
+  },
   "dependencies": {
     "notifications-node-client": "^8.2.1"
   },
