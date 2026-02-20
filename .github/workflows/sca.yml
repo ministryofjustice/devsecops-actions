@@ -101,8 +101,8 @@ jobs:
       - name: ⚡️ SCA
         uses: ministryofjustice/devsecops-actions/sca@feat/114-trufflehog-file-name-as-an-input # v1.3.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Mandatory
+          token: "${{ secrets.GITHUB_TOKEN }}" # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
-          docker-images-file: ${{ github.workspace }}/sources.json # Optional
-          dependency-check-suppression-file: ${{ github.workspace }}/dependency-check-suppression.xml
+          docker-images-file: "${{ github.workspace }}/sources.json" # Optional
+          dependency-check-suppression-file: "dependency-check-suppression.xml"
 
