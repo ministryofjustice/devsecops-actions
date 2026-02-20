@@ -103,7 +103,7 @@ runs:
           --failOnCVSS 7
           --prettyPrint
           --format SARIF
-          --suppression ${{ inputs.dependency-check-suppression-file }}
+          --suppression ${{ github.workspace }}/${{ inputs.dependency-check-suppression-file }}
 
     - name: Upload
       if: always()
