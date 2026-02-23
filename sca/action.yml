@@ -32,12 +32,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+#   - uses: ministryofjustice/devsecops-actions/sca@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # Advanced usage with custom configuration:
-#   - uses: ministryofjustice/devsecops-actions/sca@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+#   - uses: ministryofjustice/devsecops-actions/sca@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate: "true"
@@ -168,47 +168,47 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ministryofjustice/devsecops-actions/sca/repository@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+      uses: ministryofjustice/devsecops-actions/sca/repository@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
 
     - name: 📊 Dependencies
-      uses: ministryofjustice/devsecops-actions/sca/dependencies@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ministryofjustice/devsecops-actions/sca/owasp@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+      uses: ministryofjustice/devsecops-actions/sca/owasp@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
         dependency-check-suppression-file: ${{ inputs.dependency-check-suppression-file }}
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
-      uses: ministryofjustice/devsecops-actions/sca/renovate@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+      uses: ministryofjustice/devsecops-actions/sca/renovate@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ministryofjustice/devsecops-actions/sca/moj@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+      uses: ministryofjustice/devsecops-actions/sca/moj@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
 
     - name: 🐷 TruffleHog
-      uses: ministryofjustice/devsecops-actions/sca/trufflehog@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+      uses: ministryofjustice/devsecops-actions/sca/trufflehog@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
         trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
 
     - name: ⚙️ CodeQL
-      uses: ministryofjustice/devsecops-actions/sca/codeql@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+      uses: ministryofjustice/devsecops-actions/sca/codeql@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
       with:
         codeql-languages: ${{ inputs.codeql-languages }}
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ministryofjustice/devsecops-actions/sca/ossf@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+      uses: ministryofjustice/devsecops-actions/sca/ossf@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
 
     - name: 📋 SBOM
-      uses: ministryofjustice/devsecops-actions/sca/sbom@3e9745e3fadc4a3ed17e715e86dd017f153a6528
+      uses: ministryofjustice/devsecops-actions/sca/sbom@ed5f0ccf80ccb6628639b29882d9ec3b0281ce44
       with:
         node-version: ${{ inputs.node-version }}
         docker-images-file: ${{ inputs.docker-images-file }}

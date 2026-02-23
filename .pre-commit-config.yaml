@@ -4,8 +4,6 @@ repos:
     hooks:
       - id: baseline
         name: Ministry of Justice - Security scan
-        env:
-          STAGE_MODE: "false"
 
   - repo: local
     hooks:
