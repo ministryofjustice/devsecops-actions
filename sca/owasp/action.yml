@@ -103,7 +103,7 @@ runs:
           --failOnCVSS 7
           --prettyPrint
           --format SARIF
-          --suppression ${{ inputs.dependency-check-suppression-file }}
+          ${{ inputs.dependency-check-suppression-file && format('--suppression "{0}"', inputs.dependency-check-suppression-file) || '' }}
 
     - name: Upload
       if: always()
