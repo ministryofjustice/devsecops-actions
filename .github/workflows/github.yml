@@ -75,7 +75,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Archive
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@582b43adf072ef7d15af8e33e78a6997509e25b0 # v1.3.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@53b8d817efc8172b998f3f357e1f94bc3f51af66 # v1.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: ${{ vars.ARCHIVAL_DAYS }}
