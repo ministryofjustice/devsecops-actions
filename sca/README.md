@@ -295,7 +295,7 @@ jobs:
 
           # Dependency Management
           renovate: "true"
-          renovate-version: "42.64.1"
+          renovate-version: "43.31.1"
           node-version: "24.11.1"
 
           # Custom Configurations
@@ -416,7 +416,7 @@ All inputs are optional except `token`. Designed for zero-configuration operatio
 | ----------------------------------- | ------ | -------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `token`                             | string | **Yes**  | N/A                | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read) |
 | `renovate`                          | string | No       | `true`             | Enable or disable Renovate bot for automated dependency updates                                                                     |
-| `renovate-version`                  | string | No       | `42.64.1`          | Renovate CLI version to use (specify without 'v' prefix)                                                                            |
+| `renovate-version`                  | string | No       | `43.31.1`          | Renovate CLI version to use (specify without 'v' prefix)                                                                            |
 | `node-version`                      | string | No       | `24.11.1`          | Node.js version to use for SBOM generation with Syft                                                                                |
 | `dependency-review-config-file`     | string | No       | `""`               | Path to custom dependency review config (e.g., `.github/dependency-review-config.yml`)                                              |
 | `trufflehog-config-file`            | string | No       | `""`               | Path to custom TruffleHog secret scanning configuration                                                                             |

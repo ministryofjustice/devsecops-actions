@@ -41,7 +41,7 @@
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       renovate: "true"
-#       renovate-version: "42.64.1"
+#       renovate-version: "43.31.1"
 #       node-version: "24.11.1"
 #       dependency-review-config-file: ".github/dependency-review-config.yml"
 #       trufflehog-config-file: ".github/trufflehog-config.yml"
@@ -118,7 +118,7 @@ inputs:
   renovate-version:
     required: false
     description: "Renovate CLI version to use for dependency scanning (specify without 'v' prefix)"
-    default: "42.64.1"
+    default: "43.31.1"
 
   dependency-review-config-file:
     required: false

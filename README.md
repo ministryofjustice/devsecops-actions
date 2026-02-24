@@ -406,7 +406,7 @@ We welcome contributions from the community! Whether it's bug fixes, feature add
 feat(sca): add support for custom SBOM formats
 fix(codeql): resolve timeout issue for large repositories
 docs(readme): add enterprise configuration examples
-chore(deps): update renovate to v42.64.1
+chore(deps): update renovate to v43.31.1
 ```
 
 ### Development Workflow
