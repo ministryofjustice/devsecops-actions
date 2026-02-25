@@ -36,7 +36,7 @@
 #   - uses: ministryofjustice/devsecops-actions/sca/renovate@v1.3.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
-#       renovate-version: "42.64.1"
+#       renovate-version: "43.31.1"
 #
 # ==============================================================================
 # CONFIGURATION
@@ -55,7 +55,7 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Default Renovate Version: 42.64.1
+# Default Renovate Version: 43.31.1
 # Last Updated: 2026-02-18
 #
 # ==============================================================================
@@ -72,13 +72,13 @@ inputs:
   renovate-version:
     required: false
     description: "Renovate CLI version to use for dependency scanning. Specify the version number without the 'v' prefix."
-    default: "42.64.1"
+    default: "43.31.1"
 
 runs:
   using: composite
   steps:
     - name: Scan
-      uses: renovatebot/github-action@8b7941943a108b2cc2150730963164aa8baeab8c # v44.2.2
+      uses: renovatebot/github-action@d65ef9e20512193cc070238b49c3873a361cd50c # v46.1.1
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
