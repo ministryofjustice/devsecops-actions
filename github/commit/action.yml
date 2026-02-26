@@ -31,4 +31,4 @@ runs:
     - name: 🧩 Conventional
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: git log -1 --no-show-signature --pretty=%B | npm run validate:commit:message -- ${{ inputs.config-file && format('--config "{0}"', inputs.config-file) || 'commitlint.config.js' }}
+      run: git log -1 --no-show-signature --pretty=%B | npm run validate:commit:message -- --config ${{ inputs.config-file && format('"{0}"', inputs.config-file) || 'commitlint.config.js' }}
