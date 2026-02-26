@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.4.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.3.0...v1.4.0) (2026-02-26)
+
+
+### Features
+
+* **100-github-repo:** eslint checks ([#101](https://github.com/ministryofjustice/devsecops-actions/issues/101)) ([0cc6bf3](https://github.com/ministryofjustice/devsecops-actions/commit/0cc6bf3d13b627714c2a12447894bb5b8519b867))
+* **100-github-scan:** latest build ([#106](https://github.com/ministryofjustice/devsecops-actions/issues/106)) ([582b43a](https://github.com/ministryofjustice/devsecops-actions/commit/582b43adf072ef7d15af8e33e78a6997509e25b0))
+* **100-github:** github archival repository scan ([#104](https://github.com/ministryofjustice/devsecops-actions/issues/104)) ([bd0e7ec](https://github.com/ministryofjustice/devsecops-actions/commit/bd0e7ec506118a2c3a567c887dc3d4e1398ffc49))
+* **100-github:** github archival repository scan CLI ([bd0e7ec](https://github.com/ministryofjustice/devsecops-actions/commit/bd0e7ec506118a2c3a567c887dc3d4e1398ffc49))
+* **114:** new inputs sca workflow ([#115](https://github.com/ministryofjustice/devsecops-actions/issues/115)) ([3e9745e](https://github.com/ministryofjustice/devsecops-actions/commit/3e9745e3fadc4a3ed17e715e86dd017f153a6528))
+* **125-commit-validation:** added commit validation ([#126](https://github.com/ministryofjustice/devsecops-actions/issues/126)) ([6bc0d6e](https://github.com/ministryofjustice/devsecops-actions/commit/6bc0d6edd646d61efbdf4650943a73c0329dc3b1))
+* **88-min-age:** add min-age to dependencies ([#89](https://github.com/ministryofjustice/devsecops-actions/issues/89)) ([25e4e6c](https://github.com/ministryofjustice/devsecops-actions/commit/25e4e6cb037f9558e5f6182abc34bcf4c1463125))
+* **92-cruft-update:** cruft autoupdate action ([#93](https://github.com/ministryofjustice/devsecops-actions/issues/93)) ([833d116](https://github.com/ministryofjustice/devsecops-actions/commit/833d116f0aa88d474e005dfb24adb09d551dacd6))
+* **94-renovate:** updated renovate configuration with schedules ([#95](https://github.com/ministryofjustice/devsecops-actions/issues/95)) ([01551a8](https://github.com/ministryofjustice/devsecops-actions/commit/01551a8bc057499a88f0231d62f7677eca91d372))
+* **94-renovate:** updated renovate configuration with schedules ([#97](https://github.com/ministryofjustice/devsecops-actions/issues/97)) ([7610919](https://github.com/ministryofjustice/devsecops-actions/commit/761091931de3d903297423c9fc0c100a574069a1))
+* **github-archive:** pinned to correct SHA commit and updated documentation ([#108](https://github.com/ministryofjustice/devsecops-actions/issues/108)) ([1635a54](https://github.com/ministryofjustice/devsecops-actions/commit/1635a5498c7c3a01a533c4249c42a4987e6a0eed))
+* **readme:** updated readme ([#110](https://github.com/ministryofjustice/devsecops-actions/issues/110)) ([c63171f](https://github.com/ministryofjustice/devsecops-actions/commit/c63171f8a2ed7855875da04cced4af690ab62de3))
+
+
+### Bug Fixes
+
+* **96-renovate:** fixed renovate configuration ([#99](https://github.com/ministryofjustice/devsecops-actions/issues/99)) ([f61d7e6](https://github.com/ministryofjustice/devsecops-actions/commit/f61d7e6eab5919a88f79d14ef01770b855179963))
+* **GHSA-38c4-r59v-3vqw:** updated to 14.1.1 ([#113](https://github.com/ministryofjustice/devsecops-actions/issues/113)) ([b526312](https://github.com/ministryofjustice/devsecops-actions/commit/b5263128db61367785a01d8e841c828f4447805c))
+* **hash:** updated hash ([#120](https://github.com/ministryofjustice/devsecops-actions/issues/120)) ([2a30e9a](https://github.com/ministryofjustice/devsecops-actions/commit/2a30e9a70be413b55b325207b4cbddf5f05d29f0))
+* **renovate:** added renovate to package.json ([#117](https://github.com/ministryofjustice/devsecops-actions/issues/117)) ([53b8d81](https://github.com/ministryofjustice/devsecops-actions/commit/53b8d817efc8172b998f3f357e1f94bc3f51af66))
+* **renovate:** update renovate version ([#122](https://github.com/ministryofjustice/devsecops-actions/issues/122)) ([03584c4](https://github.com/ministryofjustice/devsecops-actions/commit/03584c49c5095d52721315564bb6b5cfeae86fb1))
+* **sca-input:** dependency-check-suppression-file argument ([#118](https://github.com/ministryofjustice/devsecops-actions/issues/118)) ([ed5f0cc](https://github.com/ministryofjustice/devsecops-actions/commit/ed5f0ccf80ccb6628639b29882d9ec3b0281ce44))
+
 ## [1.3.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.2.0...v1.3.0) (2026-01-21)
 
 
