@@ -18,22 +18,22 @@
   "license": "MIT",
   "author": "Abhi Markan",
   "scripts": {
-    "build": "tsc --project ncc.tsconfig.json && ncc build dist/index.js -o dist --minify --source-map --no-cache",
-    "housekeeping": "npm audit && npm run validate:all && sort-package-json",
+    "build": "npx tsc --project ncc.tsconfig.json && npx ncc build dist/index.js -o dist --minify --source-map --no-cache",
+    "housekeeping": "npm audit && npm run validate:all && npx sort-package-json",
     "install:syft": "bash src/scripts/syft.sh",
-    "lint:ts": "eslint --color --cache --max-warnings 0 ./src",
-    "lint:ts:fix": "eslint --fix --color --cache --max-warnings 0 .",
+    "lint:ts": "npx eslint --color --cache --max-warnings 0 ./src",
+    "lint:ts:fix": "npx eslint --fix --color --cache --max-warnings 0 .",
     "scan": "node dist/index.js",
-    "scan:dev": "ts-node src/index.ts",
+    "scan:dev": "npx ts-node src/index.ts",
     "spellcheck": "cspell lint --gitignore --no-must-find-files --unique --no-progress --show-suggestions --color **/*",
     "test:unit": "jest --verbose --config=src/unit.jest.config.ts",
     "test:unit:coverage": "jest --coverage --verbose --config=src/unit.jest.config.ts",
     "validate:all": "npm run validate:ts && npm run lint:ts && npm run validate:yml && npm run validate:md && npm run validate:renovate",
-    "validate:md": "markdownlint-cli --config .markdownlint.json \"**/*.md\"",
-    "validate:renovate": "renovate-config-validator",
-    "validate:ts": "tsc --noEmit --project src/tsconfig.json",
-    "validate:yml": "yaml-lint **/*.yml --ignore=**/node_modules",
-    "validate:commit:message": "commitlint --color  --strict"
+    "validate:md": "npx markdownlint-cli --config .markdownlint.json \"**/*.md\"",
+    "validate:renovate": "npx renovate-config-validator",
+    "validate:ts": "npx tsc --noEmit --project src/tsconfig.json",
+    "validate:yml": "npx yaml-lint **/*.yml --ignore=**/node_modules",
+    "validate:commit:message": "npx commitlint --color  --strict"
   },
   "overrides": {
     "tar": "^7.5.3"
