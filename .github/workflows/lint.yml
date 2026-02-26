@@ -76,7 +76,7 @@ jobs:
 
     steps:
       - name: Commit
-        uses: ministryofjustice/devsecops-actions/github/commit@feat/125-commit-validation
+        uses: ministryofjustice/devsecops-actions/github/commit@27614b1ca989dade166b707a08f42a61b289a1ba # v1.3.0
 
       - name: Repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
