@@ -23,4 +23,6 @@ runs:
     - name: 🧩 Conventional
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: ${{ github.event.head_commit.message }} | npx commitlint --color  --strict ${{ inputs.config-file && format('--config "{0}"', inputs.config-file) || 'commitlint.config.js' }}
+      run: git log -1 --no-show-signature --pretty=%B | npx commitlint \
+        --color  \
+        --strict ${{ inputs.config-file && format('--config "{0}"', inputs.config-file) || 'commitlint.config.js' }}
