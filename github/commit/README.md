@@ -756,6 +756,12 @@ act push -W .github/workflows/commit-validation.yml
 
 ---
 
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](../../LICENSE) file for full details.
+
+---
+
 ## 📞 Support
 
 ### Getting Help
