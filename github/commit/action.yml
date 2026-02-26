@@ -36,4 +36,6 @@ runs:
     - name: 🔐 Signed
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%B | grep -Eq "Good signature|VALID" || echo "❌ Commit is unsigned!" && exit 1;
+      run: |
+        git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%B
+        git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%B | grep -Eq "Good signature|VALID" || echo "❌ Commit is unsigned!" && exit 1;
