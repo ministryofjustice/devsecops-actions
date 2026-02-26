@@ -36,7 +36,13 @@
     "validate:commit:message": "npx commitlint --color  --strict"
   },
   "overrides": {
-    "tar": "^7.5.3"
+    "markdownlint-cli": {
+      "minimatch": "^10.2.4"
+    },
+    "renovate": {
+      "tar": "^7.5.3",
+      "minimatch": "^10.2.4"
+    }
   },
   "dependencies": {
     "@commitlint/cli": "^20.4.2",
