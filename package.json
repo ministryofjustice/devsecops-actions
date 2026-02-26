@@ -38,6 +38,8 @@
     "tar": "^7.5.3"
   },
   "dependencies": {
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
     "notifications-node-client": "^8.2.1"
   },
   "devDependencies": {

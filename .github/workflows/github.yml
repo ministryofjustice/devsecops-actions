@@ -18,7 +18,7 @@
 #   archive:
 #     - Checks out the repository code
 #     - Executes repository archival check
-#     - Sends notifications via GOV.UK Notify for repositories approaching archival threshold
+#     - Sends notifications via GOV.UK Notify for repositories approaching archival thresholdw
 #
 # Configuration:
 #   - Environment: base (configurable via env vars)

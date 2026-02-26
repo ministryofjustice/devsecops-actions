@@ -108,3 +108,6 @@ jobs:
       - name: Spellcheck
         shell: bash
         run: npm run spellcheck
+
+      - name: Commit
+        uses: ministryofjustice/devsecops-actions/github/commit@feat/125-commit-validation

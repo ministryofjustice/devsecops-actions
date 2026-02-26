@@ -1,0 +1,26 @@
+name: Ministry of Justice UK - GitHub - Commit check 🔎
+description: Validate whether the commit is signed and commit message is constructed in conventional commit format
+author: Ministry of Justice UK
+
+inputs:
+  config-file:
+    required: false
+    description: "Commitlint configuration file, supplied to --config argument."
+
+  node-version:
+    required: false
+    description: "Node.js version to use"
+    default: "24.11.1"
+
+runs:
+  using: composite
+  steps:
+    - name: ⚡️ Node
+      uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: 🧩 Conventional
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: ${{ github.event.head_commit.message }} | npx commitlint --color  --strict ${{ inputs.config-file && format('--config "{0}"', inputs.config-file) || 'commitlint.config.js' }}
