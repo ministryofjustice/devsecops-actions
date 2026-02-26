@@ -38,4 +38,4 @@ runs:
       working-directory: ${{ github.workspace }}
       run: |
         git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%B
-        git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%B | grep -Eq "Good signature|VALID" || echo "❌ Commit is unsigned!" && exit 1;
+        git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%B | grep -Eq "gpg: Signature made|BEGIN PGP SIGNATURE" || { echo "❌ Commit is unsigned!"; exit 1; }
