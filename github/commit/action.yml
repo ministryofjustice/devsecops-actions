@@ -36,4 +36,4 @@ runs:
     - name: 🔐 Signed
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: git -C "$GITHUB_WORKSPACE" verify-commit --no-raw --no-verbose HEAD >/dev/null 2>&1 || exit 1
+      run: git -C "$GITHUB_WORKSPACE" verify-commit --no-raw --no-verbose || exit 1
