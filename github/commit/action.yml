@@ -1,0 +1,107 @@
+# ==============================================================================
+# Commit Validation - Composite GitHub Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Comprehensive commit validation action that enforces security and quality
+# standards for Git commits. This composite action performs two critical
+# validations: cryptographic signature verification and conventional commit
+# message format validation, ensuring code integrity and traceability.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Conventional commit message validation using commitlint
+# - Commit signature verification (GPG/SSH)
+# - Signature presence detection (without public key import)
+# - Custom commitlint configuration support
+# - Fast validation with detailed error messages
+# - Zero-configuration operation with sensible defaults
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage:
+#   - uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+#
+# Advanced usage with custom configuration:
+#   - uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+#     with:
+#       config-file: ".github/commitlint.config.js"
+#       node-version: "24.11.1"
+#
+# ==============================================================================
+# PREREQUISITES
+# ==============================================================================
+# - Repository must be checked out with full Git history
+# - Commits must be signed locally before pushing (GPG or SSH)
+# - Commit messages must follow conventional commits specification
+#
+# ==============================================================================
+# VALIDATION CHECKS
+# ==============================================================================
+# 1. Conventional Commit Format:
+#    - Validates commit message against conventional commits specification
+#    - Enforces format: type(scope): subject
+#    - Supports custom rules via commitlint configuration
+#
+# 2. Commit Signature:
+#    - Checks for presence of GPG or SSH signature
+#    - Does NOT verify signature validity or authenticity
+#    - Does NOT require public key import in CI environment
+#    - Detects: "gpg: Signature made" or "BEGIN PGP SIGNATURE"
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Minimum GitHub Enterprise Server: 3.8
+# Last Updated: 2026-02-26
+#
+# ==============================================================================
+
+name: Ministry of Justice UK - GitHub - Commit check 🔎
+description: Validate whether the commit is signed and commit message is constructed in conventional commit format
+author: Ministry of Justice UK
+
+inputs:
+  config-file:
+    required: false
+    description: "Commitlint configuration file, supplied to --config argument."
+
+  node-version:
+    required: false
+    description: "Node.js version to use"
+    default: "24.11.1"
+
+runs:
+  using: composite
+  steps:
+    - name: 📦 Repository
+      uses: ministryofjustice/devsecops-actions/sca/repository@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+
+    - name: ⚡️ Node
+      uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: ⚙️ Install
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: npm ci --ignore-scripts
+
+    - name: 🧩 Conventional
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: git -C "$GITHUB_WORKSPACE" --no-pager log -1 --no-show-signature --pretty=%B | npm run validate:commit:message -- --config ${{ inputs.config-file && format('"{0}"', inputs.config-file) || 'commitlint.config.js' }}
+
+    - name: 🔐 Signed
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: |
+        git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%B | grep -Eq "gpg: Signature made|BEGIN PGP SIGNATURE" || { echo "❌ Commit is unsigned!"; exit 1; }

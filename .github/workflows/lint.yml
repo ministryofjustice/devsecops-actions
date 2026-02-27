@@ -1,38 +1,31 @@
-# Lint Check Workflow
-#
-# Purpose:
-#   Performs automated code quality and formatting checks to ensure consistency
-#   and adherence to project standards.
-#
-# Triggers:
-#   - pull_request: When PRs target the any branch
-#
-# Permissions:
-#   - contents: read - Required for accessing repository contents
+# Workflow: Lint check ✏️
+# Purpose: Automated linting and validation workflow that runs on all branches
+# Triggers: Push events to any branch
 #
 # Jobs:
-#   setup:
-#     - Prepares the infrastructure and environment configuration
-#     - Outputs: environment name and timezone for downstream jobs
+#   1. setup
+#      - Initializes workflow infrastructure
+#      - Sets up environment variables (environment: base, timezone from vars)
+#      - Outputs environment and timezone for downstream jobs
+#      - Minimal permissions (default: none)
 #
-#   lint:
-#     - Checks out the repository code
-#     - Configures Node.js environment
-#     - Installs project dependencies
-#     - Executes validation checks:
-#       * Markdown formatting (validate:md)
-#       * YAML formatting (validate:yml)
-#       * TypeScript linting and type checking (lint:ts, validate:ts)
-#       * Renovate configuration validation (validate:renovate)
-#       * Spell checking (spellcheck)
+#   2. lint
+#      - Depends on: setup job
+#      - Permissions: read-only access to contents
+#      - Runs on: ubuntu-latest
+#      - Environment: Uses output from setup job
+#      - Steps:
+#        - Validates commits using custom devsecops-actions (v1.3.0)
+#        - Checks out repository code (actions/checkout v6.0.2)
+#        - Sets up Node.js runtime (v${{ vars.NODE_VERSION }})
+#        - Installs dependencies via npm ci
+#        - Validates markdown files (validate:md)
+#        - Validates YAML files (validate:yml)
+#        - Lints and validates TypeScript (lint:ts, validate:ts)
+#        - Validates Renovate configuration (validate:renovate)
+#        - Runs spell checker (spellcheck)
 #
-# Configuration:
-#   - Environment: base (configurable via env vars)
-#   - Timezone: Configurable via repository variables (TIMEZONE)
-#
-# Required Variables:
-#   - TIMEZONE: Repository variable defining the timezone for operations
-#   - NODE_VERSION: Node.js version for the runtime environment
+# Status: Part of PR #126 - feat(125-commit-validation): added commintlint validation
 
 name: Lint check ✏️
 run-name: Lint check ✏️
@@ -75,6 +68,9 @@ jobs:
     runs-on: ["ubuntu-latest"]
 
     steps:
+      - name: Commit
+        uses: ministryofjustice/devsecops-actions/github/commit@27614b1ca989dade166b707a08f42a61b289a1ba # v1.3.0
+
       - name: Repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 

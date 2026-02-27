@@ -79,7 +79,7 @@ Each component is an independent composite action that can be configured individ
 
 ### Quick Start - Public Template
 
-The simplest way to synchronize a repository with a public Cookiecutter template:
+The simplest way to synchronise a repository with a public Cookiecutter template:
 
 #### Minimal Configuration
 
@@ -566,6 +566,12 @@ cruft --version
 cd ../../
 # Create test repository and run action
 ```
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](../LICENSE) file for full details.
 
 ---
 

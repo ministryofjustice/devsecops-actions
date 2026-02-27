@@ -1,16 +1,16 @@
-# 🔎 GitHub Repository Management Actions
+# 🔎 Repository Archive Check Action
 
-Repository Health and Lifecycle Management
+Automated Repository Health Monitoring
 
 ---
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](../LICENSE)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](../../../LICENSE)
 [![Ministry of Justice](https://img.shields.io/badge/Ministry%20of%20Justice-UK-blue.svg)](https://www.gov.uk/government/organisations/ministry-of-justice)
 
 ## Overview
 
-A comprehensive collection of GitHub repository management actions that automate repository health monitoring, lifecycle management,
-and compliance workflows. These actions help organisations maintain clean, secure, and well-managed GitHub repositories at scale.
+Automated repository health monitoring action that scans GitHub repository commit history to identify dormant repositories eligible for archival.
+This action analyses repository activity patterns and dispatches notifications when repositories have been inactive for a specified period.
 
 **Key Capabilities:**
 
@@ -25,12 +25,15 @@ and compliance workflows. These actions help organisations maintain clean, secur
 ## 📋 Table of Contents
 
 - [Architecture](#️-architecture)
-- [Available Actions](#-available-actions)
+- [Features](#-features)
 - [Usage Examples](#-usage-examples)
 - [Inputs](#-inputs)
 - [Required Permissions](#-required-permissions)
 - [Configuration](#️-configuration)
+- [Best Practices](#-best-practices)
 - [Contributing](#-contributing)
+- [License](#-license)
+- [Support](#-support)
 
 ---
 
@@ -38,9 +41,9 @@ and compliance workflows. These actions help organisations maintain clean, secur
 
 ### Component Workflow
 
-![GitHub Archive Workflow](../docs/github-archive.svg)
+![GitHub Archive Workflow](../../../docs/github-archive.svg)
 
-The GitHub actions suite provides modular repository management capabilities:
+This action performs automated dormant repository detection:
 
 1. **🔎 Archive Check** - Identifies repositories eligible for archival based on inactivity
 
@@ -54,17 +57,11 @@ The GitHub actions suite provides modular repository management capabilities:
 
 ---
 
-## 🚀 Available Actions
+## ✨ Features
 
-### 🔎 Repository Archive Check
+## ✨ Features
 
-**Path**: `ministryofjustice/devsecops-actions/github/repository/archive`
-
-Automated repository health monitoring action that scans GitHub repository commit history to identify dormant repositories eligible for archival.
-
-#### Introduction
-
-This action analyses repository activity patterns and dispatches notifications when repositories have been inactive for a specified period. It helps organisations:
+This action helps organisations:
 
 - 📊 Maintain clean repository portfolios
 - 🔒 Improve security posture by reducing attack surface
@@ -72,7 +69,7 @@ This action analyses repository activity patterns and dispatches notifications w
 - 📧 Automate governance workflows
 - ✅ Ensure compliance with retention policies
 
-#### Features
+**Capabilities:**
 
 - ✅ **Configurable Inactivity Period** - Define custom archival thresholds
 - ✅ **Email Notifications** - GOV.UK Notify integration for alerts
@@ -80,7 +77,7 @@ This action analyses repository activity patterns and dispatches notifications w
 - ✅ **Zero Configuration** - Works with sensible defaults
 - ✅ **Non-Destructive** - Analysis only, no automatic archival
 
-#### Technical Details
+### Technical Details
 
 **Components:**
 
@@ -494,6 +491,12 @@ We welcome contributions! See the main repository [Contributing Guidelines](../R
 4. Test with a sample repository
 5. Update this README if adding features
 6. Submit a pull request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](../../LICENSE) file for full details.
 
 ---
 

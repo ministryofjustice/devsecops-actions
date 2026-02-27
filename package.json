@@ -32,12 +32,21 @@
     "validate:md": "npx markdownlint-cli --config .markdownlint.json \"**/*.md\"",
     "validate:renovate": "npx renovate-config-validator",
     "validate:ts": "npx tsc --noEmit --project src/tsconfig.json",
-    "validate:yml": "npx yaml-lint **/*.yml --ignore=**/node_modules"
+    "validate:yml": "npx yaml-lint **/*.yml --ignore=**/node_modules",
+    "validate:commit:message": "npx commitlint --color  --strict"
   },
   "overrides": {
-    "tar": "^7.5.3"
+    "markdownlint-cli": {
+      "minimatch": "^10.2.4"
+    },
+    "renovate": {
+      "tar": "^7.5.3",
+      "minimatch": "^10.2.4"
+    }
   },
   "dependencies": {
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
     "notifications-node-client": "^8.2.1"
   },
   "devDependencies": {
