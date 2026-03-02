@@ -98,10 +98,10 @@ runs:
     - name: 🧩 Conventional
       shell: bash
       working-directory: ${{ github.action_path }}
-      run: git -C "$GITHUB_WORKSPACE" --no-pager log -1 --no-show-signature --pretty=%B | npm run validate:commit:message -- --config ${{ inputs.config-file && format('"{0}"', inputs.config-file) || 'commitlint.config.js' }}
+      run: git -C "$GITHUB_WORKSPACE" --no-pager log -1 --no-show-signature --pretty=%s | npm run validate:commit:message -- --config ${{ inputs.config-file && format('"{0}"', inputs.config-file) || 'commitlint.config.js' }}
 
     - name: 🔐 Signed
       shell: bash
       working-directory: ${{ github.workspace }}
       run: |
-        git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%B | grep -Eq "gpg: Signature made|BEGIN PGP SIGNATURE" || { echo "❌ Commit is unsigned!"; exit 1; }
+        git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%s | grep -Eq "gpg: Signature made|BEGIN PGP SIGNATURE" || { echo "❌ Commit is unsigned!"; exit 1; }
