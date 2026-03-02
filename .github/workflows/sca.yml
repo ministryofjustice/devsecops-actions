@@ -53,7 +53,12 @@ on:
   workflow_dispatch:
   branch_protection_rule:
 
-permissions: {}
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  security-events: write
+  actions: read
 
 env:
   environment: base
