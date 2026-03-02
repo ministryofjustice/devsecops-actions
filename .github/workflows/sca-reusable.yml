@@ -10,6 +10,7 @@
 #       uses: ministryofjustice/devsecops-actions/.github/workflows/sca-reusable.yml@<sha>
 #       with:
 #         dependency-review-config-file: "./.github/dependency-review-config.yml"
+#         docker-images-file: "${{ github.workspace }}/sources.json"
 #         dependency-check-suppression-file: "dependency-check-suppression.xml"
 #       secrets: inherit
 #
@@ -21,16 +22,14 @@
 #   codeql:
 #     - Runs CodeQL SAST in parallel
 #
-# Permissions required in the calling workflow (or job):
-#   permissions:
-#     contents: write
-#     pull-requests: write
-#     issues: write
-#     security-events: write
-#     actions: read
+# Inputs (repo-specific only — all other settings are standardised):
+#   - environment: GitHub environment name for scoped secrets/variables
+#   - dependency-review-config-file: path to repo's dependency review config
+#   - docker-images-file: path to JSON file listing Docker images to scan
+#   - dependency-check-suppression-file: path to OWASP suppression XML
 #
 # Secrets:
-#   - token: GitHub token passed explicitly, or use secrets: inherit to pass GITHUB_TOKEN
+#   - token: passed explicitly or via secrets: inherit (uses GITHUB_TOKEN)
 
 name: SCA Reusable ⚡️
 
@@ -43,71 +42,17 @@ on:
         default: ""
         description: "GitHub environment name to apply to each job for environment-scoped secrets and variables"
 
-      renovate:
-        required: false
-        type: string
-        default: "true"
-        description: "Enable or disable Renovate bot for automated dependency updates"
-
-      node-version:
-        required: false
-        type: string
-        default: "24.11.1"
-        description: "Node.js version to use for SBOM generation and related tooling"
-
-      renovate-version:
-        required: false
-        type: string
-        default: "43.31.1"
-        description: "Renovate CLI version to use for dependency scanning (specify without 'v' prefix)"
-
       dependency-review-config-file:
         required: false
         type: string
         default: ""
         description: "Path to custom dependency review configuration file"
 
-      trufflehog-config-file:
-        required: false
-        type: string
-        default: ""
-        description: "Path to custom TruffleHog configuration file for secret scanning customisation"
-
-      trufflehog-output-filename:
-        required: false
-        type: string
-        default: "sca-trufflehog"
-        description: "TruffleHog JSON output file name (.json extension will be appended automatically)"
-
-      codeql-config-file:
-        required: false
-        type: string
-        default: ""
-        description: "Path to custom CodeQL configuration file for SAST query customisation"
-
-      codeql-upload-findings:
-        required: false
-        type: string
-        default: "always"
-        description: "Control SARIF upload to Code Scanning. Set to 'never' if GitHub's default CodeQL setup is enabled"
-
-      codeql-languages:
-        required: false
-        type: string
-        default: ""
-        description: "A comma-separated list of CodeQL languages to analyse"
-
       docker-images-file:
         required: false
         type: string
         default: ""
         description: "Path to JSON file containing 'images' array with Docker image URIs for container SBOM generation"
-
-      output-directory-name:
-        required: false
-        type: string
-        default: "reports"
-        description: "Output directory path for generated reports and scan results"
 
       dependency-check-suppression-file:
         required: false
@@ -118,7 +63,7 @@ on:
     secrets:
       token:
         required: false
-        description: "GitHub repository token with permissions for contents, pull requests, issues, and security events. Defaults to GITHUB_TOKEN via secrets: inherit"
+        description: "GitHub repository token. Defaults to GITHUB_TOKEN via secrets: inherit"
 
 jobs:
   sca:
@@ -141,7 +86,7 @@ jobs:
       - name: Node
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.1.0
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version: ${{ vars.NODE_VERSION }}
 
       - name: Install
         shell: bash
@@ -151,14 +96,9 @@ jobs:
         uses: ./sca
         with:
           token: ${{ secrets.token }}
-          renovate: ${{ inputs.renovate }}
-          node-version: ${{ inputs.node-version }}
-          renovate-version: ${{ inputs.renovate-version }}
           dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
-          trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
-          trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
           docker-images-file: ${{ inputs.docker-images-file }}
-          output-directory-name: ${{ inputs.output-directory-name }}
+          dependency-check-suppression-file: ${{ inputs.dependency-check-suppression-file }}
           run-owasp: "false"
           run-codeql: "false"
 
@@ -179,7 +119,6 @@ jobs:
       - name: 🔎 OWASP
         uses: ./sca/owasp
         with:
-          output-directory-name: ${{ inputs.output-directory-name }}
           dependency-check-suppression-file: ${{ inputs.dependency-check-suppression-file }}
 
   codeql:
@@ -199,7 +138,3 @@ jobs:
 
       - name: ⚙️ CodeQL
         uses: ./sca/codeql
-        with:
-          codeql-languages: ${{ inputs.codeql-languages }}
-          codeql-config-file: ${{ inputs.codeql-config-file }}
-          codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
