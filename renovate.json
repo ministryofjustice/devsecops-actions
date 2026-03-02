@@ -5,6 +5,8 @@
   "description": "Weekend update only, covering pre-commit, GHA, Docker, NPM and Python changes. Updates are only triggered once specified duration has elapsed for the provided type.",
   "dependencyDashboard": true,
   "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
   "prConcurrentLimit": 10,
   "prHourlyLimit": 7,
   "minimumReleaseAgeBehaviour": "timestamp-required",
@@ -14,15 +16,18 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["patch"],
-      "minimumReleaseAge": "3 days"
+      "minimumReleaseAge": "3 days",
+      "semanticCommitType": "fix"
     },
     {
       "matchUpdateTypes": ["minor"],
-      "minimumReleaseAge": "7 days"
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "feat"
     },
     {
       "matchUpdateTypes": ["major"],
-      "minimumReleaseAge": "30 days"
+      "minimumReleaseAge": "30 days",
+      "semanticCommitType": "feat"
     },
     {
       "matchManagers": ["github-actions"],
