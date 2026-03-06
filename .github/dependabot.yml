@@ -58,7 +58,7 @@ updates:
       - "dev-sec-ops"
 
   - package-ecosystem: "pip"
-    directory: "/"
+    directory: "/cruft/install"
     schedule:
       interval: "daily"
       time: "00:00"
