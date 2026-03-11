@@ -107,18 +107,18 @@ runs:
   steps:
     # Initialises CodeQL for analysis
     - name: Initialise
-      uses: github/codeql-action/init@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
+      uses: github/codeql-action/init@0d579ffd059c29b07949a3cce3983f0780820c98 # v4.32.6
       with:
         languages: ${{ inputs.codeql-languages }}
         config-file: ${{ inputs.codeql-config-file }}
 
     # Automatically builds compiled languages
     - name: Build
-      uses: github/codeql-action/autobuild@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
+      uses: github/codeql-action/autobuild@0d579ffd059c29b07949a3cce3983f0780820c98 # v4.32.6
       continue-on-error: true
 
     # Finalises the CodeQL database, runs the analysis, and uploads the results to Code Scanning
     - name: Analyse
-      uses: github/codeql-action/analyze@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
+      uses: github/codeql-action/analyze@0d579ffd059c29b07949a3cce3983f0780820c98 # v4.32.6
       with:
         upload: ${{ inputs.codeql-upload-findings }}
