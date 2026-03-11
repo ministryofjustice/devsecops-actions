@@ -105,10 +105,10 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ministryofjustice/devsecops-actions/sca/repository@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+      uses: ministryofjustice/devsecops-actions/sca/repository@9332dedbd84ffcfa40763fe04854a3e0906eff74
 
     - name: ⚡️ Node
-      uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6.1.0
+      uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
 

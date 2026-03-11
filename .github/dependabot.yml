@@ -56,3 +56,25 @@ updates:
           - "*"
     assignees:
       - "dev-sec-ops"
+
+  - package-ecosystem: "pip"
+    directory: "/cruft/install"
+    schedule:
+      interval: "daily"
+      time: "00:00"
+    cooldown:
+      default-days: 3
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels:
+      - "chore"
+    groups:
+      pip-packages:
+        patterns:
+          - "*"
+    assignees:
+      - "dev-sec-ops"
