@@ -42,8 +42,8 @@
     }
   },
   "dependencies": {
-    "@commitlint/cli": "^20.4.3",
-    "@commitlint/config-conventional": "^20.4.3",
+    "@commitlint/cli": "^20.4.4",
+    "@commitlint/config-conventional": "^20.4.4",
     "notifications-node-client": "^8.3.0"
   },
   "devDependencies": {
