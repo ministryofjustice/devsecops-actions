@@ -98,7 +98,7 @@ jobs:
         with:
           node-version: ${{ vars.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: ${{ github.workflow }}/package-lock.json
+          cache-dependency-path: ${{ github.workspace }}/package-lock.json
 
       - name: Install
         shell: bash
