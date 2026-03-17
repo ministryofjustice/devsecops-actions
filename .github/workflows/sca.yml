@@ -58,6 +58,10 @@ env:
   environment: base
   timezone: ${{ vars.TIMEZONE }}
 
+concurrency:
+  group: sca-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   setup:
     name: Infrastructure 🔧
@@ -93,6 +97,8 @@ jobs:
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: ${{ vars.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ${{ github.workflow }}/package-lock.json
 
       - name: Install
         shell: bash
