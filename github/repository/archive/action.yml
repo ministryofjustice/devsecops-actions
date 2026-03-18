@@ -112,7 +112,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
-        cache-dependency-path: "a6d827266ab38fdcacc0c650b2e2360e08e20398/package-lock.json"
+        cache-dependency-path: "devsecops-actions/package-lock.json"
 
     - name: ⚙️ Execute
       shell: bash
