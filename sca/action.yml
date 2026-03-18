@@ -169,8 +169,6 @@ runs:
   steps:
     - name: 📦 Repository
       uses: ministryofjustice/devsecops-actions/sca/repository@fe26ae914fa69fcfbd8a504d2bdd9464d6aaf0f7
-      with:
-        path: 'fe26ae914fa69fcfbd8a504d2bdd9464d6aaf0f7'
 
     - name: 📊 Dependencies
       uses: ministryofjustice/devsecops-actions/sca/dependencies@fe26ae914fa69fcfbd8a504d2bdd9464d6aaf0f7
