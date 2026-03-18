@@ -91,7 +91,7 @@ jobs:
 
     steps:
       - name: 📦 Repository
-        uses: ministryofjustice/devsecops-actions/sca/repository@fe26ae914fa69fcfbd8a504d2bdd9464d6aaf0f7
+        uses: ministryofjustice/devsecops-actions/sca/repository@a6d827266ab38fdcacc0c650b2e2360e08e20398
 
       - name: Node
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
@@ -105,7 +105,7 @@ jobs:
         run: npm ci --ignore-scripts --omit=dev
 
       - name: ⚡️ SCA
-        uses: ministryofjustice/devsecops-actions/sca@fe26ae914fa69fcfbd8a504d2bdd9464d6aaf0f7 # v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca@a6d827266ab38fdcacc0c650b2e2360e08e20398 # v1.4.0
         with:
           token: "${{ secrets.GITHUB_TOKEN }}" # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
