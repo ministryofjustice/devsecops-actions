@@ -105,7 +105,7 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ministryofjustice/devsecops-actions/sca/repository@b9ca9e4a5038f3f1a4ac1e9f2de38011128ea8d0
+      uses: ministryofjustice/devsecops-actions/sca/repository@feat/npm-cache
       with:
         path: "devsecops-actions"
 
