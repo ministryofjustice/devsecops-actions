@@ -57,10 +57,16 @@ name: 📦 Repository
 description: Git checkout
 author: Ministry of Justice UK
 
+inputs:
+  path:
+    required: false
+    default: ""
+    description: "Relative path under $GITHUB_WORKSPACE to place the repository. https://github.com/actions/checkout"
+
 runs:
   using: composite
   steps:
     - name: Checkout
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
-        path: "devsecops-actions"
+        path: ${{ inputs.path }}
