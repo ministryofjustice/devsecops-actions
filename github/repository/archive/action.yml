@@ -105,7 +105,7 @@ runs:
   using: composite
   steps:
     - name: 📦 Repository
-      uses: ministryofjustice/devsecops-actions/sca/repository@a6d827266ab38fdcacc0c650b2e2360e08e20398
+      uses: ministryofjustice/devsecops-actions/sca/repository@9177ebac7ba5ceab80bdcb2e88ef0b32ecfc59ef
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0

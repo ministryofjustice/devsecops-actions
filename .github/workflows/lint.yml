@@ -69,10 +69,10 @@ jobs:
 
     steps:
       - name: Commit
-        uses: ministryofjustice/devsecops-actions/github/commit@a6d827266ab38fdcacc0c650b2e2360e08e20398 # v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/commit@9177ebac7ba5ceab80bdcb2e88ef0b32ecfc59ef # v1.4.0
 
       - name: 📦 Repository
-        uses: ministryofjustice/devsecops-actions/sca/repository@a6d827266ab38fdcacc0c650b2e2360e08e20398
+        uses: ministryofjustice/devsecops-actions/sca/repository@9177ebac7ba5ceab80bdcb2e88ef0b32ecfc59ef
 
       - name: Node
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
