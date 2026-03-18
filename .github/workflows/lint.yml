@@ -69,7 +69,7 @@ jobs:
 
     steps:
       - name: 📦 Repository
-        uses: ministryofjustice/devsecops-actions/sca/repository@8d39727ed5e0e15ba57c75657749d6ccbcf1e023
+        uses: ministryofjustice/devsecops-actions/sca/repository@81ce236ced083bbce54c38e09c20d50060ca204a
 
       - name: Node
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
@@ -105,4 +105,4 @@ jobs:
         run: npm run spellcheck
 
       - name: Commit
-        uses: ministryofjustice/devsecops-actions/github/commit@8d39727ed5e0e15ba57c75657749d6ccbcf1e023 # v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/commit@81ce236ced083bbce54c38e09c20d50060ca204a # v1.4.0

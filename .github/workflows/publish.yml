@@ -76,7 +76,7 @@ jobs:
 
     steps:
       - name: 📦 Repository
-        uses: ministryofjustice/devsecops-actions/sca/repository@8d39727ed5e0e15ba57c75657749d6ccbcf1e023
+        uses: ministryofjustice/devsecops-actions/sca/repository@81ce236ced083bbce54c38e09c20d50060ca204a
 
       - name: Create
         uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
