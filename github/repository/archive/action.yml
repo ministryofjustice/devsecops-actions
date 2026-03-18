@@ -111,15 +111,14 @@ runs:
       id: root
       shell: bash
       working-directory: ${{ github.action_path }}
-      run: echo "path=$(realpath -q '${{ github.action_path }}/../../../')" >> $GITHUB_OUTPUT
+      run: echo "path=$(realpath -q '${{ github.action_path }}/../../../package-lock.json')" >> $GITHUB_OUTPUT
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-      working-directory: ${{ steps.root.outputs.path }}
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
-        cache-dependency-path: "package-lock.json"
+        cache-dependency-path: ${{ steps.root.outputs.path }}
 
     - name: ⚙️ Execute
       shell: bash
