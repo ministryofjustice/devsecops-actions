@@ -106,7 +106,12 @@ runs:
   steps:
     - name: 📦 Repository
       uses: ministryofjustice/devsecops-actions/sca/repository@feat/npm-cache
+
+    - name: Checkout
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
+        repository: "ministryofjustice/devsecops-actions"
+        ref: "feat/npm-cache"
         path: "action"
 
     - name: ⚡️ Node
@@ -115,20 +120,6 @@ runs:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
         cache-dependency-path: "action/package-lock.json"
-
-    - name: ⚙️ Execute
-      shell: bash
-      working-directory: ${{ github.workspace }}
-      run: |
-        echo $(pwd)
-        echo $(ls -alh)
-
-    - name: ⚙️ Execute
-      shell: bash
-      working-directory: ${{ github.action_path }}
-      run: |
-        echo $(pwd)
-        echo $(ls -alh)
 
     - name: ⚙️ Execute
       shell: bash
