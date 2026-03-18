@@ -111,12 +111,14 @@ runs:
       id: root
       shell: bash
       working-directory: ${{ github.action_path }}
-      run: echo "path=$(realpath -q '../../../')" >> $GITHUB_OUTPUT
+      run: echo "path=$(realpath -q '../../../../')" >> $GITHUB_OUTPUT
 
     - name: test
       shell: bash
       working-directory: ${{ github.action_path }}
-      run: echo "PATH-${{ steps.root.outputs.path }}-"
+      run: |
+        echo "$(pwd)"
+        echo "${{ steps.root.outputs.path }}"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
