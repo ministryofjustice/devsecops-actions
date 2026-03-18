@@ -125,5 +125,12 @@ runs:
 
     - name: ⚙️ Execute
       shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        echo $(pwd)
+        echo $(ls -alh)
+
+    - name: ⚙️ Execute
+      shell: bash
       working-directory: ${{ github.workspace }}
       run: node action/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
