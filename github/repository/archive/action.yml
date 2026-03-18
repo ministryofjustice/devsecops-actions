@@ -113,20 +113,13 @@ runs:
       working-directory: ${{ github.action_path }}
       run: echo "path=$(realpath -q '${{ github.action_path }}/../../../')" >> $GITHUB_OUTPUT
 
-    - name: test
-      shell: bash
-      working-directory: ${{ steps.root.outputs.path }}
-      run: |
-        echo "$(pwd)"
-        echo "${{ steps.root.outputs.path }}"
-        echo "$(ls -alh)"
-
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+      working-directory: ${{ steps.root.outputs.path }}
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
-        cache-dependency-path: "${{ steps.root.outputs.path }}/package-lock.json"
+        cache-dependency-path: "package-lock.json"
 
     - name: ⚙️ Execute
       shell: bash
