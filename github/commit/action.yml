@@ -90,7 +90,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
-        cache-dependency-path: ${{ github.action_path }}/../../package-lock.json
+        cache-dependency-path: ${{ github.action_path }}../../package-lock.json
 
     - name: ⚙️ Install
       shell: bash
