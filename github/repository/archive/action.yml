@@ -106,13 +106,15 @@ runs:
   steps:
     - name: 📦 Repository
       uses: ministryofjustice/devsecops-actions/sca/repository@9732882c71151216a62c1b63e0cf29c71bead44b
+      with:
+        path: "9732882c71151216a62c1b63e0cf29c71bead44b"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
-        cache: 'npm'
-        cache-dependency-path: ${{ github.action_path }}/../../../package-lock.json
+        cache: "npm"
+        cache-dependency-path: "9732882c71151216a62c1b63e0cf29c71bead44b/package-lock.json"
 
     - name: ⚙️ Execute
       shell: bash
