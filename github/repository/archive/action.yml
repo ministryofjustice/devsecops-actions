@@ -107,14 +107,14 @@ runs:
     - name: 📦 Repository
       uses: ministryofjustice/devsecops-actions/sca/repository@feat/npm-cache
       with:
-        path: "devsecops-actions"
+        path: "action"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
-        cache-dependency-path: "devsecops-actions/package-lock.json"
+        cache-dependency-path: "action/package-lock.json"
 
     - name: ⚙️ Execute
       shell: bash
@@ -126,4 +126,4 @@ runs:
     - name: ⚙️ Execute
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: node devsecops-actions/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
+      run: node action/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
