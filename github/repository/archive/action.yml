@@ -111,7 +111,7 @@ runs:
       id: root
       shell: bash
       working-directory: ${{ github.action_path }}
-      run: echo "path=$(realpath -q '../../../../')" >> $GITHUB_OUTPUT
+      run: echo "path=$(realpath -q '${{ github.action_path }}../../../../')" >> $GITHUB_OUTPUT
 
     - name: test
       shell: bash
