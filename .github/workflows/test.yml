@@ -72,7 +72,7 @@ jobs:
 
     steps:
       - name: 📦 Repository
-        uses: ministryofjustice/devsecops-actions/sca/repository@45f8728c565b4201703b6e0e336926e4ba328504
+        uses: ministryofjustice/devsecops-actions/sca/repository@8d39727ed5e0e15ba57c75657749d6ccbcf1e023
 
       - name: Node
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
