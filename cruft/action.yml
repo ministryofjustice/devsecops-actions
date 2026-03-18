@@ -158,13 +158,13 @@ runs:
   using: composite
   steps:
     - name: ⚒️ Install
-      uses: ministryofjustice/devsecops-actions/cruft/install@b5d57181cb641043cdcba3d8f618b73c8f4636bf
+      uses: ministryofjustice/devsecops-actions/cruft/install@d37ba96dd7bec1afdf6f085b840fbd5ac68c8b8f
       with:
         python-version: ${{ inputs.python-version }}
 
     - name: 🔑 Authenticate
       if: inputs.private  == 'true'
-      uses: ministryofjustice/devsecops-actions/cruft/authenticate@b5d57181cb641043cdcba3d8f618b73c8f4636bf
+      uses: ministryofjustice/devsecops-actions/cruft/authenticate@d37ba96dd7bec1afdf6f085b840fbd5ac68c8b8f
       with:
         token: ${{ inputs.token }}
         github-app-owner: ${{ inputs.github-app-owner }}
@@ -174,11 +174,11 @@ runs:
 
     - name: 🔎 Check
       id: check
-      uses: ministryofjustice/devsecops-actions/cruft/check@b5d57181cb641043cdcba3d8f618b73c8f4636bf
+      uses: ministryofjustice/devsecops-actions/cruft/check@d37ba96dd7bec1afdf6f085b840fbd5ac68c8b8f
 
     - name: ✏️ Create
       if: steps.check.outputs.has-update == 'true'
-      uses: ministryofjustice/devsecops-actions/cruft/create@b5d57181cb641043cdcba3d8f618b73c8f4636bf
+      uses: ministryofjustice/devsecops-actions/cruft/create@d37ba96dd7bec1afdf6f085b840fbd5ac68c8b8f
       with:
         token: ${{ inputs.token }}
         github-app-id: ${{ inputs.github-app-id }}
