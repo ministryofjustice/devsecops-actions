@@ -112,16 +112,16 @@ runs:
       with:
         repository: "ministryofjustice/devsecops-actions"
         ref: "ee8fd31b065d8f56097738054ad1fa243ce353d8"
-        path: "action"
+        path: "ee8fd31b065d8f56097738054ad1fa243ce353d8"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
-        cache-dependency-path: "action/package-lock.json"
+        cache-dependency-path: "ee8fd31b065d8f56097738054ad1fa243ce353d8/package-lock.json"
 
     - name: ⚙️ Execute
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: node action/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
+      run: node ee8fd31b065d8f56097738054ad1fa243ce353d8/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
