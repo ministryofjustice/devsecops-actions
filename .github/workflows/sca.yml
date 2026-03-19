@@ -104,11 +104,17 @@ jobs:
         shell: bash
         run: npm ci --ignore-scripts --omit=dev
 
-      - name: ⚡️ SCA
-        uses: ministryofjustice/devsecops-actions/sca@7f71b30c375801e08cbe9e3f096af25a68b7047a # v1.4.0
-        with:
-          token: "${{ secrets.GITHUB_TOKEN }}" # Mandatory
-          dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
-          docker-images-file: "${{ github.workspace }}/sources.json" # Optional
-          dependency-check-suppression-file: "dependency-check-suppression.xml" # Optional
+      # - name: ⚡️ SCA
+      #   uses: ministryofjustice/devsecops-actions/sca@7f71b30c375801e08cbe9e3f096af25a68b7047a # v1.4.0
+      #   with:
+      #     token: "${{ secrets.GITHUB_TOKEN }}" # Mandatory
+      #     dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
+      #     docker-images-file: "${{ github.workspace }}/sources.json" # Optional
+      #     dependency-check-suppression-file: "dependency-check-suppression.xml" # Optional
 
+
+      - name: ⚡️ Test
+        uses: ministryofjustice/devsecops-actions/sca/sbom@7f71b30c375801e08cbe9e3f096af25a68b7047a
+        with:
+          node-version: ${{ inputs.node-version }}
+          docker-images-file: ${{ inputs.docker-images-file }}
