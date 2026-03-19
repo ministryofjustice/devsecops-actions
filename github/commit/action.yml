@@ -89,7 +89,7 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "7f71b30c375801e08cbe9e3f096af25a68b7047a"
+        ref: "457bff56521d6152ce86b6f5434b4dd3c140200b"
         path: "action"
 
     - name: ⚡️ Node
