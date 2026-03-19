@@ -97,24 +97,17 @@ jobs:
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: ${{ vars.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: ${{ github.workspace }}/package-lock.json
 
       - name: Install
         shell: bash
         run: npm ci --ignore-scripts --omit=dev
 
-      # - name: ⚡️ SCA
-      #   uses: ministryofjustice/devsecops-actions/sca@457bff56521d6152ce86b6f5434b4dd3c140200b # v1.4.0
-      #   with:
-      #     token: "${{ secrets.GITHUB_TOKEN }}" # Mandatory
-      #     dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
-      #     docker-images-file: "${{ github.workspace }}/sources.json" # Optional
-      #     dependency-check-suppression-file: "dependency-check-suppression.xml" # Optional
-
-
-      - name: ⚡️ Test
-        uses: ministryofjustice/devsecops-actions/sca/sbom@457bff56521d6152ce86b6f5434b4dd3c140200b
+      - name: ⚡️ SCA
+        uses: ministryofjustice/devsecops-actions/sca@457bff56521d6152ce86b6f5434b4dd3c140200b # v1.4.0
         with:
-          node-version: ${{ inputs.node-version }}
-          docker-images-file: ${{ inputs.docker-images-file }}
+          token: "${{ secrets.GITHUB_TOKEN }}" # Mandatory
+          dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
+          docker-images-file: "${{ github.workspace }}/sources.json" # Optional
+          dependency-check-suppression-file: "dependency-check-suppression.xml" # Optional
