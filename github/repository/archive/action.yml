@@ -110,8 +110,8 @@ runs:
     - name: 📦 Action
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
-        repository: "ministryofjustice/devsecops-actions"
-        ref: "457bff56521d6152ce86b6f5434b4dd3c140200b"
+        repository: "${{ github.action_repository }}"
+        ref: "${{ github.action_ref }}"
         path: "action"
 
     - name: ⚡️ Node

@@ -115,8 +115,8 @@ runs:
     - name: 📦 Action
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
-        repository: "ministryofjustice/devsecops-actions"
-        ref: "457bff56521d6152ce86b6f5434b4dd3c140200b"
+        repository: "${{ github.action_repository }}"
+        ref: "${{ github.action_ref }}"
         path: "action"
 
     - name: Node
@@ -134,7 +134,7 @@ runs:
     - name: Repository
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: syft scan ./ --config  ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}.cdx.json
+      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}.cdx.json
 
     - name: Images
       if: inputs.docker-images-file != ''
