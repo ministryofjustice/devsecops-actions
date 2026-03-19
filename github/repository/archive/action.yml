@@ -111,17 +111,17 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "c226ba1c0cd46ff243392ec3f58fb6a6d0934b96"
-        path: "c226ba1c0cd46ff243392ec3f58fb6a6d0934b96"
+        ref: "925abfbd81a39915859f102a58b4799d96376285"
+        path: "925abfbd81a39915859f102a58b4799d96376285"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
-        cache-dependency-path: "c226ba1c0cd46ff243392ec3f58fb6a6d0934b96/package-lock.json"
+        cache-dependency-path: "925abfbd81a39915859f102a58b4799d96376285/package-lock.json"
 
     - name: ⚙️ Execute
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: node c226ba1c0cd46ff243392ec3f58fb6a6d0934b96/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
+      run: node 925abfbd81a39915859f102a58b4799d96376285/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
