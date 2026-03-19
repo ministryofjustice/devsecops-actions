@@ -117,35 +117,35 @@ runs:
     - name: 📦 Action
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
-        repository: "${{ github.action_repository }}"
-        ref: "${{ github.action_ref }}"
+        repository: "ministryofjustice/devsecops-actions"
+        ref: "feat/npm-cache"
         path: "action"
 
-    # - name: Node
-    #   uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-    #   with:
-    #     node-version: ${{ inputs.node-version }}
-    #     cache: "npm"
-    #     cache-dependency-path: "action/package-lock.json"
+    - name: Node
+      uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: "npm"
+        cache-dependency-path: "action/package-lock.json"
 
-    # - name: Install
-    #   shell: bash
-    #   working-directory: action
-    #   run: npm run install:syft
+    - name: Install
+      shell: bash
+      working-directory: action
+      run: npm run install:syft
 
-    # - name: Repository
-    #   shell: bash
-    #   working-directory: ${{ github.workspace }}
-    #   run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}.cdx.json
+    - name: Repository
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}.cdx.json
 
-    # - name: Images
-    #   if: inputs.docker-images-file != ''
-    #   working-directory: action
-    #   shell: bash
-    #   run: npm run scan -- --images "${{ inputs.docker-images-file }}"
+    - name: Images
+      if: inputs.docker-images-file != ''
+      working-directory: action
+      shell: bash
+      run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 
-    # - name: Upload
-    #   uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-    #   with:
-    #     name: SBOM-${{ github.run_number }}${{ github.run_attempt }}${{ strategy.job-index }}
-    #     path: sca-sbom-*.cdx.json
+    - name: Upload
+      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+      with:
+        name: SBOM-${{ github.run_number }}${{ github.run_attempt }}${{ strategy.job-index }}
+        path: sca-sbom-*.cdx.json
