@@ -38,9 +38,6 @@ name: GitHub 🔎
 run-name: GitHub repository check
 
 on:
-  pull_request:
-    branches:
-      - "**"
   schedule:
     - cron: "0 0 * * 0"
 
