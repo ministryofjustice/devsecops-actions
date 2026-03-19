@@ -116,7 +116,7 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "feat/npm-cache"
+        ref: "cc4c2532c5d3cc3fd89ece49e31fca9aec80451e"
         path: "action"
 
     - name: Node
