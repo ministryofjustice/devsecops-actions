@@ -72,7 +72,7 @@ jobs:
 
     steps:
       - name: Archive
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@cc4c2532c5d3cc3fd89ece49e31fca9aec80451e # v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@7f71b30c375801e08cbe9e3f096af25a68b7047a # v1.4.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: ${{ vars.ARCHIVAL_DAYS }}
