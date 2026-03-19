@@ -207,8 +207,8 @@ runs:
     - name: 🛡 OpenSSF
       uses: ministryofjustice/devsecops-actions/sca/ossf@457bff56521d6152ce86b6f5434b4dd3c140200b
 
-    - name: 📋 SBOM
-      uses: ministryofjustice/devsecops-actions/sca/sbom@457bff56521d6152ce86b6f5434b4dd3c140200b
-      with:
-        node-version: ${{ inputs.node-version }}
-        docker-images-file: ${{ inputs.docker-images-file }}
+    # - name: 📋 SBOM
+    #   uses: ministryofjustice/devsecops-actions/sca/sbom@457bff56521d6152ce86b6f5434b4dd3c140200b
+    #   with:
+    #     node-version: ${{ inputs.node-version }}
+    #     docker-images-file: ${{ inputs.docker-images-file }}
