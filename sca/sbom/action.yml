@@ -109,14 +109,28 @@ runs:
   using: composite
 
   steps:
+    - name: 📦 Repository
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        clean: false
+
+    - name: 📦 Action
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        repository: "ministryofjustice/devsecops-actions"
+        ref: "925abfbd81a39915859f102a58b4799d96376285"
+        path: "925abfbd81a39915859f102a58b4799d96376285"
+
     - name: Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
+        cache: "npm"
+        cache-dependency-path: "925abfbd81a39915859f102a58b4799d96376285/package-lock.json"
 
     - name: Install
       shell: bash
-      working-directory: ${{ github.action_path }}
+      working-directory: 925abfbd81a39915859f102a58b4799d96376285
       run: npm run install:syft
 
     - name: Repository
@@ -126,7 +140,7 @@ runs:
 
     - name: Images
       if: inputs.docker-images-file != ''
-      working-directory: ${{ github.action_path }}
+      working-directory: 925abfbd81a39915859f102a58b4799d96376285
       shell: bash
       run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 
