@@ -130,7 +130,7 @@ runs:
 
     - name: Install
       shell: bash
-      working-directory: action
+      working-directory: d50376fb677ac9bcb1e8aead7474fda1ee9891d8
       run: npm run install:syft
 
     - name: Repository
@@ -140,7 +140,7 @@ runs:
 
     - name: Images
       if: inputs.docker-images-file != ''
-      working-directory: action
+      working-directory: d50376fb677ac9bcb1e8aead7474fda1ee9891d8
       shell: bash
       run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 

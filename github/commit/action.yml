@@ -101,16 +101,16 @@ runs:
 
     - name: ⚙️ Install
       shell: bash
-      working-directory: action
+      working-directory: d50376fb677ac9bcb1e8aead7474fda1ee9891d8
       run: npm ci --ignore-scripts
 
     - name: 🧩 Conventional
       shell: bash
-      working-directory: action
+      working-directory: d50376fb677ac9bcb1e8aead7474fda1ee9891d8
       run: git -C "$GITHUB_WORKSPACE" --no-pager log -1 --no-show-signature --pretty=%s | npm run validate:commit:message -- --config ${{ inputs.config-file && format('"{0}"', inputs.config-file) || 'commitlint.config.js' }}
 
     - name: 🔐 Signed
       shell: bash
-      working-directory: action
+      working-directory: d50376fb677ac9bcb1e8aead7474fda1ee9891d8
       run: |
         git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%s | grep -Eq "gpg: Signature made|BEGIN PGP SIGNATURE" || { echo "❌ Commit is unsigned!"; exit 1; }
