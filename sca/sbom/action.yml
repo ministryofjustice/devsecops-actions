@@ -126,24 +126,24 @@ runs:
         cache: "npm"
         cache-dependency-path: "action/package-lock.json"
 
-    - name: Install
-      shell: bash
-      working-directory: action
-      run: npm run install:syft
+    # - name: Install
+    #   shell: bash
+    #   working-directory: action
+    #   run: npm run install:syft
 
-    - name: Repository
-      shell: bash
-      working-directory: ${{ github.workspace }}
-      run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}.cdx.json
+    # - name: Repository
+    #   shell: bash
+    #   working-directory: ${{ github.workspace }}
+    #   run: syft scan ./ --config ${{ github.action_path }}/config.yml --source-name "${{ github.repository }}" --source-version "${{ github.sha }}" --output cyclonedx-json=sca-sbom-repository-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}.cdx.json
 
-    - name: Images
-      if: inputs.docker-images-file != ''
-      working-directory: action
-      shell: bash
-      run: npm run scan -- --images "${{ inputs.docker-images-file }}"
+    # - name: Images
+    #   if: inputs.docker-images-file != ''
+    #   working-directory: action
+    #   shell: bash
+    #   run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 
-    - name: Upload
-      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-      with:
-        name: SBOM-${{ github.run_number }}${{ github.run_attempt }}${{ strategy.job-index }}
-        path: sca-sbom-*.cdx.json
+    # - name: Upload
+    #   uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+    #   with:
+    #     name: SBOM-${{ github.run_number }}${{ github.run_attempt }}${{ strategy.job-index }}
+    #     path: sca-sbom-*.cdx.json
