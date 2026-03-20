@@ -58,6 +58,10 @@ env:
   environment: base
   timezone: ${{ vars.TIMEZONE }}
 
+concurrency:
+  group: sca-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   setup:
     name: Infrastructure 🔧
@@ -86,23 +90,24 @@ jobs:
       name: ${{ needs.setup.outputs.environment }}
 
     steps:
-      - name: Repository
+      - name: 📦 Repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Node
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: ${{ vars.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: ${{ github.workspace }}/package-lock.json
 
       - name: Install
         shell: bash
         run: npm ci --ignore-scripts --omit=dev
 
       - name: ⚡️ SCA
-        uses: ministryofjustice/devsecops-actions/sca@f965eb1771ec66cfc41d7d57dc607fa6dfbc10ed # v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca@925abfbd81a39915859f102a58b4799d96376285 # v1.4.0
         with:
           token: "${{ secrets.GITHUB_TOKEN }}" # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
           docker-images-file: "${{ github.workspace }}/sources.json" # Optional
           dependency-check-suppression-file: "dependency-check-suppression.xml" # Optional
-

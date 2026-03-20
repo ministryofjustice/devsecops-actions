@@ -68,16 +68,15 @@ jobs:
     runs-on: ["ubuntu-latest"]
 
     steps:
-      - name: Commit
-        uses: ministryofjustice/devsecops-actions/github/commit@f965eb1771ec66cfc41d7d57dc607fa6dfbc10ed # v1.4.0
-
-      - name: Repository
+      - name: 📦 Repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Node
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: ${{ vars.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: ${{ github.workspace }}/package-lock.json
 
       - name: Install
         shell: bash
@@ -104,3 +103,6 @@ jobs:
       - name: Spellcheck
         shell: bash
         run: npm run spellcheck
+
+      - name: Commit
+        uses: ministryofjustice/devsecops-actions/github/commit@925abfbd81a39915859f102a58b4799d96376285 # v1.4.0
