@@ -99,6 +99,9 @@ runs:
         cache: 'npm'
         cache-dependency-path: '925abfbd81a39915859f102a58b4799d96376285/package-lock.json'
 
+    - name: ⛓️ SLSA
+      uses: ministryofjustice/devsecops-actions/sca/slsa@10-sca-slsa
+
     - name: ⚙️ Install
       shell: bash
       working-directory: 925abfbd81a39915859f102a58b4799d96376285
