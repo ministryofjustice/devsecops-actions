@@ -105,7 +105,13 @@ fi
 cat "$FILE" | sh -s -- --ci
 
 # Validate
-command -v safe-chain >/dev/null 2>&1 || { echo "❌ Missing safe-chain executable."; exit 1; }
+npm safe-chain-verify
+pnpm safe-chain-verify
+pip safe-chain-verify
+uv safe-chain-verify
+
+# Cleanup
+rm -f "$FILE"
 
 echo "✅ $(safe-chain --version) has been installed."
 exit 0;
