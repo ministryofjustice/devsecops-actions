@@ -66,18 +66,17 @@ and security review across the entire software supply chain.
 
 #### Introduction
 
-Orchestrates 10 specialised security tools:
+Orchestrates 9 specialised security steps:
 
 1. **📦 Repository Checkout** - Secure code retrieval
-2. **⛓️ SLSA** - Supply-chain security framework (Safe-Chain)
-3. **📊 Dependency Review** - PR vulnerability scanning
-4. **🔎 OWASP Dependency-Check** - CVE detection (CVSS ≥7.0 fails)
-5. **🔁 Renovate** - Automated dependency updates
-6. **🔑 MOJ Secret Scanner** - Custom secret patterns
-7. **🐷 TruffleHog** - Entropy-based secret detection (700+ detectors)
-8. **⚙️ CodeQL** - SAST semantic analysis
-9. **🛡️ OpenSSF Scorecard** - Security posture (18+ checks)
-10. **📋 SBOM Generator** - CycloneDX-compliant bill of materials
+2. **📊 Dependency Review** - PR vulnerability scanning
+3. **🔎 OWASP Dependency-Check** - CVE detection (CVSS ≥7.0 fails)
+4. **🔁 Renovate** - Automated dependency updates
+5. **🔑 MOJ Secret Scanner** - Custom secret patterns
+6. **🐷 TruffleHog** - Entropy-based secret detection (700+ detectors)
+7. **⚙️ CodeQL** - SAST semantic analysis (includes SLSA/Safe-Chain)
+8. **🛡️ OpenSSF Scorecard** - Security posture (18+ checks)
+9. **📋 SBOM Generator** - CycloneDX-compliant bill of materials
 
 #### Code
 

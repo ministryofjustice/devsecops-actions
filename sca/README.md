@@ -48,15 +48,14 @@ tools to provide complete visibility into your application's dependencies, vulne
 Each component is an independent composite action that can be configured individually:
 
 1. **📦 Repository** - Secure code retrieval with token authentication
-2. **⛓️ SLSA** - Supply-chain Levels for Software Artifacts (Safe-Chain)
-3. **📊 Dependencies** - GitHub Dependency Review for PR vulnerability scanning
-4. **🔎 OWASP** - OWASP Dependency-Check for CVE detection (CVSS ≥7.0 fails)
-5. **🔁 Renovate** - Automated dependency updates with intelligent grouping
-6. **🔑 Secrets (MOJ)** - Ministry of Justice custom secret detection
-7. **🐷 TruffleHog** - Entropy-based secret scanning (700+ detectors)
-8. **⚙️ CodeQL** - Semantic SAST analysis for security vulnerabilities
-9. **🛡️ OpenSSF** - Security posture assessment (18+ checks)
-10. **📋 SBOM** - Software Bill of Materials generation (CycloneDX)
+2. **📊 Dependencies** - GitHub Dependency Review for PR vulnerability scanning
+3. **🔎 OWASP** - OWASP Dependency-Check for CVE detection (CVSS ≥7.0 fails)
+4. **🔁 Renovate** - Automated dependency updates with intelligent grouping
+5. **🔑 Secrets (MOJ)** - Ministry of Justice custom secret detection
+6. **🐷 TruffleHog** - Entropy-based secret scanning (700+ detectors)
+7. **⚙️ CodeQL** - Semantic SAST analysis (includes SLSA supply chain security via Safe-Chain)
+8. **🛡️ OpenSSF** - Security posture assessment (18+ checks)
+9. **📋 SBOM** - Software Bill of Materials generation (CycloneDX)
 
 ---
 
@@ -109,19 +108,7 @@ Each component is an independent composite action that can be configured individ
 - Authenticates using provided GitHub token
 - Prepares workspace for subsequent scanning
 
-### 2. ⛓️ SLSA (Supply-chain Levels for Software Artifacts)
-
-**Action**: `sca/slsa/`  
-**Purpose**: Supply chain security framework implementation
-
-- Validates package integrity and age (minimum 72 hours)
-- Detects typosquatting and malicious packages
-- Prevents dependency confusion attacks
-- Protects against compromised maintainer accounts
-- Enforces supply chain security policies
-- Uses Safe-Chain by AikidoSec
-
-### 3. 📊 Dependency Review
+### 2. 📊 Dependency Review
 
 **Action**: `sca/dependencies/`  
 **Purpose**: GitHub-native vulnerability scanning for pull requests
@@ -132,7 +119,7 @@ Each component is an independent composite action that can be configured individ
 - Blocks PRs with high-severity vulnerabilities
 - **Customisable**: Use `dependency-review-config-file` input
 
-### 4. 🔎 OWASP Dependency-Check
+### 3. 🔎 OWASP Dependency-Check
 
 **Action**: `sca/owasp/`  
 **Purpose**: CVE detection with CVSS threshold enforcement
@@ -144,7 +131,7 @@ Each component is an independent composite action that can be configured individ
 - Includes CVE details and remediation guidance
 - **Customisable**: Use `dependency-check-suppression-file` input to suppress false positives
 
-### 5. 🔁 Renovate
+### 4. 🔁 Renovate
 
 **Action**: `sca/renovate/`  
 **Purpose**: Automated dependency updates
@@ -156,7 +143,7 @@ Each component is an independent composite action that can be configured individ
 - Configurable update strategies
 - **Customisable**: Set `renovate: "false"` to disable
 
-### 6. 🔑 MOJ Secret Scanner
+### 5. 🔑 MOJ Secret Scanner
 
 **Action**: `sca/moj/`  
 **Purpose**: Ministry of Justice custom secret detection
@@ -167,7 +154,7 @@ Each component is an independent composite action that can be configured individ
 - Fast, lightweight scanning
 - Fails on secret detection
 
-### 7. 🐷 TruffleHog
+### 6. 🐷 TruffleHog
 
 **Action**: `sca/trufflehog/`  
 **Purpose**: Entropy-based secret scanning
@@ -179,11 +166,12 @@ Each component is an independent composite action that can be configured individ
 - Excludes false positives
 - **Customisable**: Use `trufflehog-config-file` input
 
-### 8. ⚙️ CodeQL
+### 7. ⚙️ CodeQL
 
 **Action**: `sca/codeql/`  
-**Purpose**: Semantic code analysis (SAST)
+**Purpose**: Semantic code analysis (SAST) with SLSA supply chain security
 
+- **SLSA/Safe-Chain**: Validates package integrity, detects typosquatting and malicious packages (minimum 72-hour package age)
 - Deep semantic analysis of source code
 - Detects security vulnerabilities and bugs
 - Supports 10+ programming languages
@@ -192,7 +180,7 @@ Each component is an independent composite action that can be configured individ
 - SARIF upload to GitHub Code Scanning
 - **Customisable**: Use `codeql-config-file`, `codeql-upload-findings`, and `codeql-languages` inputs
 
-### 9. 🛡️ OpenSSF Scorecard
+### 8. 🛡️ OpenSSF Scorecard
 
 **Action**: `sca/ossf/`  
 **Purpose**: Security posture assessment
@@ -204,7 +192,7 @@ Each component is an independent composite action that can be configured individ
 - CI/CD security assessment
 - Generates scorecard with actionable recommendations
 
-### 10. 📋 SBOM Generation
+### 9. 📋 SBOM Generation
 
 **Action**: `sca/sbom/`  
 **Purpose**: Software Bill of Materials
