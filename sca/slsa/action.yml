@@ -1,0 +1,121 @@
+# ==============================================================================
+# SLSA - Supply-chain Levels for Software Artifacts Action
+# ==============================================================================
+#
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Implements Supply-chain Levels for Software Artifacts (SLSA) security
+# framework using Safe-Chain by AikidoSec. Protects against supply chain
+# attacks by validating package integrity, detecting malicious dependencies,
+# and enforcing security policies for software dependencies. Ensures packages
+# meet minimum age requirements before installation to prevent typosquatting
+# and compromised package attacks.
+#
+# ==============================================================================
+# FEATURES
+# ==============================================================================
+# - Package age verification (minimum 72 hours by default)
+# - Typosquatting detection and prevention
+# - Malicious package identification
+# - Known vulnerability detection in dependencies
+# - Suspicious package behaviour analysis
+# - Supply chain attack mitigation
+# - Automated policy enforcement
+# - Continuous monitoring integration
+#
+# ==============================================================================
+# SECURITY PROTECTIONS
+# ==============================================================================
+# Protection against:
+# - Newly published malicious packages
+# - Typosquatting attacks (similar package names)
+# - Dependency confusion attacks
+# - Compromised maintainer accounts
+# - Backdoored packages
+# - Known vulnerable dependencies
+# - Suspicious package modifications
+#
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Basic usage (default settings):
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@v1.3.0
+#
+# Note: This action is typically called as part of the main SCA workflow
+# and runs automatically before dependency installation.
+#
+# ==============================================================================
+# CONFIGURATION
+# ==============================================================================
+# Default settings:
+# - SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 72 hours (3 days)
+#
+# This ensures packages have been publicly available for at least 3 days
+# before installation, allowing time for community review and security
+# analysis to detect potentially malicious packages.
+#
+# ==============================================================================
+# MINIMUM PACKAGE AGE
+# ==============================================================================
+# Why 72 hours?
+# - Most malicious packages are discovered within 24-48 hours
+# - Provides sufficient time for security researchers to analyse new packages
+# - Balances security with development velocity
+# - Reduces risk of zero-day supply chain attacks
+# - Allows automated security scanning tools to flag issues
+#
+# ==============================================================================
+# BEST PRACTICES
+# ==============================================================================
+# - Run as the first step in CI/CD pipelines
+# - Integrate with dependency review workflows
+# - Monitor Safe-Chain alerts and warnings
+# - Maintain an approved package allowlist for critical dependencies
+# - Regularly review blocked packages for false positives
+# - Document exceptions for urgent dependency updates
+#
+# ==============================================================================
+# TOOL INFORMATION
+# ==============================================================================
+# Tool: Safe-Chain (AikidoSec)
+# Version: 1.4.6
+# Installation: Via install-safe-chain.sh script
+# Documentation: https://github.com/AikidoSec/safe-chain
+# Framework: SLSA (Supply-chain Levels for Software Artifacts)
+#
+# ==============================================================================
+# VERSION INFORMATION
+# ==============================================================================
+# Action Version: 1.0.0
+# Last Updated: 2026-03-31
+#
+# ==============================================================================
+
+name: ⛓️ SLSA
+description: Supply-chain Levels for Software Artifacts
+author: Ministry of Justice UK
+
+runs:
+  using: composite
+  steps:
+    - name: 📦 Action
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        repository: "ministryofjustice/devsecops-actions"
+        ref: "925abfbd81a39915859f102a58b4799d96376285"
+        path: "925abfbd81a39915859f102a58b4799d96376285"
+
+    - name: ⚙️ Configuration
+      working-directory: ${{ github.workspace }}
+      shell: bash
+      run: |
+        export SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=72
+
+    - name: 📥 Install
+      working-directory: 925abfbd81a39915859f102a58b4799d96376285
+      shell: bash
+      run: npm run install:safechain

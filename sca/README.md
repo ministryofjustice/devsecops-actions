@@ -10,7 +10,7 @@ Enterprise-Grade Security Scanning for Software Supply Chain
 ## Overview
 
 A comprehensive, enterprise-grade composite action for software composition analysis, dependency management,
-and security review across the entire software supply chain. This action orchestrates 9 specialized security
+and security review across the entire software supply chain. This action orchestrates 10 specialised security
 tools to provide complete visibility into your application's dependencies, vulnerabilities, and supply chain risks.
 
 **Key Capabilities:**
@@ -48,14 +48,15 @@ tools to provide complete visibility into your application's dependencies, vulne
 Each component is an independent composite action that can be configured individually:
 
 1. **📦 Repository** - Secure code retrieval with token authentication
-2. **📊 Dependencies** - GitHub Dependency Review for PR vulnerability scanning
-3. **🔎 OWASP** - OWASP Dependency-Check for CVE detection (CVSS ≥7.0 fails)
-4. **🔁 Renovate** - Automated dependency updates with intelligent grouping
-5. **🔑 Secrets (MOJ)** - Ministry of Justice custom secret detection
-6. **🐷 TruffleHog** - Entropy-based secret scanning (700+ detectors)
-7. **⚙️ CodeQL** - Semantic SAST analysis for security vulnerabilities
-8. **🛡️ OpenSSF** - Security posture assessment (18+ checks)
-9. **📋 SBOM** - Software Bill of Materials generation (CycloneDX)
+2. **⛓️ SLSA** - Supply-chain Levels for Software Artifacts (Safe-Chain)
+3. **📊 Dependencies** - GitHub Dependency Review for PR vulnerability scanning
+4. **🔎 OWASP** - OWASP Dependency-Check for CVE detection (CVSS ≥7.0 fails)
+5. **🔁 Renovate** - Automated dependency updates with intelligent grouping
+6. **🔑 Secrets (MOJ)** - Ministry of Justice custom secret detection
+7. **🐷 TruffleHog** - Entropy-based secret scanning (700+ detectors)
+8. **⚙️ CodeQL** - Semantic SAST analysis for security vulnerabilities
+9. **🛡️ OpenSSF** - Security posture assessment (18+ checks)
+10. **📋 SBOM** - Software Bill of Materials generation (CycloneDX)
 
 ---
 
@@ -76,6 +77,7 @@ Each component is an independent composite action that can be configured individ
 
 | Tool                         | Purpose                             | Output Format     |
 | ---------------------------- | ----------------------------------- | ----------------- |
+| **Safe-Chain**               | Supply chain security (SLSA)        | Process Output    |
 | **GitHub Dependency Review** | PR-based vulnerability detection    | GitHub Alerts     |
 | **OWASP Dependency-Check**   | CVE detection with CVSS scoring     | SARIF, HTML, JSON |
 | **Renovate**                 | Automated dependency updates        | Pull Requests     |
@@ -107,7 +109,19 @@ Each component is an independent composite action that can be configured individ
 - Authenticates using provided GitHub token
 - Prepares workspace for subsequent scanning
 
-### 2. 📊 Dependency Review
+### 2. ⛓️ SLSA (Supply-chain Levels for Software Artifacts)
+
+**Action**: `sca/slsa/`  
+**Purpose**: Supply chain security framework implementation
+
+- Validates package integrity and age (minimum 72 hours)
+- Detects typosquatting and malicious packages
+- Prevents dependency confusion attacks
+- Protects against compromised maintainer accounts
+- Enforces supply chain security policies
+- Uses Safe-Chain by AikidoSec
+
+### 3. 📊 Dependency Review
 
 **Action**: `sca/dependencies/`  
 **Purpose**: GitHub-native vulnerability scanning for pull requests
@@ -118,7 +132,7 @@ Each component is an independent composite action that can be configured individ
 - Blocks PRs with high-severity vulnerabilities
 - **Customisable**: Use `dependency-review-config-file` input
 
-### 3. 🔎 OWASP Dependency-Check
+### 4. 🔎 OWASP Dependency-Check
 
 **Action**: `sca/owasp/`  
 **Purpose**: CVE detection with CVSS threshold enforcement
@@ -130,7 +144,7 @@ Each component is an independent composite action that can be configured individ
 - Includes CVE details and remediation guidance
 - **Customisable**: Use `dependency-check-suppression-file` input to suppress false positives
 
-### 4. 🔁 Renovate
+### 5. 🔁 Renovate
 
 **Action**: `sca/renovate/`  
 **Purpose**: Automated dependency updates
@@ -142,7 +156,7 @@ Each component is an independent composite action that can be configured individ
 - Configurable update strategies
 - **Customisable**: Set `renovate: "false"` to disable
 
-### 5. 🔑 MOJ Secret Scanner
+### 6. 🔑 MOJ Secret Scanner
 
 **Action**: `sca/moj/`  
 **Purpose**: Ministry of Justice custom secret detection
@@ -153,7 +167,7 @@ Each component is an independent composite action that can be configured individ
 - Fast, lightweight scanning
 - Fails on secret detection
 
-### 6. 🐷 TruffleHog
+### 7. 🐷 TruffleHog
 
 **Action**: `sca/trufflehog/`  
 **Purpose**: Entropy-based secret scanning
@@ -165,7 +179,7 @@ Each component is an independent composite action that can be configured individ
 - Excludes false positives
 - **Customisable**: Use `trufflehog-config-file` input
 
-### 7. ⚙️ CodeQL
+### 8. ⚙️ CodeQL
 
 **Action**: `sca/codeql/`  
 **Purpose**: Semantic code analysis (SAST)
@@ -178,7 +192,7 @@ Each component is an independent composite action that can be configured individ
 - SARIF upload to GitHub Code Scanning
 - **Customisable**: Use `codeql-config-file`, `codeql-upload-findings`, and `codeql-languages` inputs
 
-### 8. 🛡️ OpenSSF Scorecard
+### 9. 🛡️ OpenSSF Scorecard
 
 **Action**: `sca/ossf/`  
 **Purpose**: Security posture assessment
@@ -190,7 +204,7 @@ Each component is an independent composite action that can be configured individ
 - CI/CD security assessment
 - Generates scorecard with actionable recommendations
 
-### 9. 📋 SBOM Generation
+### 10. 📋 SBOM Generation
 
 **Action**: `sca/sbom/`  
 **Purpose**: Software Bill of Materials

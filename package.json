@@ -21,6 +21,7 @@
     "build": "npx tsc --project ncc.tsconfig.json && npx ncc build dist/index.js -o dist --minify --source-map --no-cache",
     "housekeeping": "npm audit && npm run validate:all && npx sort-package-json",
     "install:syft": "bash src/scripts/syft.sh",
+    "install:safechain": "bash src/scripts/safechain.sh",
     "lint:ts": "npx eslint --color --cache --max-warnings 0 ./src",
     "lint:ts:fix": "npx eslint --fix --color --cache --max-warnings 0 .",
     "scan": "node dist/index.js",

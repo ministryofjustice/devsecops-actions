@@ -66,17 +66,18 @@ and security review across the entire software supply chain.
 
 #### Introduction
 
-Orchestrates 9 specialized security tools:
+Orchestrates 10 specialised security tools:
 
 1. **📦 Repository Checkout** - Secure code retrieval
-2. **📊 Dependency Review** - PR vulnerability scanning
-3. **🔎 OWASP Dependency-Check** - CVE detection (CVSS ≥7.0 fails)
-4. **🔁 Renovate** - Automated dependency updates
-5. **🔑 MOJ Secret Scanner** - Custom secret patterns
-6. **🐷 TruffleHog** - Entropy-based secret detection (700+ detectors)
-7. **⚙️ CodeQL** - SAST semantic analysis
-8. **🛡️ OpenSSF Scorecard** - Security posture (18+ checks)
-9. **📋 SBOM Generator** - CycloneDX-compliant bill of materials
+2. **⛓️ SLSA** - Supply-chain security framework (Safe-Chain)
+3. **📊 Dependency Review** - PR vulnerability scanning
+4. **🔎 OWASP Dependency-Check** - CVE detection (CVSS ≥7.0 fails)
+5. **🔁 Renovate** - Automated dependency updates
+6. **🔑 MOJ Secret Scanner** - Custom secret patterns
+7. **🐷 TruffleHog** - Entropy-based secret detection (700+ detectors)
+8. **⚙️ CodeQL** - SAST semantic analysis
+9. **🛡️ OpenSSF Scorecard** - Security posture (18+ checks)
+10. **📋 SBOM Generator** - CycloneDX-compliant bill of materials
 
 #### Code
 
@@ -106,7 +107,7 @@ Automated template synchronisation action that maintains consistency between rep
 
 #### Introduction
 
-Orchestrates 4 specialized components:
+Orchestrates 4 specialised components:
 
 1. **⚒️ Install** - Python environment and Cruft setup
 2. **🔑 Authenticate** - HTTPS token authentication for private templates
