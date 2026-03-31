@@ -102,7 +102,7 @@ if [ "$SHA256" != "$CHECKSUM" ]; then
 fi
 
 # Install
-cat "$FILE" | sh -s -- --ci
+sh "$FILE" --ci
 
 # Cleanup
 rm -f "$FILE"
