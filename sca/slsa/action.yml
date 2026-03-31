@@ -106,8 +106,8 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "925abfbd81a39915859f102a58b4799d96376285"
-        path: "925abfbd81a39915859f102a58b4799d96376285"
+        ref: "10-sca-slsa"
+        path: "10-sca-slsa"
 
     - name: ⚙️ Configuration
       working-directory: ${{ github.workspace }}
@@ -116,6 +116,6 @@ runs:
         export SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=72
 
     - name: 📥 Install
-      working-directory: 925abfbd81a39915859f102a58b4799d96376285
+      working-directory: 10-sca-slsa
       shell: bash
       run: npm run install:safechain
