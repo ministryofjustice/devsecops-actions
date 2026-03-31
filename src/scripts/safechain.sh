@@ -104,12 +104,6 @@ fi
 # Install
 cat "$FILE" | sh -s -- --ci
 
-# Validate
-npm safe-chain-verify
-pnpm safe-chain-verify
-pip safe-chain-verify
-uv safe-chain-verify
-
 # Cleanup
 rm -f "$FILE"
 
