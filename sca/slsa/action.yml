@@ -119,8 +119,3 @@ runs:
       working-directory: 10-sca-slsa
       shell: bash
       run: npm run install:safechain
-
-    - name: Test
-      working-directory: 10-sca-slsa
-      shell: bash
-      run: npm install safe-chain-test

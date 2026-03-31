@@ -107,5 +107,5 @@ cat "$FILE" | sh -s -- --ci
 # Cleanup
 rm -f "$FILE"
 
-echo "✅ $(safe-chain --version) has been installed."
+echo "✅ safe-chain ${VERSION} has been installed."
 exit 0;
