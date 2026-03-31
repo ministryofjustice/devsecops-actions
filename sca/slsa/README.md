@@ -10,7 +10,7 @@ Protect Your Dependencies from Supply Chain Attacks
 ## Overview
 
 A lightweight GitHub Action that implements **SLSA (Supply-chain Levels for Software Artifacts)** security framework to protect your project from supply chain attacks.
-This action uses **Safe-Chain by AikidoSec** to validate packageintegrity before installation, preventing malicious dependencies from entering your codebase.
+This action uses **Safe-Chain by AikidoSec** to validate package integrity before installation, preventing malicious dependencies from entering your codebase.
 
 **Key Protection**: Blocks packages published less than 72 hours ago,
 giving the security community time to detect and report malicious packages before they can harm your project.
@@ -162,7 +162,7 @@ jobs:
 
 4. **Monitor Workflow Logs** - Review Safe-Chain output for warnings
 
-   ```
+   ```bash
    ✅ All packages validated successfully
    ⚠️ Warning: Package 'new-package' is only 48 hours old
    ❌ Blocked: Package 'suspicious-pkg' is 12 hours old
