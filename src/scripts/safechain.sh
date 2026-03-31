@@ -102,7 +102,7 @@ if [ "$SHA256" != "$CHECKSUM" ]; then
 fi
 
 # Install
-sh "$FILE"
+sh -s -- --ci "$FILE"
 
 # Validate
 command -v safe-chain >/dev/null 2>&1 || { echo "❌ Missing safe-chain executable."; exit 1; }
