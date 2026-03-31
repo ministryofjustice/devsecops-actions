@@ -113,7 +113,7 @@ runs:
       working-directory: ${{ github.workspace }}
       shell: bash
       run: |
-        export SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=72
+        echo "SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=72" >> "$GITHUB_ENV"
 
     - name: 📥 Install
       working-directory: 10-sca-slsa
