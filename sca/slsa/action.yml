@@ -43,10 +43,11 @@
 # USAGE
 # ==============================================================================
 # Basic usage (default settings):
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@v1.4.0
 #
 # Note: This action is typically called as part of the main SCA workflow
 # and runs automatically before dependency installation.
+# For standalone usage, add this step BEFORE npm ci or pip install.
 #
 # ==============================================================================
 # CONFIGURATION
