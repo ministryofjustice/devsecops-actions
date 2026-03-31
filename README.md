@@ -82,7 +82,7 @@ Orchestrates 10 specialised security tools:
 #### Code
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+- uses: ministryofjustice/devsecops-actions/sca@v1.4.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -119,7 +119,7 @@ Orchestrates 4 specialised components:
 **Public Template:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
+- uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -127,7 +127,7 @@ Orchestrates 4 specialised components:
 **Private Template:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
+- uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
   with:
     private: "true"
     github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -178,7 +178,7 @@ Automated repository health monitoring that scans commit history to identify dor
 **Code:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.3.0
+- uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.4.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     notification-email: "team@example.gov.uk"
@@ -207,7 +207,7 @@ Comprehensive commit verification that validates Git commits for security and qu
 **Code:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/github/commit@v1.3.0
+- uses: ministryofjustice/devsecops-actions/github/commit@v1.4.0
 ```
 
 **[📖 Full Commit Validation Documentation](github/commit/README.md)**
