@@ -35,23 +35,25 @@ echo "$HOME/.local/bin" >> $GITHUB_PATH
 # Validate
 command -v safe-chain >/dev/null 2>&1 || { echo "❌ Missing safe-chain executable."; exit 1; }
 
+echo "✅ $(safe-chain --version) has been installed."
+
 if command -v npm >/dev/null 2>&1; then
-    echo "✅ $(npm --version) exist, validating safe-chain."
+    echo "✅ NPM $(npm --version) exist, validating safe-chain."
     npm safe-chain-verify  
 fi
 
 if command -v pnpm >/dev/null 2>&1; then
-    echo "✅ $(pnpm --version) exist, validating safe-chain."
+    echo "✅ PNPM $(pnpm --version) exist, validating safe-chain."
     pnpm safe-chain-verify  
 fi
 
 if command -v pip >/dev/null 2>&1; then
-    echo "✅ $(pip --version) exist, validating safe-chain."
+    echo "✅ PIP $(pip --version) exist, validating safe-chain."
     pip safe-chain-verify  
 fi
 
 if command -v uv >/dev/null 2>&1; then
-    echo "✅ $(uv --version) exist, validating safe-chain."
+    echo "✅ UV $(uv --version) exist, validating safe-chain."
     uv safe-chain-verify  
 fi 
 

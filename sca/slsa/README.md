@@ -216,6 +216,22 @@ jobs:
 - 📦 poetry
 - 📦 pipx
 
+### Q: How do I test the action?
+
+**A**: Run the following command
+
+NPM
+
+```bash
+npm install safe-chain-test
+```
+
+PIP
+
+```bash
+pip3 install safe-chain-pi-test
+```
+
 ### Q: What happens if a malicious package is detected?
 
 **A**: The workflow fails immediately:
