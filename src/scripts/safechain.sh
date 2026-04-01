@@ -2,9 +2,9 @@ set -euo pipefail
 
 # Variables
 COMMIT="caf56d0b17614d6291770e3e6efb906bba1d3d93"
-FILE="safe-chain-linuxstatic-x64"
+FILE="safe-chain"
 URL="https://github.com/ministryofjustice/devsecops-actions/raw/${COMMIT}/sca/slsa/${FILE}"
-SHA256="06779120ef7958079b690d3e7f04299af3d12aacc5f9b38772cef57933e3d478"
+SHA256="d6f351dcfb2bd5a11e58d5ce243a1815a976c03768e0519822f2f4e4f96f2d03"
 
 # Dependencies
 for cmd in curl sha256sum; do
