@@ -1,10 +1,11 @@
 set -euo pipefail
 
 # Variables
-COMMIT="62f26ecccb5a17c38c495aa7e735f50cbd00ab39"
+COMMIT="25f7d3ac1b6fcdfcf0feeffac5d6ca9b4ec186b7"
+DIRECTORY="${HOME}/.safe-chain/bin"
 FILE="safe-chain"
-URL="https://github.com/ministryofjustice/devsecops-actions/raw/${COMMIT}/sca/slsa/${FILE}"
-SHA256="06779120ef7958079b690d3e7f04299af3d12aacc5f9b38772cef57933e3d478"
+URL="https://raw.githubusercontent.com/ministryofjustice/devsecops-actions/${COMMIT}/sca/slsa/${FILE}"
+SHA256="d6f351dcfb2bd5a11e58d5ce243a1815a976c03768e0519822f2f4e4f96f2d03"
 
 # Dependencies
 for cmd in curl sha256sum; do
@@ -25,37 +26,20 @@ if [ "$SHA256" != "$CHECKSUM" ]; then
 fi
 
 # Install
-mkdir -p "$HOME/.local/bin"
-mv "./$FILE" "$HOME/.local/bin/$FILE"
-chmod +x "$HOME/.local/bin/$FILE"
+if [ ! -d "$DIRECTORY" ]; then
+    mkdir -p "$DIRECTORY" || { echo "❌ Directory $DIRECTORY creation failed."; exit 1; }
+fi
 
-export PATH="$HOME/.local/bin:$PATH"
-echo "$HOME/.local/bin" >> $GITHUB_PATH
+mv "./$FILE" "$DIRECTORY/$FILE"
+chmod +x "$DIRECTORY/$FILE"
+
+export PATH="$DIRECTORY:$PATH"
+echo "$DIRECTORY" >> $GITHUB_PATH
+
+safe-chain setup-ci
 
 # Validate
 command -v safe-chain >/dev/null 2>&1 || { echo "❌ Missing safe-chain executable."; exit 1; }
-
-echo "SF - $($HOME/.local/bin/safe-chain)"
-
-if command -v npm >/dev/null 2>&1; then
-    echo "✅ NPM $(npm --version) exist, validating safe-chain."
-    npm safe-chain-verify  
-fi
-
-if command -v pnpm >/dev/null 2>&1; then
-    echo "✅ PNPM $(pnpm --version) exist, validating safe-chain."
-    pnpm safe-chain-verify  
-fi
-
-if command -v pip >/dev/null 2>&1; then
-    echo "✅ PIP $(pip --version) exist, validating safe-chain."
-    pip safe-chain-verify  
-fi
-
-if command -v uv >/dev/null 2>&1; then
-    echo "✅ UV $(uv --version) exist, validating safe-chain."
-    uv safe-chain-verify  
-fi 
 
 # Cleanup
 rm -f "$FILE"
