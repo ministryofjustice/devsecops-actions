@@ -118,19 +118,19 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "925abfbd81a39915859f102a58b4799d96376285"
-        path: "925abfbd81a39915859f102a58b4799d96376285"
+        ref: "3e9410cef31dd9cec64ad567efc959afd88a591c"
+        path: "3e9410cef31dd9cec64ad567efc959afd88a591c"
 
     - name: Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
-        cache-dependency-path: "925abfbd81a39915859f102a58b4799d96376285/package-lock.json"
+        cache-dependency-path: "3e9410cef31dd9cec64ad567efc959afd88a591c/package-lock.json"
 
     - name: Install
       shell: bash
-      working-directory: 925abfbd81a39915859f102a58b4799d96376285
+      working-directory: 3e9410cef31dd9cec64ad567efc959afd88a591c
       run: npm run install:syft
 
     - name: Repository
@@ -140,7 +140,7 @@ runs:
 
     - name: Images
       if: inputs.docker-images-file != ''
-      working-directory: 925abfbd81a39915859f102a58b4799d96376285
+      working-directory: 3e9410cef31dd9cec64ad567efc959afd88a591c
       shell: bash
       run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 

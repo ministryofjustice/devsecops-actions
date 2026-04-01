@@ -20,6 +20,7 @@
   "scripts": {
     "build": "npx tsc --project ncc.tsconfig.json && npx ncc build dist/index.js -o dist --minify --source-map --no-cache",
     "housekeeping": "npm audit && npm run validate:all && npx sort-package-json",
+    "install:safechain": "bash src/scripts/safechain.sh",
     "install:syft": "bash src/scripts/syft.sh",
     "lint:ts": "npx eslint --color --cache --max-warnings 0 ./src",
     "lint:ts:fix": "npx eslint --fix --color --cache --max-warnings 0 .",

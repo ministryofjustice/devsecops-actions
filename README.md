@@ -66,7 +66,7 @@ and security review across the entire software supply chain.
 
 #### Introduction
 
-Orchestrates 9 specialized security tools:
+Orchestrates 9 specialised security steps:
 
 1. **📦 Repository Checkout** - Secure code retrieval
 2. **📊 Dependency Review** - PR vulnerability scanning
@@ -74,14 +74,14 @@ Orchestrates 9 specialized security tools:
 4. **🔁 Renovate** - Automated dependency updates
 5. **🔑 MOJ Secret Scanner** - Custom secret patterns
 6. **🐷 TruffleHog** - Entropy-based secret detection (700+ detectors)
-7. **⚙️ CodeQL** - SAST semantic analysis
+7. **⚙️ CodeQL** - SAST semantic analysis (includes SLSA/Safe-Chain)
 8. **🛡️ OpenSSF Scorecard** - Security posture (18+ checks)
 9. **📋 SBOM Generator** - CycloneDX-compliant bill of materials
 
 #### Code
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+- uses: ministryofjustice/devsecops-actions/sca@v1.4.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -106,7 +106,7 @@ Automated template synchronisation action that maintains consistency between rep
 
 #### Introduction
 
-Orchestrates 4 specialized components:
+Orchestrates 4 specialised components:
 
 1. **⚒️ Install** - Python environment and Cruft setup
 2. **🔑 Authenticate** - HTTPS token authentication for private templates
@@ -118,7 +118,7 @@ Orchestrates 4 specialized components:
 **Public Template:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
+- uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -126,7 +126,7 @@ Orchestrates 4 specialized components:
 **Private Template:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
+- uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
   with:
     private: "true"
     github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -177,7 +177,7 @@ Automated repository health monitoring that scans commit history to identify dor
 **Code:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.3.0
+- uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.4.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     notification-email: "team@example.gov.uk"
@@ -206,7 +206,7 @@ Comprehensive commit verification that validates Git commits for security and qu
 **Code:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/github/commit@v1.3.0
+- uses: ministryofjustice/devsecops-actions/github/commit@v1.4.0
 ```
 
 **[📖 Full Commit Validation Documentation](github/commit/README.md)**

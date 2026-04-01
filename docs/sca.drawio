@@ -10,7 +10,7 @@
                     <mxGeometry x="100" y="40" width="800" height="40" as="geometry"/>
                 </mxCell>
                 
-                <mxCell id="subtitle" value="ministryofjustice/devsecops-actions/sca" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="subtitle" value="ministryofjustice/devsecops-actions/sca@v1.4.0" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="100" y="75" width="800" height="25" as="geometry"/>
                 </mxCell>
                 
@@ -34,7 +34,7 @@
                 <mxCell id="step1-title" value="Checkout Repository" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="245" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step1-desc" value="actions/checkout@v6.0.1&lt;br&gt;Clones repository code and prepares workspace for scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step1-desc" value="actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2&lt;br&gt;Clones repository code and prepares workspace for scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="275" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
@@ -53,7 +53,7 @@
                 <mxCell id="step2-title" value="Dependency Review" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="385" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step2-desc" value="actions/dependency-review-action@v4.8.3&lt;br&gt;Scans dependencies for vulnerabilities, license issues, and security risks" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step2-desc" value="sca/dependencies@3e9410cef31dd9cec64ad567efc959afd88a591c&lt;br&gt;Scans dependencies for vulnerabilities, license issues, and security risks" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="415" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
@@ -72,7 +72,7 @@
                 <mxCell id="step3-title" value="OWASP Dependency Check" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="525" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step3-desc" value="dependency-check/Dependency-Check_Action@v1.1.0&lt;br&gt;Scans dependencies for known CVEs with CVSS threshold enforcement" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step3-desc" value="sca/owasp@3e9410cef31dd9cec64ad567efc959afd88a591c&lt;br&gt;Scans dependencies for known CVEs with CVSS threshold enforcement (≥7.0)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="555" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
@@ -101,7 +101,7 @@
                 <mxCell id="step4-title" value="Renovate Bot" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="805" width="180" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step4-desc" value="renovatebot/github-action@v44.2.2&lt;br&gt;Automated dependency updates" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step4-desc" value="sca/renovate@3e9410cef31dd9cec64ad567efc959afd88a591c&lt;br&gt;Automated dependency updates and pull requests" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="835" width="180" height="45" as="geometry"/>
                 </mxCell>
                 
@@ -155,10 +155,10 @@
                 <mxCell id="step5-icon" value="🔑" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
                     <mxGeometry x="220" y="985" width="60" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="step5-title" value="Secret Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step5-title" value="MOJ Secret Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="985" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step5-desc" value="ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0&lt;br&gt;Scans codebase for exposed secrets and credentials using Docker container" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step5-desc" value="sca/moj@3e9410cef31dd9cec64ad567efc959afd88a591c&lt;br&gt;Ministry of Justice custom secret detection using Docker container" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1015" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
@@ -177,7 +177,7 @@
                 <mxCell id="step6-title" value="TruffleHog Secret Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1125" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step6-desc" value="trufflesecurity/trufflehog:3.92.4&lt;br&gt;Advanced secret detection and scanning, uploads findings as artifact" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step6-desc" value="sca/trufflehog@3e9410cef31dd9cec64ad567efc959afd88a591c&lt;br&gt;Advanced secret detection with 700+ detectors, uploads findings as artifact" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1155" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
@@ -193,10 +193,10 @@
                 <mxCell id="step7-icon" value="⚙️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
                     <mxGeometry x="220" y="1265" width="60" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="step7-title" value="CodeQL Security Analysis" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step7-title" value="CodeQL SAST Analysis + SLSA" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1265" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step7-desc" value="github/codeql-action@v4.31.9&lt;br&gt;Code scanning for security vulnerabilities, uploads results to Code Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step7-desc" value="sca/codeql@3e9410cef31dd9cec64ad567efc959afd88a591c&lt;br&gt;Semantic code analysis + SLSA supply chain security (Safe-Chain)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1295" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
@@ -215,7 +215,7 @@
                 <mxCell id="step8-title" value="OpenSSF Scorecard" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1405" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step8-desc" value="ossf/scorecard-action@v2.4.3&lt;br&gt;Security health scoring and best practices assessment" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step8-desc" value="sca/ossf@3e9410cef31dd9cec64ad567efc959afd88a591c&lt;br&gt;Security health scoring and best practices assessment (18+ checks)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1435" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
@@ -234,7 +234,7 @@
                 <mxCell id="step9-title" value="SBOM Generation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#c9d1d9;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1545" width="480" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="step9-desc" value="Syft (Anchore) + TypeScript CLI&lt;br&gt;Generates CycloneDX SBOM for repository and Docker images" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="step9-desc" value="sca/sbom@3e9410cef31dd9cec64ad567efc959afd88a591c&lt;br&gt;Generates CycloneDX 1.5 SBOM for repository and Docker images (Syft + TypeScript)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="300" y="1575" width="480" height="45" as="geometry"/>
                 </mxCell>
                 
