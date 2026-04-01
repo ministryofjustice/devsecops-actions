@@ -35,10 +35,7 @@ echo "$HOME/.local/bin" >> $GITHUB_PATH
 # Validate
 command -v safe-chain >/dev/null 2>&1 || { echo "❌ Missing safe-chain executable."; exit 1; }
 
-echo "$(pwd)"
-echo "$(ls -alh)"
-echo "$(ls -alh $HOME/.local/bin/)"
-echo "$(safe-chain)"
+echo "SF - $($HOME/.local/bin/safe-chain)"
 
 if command -v npm >/dev/null 2>&1; then
     echo "✅ NPM $(npm --version) exist, validating safe-chain."
