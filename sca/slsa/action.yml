@@ -110,6 +110,13 @@ runs:
         ref: "3e9410cef31dd9cec64ad567efc959afd88a591c"
         path: "3e9410cef31dd9cec64ad567efc959afd88a591c"
 
+    - name: Node
+      uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: "npm"
+        cache-dependency-path: "3e9410cef31dd9cec64ad567efc959afd88a591c/package-lock.json"
+
     - name: ⚙️ Configuration
       working-directory: ${{ github.workspace }}
       shell: bash
