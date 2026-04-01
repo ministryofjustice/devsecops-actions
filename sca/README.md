@@ -10,7 +10,7 @@ Enterprise-Grade Security Scanning for Software Supply Chain
 ## Overview
 
 A comprehensive, enterprise-grade composite action for software composition analysis, dependency management,
-and security review across the entire software supply chain. This action orchestrates 9 specialized security
+and security review across the entire software supply chain. This action orchestrates 10 specialised security
 tools to provide complete visibility into your application's dependencies, vulnerabilities, and supply chain risks.
 
 **Key Capabilities:**
@@ -53,7 +53,7 @@ Each component is an independent composite action that can be configured individ
 4. **🔁 Renovate** - Automated dependency updates with intelligent grouping
 5. **🔑 Secrets (MOJ)** - Ministry of Justice custom secret detection
 6. **🐷 TruffleHog** - Entropy-based secret scanning (700+ detectors)
-7. **⚙️ CodeQL** - Semantic SAST analysis for security vulnerabilities
+7. **⚙️ CodeQL** - Semantic SAST analysis (includes SLSA supply chain security via Safe-Chain)
 8. **🛡️ OpenSSF** - Security posture assessment (18+ checks)
 9. **📋 SBOM** - Software Bill of Materials generation (CycloneDX)
 
@@ -76,6 +76,7 @@ Each component is an independent composite action that can be configured individ
 
 | Tool                         | Purpose                             | Output Format     |
 | ---------------------------- | ----------------------------------- | ----------------- |
+| **Safe-Chain**               | Supply chain security (SLSA)        | Process Output    |
 | **GitHub Dependency Review** | PR-based vulnerability detection    | GitHub Alerts     |
 | **OWASP Dependency-Check**   | CVE detection with CVSS scoring     | SARIF, HTML, JSON |
 | **Renovate**                 | Automated dependency updates        | Pull Requests     |
@@ -168,8 +169,9 @@ Each component is an independent composite action that can be configured individ
 ### 7. ⚙️ CodeQL
 
 **Action**: `sca/codeql/`  
-**Purpose**: Semantic code analysis (SAST)
+**Purpose**: Semantic code analysis (SAST) with SLSA supply chain security
 
+- **SLSA/Safe-Chain**: Validates package integrity, detects typosquatting and malicious packages (minimum 72-hour package age)
 - Deep semantic analysis of source code
 - Detects security vulnerabilities and bugs
 - Supports 10+ programming languages
@@ -236,7 +238,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.4.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -289,7 +291,7 @@ jobs:
 
     steps:
       - name: Run SCA with Custom Configuration
-        uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.4.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -350,7 +352,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.4.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: ${{ matrix.renovate }}
@@ -386,7 +388,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+        uses: ministryofjustice/devsecops-actions/sca@v1.4.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: "false" # No automated updates on PRs
@@ -400,7 +402,7 @@ For repositories with external dependency management:
 ```yaml
 steps:
   - name: Run SCA without Renovate
-    uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+    uses: ministryofjustice/devsecops-actions/sca@v1.4.0
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
       renovate: "false"
@@ -485,7 +487,7 @@ Create a JSON file (e.g., `docker-images.json` or `sources.json`) in your reposi
 #### Usage
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+- uses: ministryofjustice/devsecops-actions/sca@v1.4.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     docker-images-file: "docker-images.json"
@@ -725,7 +727,7 @@ env:
 uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Not recommended: Branch names
-uses: ministryofjustice/devsecops-actions/sca@v1.3.0
+uses: ministryofjustice/devsecops-actions/sca@v1.4.0
 ```
 
 ### Security Best Practices
