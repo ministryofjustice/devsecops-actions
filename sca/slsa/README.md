@@ -88,11 +88,11 @@ jobs:
 
       # ⛓️ SLSA Protection - Add BEFORE npm ci
       - name: ⛓️ SLSA Supply Chain Security
-        uses: ministryofjustice/devsecops-actions/sca/slsa@3e9410cef31dd9cec64ad567efc959afd88a591c
+        uses: ministryofjustice/devsecops-actions/sca/slsa@4cd163be7859cd130800d6719d925318826038ea
 
       # Now safe to install dependencies
       - name: Install Dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Run Tests
         run: npm test
@@ -120,7 +120,7 @@ jobs:
 
       # ⛓️ SLSA Protection - Add BEFORE pip install
       - name: ⛓️ SLSA Supply Chain Security
-        uses: ministryofjustice/devsecops-actions/sca/slsa@3e9410cef31dd9cec64ad567efc959afd88a591c
+        uses: ministryofjustice/devsecops-actions/sca/slsa@4cd163be7859cd130800d6719d925318826038ea
 
       # Now safe to install dependencies
       - name: Install Dependencies
@@ -141,7 +141,7 @@ jobs:
    ```yaml
    - uses: actions/checkout@v4
    - uses: .../sca/slsa@... # ← First security step
-   - run: npm ci # ← Then install
+   - run: npm ci --ignore-scripts # ← Then install
    ```
 
 2. **Use in All Workflows** - Protect every workflow that installs dependencies
@@ -154,7 +154,7 @@ jobs:
 
    ```yaml
    # ✅ Recommended
-   uses: ministryofjustice/devsecops-actions/sca/slsa@3e9410cef31dd9cec64ad567efc959afd88a591c
+   uses: ministryofjustice/devsecops-actions/sca/slsa@4cd163be7859cd130800d6719d925318826038ea
 
    # ⚠️ Less secure
    uses: ministryofjustice/devsecops-actions/sca/slsa@v1.4.0
@@ -189,7 +189,7 @@ jobs:
 
    ```yaml
    # ❌ BAD - Installing before security check
-   - run: npm ci
+   - run: npm ci --ignore-scripts
    - uses: .../sca/slsa@... # ← Too late!
    ```
 
