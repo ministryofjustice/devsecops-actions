@@ -687,7 +687,7 @@ steps:
 uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Acceptable: Version tag (updated periodically)
-uses: ministryofjustice/devsecops-actions/github/commit@c0635294682443780fa88c82c6a0ea9205f35f34
+uses: ministryofjustice/devsecops-actions/github/commit@559ec2408860d9237cc472a5710e61c1c2187ffa
 
 # ❌ Not recommended: Branch names (security risk)
 uses: ministryofjustice/devsecops-actions/github/commit@main

@@ -21,6 +21,7 @@ giving the security community time to detect and report malicious packages befor
 
 - [What It Prevents](#-what-it-prevents)
 - [Quick Start](#-quick-start)
+- [Configuration](#️-configuration)
 - [Best Practices](#-best-practices)
 - [FAQ](#-faq)
 
@@ -84,11 +85,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
 
       # ⛓️ SLSA Protection - Add BEFORE npm ci
       - name: ⛓️ SLSA Supply Chain Security
-        uses: ministryofjustice/devsecops-actions/sca/slsa@4cd163be7859cd130800d6719d925318826038ea
+        uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa # v1.4.0
 
       # Now safe to install dependencies
       - name: Install Dependencies
@@ -112,15 +116,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
 
       # ⛓️ SLSA Protection - Add BEFORE pip install
       - name: ⛓️ SLSA Supply Chain Security
-        uses: ministryofjustice/devsecops-actions/sca/slsa@4cd163be7859cd130800d6719d925318826038ea
+        uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa # v1.4.0
 
       # Now safe to install dependencies
       - name: Install Dependencies
@@ -129,6 +131,57 @@ jobs:
       - name: Run Tests
         run: pytest
 ```
+
+---
+
+## ⚙️ Configuration
+
+### Basic Usage
+
+No configuration required - works out of the box with secure defaults:
+
+```yaml
+- name: ⛓️ SLSA Supply Chain Security
+  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+```
+
+### Advanced Configuration
+
+#### Custom Node.js Version
+
+```yaml
+- name: ⛓️ SLSA Supply Chain Security
+  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  with:
+    node-version: "24.11.1"
+```
+
+#### Package Exclusions
+
+Exclude trusted packages from the 72-hour age requirement:
+
+```yaml
+- name: ⛓️ SLSA Supply Chain Security
+  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  with:
+    security-patch-package-exclusion: "@ministryofjustice/example"
+```
+
+**⚠️ Important:** Only exclude packages you absolutely trust, is verified and is only required for an urgent security patch.
+
+### Environment Variables Set
+
+After running this action, the following environment variables are available:
+
+- `SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS` - Set to `72` (3 days)
+- `SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS` - Your exclusion patterns
+
+### Inputs
+
+| Input                              | Required | Default   | Description                                                    |
+| ---------------------------------- | -------- | --------- | -------------------------------------------------------------- |
+| `node-version`                     | No       | `24.11.1` | Node.js version to use for Safe-Chain installation             |
+| `security-patch-package-exclusion` | No       | `""`      | Comma-separated list of packages to exclude from age filtering |
 
 ---
 
@@ -153,11 +206,11 @@ jobs:
 3. **Pin to Commit SHA** - Use SHA instead of tags for maximum security
 
    ```yaml
-   # ✅ Recommended
-   uses: ministryofjustice/devsecops-actions/sca/slsa@4cd163be7859cd130800d6719d925318826038ea
+   # ✅ Recommended - Use latest stable commit
+   uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
 
-   # ⚠️ Less secure
-   uses: ministryofjustice/devsecops-actions/sca/slsa@c0635294682443780fa88c82c6a0ea9205f35f34
+   # ⚠️ Alternative - Use specific version tag
+   uses: ministryofjustice/devsecops-actions/sca/slsa@v1.4.0
    ```
 
 4. **Monitor Workflow Logs** - Review Safe-Chain output for warnings
@@ -254,19 +307,31 @@ pip3 install safe-chain-pi-test
 
 **A**: Follow this process:
 
-1. **Assess urgency**: Is this a critical security patch?
+1. **Assess urgency**: Is this a critical security patch, only proceed if the answer 'yes'.
 2. **Get approval**: OCTO Cyber team sign-off required
-3. **Document**: Document decision
-4. **Monitor**: Watch for any suspicious behaviour
+3. **Temporary exclusion**: Add to `security-patch-package-exclusion`
+4. **Document**: Document decision in PR/issue
+5. **Monitor**: Watch for any suspicious behaviour
+6. **Remove exclusion**: Once package reaches 72 hours old
+
+**Example:**
+
+```yaml
+- name: ⛓️ SLSA Supply Chain Security
+  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  with:
+    security-patch-package-exclusion: "critical-security-fix"
+```
 
 ---
 
 ## 🔗 Related Documentation
 
-- [Safe-Chain GitHub](https://github.com/AikidoSec/safe-chain)
-- [SLSA Framework](https://slsa.dev/)
-- [Main SCA Action](../README.md)
-- [NCSC Supply Chain Playbook](https://www.ncsc.gov.uk/information/cyber-essentials-supply-chain-playbook)
+- [Safe-Chain GitHub Repository](https://github.com/AikidoSec/safe-chain)
+- [SLSA Framework Official Site](https://slsa.dev/)
+- [GitHub Actions Security Best Practices](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions)
+- [NCSC Supply Chain Security Playbook](https://www.ncsc.gov.uk/information/cyber-essentials-supply-chain-playbook)
+- [Main SCA Action Documentation](../README.md)
 
 ---
 
