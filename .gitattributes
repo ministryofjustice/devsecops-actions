@@ -45,3 +45,7 @@
 *.docx          binary
 *.xls           binary
 *.xlsx          binary
+
+# safe-chain binary
+safe-chain        binary
+safe-chain-*      binary
