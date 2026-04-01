@@ -41,10 +41,10 @@
 # USAGE
 # ==============================================================================
 # Basic usage (default settings):
-#   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@c0635294682443780fa88c82c6a0ea9205f35f34
 #
 # With custom configuration:
-#   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca/trufflehog@c0635294682443780fa88c82c6a0ea9205f35f34
 #     with:
 #       trufflehog-config-file: ".github/trufflehog-config.yml"
 #       trufflehog-output-filename: "sca-trufflehog"

@@ -30,19 +30,19 @@
 # USAGE
 # ==============================================================================
 # Basic usage (auto-detection):
-#   - uses: ministryofjustice/devsecops-actions/sca/codeql@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@c0635294682443780fa88c82c6a0ea9205f35f34
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With custom configuration:
-#   - uses: ministryofjustice/devsecops-actions/sca/codeql@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@c0635294682443780fa88c82c6a0ea9205f35f34
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       codeql-config-file: ".github/codeql/codeql-config.yml"
 #       codeql-upload-findings: "always"
 #
 # Disable upload (for default CodeQL setup):
-#   - uses: ministryofjustice/devsecops-actions/sca/codeql@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@c0635294682443780fa88c82c6a0ea9205f35f34
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       codeql-upload-findings: "never"
@@ -113,7 +113,7 @@ runs:
         config-file: ${{ inputs.codeql-config-file }}
 
     - name: ⛓️ SLSA
-      uses: ministryofjustice/devsecops-actions/sca/slsa@4cd163be7859cd130800d6719d925318826038ea
+      uses: ministryofjustice/devsecops-actions/sca/slsa@c0635294682443780fa88c82c6a0ea9205f35f34
 
     # Automatically builds compiled languages
     - name: Build

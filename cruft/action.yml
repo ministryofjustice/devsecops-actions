@@ -32,12 +32,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage (public template):
-#   - uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/cruft@c0635294682443780fa88c82c6a0ea9205f35f34
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # Advanced usage with private template:
-#   - uses: ministryofjustice/devsecops-actions/cruft@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/cruft@c0635294682443780fa88c82c6a0ea9205f35f34
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       private: "true"
@@ -158,13 +158,13 @@ runs:
   using: composite
   steps:
     - name: ⚒️ Install
-      uses: ministryofjustice/devsecops-actions/cruft/install@4cd163be7859cd130800d6719d925318826038ea
+      uses: ministryofjustice/devsecops-actions/cruft/install@c0635294682443780fa88c82c6a0ea9205f35f34
       with:
         python-version: ${{ inputs.python-version }}
 
     - name: 🔑 Authenticate
       if: inputs.private  == 'true'
-      uses: ministryofjustice/devsecops-actions/cruft/authenticate@4cd163be7859cd130800d6719d925318826038ea
+      uses: ministryofjustice/devsecops-actions/cruft/authenticate@c0635294682443780fa88c82c6a0ea9205f35f34
       with:
         token: ${{ inputs.token }}
         github-app-owner: ${{ inputs.github-app-owner }}
@@ -174,11 +174,11 @@ runs:
 
     - name: 🔎 Check
       id: check
-      uses: ministryofjustice/devsecops-actions/cruft/check@4cd163be7859cd130800d6719d925318826038ea
+      uses: ministryofjustice/devsecops-actions/cruft/check@c0635294682443780fa88c82c6a0ea9205f35f34
 
     - name: ✏️ Create
       if: steps.check.outputs.has-update == 'true'
-      uses: ministryofjustice/devsecops-actions/cruft/create@4cd163be7859cd130800d6719d925318826038ea
+      uses: ministryofjustice/devsecops-actions/cruft/create@c0635294682443780fa88c82c6a0ea9205f35f34
       with:
         token: ${{ inputs.token }}
         github-app-id: ${{ inputs.github-app-id }}

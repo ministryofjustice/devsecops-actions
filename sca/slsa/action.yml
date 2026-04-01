@@ -43,7 +43,7 @@
 # USAGE
 # ==============================================================================
 # Basic usage (default settings):
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@v1.4.0
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@c0635294682443780fa88c82c6a0ea9205f35f34
 #
 # Note: This action is typically called as part of the main SCA workflow
 # and runs automatically before dependency installation.
@@ -117,15 +117,15 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "10-sca-slsa"
-        path: "10-sca-slsa"
+        ref: "c0635294682443780fa88c82c6a0ea9205f35f34"
+        path: "c0635294682443780fa88c82c6a0ea9205f35f34"
 
     - name: Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
-        cache-dependency-path: "10-sca-slsa/package-lock.json"
+        cache-dependency-path: "c0635294682443780fa88c82c6a0ea9205f35f34/package-lock.json"
 
     - name: ⚙️ Configuration
       working-directory: ${{ github.workspace }}

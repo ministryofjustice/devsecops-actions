@@ -29,15 +29,15 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@c0635294682443780fa88c82c6a0ea9205f35f34
 #
 # With Docker image scanning:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@c0635294682443780fa88c82c6a0ea9205f35f34
 #     with:
 #       docker-images-file: "docker-images.json"
 #
 # Custom Node.js version:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@c0635294682443780fa88c82c6a0ea9205f35f34
 #     with:
 #       node-version: "24.11.1"
 #       docker-images-file: "docker-images.json"
@@ -118,19 +118,19 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "4cd163be7859cd130800d6719d925318826038ea"
-        path: "4cd163be7859cd130800d6719d925318826038ea"
+        ref: "c0635294682443780fa88c82c6a0ea9205f35f34"
+        path: "c0635294682443780fa88c82c6a0ea9205f35f34"
 
     - name: Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
-        cache-dependency-path: "4cd163be7859cd130800d6719d925318826038ea/package-lock.json"
+        cache-dependency-path: "c0635294682443780fa88c82c6a0ea9205f35f34/package-lock.json"
 
     - name: Install
       shell: bash
-      working-directory: 4cd163be7859cd130800d6719d925318826038ea
+      working-directory: c0635294682443780fa88c82c6a0ea9205f35f34
       run: npm run install:syft
 
     - name: Repository
@@ -140,7 +140,7 @@ runs:
 
     - name: Images
       if: inputs.docker-images-file != ''
-      working-directory: 4cd163be7859cd130800d6719d925318826038ea
+      working-directory: c0635294682443780fa88c82c6a0ea9205f35f34
       shell: bash
       run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 

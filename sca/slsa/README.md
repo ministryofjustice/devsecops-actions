@@ -157,7 +157,7 @@ jobs:
    uses: ministryofjustice/devsecops-actions/sca/slsa@4cd163be7859cd130800d6719d925318826038ea
 
    # ⚠️ Less secure
-   uses: ministryofjustice/devsecops-actions/sca/slsa@v1.4.0
+   uses: ministryofjustice/devsecops-actions/sca/slsa@c0635294682443780fa88c82c6a0ea9205f35f34
    ```
 
 4. **Monitor Workflow Logs** - Review Safe-Chain output for warnings
