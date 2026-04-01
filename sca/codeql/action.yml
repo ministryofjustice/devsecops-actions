@@ -112,9 +112,6 @@ runs:
         languages: ${{ inputs.codeql-languages }}
         config-file: ${{ inputs.codeql-config-file }}
 
-    - name: ⛓️ SLSA
-      uses: ministryofjustice/devsecops-actions/sca/slsa@c0635294682443780fa88c82c6a0ea9205f35f34
-
     # Automatically builds compiled languages
     - name: Build
       uses: github/codeql-action/autobuild@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4

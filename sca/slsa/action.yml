@@ -8,12 +8,19 @@
 # ==============================================================================
 # DESCRIPTION
 # ==============================================================================
-# Implements Supply-chain Levels for Software Artifacts (SLSA) security
-# framework using Safe-Chain by AikidoSec. Protects against supply chain
-# attacks by validating package integrity, detecting malicious dependencies,
-# and enforcing security policies for software dependencies. Ensures packages
-# meet minimum age requirements before installation to prevent typosquatting
-# and compromised package attacks.
+# Composite GitHub Action that implements Supply-chain Levels for Software
+# Artifacts (SLSA) security framework using Safe-Chain by AikidoSec. This
+# action sets up the Safe-Chain tool in GitHub Actions workflows to protect
+# against supply chain attacks by validating package integrity, detecting
+# malicious dependencies, and enforcing security policies for software
+# dependencies. Ensures packages meet minimum age requirements before
+# installation to prevent typosquatting and compromised package attacks.
+#
+# The action performs the following steps:
+# 1. Checks out the repository
+# 2. Sets up Node.js environment
+# 3. Configures Safe-Chain environment variables
+# 4. Installs Safe-Chain binary via safechain.sh script
 #
 # ==============================================================================
 # FEATURES
@@ -45,15 +52,35 @@
 # Basic usage (default settings):
 #   - uses: ministryofjustice/devsecops-actions/sca/slsa@c0635294682443780fa88c82c6a0ea9205f35f34
 #
+# Advanced usage with package exclusions:
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@c0635294682443780fa88c82c6a0ea9205f35f34
+#     with:
+#       node-version: "24.11.1"
+#       security-patch-package-exclusion: "@octokit/*,@actions/*"
+#
 # Note: This action is typically called as part of the main SCA workflow
 # and runs automatically before dependency installation.
 # For standalone usage, add this step BEFORE npm ci --ignore-scripts or pip install.
 #
 # ==============================================================================
+# PREREQUISITES
+# ==============================================================================
+# - GitHub Actions runner (ubuntu-latest recommended)
+# - curl and sha256sum utilities (pre-installed on GitHub runners)
+# - Internet access to download Safe-Chain binary
+# - GITHUB_PATH environment variable (available in GitHub Actions)
+#
+# ==============================================================================
 # CONFIGURATION
 # ==============================================================================
-# Default settings:
+# Environment Variables Set:
 # - SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 72 hours (3 days)
+# - SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS: Package exclusion patterns
+#
+# Inputs:
+# - node-version: Node.js version for Safe-Chain (default: 24.11.1)
+# - security-patch-package-exclusion: Trusted packages to exclude from
+#   minimum age filtering (e.g., @scope/* to trust all packages from scope)
 #
 # This ensures packages have been publicly available for at least 3 days
 # before installation, allowing time for community review and security
@@ -72,19 +99,33 @@
 # ==============================================================================
 # BEST PRACTICES
 # ==============================================================================
-# - Run as the first step in CI/CD pipelines
+# - Run as the first step in CI/CD pipelines (after checkout)
 # - Integrate with dependency review workflows
-# - Monitor Safe-Chain alerts and warnings
+# - Monitor Safe-Chain alerts and warnings in workflow logs
 # - Maintain an approved package allowlist for critical dependencies
 # - Regularly review blocked packages for false positives
 # - Document exceptions for urgent dependency updates
+#
+# ==============================================================================
+# OUTPUTS
+# ==============================================================================
+# This action produces the following side effects:
+# - Installs Safe-Chain binary to ~/.safe-chain/bin
+# - Adds ~/.safe-chain/bin to PATH for subsequent steps
+# - Sets SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS environment variable
+# - Sets SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS environment variable
+# - Configures Safe-Chain CI integration via setup-ci command
+#
+# After this action runs, Safe-Chain will automatically intercept:
+# - npm, npx, yarn, pnpm, bun package installations
+# - pip, pip3, uv, poetry, pipx package installations
 #
 # ==============================================================================
 # TOOL INFORMATION
 # ==============================================================================
 # Tool: Safe-Chain (AikidoSec)
 # Version: 1.4.6
-# Installation: Via install-safe-chain.sh script
+# Installation: Via safechain.sh script (npm run install:safechain)
 # Documentation: https://github.com/AikidoSec/safe-chain
 # Framework: SLSA (Supply-chain Levels for Software Artifacts)
 #
@@ -92,7 +133,8 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Action Version: 1.0.0
-# Last Updated: 2026-03-31
+# Safe-Chain Version: 1.4.6
+# Last Updated: 2026-04-01
 #
 # ==============================================================================
 
