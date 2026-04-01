@@ -308,7 +308,7 @@ pip3 install safe-chain-pi-test
 **A**: Follow this process:
 
 1. **Assess urgency**: Is this a critical security patch, only proceed if the answer 'yes'.
-2. **Get approval**: OCTO Cyber team sign-off required
+2. **Get approval**: Cyber / SRE / OCTO Cyber
 3. **Temporary exclusion**: Add to `security-patch-package-exclusion`
 4. **Document**: Document decision in PR/issue
 5. **Monitor**: Watch for any suspicious behaviour

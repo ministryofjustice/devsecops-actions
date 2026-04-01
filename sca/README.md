@@ -10,7 +10,7 @@ Enterprise-Grade Security Scanning for Software Supply Chain
 ## Overview
 
 A comprehensive, enterprise-grade composite action for software composition analysis, dependency management,
-and security review across the entire software supply chain. This action orchestrates 10 specialised security
+and security review across the entire software supply chain. This action orchestrates 9 specialised security
 tools to provide complete visibility into your application's dependencies, vulnerabilities, and supply chain risks.
 
 **Key Capabilities:**
