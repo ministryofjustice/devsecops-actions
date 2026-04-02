@@ -347,11 +347,32 @@ pip3 install safe-chain-pi-test
 
 **Example:**
 
+Single package
+
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
   uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
   with:
-    security-patch-package-exclusion: "ministryofjustice/example"
+    security-patch-package-exclusion: "@ministryofjustice/example"
+```
+
+Multiple packages
+
+```yaml
+- name: ⛓️ SLSA Supply Chain Security
+  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  with:
+    security-patch-package-exclusion: "@ministryofjustice/package1,@ministryofjustice/package2,@ministryofjustice/package3"
+```
+
+Do not allow wildcard packages, be specific.
+
+```yaml
+- name: ⛓️ SLSA Supply Chain Security
+  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  with:
+    # Not recommended, avoid wildcard packages
+    security-patch-package-exclusion: "@ministryofjustice/*"
 ```
 
 ---
