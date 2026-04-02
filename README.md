@@ -226,7 +226,7 @@ Comprehensive commit verification that validates Git commits for security and qu
 
 ### Local Development Setup
 
-```bash
+```console
 # Clone the repository
 git clone https://github.com/ministryofjustice/devsecops-actions.git
 cd devsecops-actions
@@ -248,7 +248,7 @@ npm run spellcheck        # Spell checking
 
 ### Quality Assurance
 
-```bash
+```console
 # Run comprehensive housekeeping
 npm run housekeeping
 
@@ -264,7 +264,7 @@ npm outdated
 
 ### Testing Actions Locally
 
-```bash
+```console
 # Test individual SCA components
 cd sca/<component-name>
 
@@ -289,7 +289,7 @@ We welcome contributions from the community! Whether it's bug fixes, feature add
 3. **Pre-commit Hooks**: Install MoJ [pre-commit hooks](https://github.com/ministryofjustice/devsecops-hooks) for automatic validation
 4. **Conventional Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/) for automatic changelog generation
 
-   ```bash
+   ```console
    git commit -m "feat: add new secret detection pattern"
    git commit -m "fix: resolve CodeQL configuration issue"
    git commit -m "docs: update SBOM usage examples"
@@ -297,7 +297,7 @@ We welcome contributions from the community! Whether it's bug fixes, feature add
 
 5. **Test**: Ensure all validation checks pass
 
-   ```bash
+   ```console
    npm run validate:all
    npm run spellcheck
    ```
@@ -307,7 +307,7 @@ We welcome contributions from the community! Whether it's bug fixes, feature add
 
 ### Commit Message Format
 
-```bash
+```console
 <type>(<scope>): <subject>
 
 <body>
@@ -328,7 +328,7 @@ We welcome contributions from the community! Whether it's bug fixes, feature add
 
 **Examples:**
 
-```bash
+```console
 feat(sca): add support for custom SBOM formats
 fix(codeql): resolve timeout issue for large repositories
 docs(readme): add enterprise configuration examples

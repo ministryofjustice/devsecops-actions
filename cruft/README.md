@@ -359,7 +359,7 @@ Add these secrets to your repository:
    - Value: Contents of the `.pem` file (entire key including headers)
    - Format:
 
-     ```bash
+     ```console
      -----BEGIN RSA PRIVATE KEY-----
      MIIEpAIB...
      -----END RSA PRIVATE KEY-----
@@ -384,7 +384,7 @@ For simpler setups without GitHub App:
 
 Pull requests are created with the following naming pattern:
 
-```bash
+```console
 chore/cookie-cutter-update-YYYYMMDD
 ```
 
@@ -411,7 +411,7 @@ This convention:
 
 **Solution**:
 
-```bash
+```console
 # Initialize Cruft tracking
 cruft link https://github.com/ministryofjustice/template-repository
 ```
@@ -552,7 +552,7 @@ We welcome contributions! See the main repository [Contributing Guidelines](../R
 
 ### Testing Locally
 
-```bash
+```console
 # Test SSH authentication setup
 cd cruft/authenticate
 # Review action.yml changes

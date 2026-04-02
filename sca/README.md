@@ -767,7 +767,7 @@ See the main repository [Contributing Guidelines](../README.md#-contributing) fo
 
 ### Testing Changes
 
-```bash
+```console
 # Test individual components
 cd sca/codeql
 # Review action.yml
