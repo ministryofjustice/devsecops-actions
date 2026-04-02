@@ -225,6 +225,18 @@ After running this action, the following environment variables are available:
    ℹ Safe-chain: Some package versions were suppressed during package metadata resolution due to minimum package age.
    ```
 
+   Multiple NPM packages
+
+   ```console
+   $ npm ci --ignore-scripts
+   Safe-chain: blocked 4 direct package download request(s) due to minimum package age:
+    - renovate@43.101.7 (https://registry.npmjs.org/renovate/-/renovate-43.101.7.tgz)
+    - lodash@4.18.1 (https://registry.npmjs.org/lodash/-/lodash-4.18.1.tgz)
+    - @renovatebot/good-enough-parser@2.0.0 (https://registry.npmjs.org/@renovatebot/good-enough-parser/-/good-enough-parser-2.0.0.tgz)
+    - @renovatebot/detect-tools@2.0.0 (https://registry.npmjs.org/@renovatebot/detect-tools/-/detect-tools-2.0.0.tgz)
+   Safe-chain: Exiting without installing packages blocked by the direct download minimum package age check.
+   ```
+
    When one tries to access package version below threshold value
 
    ```console
