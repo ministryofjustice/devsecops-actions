@@ -10,7 +10,7 @@ Enterprise-Grade Security Scanning for Software Supply Chain
 ## Overview
 
 A comprehensive, enterprise-grade composite action for software composition analysis, dependency management,
-and security review across the entire software supply chain. This action orchestrates 10 specialised security
+and security review across the entire software supply chain. This action orchestrates 9 specialised security
 tools to provide complete visibility into your application's dependencies, vulnerabilities, and supply chain risks.
 
 **Key Capabilities:**
@@ -238,7 +238,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -291,7 +291,7 @@ jobs:
 
     steps:
       - name: Run SCA with Custom Configuration
-        uses: ministryofjustice/devsecops-actions/sca@v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -352,7 +352,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: ${{ matrix.renovate }}
@@ -388,7 +388,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: "false" # No automated updates on PRs
@@ -402,7 +402,7 @@ For repositories with external dependency management:
 ```yaml
 steps:
   - name: Run SCA without Renovate
-    uses: ministryofjustice/devsecops-actions/sca@v1.4.0
+    uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
       renovate: "false"
@@ -487,7 +487,7 @@ Create a JSON file (e.g., `docker-images.json` or `sources.json`) in your reposi
 #### Usage
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@v1.4.0
+- uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     docker-images-file: "docker-images.json"
@@ -724,9 +724,9 @@ env:
 
 ```yaml
 # ✅ Recommended: Commit SHA (maximum stability)
-uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e # v1.4.0
 
-# ⚠️ Not recommended: Branch names
+# ⚠️ Not recommended: Tag name
 uses: ministryofjustice/devsecops-actions/sca@v1.4.0
 ```
 
@@ -767,7 +767,7 @@ See the main repository [Contributing Guidelines](../README.md#-contributing) fo
 
 ### Testing Changes
 
-```bash
+```console
 # Test individual components
 cd sca/codeql
 # Review action.yml
