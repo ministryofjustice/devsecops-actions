@@ -1,94 +1,72 @@
+#!/usr/bin/env bash
 # ==============================================================================
-# Script: safechain.sh
+# Safe-Chain Installation Script
 # ==============================================================================
 #
-# Description: Downloads, verifies, and installs Safe-Chain - a supply chain
-#              security tool that implements SLSA framework protections for
-#              package dependencies. Prevents typosquatting, malicious packages,
-#              and supply chain attacks through package age verification and
-#              security policy enforcement.
+# Copyright (c) Ministry of Justice UK
+# SPDX-License-Identifier: MIT
+#
+# ==============================================================================
+# DESCRIPTION
+# ==============================================================================
+# Downloads and installs the Safe-Chain binary for SLSA supply chain security.
+# This script performs the following operations:
+#
+# 1. Downloads safe-chain binary from GitHub repository
+# 2. Verifies SHA256 checksum for integrity
+# 3. Installs to ~/.safe-chain/bin directory
+# 4. Makes binary executable and adds to PATH
+# 5. Runs setup-ci to configure CI environment
+# 6. Validates installation success
+#
+# ==============================================================================
+# SECURITY
+# ==============================================================================
+# - Uses pinned commit SHA for download URL
+# - Verifies binary integrity with SHA256 checksum
+# - Fails immediately if checksum doesn't match
+# - Downloads from trusted GitHub repository
 #
 # ==============================================================================
 # USAGE
 # ==============================================================================
-# ./safechain.sh
+# Run via npm script:
+#   npm run install:safechain
+#
+# Or directly:
+#   bash src/scripts/safechain.sh
 #
 # ==============================================================================
 # PREREQUISITES
 # ==============================================================================
-# - curl: For downloading the Safe-Chain installer script
-# - sha256sum: For verifying installer script integrity
-# - sh: For executing the installation script
-#
-# ==============================================================================
-# INSTALLATION PROCESS
-# ==============================================================================
-# 1. Validates required dependencies are available (curl, sha256sum)
-# 2. Downloads Safe-Chain installer v1.4.6 from GitHub releases
-# 3. Verifies SHA256 checksum for security and integrity
-# 4. Executes the installation script
-# 5. Validates successful installation
-# 6. Displays installed version information
-#
-# ==============================================================================
-# EXIT CODES
-# ==============================================================================
-# 0 - Success: Safe-Chain installed and validated
-# 1 - Failure: Missing dependency, checksum mismatch, or installation error
-#
-# ==============================================================================
-# ENVIRONMENT VARIABLES
-# ==============================================================================
-# SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS - Minimum package age in hours (default: 72)
-#
-# ==============================================================================
-# SECURITY FEATURES
-# ==============================================================================
-# - Cryptographic verification of installer script (SHA256)
-# - Package age validation (72 hours minimum by default)
-# - Typosquatting detection and prevention
-# - Malicious package identification
-# - Supply chain attack mitigation
-#
-# ==============================================================================
-# NOTES
-# ==============================================================================
-# - Installation is performed via official AikidoSec installer
-# - Script uses 'set -euo pipefail' for strict error handling
-# - Checksum verification prevents tampered or corrupted downloads
-# - Version pinned to 1.4.6 for reproducible installations
-#
-# ==============================================================================
-# TOOL INFORMATION
-# ==============================================================================
-# Tool: Safe-Chain (AikidoSec)
-# Version: 1.4.6
-# Repository: https://github.com/AikidoSec/safe-chain
-# Framework: SLSA (Supply-chain Levels for Software Artifacts)
+# - curl (for downloading binary)
+# - sha256sum (for checksum verification)
+# - GitHub Actions environment (sets GITHUB_PATH)
 #
 # ==============================================================================
 # VERSION INFORMATION
 # ==============================================================================
-# Script Version: 1.0.0
-# Last Updated: 2026-03-31
+# Safe-Chain Version: 1.4.6
+# Binary Commit: 25f7d3ac1b6fcdfcf0feeffac5d6ca9b4ec186b7
+# Last Updated: 2026-04-01
 #
 # ==============================================================================
-
 
 set -euo pipefail
 
 # Variables
-VERSION="1.4.6"
-FILE="install-safe-chain.sh"
-URL="https://github.com/AikidoSec/safe-chain/releases/download/${VERSION}/${FILE}"
-SHA256="1c49baa0d40285cf249364c5274ae2d0f11a5c65fb3aae23750dd06f91d9a356"
+COMMIT="25f7d3ac1b6fcdfcf0feeffac5d6ca9b4ec186b7"
+DIRECTORY="${HOME}/.safe-chain/bin"
+FILE="safe-chain"
+URL="https://raw.githubusercontent.com/ministryofjustice/devsecops-actions/${COMMIT}/sca/slsa/${FILE}"
+SHA256="d6f351dcfb2bd5a11e58d5ce243a1815a976c03768e0519822f2f4e4f96f2d03"
 
 # Dependencies
 for cmd in curl sha256sum; do
     command -v $cmd >/dev/null 2>&1 || { echo "❌ Missing $cmd executable."; exit 1; }
 done
 
-echo "⚡️ Installing safe-chain ${VERSION}.";
+echo "⚡️ Installing safe-chain from ${URL}.";
 
 # Download
 curl -fsSL -o "$FILE" "$URL"
@@ -102,10 +80,23 @@ if [ "$SHA256" != "$CHECKSUM" ]; then
 fi
 
 # Install
-sh "$FILE" --ci
+if [ ! -d "$DIRECTORY" ]; then
+    mkdir -p "$DIRECTORY" || { echo "❌ Directory $DIRECTORY creation failed."; exit 1; }
+fi
+
+mv "./$FILE" "$DIRECTORY/$FILE"
+chmod +x "$DIRECTORY/$FILE"
+
+export PATH="$DIRECTORY:$PATH"
+echo "$DIRECTORY" >> $GITHUB_PATH
+
+safe-chain setup-ci
+
+# Validate
+command -v safe-chain >/dev/null 2>&1 || { echo "❌ Missing safe-chain executable."; exit 1; }
 
 # Cleanup
 rm -f "$FILE"
 
-echo "✅ safe-chain ${VERSION} has been installed."
+echo "✅ $(safe-chain --version) has been installed."
 exit 0;

@@ -125,7 +125,7 @@ jobs:
 
     steps:
       - name: Archive Check
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           notification-email: "team@example.gov.uk"
@@ -171,7 +171,7 @@ jobs:
 
     steps:
       - name: Archive Check with Custom Threshold
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: ${{ github.event.inputs.archival-days || '180' }}
@@ -217,7 +217,7 @@ jobs:
 
     steps:
       - name: Archive Check (${{ matrix.archival-threshold.days }} days)
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: ${{ matrix.archival-threshold.days }}
@@ -253,7 +253,7 @@ jobs:
     steps:
       - name: Archive Check
         id: archive
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: "90"
@@ -410,7 +410,7 @@ archival-days: "365"
 uses: ministryofjustice/devsecops-actions/github/repository/archive@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Not recommended: Branch names
-uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.4.0
+uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
 ```
 
 ### Scheduling Best Practices

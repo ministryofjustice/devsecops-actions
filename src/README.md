@@ -56,7 +56,7 @@ The codebase follows industry best practices with modular architecture, comprehe
 
 ## 🚀 Quick Start
 
-```bash
+```console
 # Install dependencies
 npm install
 
@@ -82,7 +82,7 @@ npm run spellcheck        # Spell checking
 
 ## 🗂️ Directory Structure
 
-```bash
+```console
 src/
 ├── cli/                     # Command-line interface modules
 │   ├── scan.ts             # Main scan command implementation
@@ -124,7 +124,7 @@ The codebase adheres to industry-standard software engineering principles:
 
 ### Data Flow
 
-```bash
+```console
 index.ts (entry point)
     ↓
 cli/scan.ts (command orchestrator)
@@ -158,7 +158,7 @@ The `scan` command performs security scanning operations on container images and
 
 #### Usage
 
-```bash
+```console
 npm run scan -- --images <json-file>
 ```
 
@@ -179,7 +179,7 @@ npm run scan -- --images <json-file>
 
 #### Examples
 
-```bash
+```console
 # Scan container images from sources.json
 npm run scan -- --images sources.json
 
@@ -223,7 +223,7 @@ Ensure you have the following installed:
 
 ### Local Setup
 
-```bash
+```console
 # Clone the repository (if not already done)
 git clone https://github.com/ministryofjustice/devsecops-actions.git
 cd devsecops-actions
@@ -237,7 +237,7 @@ npm run validate:ts
 
 ### Running Locally
 
-```bash
+```console
 # Run the CLI tool
 npm run scan -- --images sources.json
 
@@ -249,7 +249,7 @@ npm run scan -- --images /absolute/path/to/images.json
 
 The `npm run build` command compiles TypeScript source files to JavaScript and prepares the project for distribution:
 
-```bash
+```console
 # Build the project
 npm run build
 ```
@@ -309,7 +309,7 @@ Currently, the CLI does not require environment variables. All configuration is 
 
 ### Running Tests
 
-```bash
+```console
 # Run all unit tests
 npm run test:unit
 
@@ -336,7 +336,7 @@ The project maintains high test coverage standards:
 
 **View Coverage Report:**
 
-```bash
+```console
 npm run test:unit:coverage
 # Open coverage/lcov-report/index.html in browser
 ```
@@ -409,7 +409,7 @@ describe("areImageArgumentsValid", () => {
 
 ### TypeScript Compilation
 
-```bash
+```console
 # Type check without emitting files (fast validation)
 npm run validate:ts
 
@@ -430,7 +430,7 @@ npx tsc --project src/tsconfig.json --watch
 
 The project uses `ts-node` for direct TypeScript execution during development:
 
-```bash
+```console
 # Development (uses ts-node)
 npm run scan -- --images sources.json
 
@@ -444,7 +444,7 @@ npx tsc && node dist/index.js --images sources.json
 
 ### Linting & Formatting
 
-```bash
+```console
 # Validate all code
 npm run validate:all
 
@@ -511,7 +511,7 @@ export function areImageArgumentsValid(args: string[]): boolean {
 
 Install pre-commit hooks for automated checks:
 
-```bash
+```console
 # Install MoJ DevSecOps hooks
 prek install
 ```
@@ -531,7 +531,7 @@ Hooks run automatically on commit:
 
 Issue: Module not found errors
 
-```bash
+```console
 # Solution: Clean install dependencies
 rm -rf node_modules package-lock.json
 npm install
@@ -539,7 +539,7 @@ npm install
 
 Issue: TypeScript compilation errors
 
-```bash
+```console
 # Solution: Check TypeScript version
 npx tsc --version
 
@@ -549,7 +549,7 @@ npm install --save-dev typescript@latest
 
 Issue: Test failures
 
-```bash
+```console
 # Solution: Clear Jest cache
 npx jest --clearCache
 
@@ -559,7 +559,7 @@ npm run test:unit -- --verbose
 
 Issue: Permission denied when running scan
 
-```bash
+```console
 # Solution: Check file permissions
 chmod +x src/scripts/syft.sh
 
@@ -635,14 +635,14 @@ We welcome contributions! To contribute to this codebase:
 
 1. **Fork & Clone**
 
-   ```bash
+   ```console
    git clone https://github.com/your-username/devsecops-actions.git
    cd devsecops-actions
    ```
 
 2. **Create Branch**
 
-   ```bash
+   ```console
    git checkout -b feature/your-feature-name
    ```
 
@@ -655,14 +655,14 @@ We welcome contributions! To contribute to this codebase:
 
 4. **Run Validations**
 
-   ```bash
+   ```console
    npm run validate:all
    npm run test:unit:coverage
    ```
 
 5. **Commit Changes**
 
-   ```bash
+   ```console
    git add .
    git commit -m "feat: add new feature"
    ```
@@ -673,7 +673,7 @@ We welcome contributions! To contribute to this codebase:
 
 Ensure you have installed MoJ [pre-commit](https://github.com/ministryofjustice/devsecops-hooks) hook.
 
-```bash
+```console
 git push origin feature/your-feature-name
 ```
 
@@ -692,7 +692,7 @@ Create pull request on GitHub
 
 **Commit Message Format:**
 
-```bash
+```console
 <type>(<scope>): <subject>
 
 <body>
@@ -704,7 +704,7 @@ Create pull request on GitHub
 
 **Example:**
 
-```bash
+```console
 feat(cli): add support for SBOM format selection
 
 Added --format flag to allow users to choose between

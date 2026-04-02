@@ -458,7 +458,7 @@ The action validates against the [Conventional Commits](https://www.conventional
 
 Add `!` after type/scope to indicate breaking changes:
 
-```bash
+```console
 feat(api)!: remove deprecated v1 endpoints
 
 BREAKING CHANGE: API v1 endpoints have been removed. Migrate to v2.
@@ -477,7 +477,7 @@ The action checks for commit signature **presence** but does not verify signatur
 
 #### GPG Signing
 
-```bash
+```console
 # Generate GPG key
 gpg --full-generate-key
 
@@ -491,7 +491,7 @@ git commit -S -m "feat: add new feature"
 
 #### SSH Signing
 
-```bash
+```console
 # Generate SSH key
 ssh-keygen -t ed25519 -C "your_email@example.com"
 
@@ -531,7 +531,7 @@ This action does not produce artifacts but provides immediate feedback:
 
 #### Valid Commit (Success)
 
-```bash
+```console
 🧩 Conventional Commit Validation
 feat(auth): add OAuth2 authentication
 ✅ Commit message is valid
@@ -544,7 +544,7 @@ gpg:                using RSA key ED37D6E7EB2CEBF06DF4E75097AAE65204663900
 
 #### Invalid Commit Message (Failure)
 
-```bash
+```console
 🧩 Conventional Commit Validation
 Updated authentication
 ❌ Commit message validation failed:
@@ -555,7 +555,7 @@ Updated authentication
 
 #### Unsigned Commit (Failure)
 
-```bash
+```console
 🔐 Signature Verification
 feat(auth): add OAuth2 authentication
 ❌ Commit is unsigned!
@@ -572,7 +572,7 @@ Error: Process completed with exit code 1.
 
 **Symptom:**
 
-```bash
+```console
 ✖   type may not be empty [type-empty]
 ```
 
@@ -580,7 +580,7 @@ Error: Process completed with exit code 1.
 
 **Solution**: Format commit message correctly:
 
-```bash
+```console
 # ✅ Correct
 git commit -m "feat(api): add user endpoint"
 
@@ -592,7 +592,7 @@ git commit -m "Added user endpoint"
 
 **Symptom:**
 
-```bash
+```console
 ❌ Commit is unsigned!
 ```
 
@@ -600,7 +600,7 @@ git commit -m "Added user endpoint"
 
 **Solution**: Configure Git signing:
 
-```bash
+```console
 # GPG signing
 git config --global commit.gpgsign true
 git config --global user.signingkey YOUR_GPG_KEY_ID
@@ -615,7 +615,7 @@ git config --global commit.gpgsign true
 
 **Symptom** (in logs):
 
-```bash
+```console
 gpg: Can't check signature: No public key
 ❌ Commit is unsigned!
 ```
@@ -629,7 +629,7 @@ If you still get failure, ensure your commits are actually signed locally before
 
 **Symptom:**
 
-```bash
+```console
 Error: Cannot find module './commitlint.config.js'
 ```
 
@@ -637,7 +637,7 @@ Error: Cannot find module './commitlint.config.js'
 
 **Solution**: Verify file exists and path is correct:
 
-```bash
+```console
 # Check file exists
 ls -la .github/commitlint.config.js
 
@@ -649,7 +649,7 @@ config-file: ".github/commitlint.config.js"
 
 **Symptom:**
 
-```bash
+```console
 Error: The engine "node" is incompatible with this module
 ```
 
@@ -687,7 +687,7 @@ steps:
 uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Acceptable: Version tag (updated periodically)
-uses: ministryofjustice/devsecops-actions/github/commit@v1.4.0
+uses: ministryofjustice/devsecops-actions/github/commit@559ec2408860d9237cc472a5710e61c1c2187ffa
 
 # ❌ Not recommended: Branch names (security risk)
 uses: ministryofjustice/devsecops-actions/github/commit@main
@@ -711,7 +711,7 @@ feat(Auth): add   # Incorrect scope case
 
 ### Signature Best Practices
 
-```bash
+```console
 # ✅ Always sign commits
 git commit -S -m "feat: add feature"
 
@@ -731,7 +731,7 @@ See the main repository [Contributing Guidelines](../../README.md#-contributing)
 
 ### Testing Changes
 
-```bash
+```console
 # Navigate to action directory
 cd github/commit
 

@@ -29,12 +29,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/cruft/authenticate@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/cruft/authenticate@559ec2408860d9237cc472a5710e61c1c2187ffa
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With personal access token:
-#   - uses: ministryofjustice/devsecops-actions/cruft/authenticate@v1.3.0
+#   - uses: ministryofjustice/devsecops-actions/cruft/authenticate@559ec2408860d9237cc472a5710e61c1c2187ffa
 #     with:
 #       token: ${{ secrets.PAT_TOKEN }}
 #

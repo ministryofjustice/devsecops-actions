@@ -109,7 +109,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Run Cruft Update
-        uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
+        uses: ministryofjustice/devsecops-actions/cruft@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -151,7 +151,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Run Cruft Update with GitHub App
-        uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
+        uses: ministryofjustice/devsecops-actions/cruft@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           private: "true"
           github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -200,7 +200,7 @@ jobs:
           fetch-depth: 0 # Full history for better diff
 
       - name: Run Cruft Update
-        uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
+        uses: ministryofjustice/devsecops-actions/cruft@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           private: "true"
           github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -252,7 +252,7 @@ jobs:
           token: ${{ secrets.ORG_ACCESS_TOKEN }}
 
       - name: Sync Template
-        uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
+        uses: ministryofjustice/devsecops-actions/cruft@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
           token: ${{ secrets.ORG_ACCESS_TOKEN }}
           private: "true"
@@ -359,7 +359,7 @@ Add these secrets to your repository:
    - Value: Contents of the `.pem` file (entire key including headers)
    - Format:
 
-     ```bash
+     ```console
      -----BEGIN RSA PRIVATE KEY-----
      MIIEpAIB...
      -----END RSA PRIVATE KEY-----
@@ -384,7 +384,7 @@ For simpler setups without GitHub App:
 
 Pull requests are created with the following naming pattern:
 
-```bash
+```console
 chore/cookie-cutter-update-YYYYMMDD
 ```
 
@@ -411,7 +411,7 @@ This convention:
 
 **Solution**:
 
-```bash
+```console
 # Initialize Cruft tracking
 cruft link https://github.com/ministryofjustice/template-repository
 ```
@@ -476,13 +476,13 @@ env:
 
 ```yaml
 # ✅ Recommended: Use specific version tags
-uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
+uses: ministryofjustice/devsecops-actions/cruft@559ec2408860d9237cc472a5710e61c1c2187ffa
 
 # ✅ Alternative: Use commit SHA for maximum stability
 uses: ministryofjustice/devsecops-actions/cruft@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Not recommended: Using branch names (unpredictable)
-uses: ministryofjustice/devsecops-actions/cruft@v1.4.0
+uses: ministryofjustice/devsecops-actions/cruft@559ec2408860d9237cc472a5710e61c1c2187ffa
 ```
 
 ### Security Best Practices
@@ -552,7 +552,7 @@ We welcome contributions! See the main repository [Contributing Guidelines](../R
 
 ### Testing Locally
 
-```bash
+```console
 # Test SSH authentication setup
 cd cruft/authenticate
 # Review action.yml changes
