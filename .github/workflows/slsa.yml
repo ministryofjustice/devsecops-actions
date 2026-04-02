@@ -1,3 +1,26 @@
+# Workflow: SLSA ⚡️
+# Description:
+#   Runs a supply-chain prevention check on pull requests using the reusable
+#   SLSA action from this repository.
+#
+# Features:
+#   - Executes on all pull request branches
+#   - Uses SHA-pinned actions for secure, repeatable builds
+#   - Runs SLSA checks via the MoJ DevSecOps action set
+#
+# Usage:
+#   - Place this file at .github/workflows/slsa.yml
+#   - Configure repository variable NODE_VERSION for Node setup
+#   - Open or update a pull request to trigger the checks
+#
+# Prerequisites:
+#   - Repository access for GitHub Actions to read contents
+#   - Valid npm lockfile at package-lock.json for dependency caching
+#
+# Version information:
+#   - Workflow definition version: 1
+#   - Action versions are pinned by commit SHA in this file
+
 name: SLSA ⚡️
 run-name: Supply-chain prevention check ⚡️
 
