@@ -724,10 +724,10 @@ env:
 
 ```yaml
 # ✅ Recommended: Commit SHA (maximum stability)
-uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e # v1.4.0
 
-# ⚠️ Not recommended: Branch names
-uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+# ⚠️ Not recommended: Tag name
+uses: ministryofjustice/devsecops-actions/sca@v1.4.0
 ```
 
 ### Security Best Practices

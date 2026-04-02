@@ -197,7 +197,7 @@ After running this action, the following environment variables are available:
    - run: npm ci --ignore-scripts # ← Then install
    ```
 
-2. **Use in All Workflows** - Protect every workflow that installs dependencies
+2. **Use in all workflows** - Protect every workflow that installs dependencies
    - ✅ CI/CD pipelines
    - ✅ Deployment workflows
    - ✅ Scheduled jobs
@@ -206,20 +206,14 @@ After running this action, the following environment variables are available:
 3. **Pin to Commit SHA** - Use SHA instead of tags for maximum security
 
    ```yaml
-   # ✅ Recommended - Use latest stable commit
+   # ✅ Recommended - Use latest stable commit SHA
    uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
 
-   # ⚠️ Alternative - Use specific version tag
+   # ❌ Not recommended - Use specific version tag
    uses: ministryofjustice/devsecops-actions/sca/slsa@v1.4.0
    ```
 
 4. **Monitor Workflow Logs** - Review Safe-Chain output for warnings
-
-   ```bash
-   ✅ All packages validated successfully
-   ⚠️ Warning: Package 'new-package' is only 48 hours old
-   ❌ Blocked: Package 'suspicious-pkg' is 12 hours old
-   ```
 
 ### ❌ Don'ts
 
@@ -299,7 +293,7 @@ pip3 install safe-chain-pi-test
 | Tool                | Purpose                                           | When It Runs                          |
 | ------------------- | ------------------------------------------------- | ------------------------------------- |
 | **SLSA/Safe-Chain** | Prevents malicious packages from being installed  | Before every `npm ci` / `pip install` |
-| **Dependabot**      | Updates dependencies to fix known vulnerabilities | Weekly / Monthly                      |
+| **Dependabot**      | Updates dependencies to fix known vulnerabilities | As per your configuration             |
 
 **Use both** for comprehensive protection! ✅
 
@@ -308,7 +302,7 @@ pip3 install safe-chain-pi-test
 **A**: Follow this process:
 
 1. **Assess urgency**: Is this a critical security patch, only proceed if the answer 'yes'.
-2. **Get approval**: Cyber / SRE / OCTO Cyber
+2. **Get approval**: Lead / Cyber / SRE / OCTO Cyber
 3. **Temporary exclusion**: Add to `security-patch-package-exclusion`
 4. **Document**: Document decision in PR/issue
 5. **Monitor**: Watch for any suspicious behaviour
@@ -320,7 +314,7 @@ pip3 install safe-chain-pi-test
 - name: ⛓️ SLSA Supply Chain Security
   uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
   with:
-    security-patch-package-exclusion: "critical-security-fix"
+    security-patch-package-exclusion: "ministryofjustice/example"
 ```
 
 ---
