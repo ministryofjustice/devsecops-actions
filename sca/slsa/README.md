@@ -339,7 +339,7 @@ pip3 install safe-chain-pi-test
 **A**: Follow this process:
 
 1. **Assess urgency**: Is this a critical security patch, only proceed if the answer 'yes'.
-2. **Get approval**: Lead / Cyber / SRE / OCTO Cyber
+2. **Get approval**: Cyber / SRE / OCTO Cyber
 3. **Temporary exclusion**: Add to `security-patch-package-exclusion`
 4. **Document**: Document decision in PR/issue
 5. **Monitor**: Watch for any suspicious behaviour
@@ -362,7 +362,7 @@ Multiple packages
 - name: ⛓️ SLSA Supply Chain Security
   uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
   with:
-    security-patch-package-exclusion: "@ministryofjustice/package1,@ministryofjustice/package2,@ministryofjustice/package3"
+    security-patch-package-exclusion: "@ministryofjustice/package1,@ministryofjustice/package2,package3"
 ```
 
 Do not allow wildcard packages, be specific.
