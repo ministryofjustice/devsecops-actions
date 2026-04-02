@@ -81,7 +81,7 @@ jobs:
       - name: ⛓️ SLSA
         uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
         with:
-          security-patch-package-exclusion: "@renovatebot/*"
+          security-patch-package-exclusion: "@renovatebot/*,lodash@4.18.1,renovate@43.101.7"
 
       - name: Install
         shell: bash
