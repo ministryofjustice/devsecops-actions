@@ -205,7 +205,7 @@ After running this action, the following environment variables are available:
 
 3. **Pin to Commit SHA** - Use SHA instead of tags for maximum security
 
-   ```yaml
+   ```bash
    # ✅ Recommended - Use latest stable commit SHA
    uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
 
@@ -215,18 +215,36 @@ After running this action, the following environment variables are available:
 
 4. **Monitor Workflow Logs** - Review Safe-Chain output for warnings
 
+   When the package does not meet 72 hours threshold.
+
+   ```bash
+   $ npm install example
+   npm error code ENOVERSIONS
+   npm error No versions available for example
+   npm error A complete log of this run can be found in: example.log
+   ℹ Safe-chain: Some package versions were suppressed during package metadata resolution due to minimum package age.
+   ```
+
+   When the package is maliciou
+
+   ```bash
+   $ npm install safe-chain-test
+   ✖ Safe-chain: Malicious changes detected:
+   - safe-chain-test@0.0.1-security
+   ```
+
 ### ❌ Don'ts
 
 1. **Don't Skip in Production** - Never bypass SLSA checks in production workflows
 
-   ```yaml
+   ```bash
    # ❌ BAD - Skipping security check
    if: github.ref != 'refs/heads/main'
    ```
 
 2. **Don't Set Age Too Low** - Don't reduce below 72 hours without security approval
 
-   ```yaml
+   ```bash
    # ❌ BAD - Too permissive
    env:
      SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 1
@@ -234,7 +252,7 @@ After running this action, the following environment variables are available:
 
 3. **Don't Install Before Checking** - Always run SLSA before `npm ci` / `pip install`
 
-   ```yaml
+   ```bash
    # ❌ BAD - Installing before security check
    - run: npm ci --ignore-scripts
    - uses: .../sca/slsa@... # ← Too late!
