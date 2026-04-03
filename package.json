@@ -52,7 +52,7 @@
   "dependencies": {
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
-    "notifications-node-client": "^8.3.0"
+    "notifications-node-client": "^8.3.2"
   },
   "devDependencies": {
     "@jest/types": "^30.3.0",
