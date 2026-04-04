@@ -244,7 +244,7 @@ After running this action, the following environment variables are available:
    ℹ Safe-chain: Some package versions were suppressed during package metadata resolution due to minimum package age.
    ```
 
-   When the package is maliciou
+   When the package is malicious
 
    ```console
    $ npm install safe-chain-test
