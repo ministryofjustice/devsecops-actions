@@ -83,7 +83,7 @@
 # - SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS: Package exclusion patterns
 #
 # Inputs:
-# - node-version: Node.js version for Safe-Chain (default: 24.11.1)
+# - node-version: Node.js version for Safe-Chain
 # - security-patch-package-exclusion: Trusted packages to exclude from
 #   minimum age filtering (e.g., @scope/* to trust all packages from scope)
 #

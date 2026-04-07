@@ -107,7 +107,7 @@ Both checks must pass for the action to succeed.
 
 **Purpose**: Installs Node.js runtime for commitlint
 
-- Installs specified Node.js version (default: 24.11.1)
+- Installs specified Node.js version
 - Configures npm environment
 - Prepares runtime for commitlint execution
 
@@ -320,7 +320,7 @@ All inputs are optional. The action works with zero configuration.
 | Input          | Type   | Required | Default             | Description                                                                      |
 | -------------- | ------ | -------- | ------------------- | -------------------------------------------------------------------------------- |
 | `config-file`  | string | No       | `""`                | Path to custom commitlint configuration file (e.g., `commitlint.config.js`)      |
-| `node-version` | string | No       | `"24.11.1"`         | Node.js version to use for commitlint execution                                  |
+| `node-version` | string | No       | `""`         | Node.js version to use for commitlint execution                                  |
 
 ---
 

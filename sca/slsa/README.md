@@ -178,10 +178,10 @@ After running this action, the following environment variables are available:
 
 ### Inputs
 
-| Input                              | Required | Default   | Description                                                    |
-| ---------------------------------- | -------- | --------- | -------------------------------------------------------------- |
-| `node-version`                     | No       | `24.11.1` | Node.js version to use for Safe-Chain installation             |
-| `security-patch-package-exclusion` | No       | `""`      | Comma-separated list of packages to exclude from age filtering |
+| Input                              | Required | Default | Description                                                    |
+| ---------------------------------- | -------- | ------- | -------------------------------------------------------------- |
+| `node-version`                     | No       | `""`    | Node.js version to use for Safe-Chain installation             |
+| `security-patch-package-exclusion` | No       | `""`    | Comma-separated list of packages to exclude from age filtering |
 
 ---
 

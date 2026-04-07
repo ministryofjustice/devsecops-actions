@@ -280,14 +280,14 @@ All inputs are clearly defined with sensible defaults for ease of use.
 
 ### Repository Archive Check Inputs
 
-| Input                     | Type   | Required | Default     | Description                                                                                                           |
-| ------------------------- | ------ | -------- | ----------- | --------------------------------------------------------------------------------------------------------------------- |
-| `token`                   | string | **Yes**  | N/A         | GitHub token with read permissions to repository contents                                                             |
-| `archival-days`           | string | No       | `90`        | Number of non-activity days before repository is considered eligible for archival                                     |
-| `notification-email`      | string | **Yes**  | N/A         | Email address to receive notifications for repositories dormant for specified archival-days period                    |
-| `gov-notify-key`          | string | **Yes**  | N/A         | GOV.UK Notify API key for sending email notifications                                                                 |
-| `gov-notify-template-id`  | string | **Yes**  | N/A         | GOV.UK Notify template ID for notification email format                                                               |
-| `node-version`            | string | No       | `24.11.1`   | Node.js version to use for executing the archive check scanner                                                        |
+| Input                    | Type   | Required | Default | Description                                                                                        |
+| ------------------------ | ------ | -------- | ------- | -------------------------------------------------------------------------------------------------- |
+| `token`                  | string | **Yes**  | N/A     | GitHub token with read permissions to repository contents                                          |
+| `archival-days`          | string | No       | `90`    | Number of non-activity days before repository is considered eligible for archival                  |
+| `notification-email`     | string | **Yes**  | N/A     | Email address to receive notifications for repositories dormant for specified archival-days period |
+| `gov-notify-key`         | string | **Yes**  | N/A     | GOV.UK Notify API key for sending email notifications                                              |
+| `gov-notify-template-id` | string | **Yes**  | N/A     | GOV.UK Notify template ID for notification email format                                            |
+| `node-version`           | string | No       | N/A     | Node.js version to use for executing the archive check scanner                                     |
 
 ---
 
@@ -295,9 +295,9 @@ All inputs are clearly defined with sensible defaults for ease of use.
 
 Your workflow must explicitly grant these permissions:
 
-| Permission        | Level     | Purpose                                              |
-| ----------------- | --------- | ---------------------------------------------------- |
-| `contents`        | **read**  | Repository checkout and commit history access        |
+| Permission | Level    | Purpose                                       |
+| ---------- | -------- | --------------------------------------------- |
+| `contents` | **read** | Repository checkout and commit history access |
 
 **Example:**
 
@@ -451,13 +451,13 @@ gov-notify-template-id: ${{ secrets.ORG_NOTIFY_TEMPLATE_ID }}
 
 ### Threshold Selection Guidelines
 
-| Repository Type           | Recommended Threshold | Rationale                            |
-| ------------------------- | --------------------- | ------------------------------------ |
-| Production Services       | 180-365 days          | Long release cycles expected         |
-| Development Projects      | 90 days               | Regular activity expected            |
-| Experimental Repositories | 30-60 days            | Short-lived by nature                |
-| Documentation             | 180 days              | Updated less frequently              |
-| Archived Projects         | N/A                   | Should already be archived           |
+| Repository Type           | Recommended Threshold | Rationale                    |
+| ------------------------- | --------------------- | ---------------------------- |
+| Production Services       | 180-365 days          | Long release cycles expected |
+| Development Projects      | 90 days               | Regular activity expected    |
+| Experimental Repositories | 30-60 days            | Short-lived by nature        |
+| Documentation             | 180 days              | Updated less frequently      |
+| Archived Projects         | N/A                   | Should already be archived   |
 
 ### Notification Management
 
