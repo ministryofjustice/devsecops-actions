@@ -113,7 +113,7 @@ inputs:
   node-version:
     required: false
     description: "Node.js version to use for SBOM generation and related tooling"
-    default: "24.11.1"
+    default: ""
 
   renovate-version:
     required: false

@@ -146,7 +146,10 @@ inputs:
   node-version:
     required: false
     description: "Node.js version to use"
-    default: "24.11.1"
+
+  node-version-file:
+    required: false
+    description: "File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined the action will use version from node-version."
 
   security-patch-package-exclusion:
     required: false
@@ -162,6 +165,7 @@ runs:
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
+        node-version-file: ${{ inputs.node-version-file }}
 
     - name: ⚙️ Configuration
       working-directory: ${{ github.workspace }}
