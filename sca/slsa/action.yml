@@ -52,6 +52,11 @@
 # Basic usage (default settings):
 #   - uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
 #
+# With Node.js version from file:
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+#     with:
+#       node-version-file: ".node-version"
+#
 # Advanced usage with package exclusions:
 #   - uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
 #     with:
@@ -145,7 +150,7 @@ author: Ministry of Justice UK
 inputs:
   node-version:
     required: false
-    description: "Node.js version to use"
+    description: "Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence."
 
   node-version-file:
     required: false

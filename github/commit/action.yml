@@ -29,6 +29,11 @@
 # Basic usage:
 #   - uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 #
+# With Node.js version from file:
+#   - uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+#     with:
+#       node-version-file: "package.json"
+#
 # Advanced usage with custom configuration:
 #   - uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 #     with:
@@ -76,7 +81,7 @@ inputs:
 
   node-version:
     required: false
-    description: "Node.js version to use"
+    description: "Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence."
     default: ""
 
   node-version-file:

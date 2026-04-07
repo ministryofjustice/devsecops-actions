@@ -35,6 +35,15 @@
 #       gov-notify-key: ${{ secrets.GOV_NOTIFY_API_KEY }}
 #       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
 #
+# With Node.js version from file:
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       node-version-file: "package.json"
+#       notification-email: "team@example.gov.uk"
+#       gov-notify-key: ${{ secrets.GOV_NOTIFY_API_KEY }}
+#       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
+#
 # Advanced usage with custom threshold:
 #   - uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
 #     with:
@@ -94,7 +103,7 @@ inputs:
 
   node-version:
     required: false
-    description: "Node.js version to use"
+    description: "Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence."
     default: ""
 
   node-version-file:
