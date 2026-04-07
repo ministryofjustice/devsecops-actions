@@ -110,4 +110,4 @@ jobs:
         run: npm run spellcheck
 
       - name: Commit
-        uses: ministryofjustice/devsecops-actions/github/commit@dependabot/npm_and_yarn/npm-packages-11e238c2c0 # v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/commit@aa338f78f4af76b14d4fa50f473b96ec1142614a # v1.4.0
