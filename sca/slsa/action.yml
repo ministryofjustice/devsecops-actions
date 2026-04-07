@@ -158,17 +158,17 @@ runs:
     - name: 📦 Repository
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-    - name: Node
-      uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-      with:
-        node-version: ${{ inputs.node-version }}
+    # - name: Node
+    #   uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+    #   with:
+    #     node-version: ${{ inputs.node-version }}
 
-    - name: ⚙️ Configuration
-      working-directory: ${{ github.workspace }}
-      shell: bash
-      run: |
-        echo "SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=72" >> "$GITHUB_ENV"
-        echo "SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS=${{ inputs.security-patch-package-exclusion }}" >> "$GITHUB_ENV"
+    # - name: ⚙️ Configuration
+    #   working-directory: ${{ github.workspace }}
+    #   shell: bash
+    #   run: |
+    #     echo "SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=72" >> "$GITHUB_ENV"
+    #     echo "SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS=${{ inputs.security-patch-package-exclusion }}" >> "$GITHUB_ENV"
 
     # - name: 📥 Install
     #   working-directory: ${{ github.action_path }}
