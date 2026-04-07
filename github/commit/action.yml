@@ -99,13 +99,13 @@ runs:
         cache: 'npm'
         cache-dependency-path: 'b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2/package-lock.json'
 
-    - name: ⛓️ SLSA
-      uses: ministryofjustice/devsecops-actions/sca/slsa@b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2
+    # - name: ⛓️ SLSA
+    #   uses: ministryofjustice/devsecops-actions/sca/slsa@b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2
 
-    # - name: ⚙️ Install
-    #   shell: bash
-    #   working-directory: b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2
-    #   run: npm ci --ignore-scripts
+    - name: ⚙️ Install
+      shell: bash
+      working-directory: b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2
+      run: npm ci --ignore-scripts
 
     - name: 🧩 Conventional
       shell: bash
