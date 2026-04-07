@@ -100,7 +100,7 @@ runs:
         cache-dependency-path: 'b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2/package-lock.json'
 
     - name: ⛓️ SLSA
-      uses: ministryofjustice/devsecops-actions/sca/slsa@11a7f743d2c314988bc58d577d0282ef5abf9f9b
+      uses: ministryofjustice/devsecops-actions/sca/slsa@36b2754917fc12032feda295ade8ff665dea5d78
 
     - name: ⚙️ Install
       shell: bash
