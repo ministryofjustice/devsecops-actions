@@ -92,7 +92,7 @@ jobs:
 
       # ⛓️ SLSA Protection - Add BEFORE npm ci
       - name: ⛓️ SLSA Supply Chain Security
-        uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336 # v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649 # v1.4.0
 
       # Now safe to install dependencies
       - name: Install Dependencies
@@ -122,7 +122,7 @@ jobs:
 
       # ⛓️ SLSA Protection - Add BEFORE pip install
       - name: ⛓️ SLSA Supply Chain Security
-        uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336 # v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649 # v1.4.0
 
       # Now safe to install dependencies
       - name: Install Dependencies
@@ -142,7 +142,7 @@ No configuration required - works out of the box with secure defaults:
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+  uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 ```
 
 ### Advanced Configuration
@@ -151,7 +151,7 @@ No configuration required - works out of the box with secure defaults:
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+  uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     node-version: "24.11.1"
 ```
@@ -162,7 +162,7 @@ Exclude trusted packages from the 72-hour age requirement:
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+  uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     security-patch-package-exclusion: "@ministryofjustice/example"
 ```
@@ -178,10 +178,11 @@ After running this action, the following environment variables are available:
 
 ### Inputs
 
-| Input                              | Required | Default   | Description                                                    |
-| ---------------------------------- | -------- | --------- | -------------------------------------------------------------- |
-| `node-version`                     | No       | `24.11.1` | Node.js version to use for Safe-Chain installation             |
-| `security-patch-package-exclusion` | No       | `""`      | Comma-separated list of packages to exclude from age filtering |
+| Input                              | Required | Default | Description                                                                                                                                                                                                                                            |
+| ---------------------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `node-version`                     | No       | `""`    | Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence                                                                               |
+| `node-version-file`                | No       | `""`    | File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined, the action will use version from `node-version` input |
+| `security-patch-package-exclusion` | No       | `""`    | Comma-separated list of packages to exclude from minimum age filtering. Use to exclude trusted packages from the 72-hour age requirement                                                                                                               |
 
 ---
 
@@ -207,7 +208,7 @@ After running this action, the following environment variables are available:
 
    ```yaml
    # ✅ Recommended - Use latest stable commit SHA
-   uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+   uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 
    # ❌ Not recommended - Use specific version tag
    uses: ministryofjustice/devsecops-actions/sca/slsa@v1.4.0
@@ -351,7 +352,7 @@ Single package
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+  uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     security-patch-package-exclusion: "@ministryofjustice/example"
 ```
@@ -360,7 +361,7 @@ Multiple packages
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+  uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     security-patch-package-exclusion: "@ministryofjustice/package1,@ministryofjustice/package2,package3"
 ```
@@ -369,7 +370,7 @@ Do not allow wildcard packages, be specific.
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+  uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     # Not recommended, avoid wildcard packages
     security-patch-package-exclusion: "@ministryofjustice/*"

@@ -107,7 +107,7 @@ Both checks must pass for the action to succeed.
 
 **Purpose**: Installs Node.js runtime for commitlint
 
-- Installs specified Node.js version (default: 24.11.1)
+- Installs specified Node.js version
 - Configures npm environment
 - Prepares runtime for commitlint execution
 
@@ -317,10 +317,11 @@ jobs:
 
 All inputs are optional. The action works with zero configuration.
 
-| Input          | Type   | Required | Default             | Description                                                                      |
-| -------------- | ------ | -------- | ------------------- | -------------------------------------------------------------------------------- |
-| `config-file`  | string | No       | `""`                | Path to custom commitlint configuration file (e.g., `commitlint.config.js`)      |
-| `node-version` | string | No       | `"24.11.1"`         | Node.js version to use for commitlint execution                                  |
+| Input               | Type   | Required | Default | Description                                                                                                                                                                                                                                            |
+| ------------------- | ------ | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `config-file`       | string | No       | `""`    | Path to custom commitlint configuration file (e.g., `commitlint.config.js`)                                                                                                                                                                            |
+| `node-version`      | string | No       | `""`    | Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence                                                                               |
+| `node-version-file` | string | No       | `""`    | File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined, the action will use version from `node-version` input |
 
 ---
 
@@ -328,9 +329,9 @@ All inputs are optional. The action works with zero configuration.
 
 Your workflow must explicitly grant these permissions:
 
-| Permission | Level    | Purpose                                         |
-| ---------- | -------- | ----------------------------------------------- |
-| `contents` | **read** | Repository checkout and commit history access   |
+| Permission | Level    | Purpose                                       |
+| ---------- | -------- | --------------------------------------------- |
+| `contents` | **read** | Repository checkout and commit history access |
 
 **Example:**
 
@@ -353,34 +354,34 @@ Create `commitlint.config.js` in your repository root:
 
 ```javascript
 module.exports = {
-  extends: ['@commitlint/config-conventional'],
+  extends: ["@commitlint/config-conventional"],
   rules: {
-    'type-enum': [
+    "type-enum": [
       2,
-      'always',
+      "always",
       [
-        'feat',     // New feature
-        'fix',      // Bug fix
-        'docs',     // Documentation changes
-        'style',    // Code style changes (formatting, etc.)
-        'refactor', // Code refactoring
-        'perf',     // Performance improvements
-        'test',     // Adding or updating tests
-        'build',    // Build system changes
-        'ci',       // CI/CD changes
-        'chore',    // Maintenance tasks
-        'revert',   // Revert previous commit
+        "feat", // New feature
+        "fix", // Bug fix
+        "docs", // Documentation changes
+        "style", // Code style changes (formatting, etc.)
+        "refactor", // Code refactoring
+        "perf", // Performance improvements
+        "test", // Adding or updating tests
+        "build", // Build system changes
+        "ci", // CI/CD changes
+        "chore", // Maintenance tasks
+        "revert", // Revert previous commit
       ],
     ],
-    'type-case': [2, 'always', 'lower-case'],
-    'type-empty': [2, 'never'],
-    'scope-case': [2, 'always', 'lower-case'],
-    'subject-empty': [2, 'never'],
-    'subject-full-stop': [2, 'never', '.'],
-    'header-max-length': [2, 'always', 100],
-    'body-leading-blank': [1, 'always'],
-    'body-max-line-length': [2, 'always', 160],
-    'footer-leading-blank': [1, 'always'],
+    "type-case": [2, "always", "lower-case"],
+    "type-empty": [2, "never"],
+    "scope-case": [2, "always", "lower-case"],
+    "subject-empty": [2, "never"],
+    "subject-full-stop": [2, "never", "."],
+    "header-max-length": [2, "always", 100],
+    "body-leading-blank": [1, "always"],
+    "body-max-line-length": [2, "always", 160],
+    "footer-leading-blank": [1, "always"],
   },
 };
 ```
@@ -440,19 +441,19 @@ The action validates against the [Conventional Commits](https://www.conventional
 
 **Types:**
 
-| Type       | Description                                              | Example                                     |
-| ---------- | -------------------------------------------------------- | ------------------------------------------- |
-| `feat`     | New feature                                              | `feat(auth): add JWT authentication`        |
-| `fix`      | Bug fix                                                  | `fix(api): handle null response`            |
-| `docs`     | Documentation changes                                    | `docs: update README installation steps`    |
-| `style`    | Code style (whitespace, formatting)                      | `style: apply prettier formatting`          |
-| `refactor` | Code change that neither fixes bug nor adds feature      | `refactor(parser): simplify token logic`    |
-| `perf`     | Performance improvement                                  | `perf(database): optimise query execution`  |
-| `test`     | Adding or updating tests                                 | `test(user): add integration tests`         |
-| `build`    | Build system or external dependencies                    | `build: upgrade to webpack 5`               |
-| `ci`       | CI/CD configuration changes                              | `ci: add deployment workflow`               |
-| `chore`    | Maintenance tasks                                        | `chore: update dependencies`                |
-| `revert`   | Revert previous commit                                   | `revert: revert commit abc123`              |
+| Type       | Description                                         | Example                                    |
+| ---------- | --------------------------------------------------- | ------------------------------------------ |
+| `feat`     | New feature                                         | `feat(auth): add JWT authentication`       |
+| `fix`      | Bug fix                                             | `fix(api): handle null response`           |
+| `docs`     | Documentation changes                               | `docs: update README installation steps`   |
+| `style`    | Code style (whitespace, formatting)                 | `style: apply prettier formatting`         |
+| `refactor` | Code change that neither fixes bug nor adds feature | `refactor(parser): simplify token logic`   |
+| `perf`     | Performance improvement                             | `perf(database): optimise query execution` |
+| `test`     | Adding or updating tests                            | `test(user): add integration tests`        |
+| `build`    | Build system or external dependencies               | `build: upgrade to webpack 5`              |
+| `ci`       | CI/CD configuration changes                         | `ci: add deployment workflow`              |
+| `chore`    | Maintenance tasks                                   | `chore: update dependencies`               |
+| `revert`   | Revert previous commit                              | `revert: revert commit abc123`             |
 
 **Breaking Changes:**
 
@@ -687,7 +688,7 @@ steps:
 uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Acceptable: Version tag (updated periodically)
-uses: ministryofjustice/devsecops-actions/github/commit@559ec2408860d9237cc472a5710e61c1c2187ffa
+uses: ministryofjustice/devsecops-actions/github/commit@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 
 # ❌ Not recommended: Branch names (security risk)
 uses: ministryofjustice/devsecops-actions/github/commit@main

@@ -29,15 +29,21 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #
 # With Docker image scanning:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #     with:
 #       docker-images-file: "docker-images.json"
 #
+# With Node.js version from file:
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#     with:
+#       node-version-file: ".nvmrc"
+#       docker-images-file: "docker-images.json"
+#
 # Custom Node.js version:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #     with:
 #       node-version: "24.11.1"
 #       docker-images-file: "docker-images.json"
@@ -97,8 +103,13 @@ author: Ministry of Justice UK
 inputs:
   node-version:
     required: false
-    description: "Node.js version to use for SBOM generation and related tooling. Specify the exact version number."
-    default: "24.11.1"
+    description: "Node.js version to use for SBOM generation and related tooling. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence."
+    default: ""
+
+  node-version-file:
+    required: false
+    description: "File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined the action will use version from `node-version` input."
+    default: ""
 
   docker-images-file:
     required: false
@@ -118,19 +129,20 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "559ec2408860d9237cc472a5710e61c1c2187ffa"
-        path: "559ec2408860d9237cc472a5710e61c1c2187ffa"
+        ref: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
+        path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
 
     - name: Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
+        node-version-file: ${{ inputs.node-version-file }}
         cache: "npm"
-        cache-dependency-path: "559ec2408860d9237cc472a5710e61c1c2187ffa/package-lock.json"
+        cache-dependency-path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649/package-lock.json"
 
     - name: Install
       shell: bash
-      working-directory: 559ec2408860d9237cc472a5710e61c1c2187ffa
+      working-directory: 2ce4e5898dfb83378215b4ae15401d4e9dba0649
       run: npm run install:syft
 
     - name: Repository
@@ -140,7 +152,7 @@ runs:
 
     - name: Images
       if: inputs.docker-images-file != ''
-      working-directory: 559ec2408860d9237cc472a5710e61c1c2187ffa
+      working-directory: 2ce4e5898dfb83378215b4ae15401d4e9dba0649
       shell: bash
       run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 

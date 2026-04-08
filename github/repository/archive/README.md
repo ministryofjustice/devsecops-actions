@@ -125,7 +125,7 @@ jobs:
 
     steps:
       - name: Archive Check
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           notification-email: "team@example.gov.uk"
@@ -171,7 +171,7 @@ jobs:
 
     steps:
       - name: Archive Check with Custom Threshold
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: ${{ github.event.inputs.archival-days || '180' }}
@@ -217,7 +217,7 @@ jobs:
 
     steps:
       - name: Archive Check (${{ matrix.archival-threshold.days }} days)
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: ${{ matrix.archival-threshold.days }}
@@ -253,7 +253,7 @@ jobs:
     steps:
       - name: Archive Check
         id: archive
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: "90"
@@ -280,14 +280,15 @@ All inputs are clearly defined with sensible defaults for ease of use.
 
 ### Repository Archive Check Inputs
 
-| Input                     | Type   | Required | Default     | Description                                                                                                           |
-| ------------------------- | ------ | -------- | ----------- | --------------------------------------------------------------------------------------------------------------------- |
-| `token`                   | string | **Yes**  | N/A         | GitHub token with read permissions to repository contents                                                             |
-| `archival-days`           | string | No       | `90`        | Number of non-activity days before repository is considered eligible for archival                                     |
-| `notification-email`      | string | **Yes**  | N/A         | Email address to receive notifications for repositories dormant for specified archival-days period                    |
-| `gov-notify-key`          | string | **Yes**  | N/A         | GOV.UK Notify API key for sending email notifications                                                                 |
-| `gov-notify-template-id`  | string | **Yes**  | N/A         | GOV.UK Notify template ID for notification email format                                                               |
-| `node-version`            | string | No       | `24.11.1`   | Node.js version to use for executing the archive check scanner                                                        |
+| Input                    | Type   | Required | Default | Description                                                                                                                                                                                                                                            |
+| ------------------------ | ------ | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `token`                  | string | **Yes**  | N/A     | GitHub token with read permissions to repository contents                                                                                                                                                                                              |
+| `archival-days`          | string | No       | `90`    | Number of inactivity days before repository is considered eligible for archival                                                                                                                                                                        |
+| `notification-email`     | string | **Yes**  | N/A     | Email address to receive notifications for repositories dormant for specified archival-days period                                                                                                                                                     |
+| `gov-notify-key`         | string | **Yes**  | N/A     | GOV.UK Notify API key for sending email notifications                                                                                                                                                                                                  |
+| `gov-notify-template-id` | string | **Yes**  | N/A     | GOV.UK Notify template ID for notification email format                                                                                                                                                                                                |
+| `node-version`           | string | No       | `""`    | Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence                                                                               |
+| `node-version-file`      | string | No       | `""`    | File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined, the action will use version from `node-version` input |
 
 ---
 
@@ -295,9 +296,9 @@ All inputs are clearly defined with sensible defaults for ease of use.
 
 Your workflow must explicitly grant these permissions:
 
-| Permission        | Level     | Purpose                                              |
-| ----------------- | --------- | ---------------------------------------------------- |
-| `contents`        | **read**  | Repository checkout and commit history access        |
+| Permission | Level    | Purpose                                       |
+| ---------- | -------- | --------------------------------------------- |
+| `contents` | **read** | Repository checkout and commit history access |
 
 **Example:**
 
@@ -410,7 +411,7 @@ archival-days: "365"
 uses: ministryofjustice/devsecops-actions/github/repository/archive@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
 # ⚠️ Not recommended: Branch names
-uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
+uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 ```
 
 ### Scheduling Best Practices
@@ -451,13 +452,13 @@ gov-notify-template-id: ${{ secrets.ORG_NOTIFY_TEMPLATE_ID }}
 
 ### Threshold Selection Guidelines
 
-| Repository Type           | Recommended Threshold | Rationale                            |
-| ------------------------- | --------------------- | ------------------------------------ |
-| Production Services       | 180-365 days          | Long release cycles expected         |
-| Development Projects      | 90 days               | Regular activity expected            |
-| Experimental Repositories | 30-60 days            | Short-lived by nature                |
-| Documentation             | 180 days              | Updated less frequently              |
-| Archived Projects         | N/A                   | Should already be archived           |
+| Repository Type           | Recommended Threshold | Rationale                    |
+| ------------------------- | --------------------- | ---------------------------- |
+| Production Services       | 180-365 days          | Long release cycles expected |
+| Development Projects      | 90 days               | Regular activity expected    |
+| Experimental Repositories | 30-60 days            | Short-lived by nature        |
+| Documentation             | 180 days              | Updated less frequently      |
+| Archived Projects         | N/A                   | Should already be archived   |
 
 ### Notification Management
 

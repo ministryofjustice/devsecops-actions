@@ -238,7 +238,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -291,7 +291,7 @@ jobs:
 
     steps:
       - name: Run SCA with Custom Configuration
-        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -352,7 +352,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: ${{ matrix.renovate }}
@@ -388,7 +388,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: "false" # No automated updates on PRs
@@ -402,7 +402,7 @@ For repositories with external dependency management:
 ```yaml
 steps:
   - name: Run SCA without Renovate
-    uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+    uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
       renovate: "false"
@@ -414,21 +414,22 @@ steps:
 
 All inputs are optional except `token`. Designed for zero-configuration operation.
 
-| Input                               | Type   | Required | Default            | Description                                                                                                                         |
-| ----------------------------------- | ------ | -------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `token`                             | string | **Yes**  | N/A                | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read) |
-| `renovate`                          | string | No       | `true`             | Enable or disable Renovate bot for automated dependency updates                                                                     |
-| `renovate-version`                  | string | No       | `43.31.1`          | Renovate CLI version to use (specify without 'v' prefix)                                                                            |
-| `node-version`                      | string | No       | `24.11.1`          | Node.js version to use for SBOM generation with Syft                                                                                |
-| `dependency-review-config-file`     | string | No       | `""`               | Path to custom dependency review config (e.g., `.github/dependency-review-config.yml`)                                              |
-| `trufflehog-config-file`            | string | No       | `""`               | Path to custom TruffleHog secret scanning configuration                                                                             |
-| `trufflehog-output-filename`        | string | No       | `"sca-trufflehog"` | TruffleHog JSON output file name (`.json` will be appended)                                                                         |
-| `codeql-config-file`                | string | No       | `""`               | Path to custom CodeQL query configuration for SAST                                                                                  |
-| `codeql-upload-findings`            | string | No       | `always`           | Control SARIF upload to Code Scanning. Set to `never` if using GitHub's default CodeQL setup                                        |
-| `codeql-languages`                  | string | No       | `""`               | A comma-separated list of CodeQL languages to analyse                                                                               |
-| `docker-images-file`                | string | No       | `""`               | Path to JSON file with Docker image URIs for container SBOM generation                                                              |
-| `output-directory-name`             | string | No       | `"reports"`        | Output directory for reports generation, prefixed with `./`                                                                         |
-| `dependency-check-suppression-file` | string | No       | `""`               | The file paths to the suppression XML files for OWASP Dependency-Check                                                              |
+| Input                               | Type   | Required | Default            | Description                                                                                                                                                                                                                                            |
+| ----------------------------------- | ------ | -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `token`                             | string | **Yes**  | N/A                | GitHub token with required permissions (contents: read/write, pull-requests: read/write, issues: read/write, security-events: read)                                                                                                                    |
+| `renovate`                          | string | No       | `true`             | Enable or disable Renovate bot for automated dependency updates                                                                                                                                                                                        |
+| `renovate-version`                  | string | No       | `43.31.1`          | Renovate CLI version to use (specify without 'v' prefix)                                                                                                                                                                                               |
+| `node-version`                      | string | No       | `""`               | Node.js version to use for SBOM generation and related tooling. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence                                       |
+| `node-version-file`                 | string | No       | `""`               | File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined, the action will use version from `node-version` input |
+| `dependency-review-config-file`     | string | No       | `""`               | Path to custom dependency review config (e.g., `.github/dependency-review-config.yml`)                                                                                                                                                                 |
+| `trufflehog-config-file`            | string | No       | `""`               | Path to custom TruffleHog secret scanning configuration                                                                                                                                                                                                |
+| `trufflehog-output-filename`        | string | No       | `"sca-trufflehog"` | TruffleHog JSON output file name (`.json` will be appended)                                                                                                                                                                                            |
+| `codeql-config-file`                | string | No       | `""`               | Path to custom CodeQL query configuration for SAST                                                                                                                                                                                                     |
+| `codeql-upload-findings`            | string | No       | `always`           | Control SARIF upload to Code Scanning. Set to `never` if using GitHub's default CodeQL setup                                                                                                                                                           |
+| `codeql-languages`                  | string | No       | `""`               | A comma-separated list of CodeQL languages to analyse                                                                                                                                                                                                  |
+| `docker-images-file`                | string | No       | `""`               | Path to JSON file with Docker image URIs for container SBOM generation                                                                                                                                                                                 |
+| `output-directory-name`             | string | No       | `"reports"`        | Output directory for reports generation, prefixed with `./`                                                                                                                                                                                            |
+| `dependency-check-suppression-file` | string | No       | `""`               | The file paths to the suppression XML files for OWASP Dependency-Check                                                                                                                                                                                 |
 
 ---
 
@@ -487,7 +488,7 @@ Create a JSON file (e.g., `docker-images.json` or `sources.json`) in your reposi
 #### Usage
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+- uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     docker-images-file: "docker-images.json"

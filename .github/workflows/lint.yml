@@ -79,9 +79,7 @@ jobs:
           cache-dependency-path: ${{ github.workspace }}/package-lock.json
 
       - name: ⛓️ SLSA
-        uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
-        with:
-          security-patch-package-exclusion: "@renovatebot/good-enough-parser,@renovatebot/detect-tools,renovate,lodash"
+        uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 
       - name: Install
         shell: bash
@@ -110,4 +108,4 @@ jobs:
         run: npm run spellcheck
 
       - name: Commit
-        uses: ministryofjustice/devsecops-actions/github/commit@d81296671f9da2637baf5c33d60ca67bf31f5a3d # v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/commit@25ae25808a772819101d3f91f614d4d5844862e4 # v1.4.0

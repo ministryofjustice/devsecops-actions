@@ -50,10 +50,15 @@
 # USAGE
 # ==============================================================================
 # Basic usage (default settings):
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#
+# With Node.js version from file:
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#     with:
+#       node-version-file: ".node-version"
 #
 # Advanced usage with package exclusions:
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #     with:
 #       node-version: "24.11.1"
 #       security-patch-package-exclusion: "@octokit/*,@actions/*"
@@ -78,7 +83,7 @@
 # - SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS: Package exclusion patterns
 #
 # Inputs:
-# - node-version: Node.js version for Safe-Chain (default: 24.11.1)
+# - node-version: Node.js version for Safe-Chain
 # - security-patch-package-exclusion: Trusted packages to exclude from
 #   minimum age filtering (e.g., @scope/* to trust all packages from scope)
 #
@@ -145,12 +150,18 @@ author: Ministry of Justice UK
 inputs:
   node-version:
     required: false
-    description: "Node.js version to use"
-    default: "24.11.1"
+    description: "Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence."
+    default: ""
+
+  node-version-file:
+    required: false
+    description: "File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined the action will use version from `node-version` input."
+    default: ""
 
   security-patch-package-exclusion:
     required: false
-    description: "Exclude trusted packages from minimum age filtering. Use @scope/* to trust all packages from an organisation"
+    description: "Exclude trusted packages from minimum age filtering. Use comma-separated list for multiple packages (e.g., '@ministryofjustice/package1,@ministryofjustice/package2')"
+    default: ""
 
 runs:
   using: composite
@@ -159,6 +170,7 @@ runs:
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
+        node-version-file: ${{ inputs.node-version-file }}
 
     - name: ⚙️ Configuration
       working-directory: ${{ github.workspace }}

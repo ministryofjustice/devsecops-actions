@@ -29,6 +29,11 @@
 # Basic usage:
 #   - uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 #
+# With Node.js version from file:
+#   - uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
+#     with:
+#       node-version-file: "package.json"
+#
 # Advanced usage with custom configuration:
 #   - uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 #     with:
@@ -76,8 +81,13 @@ inputs:
 
   node-version:
     required: false
-    description: "Node.js version to use"
-    default: "24.11.1"
+    description: "Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence."
+    default: ""
+
+  node-version-file:
+    required: false
+    description: "File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined the action will use version from `node-version` input."
+    default: ""
 
 runs:
   using: composite
@@ -89,31 +99,32 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "76122f269486156f5ff5277f4096ce79f7363336"
-        path: "76122f269486156f5ff5277f4096ce79f7363336"
+        ref: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
+        path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
-        cache: 'npm'
-        cache-dependency-path: '76122f269486156f5ff5277f4096ce79f7363336/package-lock.json'
+        node-version-file: ${{ inputs.node-version-file }}
+        cache: "npm"
+        cache-dependency-path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649/package-lock.json"
 
     - name: ⛓️ SLSA
-      uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
+      uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
 
     - name: ⚙️ Install
       shell: bash
-      working-directory: 76122f269486156f5ff5277f4096ce79f7363336
+      working-directory: 2ce4e5898dfb83378215b4ae15401d4e9dba0649
       run: npm ci --ignore-scripts
 
     - name: 🧩 Conventional
       shell: bash
-      working-directory: 76122f269486156f5ff5277f4096ce79f7363336
+      working-directory: 2ce4e5898dfb83378215b4ae15401d4e9dba0649
       run: git -C "$GITHUB_WORKSPACE" --no-pager log -1 --no-show-signature --pretty=%s | npm run validate:commit:message -- --config ${{ inputs.config-file && format('"{0}"', inputs.config-file) || 'commitlint.config.js' }}
 
     - name: 🔐 Signed
       shell: bash
-      working-directory: 76122f269486156f5ff5277f4096ce79f7363336
+      working-directory: 2ce4e5898dfb83378215b4ae15401d4e9dba0649
       run: |
         git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%s | grep -Eq "gpg: Signature made|BEGIN PGP SIGNATURE" || { echo "❌ Commit is unsigned!"; exit 1; }
