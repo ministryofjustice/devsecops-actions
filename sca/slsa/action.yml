@@ -50,10 +50,10 @@
 # USAGE
 # ==============================================================================
 # Basic usage (default settings):
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
 #
 # Advanced usage with package exclusions:
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
 #     with:
 #       node-version: "24.11.1"
 #       security-patch-package-exclusion: "@octokit/*,@actions/*"
@@ -155,9 +155,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: 📦 Repository
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
     - name: Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
