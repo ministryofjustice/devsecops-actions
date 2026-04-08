@@ -110,4 +110,4 @@ jobs:
         run: npm run spellcheck
 
       - name: Commit
-        uses: ministryofjustice/devsecops-actions/github/commit@003c12093f5c456a22ee726beb26e02ded22eb2e # v1.4.0
+        uses: ministryofjustice/devsecops-actions/github/commit@2ce4e5898dfb83378215b4ae15401d4e9dba0649 # v1.4.0
