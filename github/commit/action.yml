@@ -89,31 +89,31 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "559ec2408860d9237cc472a5710e61c1c2187ffa"
-        path: "559ec2408860d9237cc472a5710e61c1c2187ffa"
+        ref: "76122f269486156f5ff5277f4096ce79f7363336"
+        path: "76122f269486156f5ff5277f4096ce79f7363336"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
-        cache-dependency-path: '559ec2408860d9237cc472a5710e61c1c2187ffa/package-lock.json'
+        cache-dependency-path: '76122f269486156f5ff5277f4096ce79f7363336/package-lock.json'
 
     - name: ⛓️ SLSA
       uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
 
     - name: ⚙️ Install
       shell: bash
-      working-directory: 559ec2408860d9237cc472a5710e61c1c2187ffa
+      working-directory: 76122f269486156f5ff5277f4096ce79f7363336
       run: npm ci --ignore-scripts
 
     - name: 🧩 Conventional
       shell: bash
-      working-directory: 559ec2408860d9237cc472a5710e61c1c2187ffa
+      working-directory: 76122f269486156f5ff5277f4096ce79f7363336
       run: git -C "$GITHUB_WORKSPACE" --no-pager log -1 --no-show-signature --pretty=%s | npm run validate:commit:message -- --config ${{ inputs.config-file && format('"{0}"', inputs.config-file) || 'commitlint.config.js' }}
 
     - name: 🔐 Signed
       shell: bash
-      working-directory: 559ec2408860d9237cc472a5710e61c1c2187ffa
+      working-directory: 76122f269486156f5ff5277f4096ce79f7363336
       run: |
         git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%s | grep -Eq "gpg: Signature made|BEGIN PGP SIGNATURE" || { echo "❌ Commit is unsigned!"; exit 1; }
