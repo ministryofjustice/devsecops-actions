@@ -1,11 +1,11 @@
 {
-  "images": [
-    "ghcr.io/ministryofjustice/devsecops-hooks:latest",
-    "ghcr.io/ministryofjustice/devsecops-hooks:v1.4.0",
-    "ghcr.io/ministryofjustice/devsecops-hooks:v1.5.0",
-    "ghcr.io/ministryofjustice/devsecops-hooks:v1.6.0",
-    "ghcr.io/ministryofjustice/devsecops-hooks:v1.4.0@sha256:457a7e82b47146f56902607c4ec598c852f2afda640990d08fc3d00f28e38fbc",
-    "ghcr.io/ministryofjustice/devsecops-hooks:v1.5.0@sha256:396134215e084ab907fb410829448d5a5bcfc06edceb0c7913aa9e45cc5cfd71",
-    "ghcr.io/ministryofjustice/devsecops-hooks:v1.6.0@sha256:f3d5cd21304f02698e5bc87bce7421b379fafa5a58eaabb52993d1d5066a2d91"
-  ]
+    "images": [
+        "ghcr.io/ministryofjustice/devsecops-hooks:latest",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.0.0",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.2.0",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.3.0",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.4.0@sha256:457a7e82b47146f56902607c4ec598c852f2afda640990d08fc3d00f28e38fbc",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.5.0",
+        "ghcr.io/ministryofjustice/devsecops-hooks:v1.6.0"
+    ]
 }
