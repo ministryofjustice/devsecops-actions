@@ -119,6 +119,7 @@ inputs:
   node-version:
     required: false
     description: "Node.js version to use for SBOM generation and related tooling. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence."
+    default: ""
 
   node-version-file:
     required: false

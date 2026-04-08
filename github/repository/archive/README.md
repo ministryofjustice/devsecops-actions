@@ -280,14 +280,15 @@ All inputs are clearly defined with sensible defaults for ease of use.
 
 ### Repository Archive Check Inputs
 
-| Input                    | Type   | Required | Default | Description                                                                                        |
-| ------------------------ | ------ | -------- | ------- | -------------------------------------------------------------------------------------------------- |
-| `token`                  | string | **Yes**  | N/A     | GitHub token with read permissions to repository contents                                          |
-| `archival-days`          | string | No       | `90`    | Number of non-activity days before repository is considered eligible for archival                  |
-| `notification-email`     | string | **Yes**  | N/A     | Email address to receive notifications for repositories dormant for specified archival-days period |
-| `gov-notify-key`         | string | **Yes**  | N/A     | GOV.UK Notify API key for sending email notifications                                              |
-| `gov-notify-template-id` | string | **Yes**  | N/A     | GOV.UK Notify template ID for notification email format                                            |
-| `node-version`           | string | No       | N/A     | Node.js version to use for executing the archive check scanner                                     |
+| Input                    | Type   | Required | Default  | Description                                                                                                                                                                                                                                            |
+| ------------------------ | ------ | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `token`                  | string | **Yes**  | N/A      | GitHub token with read permissions to repository contents                                                                                                                                                                                              |
+| `archival-days`          | string | No       | `90`     | Number of inactivity days before repository is considered eligible for archival                                                                                                                                                                        |
+| `notification-email`     | string | **Yes**  | N/A      | Email address to receive notifications for repositories dormant for specified archival-days period                                                                                                                                                     |
+| `gov-notify-key`         | string | **Yes**  | N/A      | GOV.UK Notify API key for sending email notifications                                                                                                                                                                                                  |
+| `gov-notify-template-id` | string | **Yes**  | N/A      | GOV.UK Notify template ID for notification email format                                                                                                                                                                                                |
+| `node-version`           | string | No       | `""`     | Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence                                                                               |
+| `node-version-file`      | string | No       | `.nvmrc` | File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined, the action will use version from `node-version` input |
 
 ---
 

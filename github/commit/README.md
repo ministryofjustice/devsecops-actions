@@ -317,10 +317,11 @@ jobs:
 
 All inputs are optional. The action works with zero configuration.
 
-| Input          | Type   | Required | Default | Description                                                                 |
-| -------------- | ------ | -------- | ------- | --------------------------------------------------------------------------- |
-| `config-file`  | string | No       | `""`    | Path to custom commitlint configuration file (e.g., `commitlint.config.js`) |
-| `node-version` | string | No       | `""`    | Node.js version to use for commitlint execution                             |
+| Input               | Type   | Required | Default  | Description                                                                                                                                                                                                                                            |
+| ------------------- | ------ | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `config-file`       | string | No       | `""`     | Path to custom commitlint configuration file (e.g., `commitlint.config.js`)                                                                                                                                                                            |
+| `node-version`      | string | No       | `""`     | Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence                                                                               |
+| `node-version-file` | string | No       | `.nvmrc` | File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined, the action will use version from `node-version` input |
 
 ---
 

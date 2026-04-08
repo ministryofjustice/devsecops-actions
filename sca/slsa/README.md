@@ -178,10 +178,11 @@ After running this action, the following environment variables are available:
 
 ### Inputs
 
-| Input                              | Required | Default | Description                                                    |
-| ---------------------------------- | -------- | ------- | -------------------------------------------------------------- |
-| `node-version`                     | No       | `""`    | Node.js version to use for Safe-Chain installation             |
-| `security-patch-package-exclusion` | No       | `""`    | Comma-separated list of packages to exclude from age filtering |
+| Input                              | Required | Default  | Description                                                                                                                                                                                                                                            |
+| ---------------------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `node-version`                     | No       | `""`     | Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence                                                                               |
+| `node-version-file`                | No       | `.nvmrc` | File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined, the action will use version from `node-version` input |
+| `security-patch-package-exclusion` | No       | `""`     | Comma-separated list of packages to exclude from minimum age filtering. Use to exclude trusted packages from the 72-hour age requirement                                                                                                               |
 
 ---
 
