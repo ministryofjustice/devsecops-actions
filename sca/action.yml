@@ -124,7 +124,7 @@ inputs:
   node-version-file:
     required: false
     description: "File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined the action will use version from `node-version` input."
-    default: ".nvmrc"
+    default: ""
 
   renovate-version:
     required: false
