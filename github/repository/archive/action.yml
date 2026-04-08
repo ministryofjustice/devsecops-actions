@@ -28,7 +28,7 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@805c9da24fe7083e24b8435a626463b25951d278
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       notification-email: "team@example.gov.uk"
@@ -36,7 +36,7 @@
 #       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
 #
 # With Node.js version from file:
-#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@805c9da24fe7083e24b8435a626463b25951d278
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       node-version-file: "package.json"
@@ -45,7 +45,7 @@
 #       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
 #
 # Advanced usage with custom threshold:
-#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@805c9da24fe7083e24b8435a626463b25951d278
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       archival-days: "180"
@@ -125,8 +125,8 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
-        path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
+        ref: "805c9da24fe7083e24b8435a626463b25951d278"
+        path: "805c9da24fe7083e24b8435a626463b25951d278"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
@@ -134,9 +134,9 @@ runs:
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version-file }}
         cache: "npm"
-        cache-dependency-path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649/package-lock.json"
+        cache-dependency-path: "805c9da24fe7083e24b8435a626463b25951d278/package-lock.json"
 
     - name: ⚙️ Execute
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: node 2ce4e5898dfb83378215b4ae15401d4e9dba0649/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
+      run: node 805c9da24fe7083e24b8435a626463b25951d278/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"

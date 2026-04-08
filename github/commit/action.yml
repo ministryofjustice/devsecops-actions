@@ -99,8 +99,8 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
-        path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
+        ref: "805c9da24fe7083e24b8435a626463b25951d278"
+        path: "805c9da24fe7083e24b8435a626463b25951d278"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
@@ -108,23 +108,23 @@ runs:
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version-file }}
         cache: "npm"
-        cache-dependency-path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649/package-lock.json"
+        cache-dependency-path: "805c9da24fe7083e24b8435a626463b25951d278/package-lock.json"
 
     - name: ⛓️ SLSA
-      uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
+      uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278
 
     - name: ⚙️ Install
       shell: bash
-      working-directory: 2ce4e5898dfb83378215b4ae15401d4e9dba0649
+      working-directory: 805c9da24fe7083e24b8435a626463b25951d278
       run: npm ci --ignore-scripts
 
     - name: 🧩 Conventional
       shell: bash
-      working-directory: 2ce4e5898dfb83378215b4ae15401d4e9dba0649
+      working-directory: 805c9da24fe7083e24b8435a626463b25951d278
       run: git -C "$GITHUB_WORKSPACE" --no-pager log -1 --no-show-signature --pretty=%s | npm run validate:commit:message -- --config ${{ inputs.config-file && format('"{0}"', inputs.config-file) || 'commitlint.config.js' }}
 
     - name: 🔐 Signed
       shell: bash
-      working-directory: 2ce4e5898dfb83378215b4ae15401d4e9dba0649
+      working-directory: 805c9da24fe7083e24b8435a626463b25951d278
       run: |
         git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%s | grep -Eq "gpg: Signature made|BEGIN PGP SIGNATURE" || { echo "❌ Commit is unsigned!"; exit 1; }
