@@ -50,7 +50,7 @@
 # USAGE
 # ==============================================================================
 # Basic usage (default settings):
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
 #
 # With Node.js version from file:
 #   - uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
@@ -58,7 +58,7 @@
 #       node-version-file: ".node-version"
 #
 # Advanced usage with package exclusions:
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@76122f269486156f5ff5277f4096ce79f7363336
 #     with:
 #       node-version: "24.11.1"
 #       security-patch-package-exclusion: "@octokit/*,@actions/*"
@@ -154,7 +154,8 @@ inputs:
 
   node-version-file:
     required: false
-    description: "File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined the action will use version from node-version."
+    description: "File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined the action will use version from `node-version` input."
+    default: ".nvmrc"
 
   security-patch-package-exclusion:
     required: false
@@ -163,9 +164,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: 📦 Repository
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
     - name: Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
