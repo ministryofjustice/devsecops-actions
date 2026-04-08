@@ -81,7 +81,7 @@ Orchestrates 9 specialised security steps:
 #### Code
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+- uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -118,7 +118,7 @@ Orchestrates 4 specialised components:
 **Public Template:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/cruft@559ec2408860d9237cc472a5710e61c1c2187ffa
+- uses: ministryofjustice/devsecops-actions/cruft@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -126,7 +126,7 @@ Orchestrates 4 specialised components:
 **Private Template:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/cruft@559ec2408860d9237cc472a5710e61c1c2187ffa
+- uses: ministryofjustice/devsecops-actions/cruft@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     private: "true"
     github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -177,7 +177,7 @@ Automated repository health monitoring that scans commit history to identify dor
 **Code:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/github/repository/archive@559ec2408860d9237cc472a5710e61c1c2187ffa
+- uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     notification-email: "team@example.gov.uk"
@@ -206,7 +206,7 @@ Comprehensive commit verification that validates Git commits for security and qu
 **Code:**
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/github/commit@559ec2408860d9237cc472a5710e61c1c2187ffa
+- uses: ministryofjustice/devsecops-actions/github/commit@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 ```
 
 **[📖 Full Commit Validation Documentation](github/commit/README.md)**

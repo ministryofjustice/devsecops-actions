@@ -79,9 +79,7 @@ jobs:
           cache-dependency-path: ${{ github.workspace }}/package-lock.json
 
       - name: ⛓️ SLSA
-        uses: ministryofjustice/devsecops-actions/sca/slsa@003c12093f5c456a22ee726beb26e02ded22eb2e
-        with:
-          security-patch-package-exclusion: "@renovatebot/good-enough-parser,@renovatebot/detect-tools,renovate,lodash"
+        uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 
       - name: Install
         shell: bash

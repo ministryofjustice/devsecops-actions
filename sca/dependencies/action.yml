@@ -29,10 +29,10 @@
 # USAGE
 # ==============================================================================
 # Basic usage (default settings):
-#   - uses: ministryofjustice/devsecops-actions/sca/dependencies@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/dependencies@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #
 # With custom configuration:
-#   - uses: ministryofjustice/devsecops-actions/sca/dependencies@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/dependencies@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #     with:
 #       dependency-review-config-file: ".github/dependency-review-config.yml"
 #

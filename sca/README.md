@@ -238,7 +238,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -291,7 +291,7 @@ jobs:
 
     steps:
       - name: Run SCA with Custom Configuration
-        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -352,7 +352,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: ${{ matrix.renovate }}
@@ -388,7 +388,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+        uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: "false" # No automated updates on PRs
@@ -402,7 +402,7 @@ For repositories with external dependency management:
 ```yaml
 steps:
   - name: Run SCA without Renovate
-    uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+    uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
       renovate: "false"
@@ -488,7 +488,7 @@ Create a JSON file (e.g., `docker-images.json` or `sources.json`) in your reposi
 #### Usage
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@559ec2408860d9237cc472a5710e61c1c2187ffa
+- uses: ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     docker-images-file: "docker-images.json"

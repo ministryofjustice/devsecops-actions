@@ -30,19 +30,19 @@
 # USAGE
 # ==============================================================================
 # Basic usage (auto-detection):
-#   - uses: ministryofjustice/devsecops-actions/sca/codeql@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With custom configuration:
-#   - uses: ministryofjustice/devsecops-actions/sca/codeql@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       codeql-config-file: ".github/codeql/codeql-config.yml"
 #       codeql-upload-findings: "always"
 #
 # Disable upload (for default CodeQL setup):
-#   - uses: ministryofjustice/devsecops-actions/sca/codeql@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/codeql@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       codeql-upload-findings: "never"
