@@ -10,7 +10,7 @@
                     <mxGeometry x="100" y="40" width="800" height="40" as="geometry"/>
                 </mxCell>
                 
-                <mxCell id="subtitle" value="ministryofjustice/devsecops-actions/sca@1cee8e5dce2be99328b2ea9074c7e0acdfd69907" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
+                <mxCell id="subtitle" value="ministryofjustice/devsecops-actions/sca@2ce4e5898dfb83378215b4ae15401d4e9dba0649" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#8b949e;fontFamily=Segoe UI;" vertex="1" parent="1">
                     <mxGeometry x="100" y="75" width="800" height="25" as="geometry"/>
                 </mxCell>
                 

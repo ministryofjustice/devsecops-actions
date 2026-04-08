@@ -32,12 +32,12 @@
 # Basic usage:
 #   - name: Check for updates
 #     id: check
-#     uses: ministryofjustice/devsecops-actions/cruft/check@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
+#     uses: ministryofjustice/devsecops-actions/cruft/check@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #
 # With conditional step:
 #   - name: Check for updates
 #     id: check
-#     uses: ministryofjustice/devsecops-actions/cruft/check@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
+#     uses: ministryofjustice/devsecops-actions/cruft/check@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #
 #   - name: Process updates
 #     if: steps.check.outputs.has-update == 'true'

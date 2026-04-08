@@ -26,7 +26,7 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/moj@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
+#   - uses: ministryofjustice/devsecops-actions/sca/moj@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #
 # ==============================================================================
 # TOOL INFORMATION

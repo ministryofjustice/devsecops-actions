@@ -28,15 +28,24 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       notification-email: "team@example.gov.uk"
 #       gov-notify-key: ${{ secrets.GOV_NOTIFY_API_KEY }}
 #       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
 #
+# With Node.js version from file:
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+#       node-version-file: "package.json"
+#       notification-email: "team@example.gov.uk"
+#       gov-notify-key: ${{ secrets.GOV_NOTIFY_API_KEY }}
+#       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
+#
 # Advanced usage with custom threshold:
-#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@2ce4e5898dfb83378215b4ae15401d4e9dba0649
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       archival-days: "180"
@@ -77,12 +86,12 @@ author: Ministry of Justice UK
 inputs:
   archival-days:
     required: false
-    description: "Number of inactivity days required before a repository is considered eligible for archival"
+    description: "Number of inactivity days before a repository is considered eligible for archival"
     default: "90"
 
   notification-email:
     required: true
-    description: "Notification email address to send alerts when a repository has been dormant for the specified 'archival-days' and is therefore eligible for archival"
+    description: "Email address to receive notifications when a repository has been dormant for the specified 'archival-days' and is therefore eligible for archival"
 
   gov-notify-key:
     required: true
@@ -94,12 +103,17 @@ inputs:
 
   node-version:
     required: false
-    description: "Node.js version to use"
-    default: "24.11.1"
+    description: "Node.js version to use. Specify the exact version number (e.g., '24.11.1'). If both `node-version` and `node-version-file` are provided, `node-version` takes precedence."
+    default: ""
+
+  node-version-file:
+    required: false
+    description: "File containing the version specification of the Node version to use. Examples: package.json, .nvmrc, .node-version, .tool-versions. If `node-version` and `node-version-file` are both defined the action will use version from `node-version` input."
+    default: ""
 
   token:
     required: true
-    description: "GitHub token with read-only access to repository contents (for example, contents: read)."
+    description: "GitHub token with read-only access to repository contents (for example, contents: read)"
 
 runs:
   using: composite
@@ -111,17 +125,18 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "1cee8e5dce2be99328b2ea9074c7e0acdfd69907"
-        path: "1cee8e5dce2be99328b2ea9074c7e0acdfd69907"
+        ref: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
+        path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
+        node-version-file: ${{ inputs.node-version-file }}
         cache: "npm"
-        cache-dependency-path: "1cee8e5dce2be99328b2ea9074c7e0acdfd69907/package-lock.json"
+        cache-dependency-path: "2ce4e5898dfb83378215b4ae15401d4e9dba0649/package-lock.json"
 
     - name: ⚙️ Execute
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: node 1cee8e5dce2be99328b2ea9074c7e0acdfd69907/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
+      run: node 2ce4e5898dfb83378215b4ae15401d4e9dba0649/dist/index.js --github --archive --days "${{ inputs.archival-days }}" --email "${{ inputs.notification-email }}" --key "${{ inputs.gov-notify-key }}" --template-id "${{ inputs.gov-notify-template-id }}" --repository-name "${{ github.repository }}"
