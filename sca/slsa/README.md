@@ -92,7 +92,7 @@ jobs:
 
       # ⛓️ SLSA Protection - Add BEFORE npm ci
       - name: ⛓️ SLSA Supply Chain Security
-        uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa # v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907 # v1.4.0
 
       # Now safe to install dependencies
       - name: Install Dependencies
@@ -122,7 +122,7 @@ jobs:
 
       # ⛓️ SLSA Protection - Add BEFORE pip install
       - name: ⛓️ SLSA Supply Chain Security
-        uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa # v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907 # v1.4.0
 
       # Now safe to install dependencies
       - name: Install Dependencies
@@ -142,7 +142,7 @@ No configuration required - works out of the box with secure defaults:
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
 ```
 
 ### Advanced Configuration
@@ -151,7 +151,7 @@ No configuration required - works out of the box with secure defaults:
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
   with:
     node-version: "24.11.1"
 ```
@@ -162,7 +162,7 @@ Exclude trusted packages from the 72-hour age requirement:
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
   with:
     security-patch-package-exclusion: "@ministryofjustice/example"
 ```
@@ -207,7 +207,7 @@ After running this action, the following environment variables are available:
 
    ```yaml
    # ✅ Recommended - Use latest stable commit SHA
-   uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+   uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
 
    # ❌ Not recommended - Use specific version tag
    uses: ministryofjustice/devsecops-actions/sca/slsa@v1.4.0
@@ -351,7 +351,7 @@ Single package
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
   with:
     security-patch-package-exclusion: "@ministryofjustice/example"
 ```
@@ -360,7 +360,7 @@ Multiple packages
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
   with:
     security-patch-package-exclusion: "@ministryofjustice/package1,@ministryofjustice/package2,package3"
 ```
@@ -369,7 +369,7 @@ Do not allow wildcard packages, be specific.
 
 ```yaml
 - name: ⛓️ SLSA Supply Chain Security
-  uses: ministryofjustice/devsecops-actions/sca/slsa@559ec2408860d9237cc472a5710e61c1c2187ffa
+  uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
   with:
     # Not recommended, avoid wildcard packages
     security-patch-package-exclusion: "@ministryofjustice/*"

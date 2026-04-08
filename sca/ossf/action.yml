@@ -59,7 +59,7 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/ossf@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/sca/ossf@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #

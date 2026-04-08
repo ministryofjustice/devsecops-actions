@@ -89,31 +89,31 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2"
-        path: "b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2"
+        ref: "1cee8e5dce2be99328b2ea9074c7e0acdfd69907"
+        path: "1cee8e5dce2be99328b2ea9074c7e0acdfd69907"
 
     - name: ⚡️ Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
-        cache-dependency-path: 'b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2/package-lock.json'
+        cache-dependency-path: '1cee8e5dce2be99328b2ea9074c7e0acdfd69907/package-lock.json'
 
     - name: ⛓️ SLSA
-      uses: ministryofjustice/devsecops-actions/sca/slsa@aa338f78f4af76b14d4fa50f473b96ec1142614a # v 1.4.0
+      uses: ministryofjustice/devsecops-actions/sca/slsa@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
 
     - name: ⚙️ Install
       shell: bash
-      working-directory: b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2
+      working-directory: 1cee8e5dce2be99328b2ea9074c7e0acdfd69907
       run: npm ci --ignore-scripts
 
     - name: 🧩 Conventional
       shell: bash
-      working-directory: b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2
+      working-directory: 1cee8e5dce2be99328b2ea9074c7e0acdfd69907
       run: git -C "$GITHUB_WORKSPACE" --no-pager log -1 --no-show-signature --pretty=%s | npm run validate:commit:message -- --config ${{ inputs.config-file && format('"{0}"', inputs.config-file) || 'commitlint.config.js' }}
 
     - name: 🔐 Signed
       shell: bash
-      working-directory: b2a8b6b0e18fa218dbcbfa735d1fe6c75a0c09d2
+      working-directory: 1cee8e5dce2be99328b2ea9074c7e0acdfd69907
       run: |
         git -C "$GITHUB_WORKSPACE" --no-pager log -1 --show-signature --pretty=%s | grep -Eq "gpg: Signature made|BEGIN PGP SIGNATURE" || { echo "❌ Commit is unsigned!"; exit 1; }

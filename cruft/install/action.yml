@@ -27,10 +27,10 @@
 # USAGE
 # ==============================================================================
 # Basic usage (default Python version):
-#   - uses: ministryofjustice/devsecops-actions/cruft/install@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/cruft/install@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
 #
 # With custom Python version:
-#   - uses: ministryofjustice/devsecops-actions/cruft/install@559ec2408860d9237cc472a5710e61c1c2187ffa
+#   - uses: ministryofjustice/devsecops-actions/cruft/install@1cee8e5dce2be99328b2ea9074c7e0acdfd69907
 #     with:
 #       python-version: "3.14.2"
 #
