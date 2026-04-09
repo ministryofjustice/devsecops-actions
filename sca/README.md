@@ -725,10 +725,10 @@ env:
 
 ```yaml
 # ✅ Recommended: Commit SHA (maximum stability)
-uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e # v1.4.0
+uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e # v1.5.0
 
 # ⚠️ Not recommended: Tag name
-uses: ministryofjustice/devsecops-actions/sca@v1.4.0
+uses: ministryofjustice/devsecops-actions/sca@v1.5.0
 ```
 
 ### Security Best Practices

@@ -55,7 +55,7 @@
 set -euo pipefail
 
 # Variables
-COMMIT="8c77d3a65a46d1d4b5416eafae5b84371ecd797d"
+COMMIT="8c77d3a65a46d1d4b5416eafae5b84371ecd797d" # v1.5.0
 DIRECTORY="${HOME}/.safe-chain/bin"
 FILE="safe-chain"
 URL="https://raw.githubusercontent.com/ministryofjustice/devsecops-actions/${COMMIT}/sca/slsa/${FILE}"
