@@ -109,7 +109,8 @@ runs:
     - name: Initialise
       uses: github/codeql-action/init@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
       with:
-        languages: ${{ inputs.codeql-languages }}
+        languages: actions,${{ inputs.codeql-languages }}
+        queries: +security-extended,+security-and-quality
         config-file: ${{ inputs.codeql-config-file }}
 
     # Automatically builds compiled languages
