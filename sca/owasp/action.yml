@@ -28,12 +28,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/owasp@805c9da24fe7083e24b8435a626463b25951d278
+#   - uses: ministryofjustice/devsecops-actions/sca/owasp@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # With custom output directory:
-#   - uses: ministryofjustice/devsecops-actions/sca/owasp@805c9da24fe7083e24b8435a626463b25951d278
+#   - uses: ministryofjustice/devsecops-actions/sca/owasp@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       output-directory-name: "reports"

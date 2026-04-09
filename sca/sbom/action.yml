@@ -29,21 +29,21 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@805c9da24fe7083e24b8435a626463b25951d278
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
 #
 # With Docker image scanning:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@805c9da24fe7083e24b8435a626463b25951d278
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
 #     with:
 #       docker-images-file: "docker-images.json"
 #
 # With Node.js version from file:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@805c9da24fe7083e24b8435a626463b25951d278
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
 #     with:
 #       node-version-file: ".nvmrc"
 #       docker-images-file: "docker-images.json"
 #
 # Custom Node.js version:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@805c9da24fe7083e24b8435a626463b25951d278
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
 #     with:
 #       node-version: "24.11.1"
 #       docker-images-file: "docker-images.json"
@@ -129,8 +129,8 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: "ministryofjustice/devsecops-actions"
-        ref: "805c9da24fe7083e24b8435a626463b25951d278"
-        path: "805c9da24fe7083e24b8435a626463b25951d278"
+        ref: "8c77d3a65a46d1d4b5416eafae5b84371ecd797d"
+        path: "8c77d3a65a46d1d4b5416eafae5b84371ecd797d"
 
     - name: Node
       uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
@@ -138,11 +138,11 @@ runs:
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version-file }}
         cache: "npm"
-        cache-dependency-path: "805c9da24fe7083e24b8435a626463b25951d278/package-lock.json"
+        cache-dependency-path: "8c77d3a65a46d1d4b5416eafae5b84371ecd797d/package-lock.json"
 
     - name: Install
       shell: bash
-      working-directory: 805c9da24fe7083e24b8435a626463b25951d278
+      working-directory: 8c77d3a65a46d1d4b5416eafae5b84371ecd797d
       run: npm run install:syft
 
     - name: Repository
@@ -152,7 +152,7 @@ runs:
 
     - name: Images
       if: inputs.docker-images-file != ''
-      working-directory: 805c9da24fe7083e24b8435a626463b25951d278
+      working-directory: 8c77d3a65a46d1d4b5416eafae5b84371ecd797d
       shell: bash
       run: npm run scan -- --images "${{ inputs.docker-images-file }}"
 

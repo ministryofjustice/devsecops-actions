@@ -182,44 +182,44 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
     - name: 📊 Dependencies
-      uses: ministryofjustice/devsecops-actions/sca/dependencies@805c9da24fe7083e24b8435a626463b25951d278
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ministryofjustice/devsecops-actions/sca/owasp@805c9da24fe7083e24b8435a626463b25951d278
+      uses: ministryofjustice/devsecops-actions/sca/owasp@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
         dependency-check-suppression-file: ${{ inputs.dependency-check-suppression-file }}
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
-      uses: ministryofjustice/devsecops-actions/sca/renovate@805c9da24fe7083e24b8435a626463b25951d278
+      uses: ministryofjustice/devsecops-actions/sca/renovate@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      uses: ministryofjustice/devsecops-actions/sca/moj@805c9da24fe7083e24b8435a626463b25951d278
+      uses: ministryofjustice/devsecops-actions/sca/moj@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
 
     - name: 🐷 TruffleHog
-      uses: ministryofjustice/devsecops-actions/sca/trufflehog@805c9da24fe7083e24b8435a626463b25951d278
+      uses: ministryofjustice/devsecops-actions/sca/trufflehog@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
         trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
 
     - name: ⚙️ CodeQL
-      uses: ministryofjustice/devsecops-actions/sca/codeql@41b6f62a7e6b54124d82164769e8d60115b1df4f
+      uses: ministryofjustice/devsecops-actions/sca/codeql@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
       with:
         codeql-languages: ${{ inputs.codeql-languages }}
         codeql-config-file: ${{ inputs.codeql-config-file }}
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      uses: ministryofjustice/devsecops-actions/sca/ossf@805c9da24fe7083e24b8435a626463b25951d278
+      uses: ministryofjustice/devsecops-actions/sca/ossf@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
 
     - name: 📋 SBOM
-      uses: ministryofjustice/devsecops-actions/sca/sbom@805c9da24fe7083e24b8435a626463b25951d278
+      uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
       with:
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version-file }}

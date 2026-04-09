@@ -105,14 +105,14 @@ jobs:
           cache-dependency-path: ${{ github.workspace }}/package-lock.json
 
       - name: ⛓️ SLSA
-        uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278
+        uses: ministryofjustice/devsecops-actions/sca/slsa@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
 
       - name: Install
         shell: bash
         run: npm ci --ignore-scripts --omit=dev
 
       - name: ⚡️ SCA
-        uses: ministryofjustice/devsecops-actions/sca@41b6f62a7e6b54124d82164769e8d60115b1df4f # v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.4.0
         with:
           token: "${{ secrets.GITHUB_TOKEN }}" # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
