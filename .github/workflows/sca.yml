@@ -45,6 +45,10 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
+  push:
+    branches:
+      - "main"
+
   pull_request:
     branches:
       - "**" # All branches
@@ -108,7 +112,7 @@ jobs:
         run: npm ci --ignore-scripts --omit=dev
 
       - name: ⚡️ SCA
-        uses: ministryofjustice/devsecops-actions/sca@805c9da24fe7083e24b8435a626463b25951d278 # v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca@9e88f85eb97c69177a35b87d116f499287e6d4d9 # v1.4.0
         with:
           token: "${{ secrets.GITHUB_TOKEN }}" # Mandatory
           dependency-review-config-file: "./.github/dependency-review-config.yml" # Optional
