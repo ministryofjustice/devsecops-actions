@@ -209,7 +209,7 @@ runs:
         trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
 
     - name: ⚙️ CodeQL
-      uses: ministryofjustice/devsecops-actions/sca/codeql@9e88f85eb97c69177a35b87d116f499287e6d4d9
+      uses: ministryofjustice/devsecops-actions/sca/codeql@41b6f62a7e6b54124d82164769e8d60115b1df4f
       with:
         codeql-languages: ${{ inputs.codeql-languages }}
         codeql-config-file: ${{ inputs.codeql-config-file }}
