@@ -47,7 +47,7 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Safe-Chain Version: 1.4.6
-# Binary Commit: 25f7d3ac1b6fcdfcf0feeffac5d6ca9b4ec186b7
+# Binary Commit: 8c77d3a65a46d1d4b5416eafae5b84371ecd797d (DSO Actions)
 # Last Updated: 2026-04-01
 #
 # ==============================================================================
