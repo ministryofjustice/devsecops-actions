@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.5.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.4.0...v1.5.0) (2026-04-09)
+
+
+### Features
+
+* **10-sca-slsa:** add SLSA check ([#176](https://github.com/ministryofjustice/devsecops-actions/issues/176)) ([4cd163b](https://github.com/ministryofjustice/devsecops-actions/commit/4cd163be7859cd130800d6719d925318826038ea))
+* **10:** SLSA action update ([#178](https://github.com/ministryofjustice/devsecops-actions/issues/178)) ([e3c63a5](https://github.com/ministryofjustice/devsecops-actions/commit/e3c63a5986ea6e7d57d38b7f72e5b8cf08dc7020))
+* **185:** added node-version-file support ([#186](https://github.com/ministryofjustice/devsecops-actions/issues/186)) ([805c9da](https://github.com/ministryofjustice/devsecops-actions/commit/805c9da24fe7083e24b8435a626463b25951d278))
+* **deps:** update actions/create-github-app-token action to v3 ([#153](https://github.com/ministryofjustice/devsecops-actions/issues/153)) ([732eafa](https://github.com/ministryofjustice/devsecops-actions/commit/732eafab5bd77c754ed1e2e5892f12b7a3451431))
+* **deps:** update actions/upload-artifact action to v7 ([#152](https://github.com/ministryofjustice/devsecops-actions/issues/152)) ([c483c09](https://github.com/ministryofjustice/devsecops-actions/commit/c483c097be69d1ff79df6e3f1dffa5e6b6a1fbd3))
+* **deps:** update pre-commit hook ministryofjustice/devsecops-hooks to v1.6.0 ([#162](https://github.com/ministryofjustice/devsecops-actions/issues/162)) ([be464b9](https://github.com/ministryofjustice/devsecops-actions/commit/be464b9bc7bca7f959a55e5c5afe206fd3eaeb97))
+* **deps:** update renovate: github-actions ([#145](https://github.com/ministryofjustice/devsecops-actions/issues/145)) ([0ee15f7](https://github.com/ministryofjustice/devsecops-actions/commit/0ee15f79ebcf8703dd8b64473276b1d0b81c37ae))
+* **github:** codeql query pack ([#193](https://github.com/ministryofjustice/devsecops-actions/issues/193)) ([41b6f62](https://github.com/ministryofjustice/devsecops-actions/commit/41b6f62a7e6b54124d82164769e8d60115b1df4f))
+* **npm-cache:** enable npm caching in CI ([#159](https://github.com/ministryofjustice/devsecops-actions/issues/159)) ([5eb2a5a](https://github.com/ministryofjustice/devsecops-actions/commit/5eb2a5ac8cc28b5d33e7c36c6963b44db5f78118))
+
+
+### Bug Fixes
+
+* **gitattribute:** removed safe-chain-* from .gitattribute ([#189](https://github.com/ministryofjustice/devsecops-actions/issues/189)) ([9401414](https://github.com/ministryofjustice/devsecops-actions/commit/9401414c182f56a7d62b30660098cde52359c31d))
+
 ## [1.4.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.3.0...v1.4.0) (2026-02-26)
 
 
