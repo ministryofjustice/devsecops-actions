@@ -50,15 +50,15 @@
 # USAGE
 # ==============================================================================
 # Basic usage (default settings):
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278
 #
 # With Node.js version from file:
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278
 #     with:
 #       node-version-file: ".node-version"
 #
 # Advanced usage with package exclusions:
-#   - uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+#   - uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278
 #     with:
 #       node-version: "24.11.1"
 #       security-patch-package-exclusion: "@octokit/*,@actions/*"

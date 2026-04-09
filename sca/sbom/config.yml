@@ -8,7 +8,7 @@
 # ==============================================================================
 # DESCRIPTION
 # ==============================================================================
-# Enterprise-grade configuration for Syft SBOM generation optimized for
+# Enterprise-grade configuration for Syft SBOM generation optimised for
 # CI/CD pipelines and GitHub Actions. Balances comprehensive package detection
 # with performance, suitable for polyglot repositories and containerized
 # applications.
@@ -16,7 +16,7 @@
 # ==============================================================================
 # DESIGN PHILOSOPHY
 # ==============================================================================
-# - Performance: Optimized for CI/CD speed without sacrificing accuracy
+# - Performance: Optimised for CI/CD speed without sacrificing accuracy
 # - Compliance: Meets NTIA minimum SBOM requirements
 # - Accuracy: Reduces false positives and noise
 # - Maintainability: Clear, well-documented configuration

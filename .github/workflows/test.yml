@@ -82,7 +82,7 @@ jobs:
           cache-dependency-path: ${{ github.workspace }}/package-lock.json
 
       - name: ⛓️ SLSA
-        uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649
+        uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278
 
       - name: Install
         shell: bash
