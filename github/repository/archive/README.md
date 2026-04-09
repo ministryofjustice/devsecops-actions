@@ -410,8 +410,11 @@ archival-days: "365"
 # ✅ Recommended: Commit SHA (maximum stability)
 uses: ministryofjustice/devsecops-actions/github/repository/archive@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
-# ⚠️ Not recommended: Branch names
-uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+# ❌ Not recommended: Branch names
+uses: ministryofjustice/devsecops-actions/github/repository/archive@main
+
+# ❌ Not recommended: Tags
+uses: ministryofjustice/devsecops-actions/github/repository/archive@v1.5.0
 ```
 
 ### Scheduling Best Practices
