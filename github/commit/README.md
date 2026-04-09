@@ -687,9 +687,6 @@ steps:
 # ✅ Recommended: Commit SHA (maximum security and stability)
 uses: ministryofjustice/devsecops-actions/github/commit@9babea875cafae0e3b05a5ec5aca76d6b560c42e
 
-# ⚠️ Acceptable: Version tag (updated periodically)
-uses: ministryofjustice/devsecops-actions/github/commit@805c9da24fe7083e24b8435a626463b25951d278
-
 # ❌ Not recommended: Branch names (security risk)
 uses: ministryofjustice/devsecops-actions/github/commit@main
 ```

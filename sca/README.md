@@ -238,7 +238,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@805c9da24fe7083e24b8435a626463b25951d278
+        uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -291,7 +291,7 @@ jobs:
 
     steps:
       - name: Run SCA with Custom Configuration
-        uses: ministryofjustice/devsecops-actions/sca@805c9da24fe7083e24b8435a626463b25951d278
+        uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -352,7 +352,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@805c9da24fe7083e24b8435a626463b25951d278
+        uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: ${{ matrix.renovate }}
@@ -388,7 +388,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@805c9da24fe7083e24b8435a626463b25951d278
+        uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: "false" # No automated updates on PRs
@@ -402,7 +402,7 @@ For repositories with external dependency management:
 ```yaml
 steps:
   - name: Run SCA without Renovate
-    uses: ministryofjustice/devsecops-actions/sca@805c9da24fe7083e24b8435a626463b25951d278
+    uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
       renovate: "false"
@@ -488,7 +488,7 @@ Create a JSON file (e.g., `docker-images.json` or `sources.json`) in your reposi
 #### Usage
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@805c9da24fe7083e24b8435a626463b25951d278
+- uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     docker-images-file: "docker-images.json"
@@ -725,10 +725,10 @@ env:
 
 ```yaml
 # ✅ Recommended: Commit SHA (maximum stability)
-uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e # v1.4.0
+uses: ministryofjustice/devsecops-actions/sca@9babea875cafae0e3b05a5ec5aca76d6b560c42e # v1.5.0
 
 # ⚠️ Not recommended: Tag name
-uses: ministryofjustice/devsecops-actions/sca@v1.4.0
+uses: ministryofjustice/devsecops-actions/sca@v1.5.0
 ```
 
 ### Security Best Practices
