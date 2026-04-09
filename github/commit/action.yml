@@ -92,9 +92,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: ⛓️ SLSA
-      uses: ministryofjustice/devsecops-actions/sca/slsa@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
-
     - name: 📦 Repository
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
@@ -112,6 +109,9 @@ runs:
         node-version-file: ${{ inputs.node-version-file }}
         cache: "npm"
         cache-dependency-path: "8c77d3a65a46d1d4b5416eafae5b84371ecd797d/package-lock.json"
+
+    - name: ⛓️ SLSA
+      uses: ministryofjustice/devsecops-actions/sca/slsa@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 
     - name: ⚙️ Install
       shell: bash
