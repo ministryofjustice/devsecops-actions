@@ -93,7 +93,7 @@ describe("scan", () => {
         // Act + Assert
         await (0, scan_1.default)();
         // Assert
-        expect(console.info).toHaveBeenCalledTimes(7);
+        expect(console.info).toHaveBeenCalledTimes(9);
         expect(console.info).toHaveBeenCalledWith("⚡️ Docker images scanning");
         expect(console.error).not.toHaveBeenCalled();
     });
