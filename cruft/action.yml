@@ -32,12 +32,12 @@
 # USAGE
 # ==============================================================================
 # Basic usage (public template):
-#   - uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+#   - uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #
 # Advanced usage with private template:
-#   - uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+#   - uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       private: "true"
@@ -158,13 +158,13 @@ runs:
   using: composite
   steps:
     - name: ⚒️ Install
-      uses: ministryofjustice/devsecops-actions/cruft/install@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+      uses: ministryofjustice/devsecops-actions/cruft/install@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
       with:
         python-version: ${{ inputs.python-version }}
 
     - name: 🔑 Authenticate
       if: inputs.private  == 'true'
-      uses: ministryofjustice/devsecops-actions/cruft/authenticate@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+      uses: ministryofjustice/devsecops-actions/cruft/authenticate@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
       with:
         token: ${{ inputs.token }}
         github-app-owner: ${{ inputs.github-app-owner }}
@@ -174,11 +174,11 @@ runs:
 
     - name: 🔎 Check
       id: check
-      uses: ministryofjustice/devsecops-actions/cruft/check@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+      uses: ministryofjustice/devsecops-actions/cruft/check@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 
     - name: ✏️ Create
       if: steps.check.outputs.has-update == 'true'
-      uses: ministryofjustice/devsecops-actions/cruft/create@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+      uses: ministryofjustice/devsecops-actions/cruft/create@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
       with:
         token: ${{ inputs.token }}
         github-app-id: ${{ inputs.github-app-id }}

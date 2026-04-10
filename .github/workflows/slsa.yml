@@ -58,9 +58,9 @@ jobs:
         run: |
           set +e
 
-          # Install malicious test package
+          # Install malicious test package (NPM security holding package version)
           # Exit with non-zero code
-          npm install safe-chain-test
+          npm install --no-save safe-chain-test@0.0.1-security --integrity=sha512-nJoRuRb52IWYNLNX/Bpwot6w+1U1cykpp08eTUdqZOoJ3AcJkiOi4hrHJx4OtT/c4wbK7MoDlKi763DP8BgD2Q==
 
           # Exit code
           EXIT_CODE=$?

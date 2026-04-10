@@ -28,7 +28,7 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       notification-email: "team@example.gov.uk"
@@ -36,7 +36,7 @@
 #       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
 #
 # With Node.js version from file:
-#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       node-version-file: "package.json"
@@ -45,7 +45,7 @@
 #       gov-notify-template-id: ${{ secrets.GOV_NOTIFY_TEMPLATE_ID }}
 #
 # Advanced usage with custom threshold:
-#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+#   - uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 #     with:
 #       token: ${{ secrets.GITHUB_TOKEN }}
 #       archival-days: "180"
