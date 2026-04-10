@@ -29,21 +29,21 @@
 # USAGE
 # ==============================================================================
 # Basic usage:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 #
 # With Docker image scanning:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 #     with:
 #       docker-images-file: "docker-images.json"
 #
 # With Node.js version from file:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 #     with:
 #       node-version-file: ".nvmrc"
 #       docker-images-file: "docker-images.json"
 #
 # Custom Node.js version:
-#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d
+#   - uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 #     with:
 #       node-version: "24.11.1"
 #       docker-images-file: "docker-images.json"
