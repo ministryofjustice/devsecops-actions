@@ -80,7 +80,7 @@ jobs:
 
       # SLSA included
       - name: Commit
-        uses: ministryofjustice/devsecops-actions/github/commit@78f13c732d07900b0146056b5a7418bdffb1ed40 # v1.5.0
+        uses: ministryofjustice/devsecops-actions/github/commit@b6855b3e1a474305aeebd95567ff7be7a5ad6beb # v1.5.0
 
       - name: Install
         shell: bash
