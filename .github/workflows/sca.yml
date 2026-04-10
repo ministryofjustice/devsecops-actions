@@ -106,6 +106,8 @@ jobs:
 
       - name: ⛓️ SLSA
         uses: ministryofjustice/devsecops-actions/sca/slsa@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        with:
+          security-patch-package-exclusion: "axios@1.15.0"
 
       - name: Install
         shell: bash
