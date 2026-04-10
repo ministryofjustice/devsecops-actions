@@ -475,14 +475,11 @@ env:
 ### Versioning Strategy
 
 ```yaml
-# ✅ Recommended: Use specific version tags
+# ✅ Recommended: Use SHA
 uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 
-# ✅ Alternative: Use commit SHA for maximum stability
-uses: ministryofjustice/devsecops-actions/cruft@9babea875cafae0e3b05a5ec5aca76d6b560c42e
-
-# ⚠️ Not recommended: Using branch names (unpredictable)
-uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+# ⚠️ Not recommended: Using release tags
+uses: ministryofjustice/devsecops-actions/cruft@v1.5.0
 ```
 
 ### Security Best Practices
