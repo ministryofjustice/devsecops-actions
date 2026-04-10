@@ -9,5 +9,3 @@
 #     - never: Don't post summary comments
 
 comment-summary-in-pr: always
-allow-ghsas:
-  - GHSA-3p68-rc4w-qgx5
