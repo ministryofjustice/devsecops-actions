@@ -84,7 +84,7 @@ inputs:
 
   disable-node-audit:
     required: false
-    description: "Whether to disable Yarn audit"
+    description: "Whether to disable Node audit"
     default: "false"
 
   output-directory-name:
