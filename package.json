@@ -47,7 +47,8 @@
       "fast-xml-parser": "^5.5.9"
     },
     "notifications-node-client": {
-      "axios": "~1.15.0"
+      "axios": "~1.15.0",
+      "follow-redirects": "~1.16.0"
     }
   },
   "dependencies": {
