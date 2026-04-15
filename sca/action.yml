@@ -175,6 +175,16 @@ inputs:
     description: "The file paths to the suppression XML files"
     default: ""
 
+  disable-yarn-audit:
+    required: false
+    description: "Whether to disable Yarn audit"
+    default: "false"
+
+  disable-node-audit:
+    required: false
+    description: "Whether to disable Yarn audit"
+    default: "false"
+
 runs:
   using: composite
   steps:
@@ -191,6 +201,8 @@ runs:
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
         dependency-check-suppression-file: ${{ inputs.dependency-check-suppression-file }}
+        disable-yarn-audit: ${{ inputs.disable-yarn-audit }}
+        disable-node-audit: ${{ inputs.disable-node-audit }}
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
