@@ -40,12 +40,6 @@
     "@ministryofjustice/eslint-config-hmpps": {
       "flatted": "~3.4.2"
     },
-    "cspell": {
-      "flatted": "~3.4.2"
-    },
-    "renovate": {
-      "fast-xml-parser": "^5.5.9"
-    },
     "notifications-node-client": {
       "axios": "~1.15.0"
     }
@@ -62,10 +56,10 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^25.5.2",
     "@vercel/ncc": "^0.38.4",
-    "cspell": "^9.7.0",
+    "cspell": "~10.0.0",
     "jest": "^30.3.0",
     "markdownlint-cli": "^0.48.0",
-    "renovate": "~43.102.1",
+    "renovate": "~43.102.11",
     "sort-package-json": "^3.6.1",
     "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
