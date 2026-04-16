@@ -130,6 +130,8 @@ Each component is an independent composite action that can be configured individ
 - Supports 30+ package ecosystems
 - Includes CVE details and remediation guidance
 - **Customisable**: Use `dependency-check-suppression-file` input to suppress false positives
+- **Audit Control**: Use `disable-yarn-audit` and `disable-node-audit` inputs to disable specific audit types
+- **Output Directory**: Use `output-directory-name` input to customise report output location (default: `reports`)
 
 ### 4. 🔁 Renovate
 
@@ -308,6 +310,11 @@ jobs:
           codeql-languages: "javascript,typescript,python"
           dependency-check-suppression-file: "dependency-check-suppression.xml"
 
+          # OWASP Configuration
+          output-directory-name: "reports"
+          disable-yarn-audit: "false"
+          disable-node-audit: "false"
+
           # Container Scanning
           docker-images-file: "docker-images.json"
 ```
@@ -428,8 +435,10 @@ All inputs are optional except `token`. Designed for zero-configuration operatio
 | `codeql-upload-findings`            | string | No       | `always`           | Control SARIF upload to Code Scanning. Set to `never` if using GitHub's default CodeQL setup                                                                                                                                                           |
 | `codeql-languages`                  | string | No       | `""`               | A comma-separated list of CodeQL languages to analyse                                                                                                                                                                                                  |
 | `docker-images-file`                | string | No       | `""`               | Path to JSON file with Docker image URIs for container SBOM generation                                                                                                                                                                                 |
-| `output-directory-name`             | string | No       | `"reports"`        | Output directory for reports generation, prefixed with `./`                                                                                                                                                                                            |
+| `output-directory-name`             | string | No       | `"reports"`        | Output directory path for generated reports and scan results                                                                                                                                                                                           |
 | `dependency-check-suppression-file` | string | No       | `""`               | The file paths to the suppression XML files for OWASP Dependency-Check                                                                                                                                                                                 |
+| `disable-yarn-audit`                | string | No       | `"false"`          | Whether to disable Yarn audit in OWASP Dependency-Check                                                                                                                                                                                                |
+| `disable-node-audit`                | string | No       | `"false"`          | Whether to disable Node.js audit in OWASP Dependency-Check                                                                                                                                                                                             |
 
 ---
 
@@ -562,7 +571,9 @@ paths:
   - "src/**"
 ```
 
-### OWASP Dependency-Check Suppression
+### OWASP Dependency-Check Configuration
+
+#### Suppression File
 
 Create a suppression XML file (e.g., `dependency-check-suppression.xml`) to suppress false positives:
 
@@ -592,6 +603,37 @@ Create a suppression XML file (e.g., `dependency-check-suppression.xml`) to supp
 ```
 
 See: [OWASP Dependency-Check Suppression Documentation](https://dependency-check.github.io/DependencyCheck/general/suppression.html)
+
+#### Disable Audit Types
+
+Control which package manager audits are enabled:
+
+```yaml
+- uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    disable-yarn-audit: "true"   # Disable Yarn audit
+    disable-node-audit: "true"   # Disable Node.js audit
+```
+
+**Use cases:**
+
+- Disable `yarn-audit` when using npm exclusively
+- Disable `node-audit` when using alternative JavaScript package managers
+- Reduce scan time by excluding unnecessary audit types
+
+#### Custom Output Directory
+
+Customise the output directory for OWASP Dependency-Check reports:
+
+```yaml
+- uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    output-directory-name: "security-reports"
+```
+
+This generates reports in `./security-reports/` instead of the default `./reports/`.
 
 ---
 

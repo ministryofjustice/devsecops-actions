@@ -175,6 +175,16 @@ inputs:
     description: "The file paths to the suppression XML files"
     default: ""
 
+  disable-yarn-audit:
+    required: false
+    description: "Whether to disable Yarn audit"
+    default: "false"
+
+  disable-node-audit:
+    required: false
+    description: "Whether to disable Node audit"
+    default: "false"
+
 runs:
   using: composite
   steps:
@@ -187,10 +197,12 @@ runs:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ministryofjustice/devsecops-actions/sca/owasp@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/owasp@c3200e456e3793277445313887ab658e06070078 # v1.5.0
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
         dependency-check-suppression-file: ${{ inputs.dependency-check-suppression-file }}
+        disable-yarn-audit: ${{ inputs.disable-yarn-audit }}
+        disable-node-audit: ${{ inputs.disable-node-audit }}
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
