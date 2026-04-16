@@ -13,10 +13,11 @@
 #   - workflow_call: When called as a reusable workflow by a consuming repository
 #
 # Permissions:
-#   - Workflow-level: {} (none — scoped to individual jobs)
-#   - scan job: contents: write, pull-requests: write, issues: write,
-#               security-events: write, actions: read
-#   - analysis job: contents: read, security-events: write, actions: read
+#   - contents: write - Required for updating dependency graphs
+#   - pull-requests: write - Required for creating dependency review comments
+#   - issues: write - Required for creating security advisories
+#   - security-events: write - Required for uploading security scan results
+#   - actions: read - Required for reading workflow run data
 #
 # Jobs:
 #   setup:
@@ -50,8 +51,10 @@
 #       secrets: inherit
 #
 # Configuration:
-#   - Environment: base (configurable via env vars or workflow_call inputs)
+#   - Environment: base (configurable via env vars)
 #   - Timezone: Configurable via repository variables (TIMEZONE)
+#   - Dependency review config: .github/dependency-review-config.yml
+#   - Docker images config: sources.json
 #
 # Required Variables:
 #   - TIMEZONE: Repository variable defining the timezone for operations
