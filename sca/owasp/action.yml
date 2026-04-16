@@ -77,6 +77,16 @@ description: Dependency vulnerability scanning
 author: Ministry of Justice UK
 
 inputs:
+  disable-yarn-audit:
+    required: false
+    description: "Whether to disable Yarn audit"
+    default: "false"
+
+  disable-node-audit:
+    required: false
+    description: "Whether to disable Node audit"
+    default: "false"
+
   output-directory-name:
     required: false
     description: "Output directory path for generated reports and scan results"
@@ -103,6 +113,8 @@ runs:
           --failOnCVSS 7
           --prettyPrint
           --format SARIF
+          ${{ inputs.disable-yarn-audit == 'true' && '--disableYarnAudit' || '' }}
+          ${{ inputs.disable-node-audit == 'true' && '--disableNodeAudit' || '' }}
           ${{ inputs.dependency-check-suppression-file && format('--suppression "{0}"', inputs.dependency-check-suppression-file) || '' }}
 
     - name: Upload
