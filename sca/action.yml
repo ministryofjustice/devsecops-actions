@@ -185,6 +185,11 @@ inputs:
     description: "Whether to disable Node audit"
     default: "false"
 
+  disable-pnpm-audit:
+    required: false
+    description: "Whether to disable PNPM audit"
+    default: "false"
+
 runs:
   using: composite
   steps:
@@ -197,12 +202,13 @@ runs:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      uses: ministryofjustice/devsecops-actions/sca/owasp@c3200e456e3793277445313887ab658e06070078 # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/owasp@630649362abc2caf91b65f134942552f8b266455 # v1.5.0
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
         dependency-check-suppression-file: ${{ inputs.dependency-check-suppression-file }}
         disable-yarn-audit: ${{ inputs.disable-yarn-audit }}
         disable-node-audit: ${{ inputs.disable-node-audit }}
+        disable-pnpm-audit: ${{ inputs.disable-pnpm-audit }}
 
     - name: 🔁 Renovate
       if: inputs.renovate == 'true'
