@@ -197,13 +197,13 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
     - name: 📊 Dependencies
-      if: ${{ always() }}
+      if: ${{ always() && !cancelled() }}
       uses: ministryofjustice/devsecops-actions/sca/dependencies@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
-      if: ${{ always() }}
+      if: ${{ always() && !cancelled() }}
       uses: ministryofjustice/devsecops-actions/sca/owasp@630649362abc2caf91b65f134942552f8b266455 # v1.5.0
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
@@ -213,25 +213,25 @@ runs:
         disable-pnpm-audit: ${{ inputs.disable-pnpm-audit }}
 
     - name: 🔁 Renovate
-      if: ${{ always() && inputs.renovate == 'true' }}
+      if: ${{ always() && !cancelled() && inputs.renovate == 'true' }}
       uses: ministryofjustice/devsecops-actions/sca/renovate@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
-      if: ${{ always() }}
+      if: ${{ always() && !cancelled() }}
       uses: ministryofjustice/devsecops-actions/sca/moj@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 
     - name: 🐷 TruffleHog
-      if: ${{ always() }}
+      if: ${{ always() && !cancelled() }}
       uses: ministryofjustice/devsecops-actions/sca/trufflehog@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
         trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
 
     - name: ⚙️ CodeQL
-      if: ${{ always() }}
+      if: ${{ always() && !cancelled() }}
       uses: ministryofjustice/devsecops-actions/sca/codeql@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
       with:
         codeql-languages: ${{ inputs.codeql-languages }}
@@ -239,11 +239,11 @@ runs:
         codeql-upload-findings: ${{ inputs.codeql-upload-findings }}
 
     - name: 🛡 OpenSSF
-      if: ${{ always() }}
+      if: ${{ always() && !cancelled() }}
       uses: ministryofjustice/devsecops-actions/sca/ossf@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 
     - name: 📋 SBOM
-      if: ${{ always() }}
+      if: ${{ always() && !cancelled() }}
       uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
       with:
         node-version: ${{ inputs.node-version }}
