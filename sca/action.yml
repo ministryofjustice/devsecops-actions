@@ -198,7 +198,7 @@ runs:
 
     - name: 📊 Dependencies
       if: ${{ always() && !cancelled() }}
-      uses: ministryofjustice/devsecops-actions/sca/dependencies@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@90c564a252511ac348aedf231da9493aef17362a # v1.5.0
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
