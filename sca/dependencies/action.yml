@@ -56,14 +56,14 @@
 # TOOL INFORMATION
 # ==============================================================================
 # Tool: GitHub Dependency Review Action
-# Version: v4.8.3
+# Version: v4.9.0
 # Documentation: https://github.com/actions/dependency-review-action
 #
 # ==============================================================================
 # VERSION INFORMATION
 # ==============================================================================
-# Action Version: 1.0.0
-# Last Updated: 2026-02-18
+# Action Version: 1.5.0
+# Last Updated: 2026-04-27
 #
 # ==============================================================================
 
@@ -82,7 +82,7 @@ runs:
   using: composite
   steps:
     - name: Scan
-      uses: actions/dependency-review-action@774d14bf50b7a2e2460f9f49e25c52503ecab125 # v4.8.3
+      uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4.9.0
       with:
         config-file: ${{ inputs.dependency-review-config-file }}
         head-ref: ${{ github.head_ref || github.sha }}
