@@ -87,6 +87,11 @@ inputs:
     description: "Whether to disable Node audit"
     default: "false"
 
+  disable-pnpm-audit:
+    required: false
+    description: "Whether to disable PNPM audit"
+    default: "false"
+
   output-directory-name:
     required: false
     description: "Output directory path for generated reports and scan results"
@@ -115,6 +120,7 @@ runs:
           --format SARIF
           ${{ inputs.disable-yarn-audit == 'true' && '--disableYarnAudit' || '' }}
           ${{ inputs.disable-node-audit == 'true' && '--disableNodeAudit' || '' }}
+          ${{ inputs.disable-pnpm-audit == 'true' && '--disablePnpmAudit' || '' }}
           ${{ inputs.dependency-check-suppression-file && format('--suppression "{0}"', inputs.dependency-check-suppression-file) || '' }}
 
     - name: Upload
