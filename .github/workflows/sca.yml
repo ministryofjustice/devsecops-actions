@@ -39,15 +39,11 @@
 #   - NODE_VERSION: Node.js version for the runtime environment
 
 name: SCA ⚡️
-run-name: Software Composition Analysis ⚡️
+run-name: Software composition analysis ⚡️
 
 on:
   schedule:
     - cron: "0 0 * * *"
-
-  push:
-    branches:
-      - "main"
 
   pull_request:
     branches:
@@ -68,7 +64,7 @@ concurrency:
 
 jobs:
   setup:
-    name: Infrastructure 🔧
+    name: Setup 🔧
     runs-on: ["ubuntu-latest"]
     outputs:
       environment: ${{ env.environment }}
