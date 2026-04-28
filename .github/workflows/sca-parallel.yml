@@ -1,3 +1,10 @@
+# --------------------------------------------------------------------------------
+# Workflow: SCA Parallel ⚡️
+# Purpose: Runs software composition analysis checks in parallel for faster feedback.
+# Triggers: push (main), pull_request (all branches), and manual workflow_dispatch.
+# Notes: Includes setup/base jobs followed by parallel security and dependency scans.
+# --------------------------------------------------------------------------------
+
 name: SCA Parallel ⚡️
 run-name: Software composition analysis parallelised ⚡️
 
@@ -69,6 +76,7 @@ jobs:
     permissions:
       contents: read
       actions: read
+      pull-requests: write
 
     name: 📊 Dependencies
     runs-on: ["ubuntu-latest"]
