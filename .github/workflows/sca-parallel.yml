@@ -1,0 +1,215 @@
+# --------------------------------------------------------------------------------
+# Workflow: SCA Parallel ⚡️
+# Purpose: Runs software composition analysis checks in parallel for faster feedback.
+# Triggers: push (main) and manual workflow_dispatch.
+# Notes: Includes setup/base jobs followed by parallel security and dependency scans.
+# --------------------------------------------------------------------------------
+
+name: SCA Parallel ⚡️
+run-name: Software composition analysis parallelised ⚡️
+
+on:
+  push:
+    branches:
+      - "main"
+
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  environment: base
+  timezone: ${{ vars.TIMEZONE }}
+
+concurrency:
+  group: sca-parallel-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  setup:
+    name: Setup 🔧
+    runs-on: ["ubuntu-latest"]
+    outputs:
+      environment: ${{ env.environment }}
+      timezone: ${{ env.timezone }}
+    steps:
+      - name: Environment 🧪
+        run: echo "Environment set to ${{ env.environment }}"
+
+      - name: Timezone 🌐
+        run: echo "Timezone set to ${{ env.timezone }}"
+  base:
+    permissions:
+      contents: read
+
+    name: 📦 Base
+    runs-on: ["ubuntu-latest"]
+    needs: setup
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: 📦 Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: ${{ vars.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: ${{ github.workspace }}/package-lock.json
+
+      - name: ⛓️ SLSA
+        uses: ministryofjustice/devsecops-actions/sca/slsa@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        with:
+          security-patch-package-exclusion: "axios"
+
+      - name: Install
+        shell: bash
+        run: npm ci --ignore-scripts --omit=dev
+
+  dependencies:
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: write
+
+    name: 📊 Dependencies
+    runs-on: ["ubuntu-latest"]
+    needs: [setup, base]
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: 📦 Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: 📊 Dependencies
+
+        uses: ministryofjustice/devsecops-actions/sca/dependencies@90c564a252511ac348aedf231da9493aef17362a # v1.5.0
+        with:
+          dependency-review-config-file: "./.github/dependency-review-config.yml"
+
+  owasp:
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+
+    name: 🔎 OWASP
+    runs-on: ["ubuntu-latest"]
+    needs: [setup, base]
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: 📦 Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: 🔎 OWASP
+
+        uses: ministryofjustice/devsecops-actions/sca/owasp@630649362abc2caf91b65f134942552f8b266455 # v1.5.0
+        with:
+          dependency-check-suppression-file: "dependency-check-suppression.xml"
+          disable-node-audit: "true"
+
+  renovate:
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: write
+      issues: write
+
+    name: 🔁 Renovate
+    runs-on: ["ubuntu-latest"]
+    needs: [setup, base]
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: 📦 Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: 🔁 Renovate
+        uses: ministryofjustice/devsecops-actions/sca/renovate@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"
+
+  secrets:
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+
+    name: 🔑 Secrets
+    runs-on: ["ubuntu-latest"]
+    needs: [setup, base]
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: 📦 Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: 🔑 MoJ
+        uses: ministryofjustice/devsecops-actions/sca/moj@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+
+      - name: 🐷 TruffleHog
+        uses: ministryofjustice/devsecops-actions/sca/trufflehog@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+
+  codeql:
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+
+    name: ⚙️ CodeQL
+    runs-on: ["ubuntu-latest"]
+    needs: [setup, base]
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: 📦 Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: ⚙️ CodeQL
+        uses: ministryofjustice/devsecops-actions/sca/codeql@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+
+  openssf:
+    permissions:
+      contents: read
+      actions: read
+
+    name: 🛡 OpenSSF
+    runs-on: ["ubuntu-latest"]
+    needs: [setup, base]
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: 📦 Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: 🛡 OpenSSF
+        uses: ministryofjustice/devsecops-actions/sca/ossf@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+
+  sbom:
+    permissions:
+      contents: read
+      actions: read
+
+    name: 📋 SBOM
+    runs-on: ["ubuntu-latest"]
+    needs: [setup, base]
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+
+    steps:
+      - name: 📦 Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: 📋 SBOM
+        uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        with:
+          docker-images-file: "${{ github.workspace }}/sources.json"
