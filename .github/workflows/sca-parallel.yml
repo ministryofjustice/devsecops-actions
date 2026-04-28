@@ -98,6 +98,7 @@ jobs:
     permissions:
       contents: read
       actions: read
+      security-events: write
 
     name: 🔎 OWASP
     runs-on: ["ubuntu-latest"]
@@ -122,7 +123,6 @@ jobs:
       actions: read
       pull-requests: write
       issues: write
-      security-events: write
 
     name: 🔁 Renovate
     runs-on: ["ubuntu-latest"]
@@ -144,6 +144,7 @@ jobs:
     permissions:
       contents: read
       actions: read
+      security-events: write
 
     name: 🔑 Secrets
     runs-on: ["ubuntu-latest"]
@@ -167,6 +168,7 @@ jobs:
     permissions:
       contents: read
       actions: read
+      security-events: write
 
     name: ⚙️ CodeQL
     runs-on: ["ubuntu-latest"]
