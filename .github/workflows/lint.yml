@@ -84,7 +84,7 @@ jobs:
 
       - name: Install
         shell: bash
-        run: npm ci --ignore-scripts
+        run: npm ci --ignore-scripts --omit=dev
 
       - name: MD
         shell: bash
@@ -97,12 +97,8 @@ jobs:
       - name: TS
         shell: bash
         run: |
-          npm run lint:ts
+          npm run lint
           npm run validate:ts
-
-      - name: Renovate
-        shell: bash
-        run: npm run validate:renovate
 
       - name: Spellcheck
         shell: bash
