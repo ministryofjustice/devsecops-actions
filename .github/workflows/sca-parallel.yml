@@ -1,7 +1,7 @@
 # --------------------------------------------------------------------------------
 # Workflow: SCA Parallel ⚡️
 # Purpose: Runs software composition analysis checks in parallel for faster feedback.
-# Triggers: push (main), pull_request (all branches), and manual workflow_dispatch.
+# Triggers: push (main) and manual workflow_dispatch.
 # Notes: Includes setup/base jobs followed by parallel security and dependency scans.
 # --------------------------------------------------------------------------------
 
@@ -12,10 +12,6 @@ on:
   push:
     branches:
       - "main"
-
-  pull_request:
-    branches:
-      - "**" # All branches
 
   workflow_dispatch:
 
