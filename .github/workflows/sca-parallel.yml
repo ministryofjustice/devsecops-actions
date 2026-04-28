@@ -60,7 +60,7 @@ jobs:
           cache-dependency-path: ${{ github.workspace }}/package-lock.json
 
       - name: ⛓️ SLSA
-        uses: ministryofjustice/devsecops-actions/sca/slsa@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca/slsa@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
 
       - name: Install
         shell: bash
@@ -129,7 +129,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: 🔁 Renovate
-        uses: ministryofjustice/devsecops-actions/sca/renovate@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca/renovate@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
 
@@ -150,10 +150,10 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: 🔑 MoJ
-        uses: ministryofjustice/devsecops-actions/sca/moj@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca/moj@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
 
       - name: 🐷 TruffleHog
-        uses: ministryofjustice/devsecops-actions/sca/trufflehog@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca/trufflehog@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
 
   codeql:
     permissions:
@@ -172,7 +172,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: ⚙️ CodeQL
-        uses: ministryofjustice/devsecops-actions/sca/codeql@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca/codeql@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
 
   openssf:
     permissions:
@@ -190,7 +190,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: 🛡 OpenSSF
-        uses: ministryofjustice/devsecops-actions/sca/ossf@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca/ossf@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
 
   sbom:
     permissions:
@@ -208,6 +208,6 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: 📋 SBOM
-        uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca/sbom@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           docker-images-file: "${{ github.workspace }}/sources.json"

@@ -125,7 +125,7 @@ jobs:
 
     steps:
       - name: Archive Check
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           notification-email: "team@example.gov.uk"
@@ -171,7 +171,7 @@ jobs:
 
     steps:
       - name: Archive Check with Custom Threshold
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: ${{ github.event.inputs.archival-days || '180' }}
@@ -217,7 +217,7 @@ jobs:
 
     steps:
       - name: Archive Check (${{ matrix.archival-threshold.days }} days)
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: ${{ matrix.archival-threshold.days }}
@@ -253,7 +253,7 @@ jobs:
     steps:
       - name: Archive Check
         id: archive
-        uses: ministryofjustice/devsecops-actions/github/repository/archive@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/github/repository/archive@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           archival-days: "90"
