@@ -80,7 +80,7 @@ jobs:
 
     name: 📊 Dependencies
     runs-on: ["ubuntu-latest"]
-    needs: base
+    needs: [setup, base]
     environment:
       name: ${{ needs.setup.outputs.environment }}
 
@@ -101,7 +101,7 @@ jobs:
 
     name: 🔎 OWASP
     runs-on: ["ubuntu-latest"]
-    needs: base
+    needs: [setup, base]
     environment:
       name: ${{ needs.setup.outputs.environment }}
 
@@ -126,7 +126,7 @@ jobs:
 
     name: 🔁 Renovate
     runs-on: ["ubuntu-latest"]
-    needs: base
+    needs: [setup, base]
     environment:
       name: ${{ needs.setup.outputs.environment }}
 
@@ -147,7 +147,7 @@ jobs:
 
     name: 🔑 Secrets
     runs-on: ["ubuntu-latest"]
-    needs: base
+    needs: [setup, base]
     environment:
       name: ${{ needs.setup.outputs.environment }}
 
@@ -170,7 +170,7 @@ jobs:
 
     name: ⚙️ CodeQL
     runs-on: ["ubuntu-latest"]
-    needs: base
+    needs: [setup, base]
     environment:
       name: ${{ needs.setup.outputs.environment }}
 
@@ -189,7 +189,7 @@ jobs:
 
     name: 🛡 OpenSSF
     runs-on: ["ubuntu-latest"]
-    needs: base
+    needs: [setup, base]
     environment:
       name: ${{ needs.setup.outputs.environment }}
 
@@ -208,7 +208,7 @@ jobs:
 
     name: 📋 SBOM
     runs-on: ["ubuntu-latest"]
-    needs: base
+    needs: [setup, base]
     environment:
       name: ${{ needs.setup.outputs.environment }}
 
