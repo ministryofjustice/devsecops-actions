@@ -47,7 +47,7 @@
 # VERSION INFORMATION
 # ==============================================================================
 # Safe-Chain Version: 1.4.6
-# Binary Commit: 8c77d3a65a46d1d4b5416eafae5b84371ecd797d (DSO Actions)
+# Binary Commit: 9af7935ef39312305084f720326ffb0e6779b1d8 (DSO Actions)
 # Last Updated: 2026-04-01
 #
 # ==============================================================================
@@ -55,7 +55,7 @@
 set -euo pipefail
 
 # Variables
-COMMIT="8c77d3a65a46d1d4b5416eafae5b84371ecd797d" # v1.5.0
+COMMIT="9af7935ef39312305084f720326ffb0e6779b1d8" # v1.5.0
 DIRECTORY="${HOME}/.safe-chain/bin"
 FILE="safe-chain"
 URL="https://raw.githubusercontent.com/ministryofjustice/devsecops-actions/${COMMIT}/sca/slsa/${FILE}"

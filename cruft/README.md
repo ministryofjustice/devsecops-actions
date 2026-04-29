@@ -109,7 +109,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Run Cruft Update
-        uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/cruft@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -151,7 +151,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Run Cruft Update with GitHub App
-        uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/cruft@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           private: "true"
           github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -200,7 +200,7 @@ jobs:
           fetch-depth: 0 # Full history for better diff
 
       - name: Run Cruft Update
-        uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/cruft@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           private: "true"
           github-app-id: ${{ secrets.CRUFT_APP_ID }}
@@ -252,7 +252,7 @@ jobs:
           token: ${{ secrets.ORG_ACCESS_TOKEN }}
 
       - name: Sync Template
-        uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/cruft@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.ORG_ACCESS_TOKEN }}
           private: "true"
@@ -476,7 +476,7 @@ env:
 
 ```yaml
 # ✅ Recommended: Use SHA
-uses: ministryofjustice/devsecops-actions/cruft@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+uses: ministryofjustice/devsecops-actions/cruft@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
 
 # ⚠️ Not recommended: Using release tags
 uses: ministryofjustice/devsecops-actions/cruft@v1.5.0

@@ -198,13 +198,13 @@ runs:
 
     - name: 📊 Dependencies
       if: ${{ always() && !cancelled() }}
-      uses: ministryofjustice/devsecops-actions/sca/dependencies@90c564a252511ac348aedf231da9493aef17362a # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/dependencies@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
       with:
         dependency-review-config-file: ${{ inputs.dependency-review-config-file }}
 
     - name: 🔎 OWASP
       if: ${{ always() && !cancelled() }}
-      uses: ministryofjustice/devsecops-actions/sca/owasp@630649362abc2caf91b65f134942552f8b266455 # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/owasp@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
       with:
         output-directory-name: ${{ inputs.output-directory-name }}
         dependency-check-suppression-file: ${{ inputs.dependency-check-suppression-file }}
@@ -214,25 +214,25 @@ runs:
 
     - name: 🔁 Renovate
       if: ${{ always() && !cancelled() && inputs.renovate == 'true' }}
-      uses: ministryofjustice/devsecops-actions/sca/renovate@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/renovate@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
       with:
         token: ${{ inputs.token }}
         renovate-version: ${{ inputs.renovate-version }}
 
     - name: 🔑 Secrets
       if: ${{ always() && !cancelled() }}
-      uses: ministryofjustice/devsecops-actions/sca/moj@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/moj@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
 
     - name: 🐷 TruffleHog
       if: ${{ always() && !cancelled() }}
-      uses: ministryofjustice/devsecops-actions/sca/trufflehog@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/trufflehog@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
       with:
         trufflehog-config-file: ${{ inputs.trufflehog-config-file }}
         trufflehog-output-filename: ${{ inputs.trufflehog-output-filename }}
 
     - name: ⚙️ CodeQL
       if: ${{ always() && !cancelled() }}
-      uses: ministryofjustice/devsecops-actions/sca/codeql@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/codeql@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
       with:
         codeql-languages: ${{ inputs.codeql-languages }}
         codeql-config-file: ${{ inputs.codeql-config-file }}
@@ -240,11 +240,11 @@ runs:
 
     - name: 🛡 OpenSSF
       if: ${{ always() && !cancelled() }}
-      uses: ministryofjustice/devsecops-actions/sca/ossf@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/ossf@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
 
     - name: 📋 SBOM
       if: ${{ always() && !cancelled() }}
-      uses: ministryofjustice/devsecops-actions/sca/sbom@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+      uses: ministryofjustice/devsecops-actions/sca/sbom@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
       with:
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version-file }}

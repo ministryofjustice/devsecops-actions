@@ -240,7 +240,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -293,7 +293,7 @@ jobs:
 
     steps:
       - name: Run SCA with Custom Configuration
-        uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -359,7 +359,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: ${{ matrix.renovate }}
@@ -395,7 +395,7 @@ jobs:
 
     steps:
       - name: Run SCA
-        uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+        uses: ministryofjustice/devsecops-actions/sca@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           renovate: "false" # No automated updates on PRs
@@ -409,7 +409,7 @@ For repositories with external dependency management:
 ```yaml
 steps:
   - name: Run SCA without Renovate
-    uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+    uses: ministryofjustice/devsecops-actions/sca@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
       renovate: "false"
@@ -497,7 +497,7 @@ Create a JSON file (e.g., `docker-images.json` or `sources.json`) in your reposi
 #### Usage
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+- uses: ministryofjustice/devsecops-actions/sca@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     docker-images-file: "docker-images.json"
@@ -609,7 +609,7 @@ See: [OWASP Dependency-Check Suppression Documentation](https://dependency-check
 Control which package manager audits are enabled:
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+- uses: ministryofjustice/devsecops-actions/sca@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     disable-yarn-audit: "true"   # Disable Yarn audit
@@ -627,7 +627,7 @@ Control which package manager audits are enabled:
 Customise the output directory for OWASP Dependency-Check reports:
 
 ```yaml
-- uses: ministryofjustice/devsecops-actions/sca@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
+- uses: ministryofjustice/devsecops-actions/sca@9af7935ef39312305084f720326ffb0e6779b1d8 # v1.5.0
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     output-directory-name: "security-reports"
