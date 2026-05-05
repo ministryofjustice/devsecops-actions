@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.6.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.5.0...v1.6.0) (2026-05-05)
+
+
+### Features
+
+* **224:** added always() ([#228](https://github.com/ministryofjustice/devsecops-actions/issues/228)) ([1bbb075](https://github.com/ministryofjustice/devsecops-actions/commit/1bbb075a85db86bf878878bd170f21a895896d9d))
+* **224:** update dependency-review-action ([#234](https://github.com/ministryofjustice/devsecops-actions/issues/234)) ([a600477](https://github.com/ministryofjustice/devsecops-actions/commit/a600477f79bedf31163091fad08150ab8b0b5be0))
+* **parallel:** parallel SCA steps execution ([#236](https://github.com/ministryofjustice/devsecops-actions/issues/236)) ([79b9f7c](https://github.com/ministryofjustice/devsecops-actions/commit/79b9f7c4bd0d3cb85d4f7a289a515a666d38322e))
+
+
+### Bug Fixes
+
+* **205:** added yarn and node audit arguments ([#210](https://github.com/ministryofjustice/devsecops-actions/issues/210)) ([b19ee3b](https://github.com/ministryofjustice/devsecops-actions/commit/b19ee3bbc4c501e5c71f01edc67e90587c57c093))
+* **alert-56:** pin safe-chain-test in bash script - slsa.yml ([#196](https://github.com/ministryofjustice/devsecops-actions/issues/196)) ([34a192f](https://github.com/ministryofjustice/devsecops-actions/commit/34a192f8802a705d53e2a1aa882de483e5d20f34))
+* **commit:** remove redundant checkout ([#200](https://github.com/ministryofjustice/devsecops-actions/issues/200)) ([07d5768](https://github.com/ministryofjustice/devsecops-actions/commit/07d5768889c79128d82c07c00418df3ef66b4453))
+* **exclusion:** remove axios from exclusion list ([#237](https://github.com/ministryofjustice/devsecops-actions/issues/237)) ([b68f065](https://github.com/ministryofjustice/devsecops-actions/commit/b68f06598355021511df55a612610e7deda935df))
+* **GHSA-xq3m-2v4x-88gg:** updated renovate npm package ([#219](https://github.com/ministryofjustice/devsecops-actions/issues/219)) ([877a668](https://github.com/ministryofjustice/devsecops-actions/commit/877a6683738d4643f16c2c306e908bb5ef5487c2))
+* **pnpm-audit:** added disable-pnpm-audit argument ([#217](https://github.com/ministryofjustice/devsecops-actions/issues/217)) ([6f6b291](https://github.com/ministryofjustice/devsecops-actions/commit/6f6b2913e021ced3d7561961771909e823b9fc89))
+
 ## [1.5.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.4.0...v1.5.0) (2026-04-09)
 
 ### Features
