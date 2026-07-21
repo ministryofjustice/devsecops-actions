@@ -41,7 +41,7 @@
       "flatted": "~3.4.2"
     },
     "notifications-node-client": {
-      "axios": "~1.15.0"
+      "axios": "~1.18.0"
     }
   },
   "dependencies": {
