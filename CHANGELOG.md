@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/ministryofjustice/devsecops-actions/compare/v1.6.0...v1.6.1) (2026-11-19)
+
+
+### Bug Fixes
+
+* **deps:** update axios to 1.21.1 and rebuild bundle ([#288](https://github.com/ministryofjustice/devsecops-actions/issues/288)) ([704502c](https://github.com/ministryofjustice/devsecops-actions/commit/704502ccd1f8a68454632187ef2d4687f9fd36d7))
+
 ## [1.6.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.5.0...v1.6.0) (2026-04-29)
 
 
