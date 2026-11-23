@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.6.1](https://github.com/ministryofjustice/devsecops-actions/compare/v1.6.0...v1.6.1) (2026-11-23)
+
+
+### Bug Fixes
+
+* **deps:** resolve Scorecard vulnerability findings ([#294](https://github.com/ministryofjustice/devsecops-actions/issues/294)) ([d00b30c](https://github.com/ministryofjustice/devsecops-actions/commit/d00b30c58615576cc1c818d885f90ed4d290ffcf))
+* **deps:** update axios to 1.21.1 and rebuild bundle ([#288](https://github.com/ministryofjustice/devsecops-actions/issues/288)) ([704502c](https://github.com/ministryofjustice/devsecops-actions/commit/704502ccd1f8a68454632187ef2d4687f9fd36d7))
+* **deps:** update vulnerable commitlint dependencies ([#292](https://github.com/ministryofjustice/devsecops-actions/issues/292)) ([7c86f22](https://github.com/ministryofjustice/devsecops-actions/commit/7c86f22a3428052e84e0f4713368fd5a48d24f97))
+* **deps:** update vulnerable development dependencies ([#293](https://github.com/ministryofjustice/devsecops-actions/issues/293)) ([880a961](https://github.com/ministryofjustice/devsecops-actions/commit/880a9611981c657552cd2d55127d3a9aeadc2251))
+* **deps:** upgrade renovate to address critical vulnerabilities ([#290](https://github.com/ministryofjustice/devsecops-actions/issues/290)) ([38b314c](https://github.com/ministryofjustice/devsecops-actions/commit/38b314c738cdb8a440b16fa4b0e1e4ec662bb458))
+
 ## [1.6.0](https://github.com/ministryofjustice/devsecops-actions/compare/v1.5.0...v1.6.0) (2026-04-29)
 
 
