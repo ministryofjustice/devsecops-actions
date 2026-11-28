@@ -37,16 +37,16 @@
     "validate:yml": "npx yaml-lint **/*.yml --ignore=**/node_modules"
   },
   "overrides": {
-    "@babel/core": "7.29.6",
-    "@babel/generator": "7.29.7",
-    "@babel/helper-string-parser": "7.29.7",
-    "@babel/helpers": "7.29.7",
-    "@babel/parser": "7.29.7",
-    "@babel/traverse": "7.29.7",
-    "@babel/types": "7.29.7",
-    "@humanfs/node": "0.16.8",
+    "@babel/core": "7.29.13",
+    "@babel/generator": "7.29.15",
+    "@babel/helper-string-parser": "7.29.15",
+    "@babel/helpers": "7.29.15",
+    "@babel/parser": "7.29.15",
+    "@babel/traverse": "7.29.15",
+    "@babel/types": "7.29.15",
+    "@humanfs/node": "0.17.0",
     "@ministryofjustice/eslint-config-hmpps": {
-      "flatted": "~3.4.2"
+      "flatted": "~3.4.4"
     },
     "glob@>=9.0.0 <14.0.2": "14.0.6",
     "katex": "0.19.1",
@@ -57,23 +57,23 @@
     }
   },
   "dependencies": {
-    "@commitlint/cli": "^20.5.0",
-    "@commitlint/config-conventional": "^20.5.0",
-    "notifications-node-client": "^8.3.2"
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
+    "notifications-node-client": "^8.5.0"
   },
   "devDependencies": {
-    "@jest/types": "^30.3.0",
-    "@ministryofjustice/eslint-config-hmpps": "^1.0.3",
-    "@tsconfig/node24": "^24.0.4",
+    "@jest/types": "^30.5.1",
+    "@ministryofjustice/eslint-config-hmpps": "^1.0.4",
+    "@tsconfig/node24": "^24.0.6",
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.6.0",
-    "@vercel/ncc": "^0.38.4",
-    "cspell": "~10.0.0",
-    "jest": "^30.3.0",
-    "markdownlint-cli": "~0.50.0",
-    "renovate": "~44.253.0",
-    "sort-package-json": "^3.6.1",
-    "ts-jest": "^29.4.9",
+    "@types/node": "^25.9.9",
+    "@vercel/ncc": "^0.45.0",
+    "cspell": "~10.5.2",
+    "jest": "^30.5.2",
+    "markdownlint-cli": "~0.50.1",
+    "renovate": "~44.257.5",
+    "sort-package-json": "^3.7.1",
+    "ts-jest": "^29.4.15",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "yaml-lint": "^1.7.0"
